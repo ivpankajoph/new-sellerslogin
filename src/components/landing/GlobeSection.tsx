@@ -35,11 +35,11 @@ export function GlobeSection() {
         { location: [25.2048, 55.2708], size: 0.08 },
         { location: [-23.5505, -46.6333], size: 0.07 },
       ],
-      onRender: (state) => {
+      onRender: (state: Record<string, any>) => {
         state.phi = phi;
         phi += 0.005; // Continues spinning smoothly
       },
-    });
+    } as any);
 
     return () => {
       globe.destroy();
