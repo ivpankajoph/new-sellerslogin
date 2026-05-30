@@ -9,7 +9,9 @@ import { CtaSection } from "./CtaSection";
 import { CustomCursor } from "./CustomCursor";
 import { FaqSection } from "./FaqSection";
 import { FeaturesSection } from "./FeaturesSection";
+import { StepsSection } from "./StepsSection";
 import { FooterSection } from "./FooterSection";
+import { GlobeSection } from "./GlobeSection";
 import { HeroSection } from "./HeroSection";
 import { Navbar } from "./Navbar";
 import { PricingSection } from "./PricingSection";
@@ -37,9 +39,11 @@ export function LandingPage() {
       <TestimonialsSection />
       <PricingSection />
       <CasesSection />
+      <StepsSection />
       <FaqSection />
  
       <CtaSection />
+      <GlobeSection />
       <FooterSection />
       <BackToTop />
       <CookieConsent />

@@ -28,13 +28,13 @@ export function FaqSection() {
           {faqs.map((f, i) => {
             const isOpen = openIndex === i;
             return (
-              <div
-                key={i}
-                className={`reveal bg-white border rounded-2xl overflow-hidden transition-all duration-300 ${
-                  isOpen ? "border-gray-300 shadow-sm" : "border-gray-200"
-                }`}
-              >
-                <button
+              <div key={i} className="reveal">
+                <div
+                  className={`bg-white border rounded-2xl overflow-hidden transition-all duration-300 ${
+                    isOpen ? "border-gray-300 shadow-sm" : "border-gray-200"
+                  }`}
+                >
+                  <button
                   type="button"
                   className={`w-full p-5 md:p-6 flex items-center justify-between text-left text-base md:text-lg font-semibold transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-900 focus-visible:ring-offset-2 cursor-pointer ${
                     isOpen ? "bg-gray-50 text-gray-900" : "text-gray-900 hover:bg-gray-50/50"
@@ -67,6 +67,7 @@ export function FaqSection() {
                   <div className="px-5 md:px-6 pb-5 md:pb-6">
                     <p className="text-sm md:text-base text-gray-500 leading-relaxed">{f.a}</p>
                   </div>
+                </div>
                 </div>
               </div>
             );

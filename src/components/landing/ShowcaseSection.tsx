@@ -70,15 +70,15 @@ export function ShowcaseSection() {
         <source src="/hero-bg.mp4" type="video/mp4" />
       </video>
       {/* Light Overlay to keep text readable */}
-      <div className="absolute inset-0 bg-white/75 z-0 pointer-events-none" />
+      <div className="absolute inset-0  z-0 pointer-events-none" />
 
       <div className="max-w-7xl mx-auto relative z-10">
         {/* Section Header */}
         <header className="text-center mb-6 md:mb-8">
-          <div className="reveal inline-flex items-center bg-white/10  rounded-full py-1.5 px-4 text-xs font-bold uppercase tracking-wider mb-4">
+          <div className="reveal inline-flex items-center bg-white  rounded-full py-1.5 px-4 text-xs font-bold uppercase tracking-wider mb-4">
             Product Tour
           </div>
-          <h2 className="reveal reveal-delay-1 text-3xl sm:text-4xl lg:text-5xl font-bold  leading-tight tracking-tight">
+          <h2 className="reveal reveal-delay-1 text-3xl sm:text-4xl lg:text-5xl font-bold  leading-tight tracking-tight text-white">
             See it in action
           </h2>
         </header>

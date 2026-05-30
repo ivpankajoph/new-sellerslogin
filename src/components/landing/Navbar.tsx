@@ -33,9 +33,9 @@ export function Navbar() {
       <a
         key={item.label}
         href={item.href}
-        className="flex items-center gap-2.5 py-2.5 px-3 rounded-lg  no-underline text-sm font-medium transition-colors duration-150 hover:bg-gray-100"
+        className="flex items-center gap-2.5 py-2.5 px-3 rounded-lg text-gray-700 hover:text-gray-900 no-underline text-sm font-medium transition-colors duration-150 hover:bg-gray-50"
       >
-        <div className="w-8 h-8 bg-gray-100 rounded-lg flex items-center justify-center shrink-0">
+        <div className="w-8 h-8 bg-gray-100 rounded-lg flex items-center justify-center text-gray-700 shrink-0">
           <LandingIcon name={item.icon} size={16} />
         </div>
         {item.label}
@@ -56,7 +56,7 @@ export function Navbar() {
     <div className="border-b border-gray-100 last:border-0">
       <button
         onClick={toggle}
-        className="flex items-center justify-between w-full py-3 px-4 text-base font-medium focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-900 focus-visible:ring-offset-2 rounded-lg"
+        className="flex items-center justify-between w-full py-3 px-4 text-base font-medium text-gray-700 hover:bg-gray-50 hover:text-gray-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-900 focus-visible:ring-offset-2 rounded-lg"
         aria-expanded={isOpen}
       >
         {title}
@@ -78,9 +78,9 @@ export function Navbar() {
               key={item.label}
               href={item.href}
               onClick={() => setMenuOpen(false)}
-              className="flex items-center gap-3 py-2 px-3 rounded-lg text-sm font-medium text-gray-600 hover:bg-gray-50 hover:text-gray-900 no-underline transition-colors"
+              className="flex items-center gap-3 py-2 px-3 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50 hover:text-gray-900 no-underline transition-colors"
             >
-              <div className="w-8 h-8 bg-gray-100 rounded-lg flex items-center justify-center text-gray-900 shrink-0">
+              <div className="w-8 h-8 bg-gray-100 rounded-lg flex items-center justify-center text-white shrink-0">
                 <LandingIcon name={item.icon} size={16} />
               </div>
               {item.label}
@@ -96,7 +96,7 @@ export function Navbar() {
       className={`fixed z-50 w-full transition-all duration-300 ease-out ${
         scrolled
           ? "top-4 left-1/2 -translate-x-1/2 max-w-6xl mx-auto bg-white/95 backdrop-blur-md border border-gray-200/50 rounded-2xl shadow-lg shadow-gray-200/40 px-4"
-          : "top-0 bg-transparent px-4"
+          : "top-0 bg-transparent text-white px-4"
       }`}
     >
       <div className={`${scrolled ? "" : "max-w-7xl mx-auto"}`}>
@@ -105,12 +105,12 @@ export function Navbar() {
           <a
             href="#hero"
             className={`text-lg font-bold no-underline flex items-center gap-2 shrink-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-900 focus-visible:ring-offset-2 rounded-md transition-colors duration-200 ${
-              scrolled ? "text-gray-900" : "text-black"
+              scrolled ? "text-gray-900" : "text-white"
             }`}
           >
             <div
               className={`w-8 h-8 rounded-lg flex items-center justify-center text-sm font-bold transition-colors duration-200 ${
-                scrolled ? "bg-gray-900 text-black" : "bg-white/20 text-black"
+                scrolled ? "bg-gray-900 text-white" : "bg-white/20 text-white"
               }`}
             >
               SL
@@ -126,7 +126,7 @@ export function Navbar() {
                 className={`text-sm font-medium no-underline py-2 px-3 rounded-full transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-900 focus-visible:ring-offset-2 ${
                   scrolled
                     ? "text-gray-600 hover:text-gray-900 hover:bg-gray-100/50"
-                    : "text-black/90 hover:text-blackhover:bg-white/10"
+                    : "text-white/90 hover:text-white hover:bg-white/10"
                 }`}
               >
                 Home
@@ -138,7 +138,7 @@ export function Navbar() {
                 className={`text-sm font-medium no-underline py-2 px-3 rounded-full transition-colors duration-200 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-900 focus-visible:ring-offset-2 ${
                   scrolled
                     ? "text-gray-600 hover:text-gray-900 hover:bg-gray-100/50"
-                    : "text-black/90 hover:text-blackhover:bg-white/10"
+                    : "text-white/90 hover:text-white hover:bg-white/10"
                 }`}
               >
                 Features <span className="ml-0.5 text-xs">▾</span>
@@ -153,7 +153,7 @@ export function Navbar() {
                 className={`text-sm font-medium no-underline py-2 px-3 rounded-full transition-colors duration-200 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-900 focus-visible:ring-offset-2 ${
                   scrolled
                     ? "text-gray-600 hover:text-gray-900 hover:bg-gray-100/50"
-                    : "text-black/90 hover:text-blackhover:bg-white/10"
+                    : "text-white/90 hover:text-white hover:bg-white/10"
                 }`}
               >
                 Solutions <span className="ml-0.5 text-xs">▾</span>
@@ -169,7 +169,7 @@ export function Navbar() {
                   className={`text-sm font-medium no-underline py-2 px-3 rounded-full transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-900 focus-visible:ring-offset-2 ${
                     scrolled
                       ? "text-gray-600 hover:text-gray-900 hover:bg-gray-100/50"
-                      : "text-black/90 hover:text-blackhover:bg-white/10"
+                      : "text-white/90 hover:text-white hover:bg-white/10"
                   }`}
                 >
                   {item}

@@ -29,7 +29,7 @@ export function FeaturesSection() {
           {features.map((f) => (
             <article
               key={f.title}
-              className={`reveal ${f.delay || ""} group relative bg-white border border-gray-200 rounded-2xl p-6 md:p-8 text-left transition-all duration-300 overflow-hidden hover:-translate-y-1.5 hover:shadow-xl hover:border-gray-300 will-change-transform`.trim()}
+              className={`reveal ${f.delay || ""} group relative  border border-gray-200 rounded-2xl p-6 md:p-8 text-left transition-all duration-300 overflow-hidden hover:-translate-y-1.5 hover:shadow-xl hover:border-gray-300 will-change-transform`.trim()}
             >
               {/* Decorative Image Overlay */}
               <div className="absolute inset-0 w-full h-full pointer-events-none z-0 overflow-hidden rounded-2xl">
@@ -37,7 +37,7 @@ export function FeaturesSection() {
                   src={f.image}
                   alt=""
                   fill
-                  className="object-cover opacity-90 transition-opacity duration-300 group-hover:opacity-100"
+                  className="object-cover  transition-opacity duration-300 "
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 />
                 {/* Smooth fade to make text readable */}

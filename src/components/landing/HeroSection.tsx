@@ -15,21 +15,21 @@ export function HeroSection() {
       >
         <source src="/hero-bg.mp4" type="video/mp4" />
         {/* Fallback */}
-        <div className="absolute inset-0 bg-gray-100" />
+        <div className="absolute inset-0" />
       </video>
 
       {/* Light Overlay to keep text readable */}
-      <div className="absolute inset-0 bg-white/75 z-0 pointer-events-none" />
+      <div className="absolute inset-0  z-0 pointer-events-none" />
 
       {/* Content Container */}
       <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-28 text-center flex flex-col items-center">
-        <h1 className="reveal text-[clamp(40px,6vw,72px)] font-bold text-gray-900 leading-[1.1] tracking-tight mb-6">
+        <h1 className="reveal text-[clamp(40px,6vw,72px)] font-bold text-white leading-[1.1] tracking-tight mb-6">
           Build Your <span className="text-purple-600">Online Store</span>
           <br className="hidden sm:block" />
           in Minutes
         </h1>
 
-        <p className="reveal reveal-delay-1 text-base md:text-lg lg:text-xl font-normal text-gray-800 leading-relaxed max-w-2xl mx-auto mb-10">
+        <p className="reveal reveal-delay-1 text-base md:text-lg lg:text-xl font-normal text-white leading-relaxed max-w-2xl mx-auto mb-10">
           The all-in-one e-commerce platform trusted by 50,000+ businesses
           worldwide. Create, manage, and scale your online store with powerful
           automation and marketing tools.
@@ -59,8 +59,8 @@ export function HeroSection() {
             { value: "150+", label: "Countries" },
           ].map(({ value, label }) => (
             <div key={label} className="text-center">
-              <div className="text-2xl md:text-3xl font-bold text-gray-900 leading-none mb-1 md:mb-2">{value}</div>
-              <div className="text-xs md:text-sm text-gray-700 font-bold uppercase tracking-wider">{label}</div>
+              <div className="text-2xl md:text-3xl font-bold text-white leading-none mb-1 md:mb-2">{value}</div>
+              <div className="text-xs md:text-sm text-white font-bold uppercase tracking-wider">{label}</div>
             </div>
           ))}
         </div>

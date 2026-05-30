@@ -105,7 +105,7 @@ export function FooterSection() {
               <label htmlFor="footer-email" className="block text-sm text-gray-600 mb-2">
                 Stay updated with the latest tips and product news
               </label>
-              <div className="flex flex-col sm:flex-row gap-2">
+              <div className="flex flex-col sm:flex-row gap-2" suppressHydrationWarning>
                 <input
                   id="footer-email"
                   type="email"
