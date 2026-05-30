@@ -6,7 +6,7 @@ export function TestimonialsSection() {
   const all = [...testimonials, ...testimonials];
 
   return (
-    <section id="testimonials" className="py-20 md:py-28 px-0 overflow-hidden bg-white">
+    <section id="testimonials" className="py-20 md:py-28 px-0 overflow-hidden bg-transparent">
       {/* Section Header */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-10 md:mb-14">
         <header className="text-center">

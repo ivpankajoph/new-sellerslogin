@@ -17,7 +17,7 @@ function BentoIcon({ name, isDark = false }: { name: LandingIconName; isDark?: b
 
 export function WhySection() {
   return (
-    <section id="why" className="py-20 md:py-28 px-4 sm:px-6 lg:px-8 bg-white">
+    <section id="why" className="py-20 md:py-28 px-4 sm:px-6 lg:px-8 bg-transparent">
       <div className="max-w-7xl mx-auto">
         {/* Section Header */}
         <header className="text-center mb-12 md:mb-16">
@@ -34,18 +34,18 @@ export function WhySection() {
         {/* Bento Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 auto-rows-auto lg:auto-rows-[200px]">
           {/* Card 1: AI Setup (Large, Dark) */}
-          <article className="reveal bg-gray-900 text-white rounded-2xl p-6 md:p-7 flex flex-col relative overflow-hidden transition-all duration-300 hover:shadow-xl lg:col-span-2 lg:row-span-1">
-            <BentoIcon name="zap" isDark />
-            <h3 className="text-lg font-bold mb-2">Setup in Under 5 Minutes</h3>
-            <p className="text-sm text-gray-300 leading-relaxed">
+          <article className="reveal bg-white border border-gray-200 rounded-2xl p-6 md:p-7 flex flex-col relative overflow-hidden transition-all duration-300 hover:shadow-xl hover:border-gray-300 lg:col-span-2 lg:row-span-1">
+            <BentoIcon name="zap" />
+            <h3 className="text-lg font-bold text-gray-900 mb-2">Setup in Under 5 Minutes</h3>
+            <p className="text-sm text-gray-500 leading-relaxed">
               Our AI onboarding creates your entire store — products, pages, and
               payment gateway — before you finish your coffee.
             </p>
             <div className="flex flex-wrap gap-2 mt-4">
-              <span className="text-[10px] font-bold tracking-wide uppercase py-1.5 px-2.5 rounded-md bg-white/10 text-white">
+              <span className="text-[10px] font-bold tracking-wide uppercase py-1.5 px-2.5 rounded-md bg-purple-100 text-purple-700">
                 AI-Powered
               </span>
-              <span className="text-[10px] font-bold tracking-wide uppercase py-1.5 px-2.5 rounded-md bg-white/10 text-white">
+              <span className="text-[10px] font-bold tracking-wide uppercase py-1.5 px-2.5 rounded-md bg-purple-100 text-purple-700">
                 Zero Code
               </span>
             </div>

@@ -7,7 +7,7 @@ export function TrustedMarquee() {
   const items = [...brandNames, ...brandNames];
 
   return (
-    <section id="trusted" className="py-8 md:py-10 border-y border-gray-200 bg-white overflow-hidden">
+    <section id="trusted" className="py-8 md:py-10 border-y border-gray-200 bg-transparent overflow-hidden">
       <div className="reveal relative w-full overflow-hidden">
         {/* Left & Right Fade Edges */}
         <div className="absolute left-0 top-0 bottom-0 w-12 md:w-20 bg-linear-to-r from-white to-transparent z-10 pointer-events-none" />

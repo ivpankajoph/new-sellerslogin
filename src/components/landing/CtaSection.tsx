@@ -2,7 +2,7 @@
 
 export function CtaSection() {
   return (
-    <section id="cta" className="py-20 md:py-28 px-4 sm:px-6 lg:px-8 bg-white">
+    <section id="cta" className="py-20 md:py-28 px-4 sm:px-6 lg:px-8 bg-transparent">
       <div className="max-w-4xl mx-auto relative overflow-hidden bg-gray-900 text-white text-center rounded-3xl p-8 sm:p-10 md:p-14 shadow-[0_20px_60px_-15px_rgba(124,58,237,0.25)]">
         {/* Subtle Background Gradient */}
         <div className="absolute inset-0 bg-linear-to-br from-violet-600/20 via-transparent to-transparent pointer-events-none" aria-hidden="true" />

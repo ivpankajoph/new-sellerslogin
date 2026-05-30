@@ -59,6 +59,19 @@ export function ShowcaseSection() {
 
   return (
     <section id="showcase" className="relative py-10 md:py-16 px-4 sm:px-6 lg:px-8 overflow-hidden bg-white">
+      {/* Background Video */}
+      <video
+        autoPlay
+        loop
+        muted
+        playsInline
+        className="absolute inset-0 w-full h-full object-cover z-0"
+      >
+        <source src="/hero-bg.mp4" type="video/mp4" />
+      </video>
+      {/* Light Overlay to keep text readable */}
+      <div className="absolute inset-0 bg-white/75 z-0 pointer-events-none" />
+
       <div className="max-w-7xl mx-auto relative z-10">
         {/* Section Header */}
         <header className="text-center mb-6 md:mb-8">

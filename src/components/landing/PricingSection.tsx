@@ -21,7 +21,7 @@ export function PricingSection() {
   const period = yearly ? "per month, billed annually" : "per month, billed monthly";
 
   return (
-    <section id="pricing" className="py-20 md:py-28 px-4 sm:px-6 lg:px-8 bg-white">
+    <section id="pricing" className="py-20 md:py-28 px-4 sm:px-6 lg:px-8 bg-transparent">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <header className="text-center mb-10 md:mb-16">

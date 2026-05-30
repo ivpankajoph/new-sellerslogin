@@ -42,7 +42,7 @@ const steps: {
 
 export function ProcessSection() {
   return (
-    <section id="process" className="py-20 md:py-28 px-4 sm:px-6 lg:px-8 bg-white">
+    <section id="process" className="py-20 md:py-28 px-4 sm:px-6 lg:px-8 bg-transparent">
       <div className="max-w-7xl mx-auto">
         {/* Section Header */}
         <header className="text-center mb-12 md:mb-16">

@@ -1,4 +1,5 @@
 import { AnalyticsSection } from "./AnalyticsSection";
+import { GlobalBackground } from "./GlobalBackground";
 import { AnnouncementBar } from "./AnnouncementBar";
 import { BackToTop } from "./BackToTop";
 import { BlogSection } from "./BlogSection";
@@ -23,8 +24,8 @@ export function LandingPage() {
   return (
     <>
       <CustomCursor />
+      <GlobalBackground />
       <ScrollRevealInit />
-  
       <Navbar />
       <HeroSection />
       <TrustedMarquee />

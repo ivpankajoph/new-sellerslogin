@@ -57,9 +57,31 @@ export function FooterSection() {
     }
   };
 
+  // Change this variable to update both the footer background AND the wavy divider!
+  const themeColor = "#e9d5ff"; // Tailwind purple-200
+
   return (
-    <footer className="bg-white pt-12 md:pt-16 px-4 sm:px-6 lg:px-8 pb-8">
-      <div className="max-w-7xl mx-auto">
+    <footer 
+      className="relative pt-16 md:pt-24 px-4 sm:px-6 lg:px-8 pb-8"
+      style={{ backgroundColor: themeColor }}
+    >
+      {/* Wavy Divider at the top */}
+      <div className="absolute top-0 left-0 w-full overflow-hidden leading-none -translate-y-full">
+        <svg
+          className="relative block w-full h-15 md:h-25"
+          viewBox="0 0 1440 120"
+          preserveAspectRatio="none"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M0,64L48,80C96,96,192,128,288,128C384,128,480,96,576,85.3C672,75,768,85,864,96C960,107,1056,117,1152,106.7C1248,96,1344,64,1392,48L1440,32L1440,121L1392,121C1344,121,1248,121,1152,121C1056,121,960,121,864,121C768,121,672,121,576,121C480,121,384,121,288,121C192,121,96,121,48,121L0,121Z"
+            fill={themeColor}
+          />
+        </svg>
+      </div>
+
+      <div className="max-w-7xl mx-auto relative z-10">
         {/* Main Footer Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-8 lg:gap-6 mb-12">
           {/* Brand Column (Spans 2 cols on large screens) */}
