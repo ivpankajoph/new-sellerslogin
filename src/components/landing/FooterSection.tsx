@@ -3,37 +3,38 @@
 import { useState } from "react";
 
 const footerLinks = {
-  Products: [
-    "Website Builder",
-    "Store Management",
-    "Marketing Tools",
-    "Analytics",
-    "Mobile Commerce",
-    "Payment Gateway",
+  Automation: [
+    "AI Voice Automation",
+    "AI Chat Automation",
+    "Email Automation",
+    "E-commerce Automation",
+    "Whatsapp Automation",
   ],
   Solutions: [
-    "Small Business",
-    "Enterprise",
-    "Agencies",
-    "Multi-Vendor",
-    "Dropshipping",
-    "Startups",
+    "B2b Dashboard",
+    "B2c Dashboard",
   ],
-  Resources: [
-    "Documentation",
-    "API Reference",
-    "Blog",
-    "Case Studies",
-    "Community",
-    "Status Page",
+  Industries: [
+    "Manufacturing",
+    "Real estate",
+    "Fashion",
+    "D2C",
+    "Food",
+    "Restaurants",
+    "Saas",
+    "Healthcare",
+    "Pharmaceutical",
   ],
-  Company: [
-    "About Us",
-    "Careers",
-    "Press Kit",
-    "Contact",
-    "Privacy Policy",
-    "Terms of Service",
+  "More Industries": [
+    "Banking",
+    "Hospitality",
+    "Tourism",
+    "Ecommerce",
+    "Retail",
+    "Logistics",
+    "FMCG",
+    "Human Resource",
+    "Professional Services",
   ],
 };
 
@@ -90,9 +91,7 @@ export function FooterSection() {
               href="#hero"
               className="inline-flex items-center gap-2 text-lg font-bold text-gray-900 no-underline focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-400 focus-visible:ring-offset-2 rounded-lg"
             >
-              <div className="w-8 h-8 bg-gray-900 rounded-lg flex items-center justify-center text-sm font-bold text-white">
-                SL
-              </div>
+              <img src="/sellerslogin-logo (1).svg" alt="SellersLogin Logo" className="w-8 h-8 object-contain" />
               SellersLogin
             </a>
             <p className="text-sm text-gray-600 leading-relaxed mt-4 mb-5 max-w-sm">
@@ -105,16 +104,18 @@ export function FooterSection() {
               <label htmlFor="footer-email" className="block text-sm text-gray-600 mb-2">
                 Stay updated with the latest tips and product news
               </label>
-              <div className="flex flex-col sm:flex-row gap-2" suppressHydrationWarning>
-                <input
-                  id="footer-email"
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="Enter your email"
-                  required
-                  className="flex-1 min-w-0 bg-gray-50 border border-gray-200 text-gray-900 rounded-lg py-2.5 px-4 text-sm placeholder-gray-500 outline-none focus:border-purple-400 focus:ring-2 focus:ring-purple-400/20 transition-colors"
-                />
+              <div className="flex flex-col sm:flex-row gap-2">
+                <div className="flex-1 min-w-0 relative" suppressHydrationWarning>
+                  <input
+                    id="footer-email"
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="Enter your email"
+                    required
+                    className="w-full bg-gray-50 border border-gray-200 text-gray-900 rounded-lg py-2.5 px-4 text-sm placeholder-gray-500 outline-none focus:border-purple-400 focus:ring-2 focus:ring-purple-400/20 transition-colors"
+                  />
+                </div>
                 <button
                   type="submit"
                   disabled={subscribed}

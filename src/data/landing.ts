@@ -127,12 +127,45 @@ export const solutionsDropdown: {
   icon: LandingIconName;
   label: string;
 }[] = [
-  { href: "#why", icon: "store", label: "Small Businesses" },
-  { href: "#why", icon: "rocket", label: "Startups" },
-  { href: "#why", icon: "building", label: "Enterprise" },
-  { href: "#why", icon: "target", label: "Agencies" },
-  { href: "#why", icon: "cart", label: "Multi Vendor Marketplace" },
-  { href: "#why", icon: "truck", label: "Dropshipping" },
+  { href: "#why", icon: "layout", label: "B2b Dashboard" },
+  { href: "#why", icon: "shopping-bag", label: "B2c Dashboard" },
+];
+
+export const automationDropdown: {
+  href: string;
+  icon: LandingIconName;
+  label: string;
+}[] = [
+  { href: "#features", icon: "bot", label: "AI Voice Automation" },
+  { href: "#features", icon: "message", label: "AI Chat Automation" },
+  { href: "#features", icon: "megaphone", label: "Email Automation" },
+  { href: "#features", icon: "store", label: "E-commerce Automation" },
+  { href: "#features", icon: "smartphone", label: "Whatsapp Automation" },
+];
+
+export const industriesDropdown: {
+  href: string;
+  icon: LandingIconName;
+  label: string;
+}[] = [
+  { href: "#why", icon: "building", label: "Manufacturing" },
+  { href: "#why", icon: "store", label: "Real estate" },
+  { href: "#why", icon: "shopping-bag", label: "Fashion" },
+  { href: "#why", icon: "package", label: "D2C" },
+  { href: "#why", icon: "store", label: "Food" },
+  { href: "#why", icon: "store", label: "Restaurants" },
+  { href: "#why", icon: "rocket", label: "Saas" },
+  { href: "#why", icon: "shield", label: "Healthcare" },
+  { href: "#why", icon: "zap", label: "Pharmaceutical" },
+  { href: "#why", icon: "credit-card", label: "Banking" },
+  { href: "#why", icon: "building", label: "Hospitality" },
+  { href: "#why", icon: "globe", label: "Tourism" },
+  { href: "#why", icon: "cart", label: "Ecommerce" },
+  { href: "#why", icon: "store", label: "Retail" },
+  { href: "#why", icon: "truck", label: "Logistics" },
+  { href: "#why", icon: "package", label: "FMCG" },
+  { href: "#why", icon: "user", label: "Human Resource" },
+  { href: "#why", icon: "target", label: "Professional Services" },
 ];
 
 export const revenueMonths = [

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { featureDropdown, solutionsDropdown } from "@/data/landing";
+import { featureDropdown, solutionsDropdown, automationDropdown, industriesDropdown } from "@/data/landing";
 import { LandingIcon } from "@/components/icons/LandingIcon";
 import type { LandingIconName } from "@/components/icons/LandingIcon";
 
@@ -10,6 +10,8 @@ export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileFeatureOpen, setMobileFeatureOpen] = useState(false);
   const [mobileSolutionOpen, setMobileSolutionOpen] = useState(false);
+  const [mobileAutomationOpen, setMobileAutomationOpen] = useState(false);
+  const [mobileIndustriesOpen, setMobileIndustriesOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -20,7 +22,7 @@ export function Navbar() {
   // Close mobile menu on resize to desktop
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth >= 768) setMenuOpen(false);
+      if (window.innerWidth >= 1024) setMenuOpen(false);
     };
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
@@ -108,22 +110,16 @@ export function Navbar() {
               scrolled ? "text-gray-900" : "text-white"
             }`}
           >
-            <div
-              className={`w-8 h-8 rounded-lg flex items-center justify-center text-sm font-bold transition-colors duration-200 ${
-                scrolled ? "bg-gray-900 text-white" : "bg-white/20 text-white"
-              }`}
-            >
-              SL
-            </div>
+            <img src="/sellerslogin-logo (1).svg" alt="SellersLogin Logo" className="w-8 h-8 object-contain" />
             <span className="hidden sm:inline">SellersLogin</span>
           </a>
 
           {/* Desktop Menu */}
-          <ul className="hidden md:flex items-center gap-1 list-none">
+          <ul className="hidden lg:flex items-center gap-0.5 xl:gap-1 list-none">
             <li>
               <a
                 href="#hero"
-                className={`text-sm font-medium no-underline py-2 px-3 rounded-full transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-900 focus-visible:ring-offset-2 ${
+                className={`flex items-center text-sm font-medium whitespace-nowrap no-underline py-2 px-2.5 xl:px-3 rounded-full transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-900 focus-visible:ring-offset-2 ${
                   scrolled
                     ? "text-gray-600 hover:text-gray-900 hover:bg-gray-100/50"
                     : "text-white/90 hover:text-white hover:bg-white/10"
@@ -135,13 +131,13 @@ export function Navbar() {
             <li className="relative group">
               <a
                 href="#features"
-                className={`text-sm font-medium no-underline py-2 px-3 rounded-full transition-colors duration-200 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-900 focus-visible:ring-offset-2 ${
+                className={`flex items-center text-sm font-medium whitespace-nowrap no-underline py-2 px-2.5 xl:px-3 rounded-full transition-colors duration-200 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-900 focus-visible:ring-offset-2 ${
                   scrolled
                     ? "text-gray-600 hover:text-gray-900 hover:bg-gray-100/50"
                     : "text-white/90 hover:text-white hover:bg-white/10"
                 }`}
               >
-                Features <span className="ml-0.5 text-xs">▾</span>
+                Features <span className="ml-1 text-[10px]">▼</span>
               </a>
               <div className="absolute top-[calc(100%+8px)] left-1/2 -translate-x-1/2 bg-white border border-gray-200 rounded-xl p-2 min-w-55 shadow-lg opacity-0 invisible -translate-y-2 transition-all duration-200 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 pointer-events-none group-hover:pointer-events-auto">
                 {renderDesktopDropdown(featureDropdown)}
@@ -150,36 +146,91 @@ export function Navbar() {
             <li className="relative group">
               <a
                 href="#why"
-                className={`text-sm font-medium no-underline py-2 px-3 rounded-full transition-colors duration-200 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-900 focus-visible:ring-offset-2 ${
+                className={`flex items-center text-sm font-medium whitespace-nowrap no-underline py-2 px-2.5 xl:px-3 rounded-full transition-colors duration-200 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-900 focus-visible:ring-offset-2 ${
                   scrolled
                     ? "text-gray-600 hover:text-gray-900 hover:bg-gray-100/50"
                     : "text-white/90 hover:text-white hover:bg-white/10"
                 }`}
               >
-                Solutions <span className="ml-0.5 text-xs">▾</span>
+                Solutions <span className="ml-1 text-[10px]">▼</span>
               </a>
               <div className="absolute top-[calc(100%+8px)] left-1/2 -translate-x-1/2 bg-white border border-gray-200 rounded-xl p-2 min-w-55 shadow-lg opacity-0 invisible -translate-y-2 transition-all duration-200 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 pointer-events-none group-hover:pointer-events-auto">
                 {renderDesktopDropdown(solutionsDropdown)}
               </div>
             </li>
-            {["Pricing", "Testimonials", "Blog", "FAQ"].map((item) => (
-              <li key={item}>
-                <a
-                  href={`#${item.toLowerCase()}`}
-                  className={`text-sm font-medium no-underline py-2 px-3 rounded-full transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-900 focus-visible:ring-offset-2 ${
-                    scrolled
-                      ? "text-gray-600 hover:text-gray-900 hover:bg-gray-100/50"
-                      : "text-white/90 hover:text-white hover:bg-white/10"
-                  }`}
-                >
-                  {item}
-                </a>
-              </li>
-            ))}
+            <li className="relative group">
+              <a
+                href="#automation"
+                className={`flex items-center text-sm font-medium whitespace-nowrap no-underline py-2 px-2.5 xl:px-3 rounded-full transition-colors duration-200 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-900 focus-visible:ring-offset-2 ${
+                  scrolled
+                    ? "text-gray-600 hover:text-gray-900 hover:bg-gray-100/50"
+                    : "text-white/90 hover:text-white hover:bg-white/10"
+                }`}
+              >
+                Automation <span className="ml-1 text-[10px]">▼</span>
+              </a>
+              <div className="absolute top-[calc(100%+8px)] left-1/2 -translate-x-1/2 bg-white border border-gray-200 rounded-xl p-2 min-w-55 shadow-lg opacity-0 invisible -translate-y-2 transition-all duration-200 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 pointer-events-none group-hover:pointer-events-auto">
+                {renderDesktopDropdown(automationDropdown)}
+              </div>
+            </li>
+            <li className="relative group">
+              <a
+                href="#industries"
+                className={`flex items-center text-sm font-medium whitespace-nowrap no-underline py-2 px-2.5 xl:px-3 rounded-full transition-colors duration-200 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-900 focus-visible:ring-offset-2 ${
+                  scrolled
+                    ? "text-gray-600 hover:text-gray-900 hover:bg-gray-100/50"
+                    : "text-white/90 hover:text-white hover:bg-white/10"
+                }`}
+              >
+                Industries <span className="ml-1 text-[10px]">▼</span>
+              </a>
+              <div className="absolute top-[calc(100%+8px)] left-1/2 -translate-x-1/2 bg-white border border-gray-200 rounded-xl p-4 min-w-[650px] shadow-lg opacity-0 invisible -translate-y-2 transition-all duration-200 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 pointer-events-none group-hover:pointer-events-auto">
+                <div className="grid grid-cols-3 gap-x-2 gap-y-1">
+                  {renderDesktopDropdown(industriesDropdown)}
+                </div>
+              </div>
+            </li>
+            <li>
+              <a
+                href="#pricing"
+                className={`flex items-center text-sm font-medium whitespace-nowrap no-underline py-2 px-2.5 xl:px-3 rounded-full transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-900 focus-visible:ring-offset-2 ${
+                  scrolled
+                    ? "text-gray-600 hover:text-gray-900 hover:bg-gray-100/50"
+                    : "text-white/90 hover:text-white hover:bg-white/10"
+                }`}
+              >
+                Pricing
+              </a>
+            </li>
+            <li className="relative group">
+              <a
+                href="#testimonials"
+                className={`flex items-center text-sm font-medium whitespace-nowrap no-underline py-2 px-2.5 xl:px-3 rounded-full transition-colors duration-200 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-900 focus-visible:ring-offset-2 ${
+                  scrolled
+                    ? "text-gray-600 hover:text-gray-900 hover:bg-gray-100/50"
+                    : "text-white/90 hover:text-white hover:bg-white/10"
+                }`}
+              >
+                Resources <span className="ml-1 text-[10px]">▼</span>
+              </a>
+              <div className="absolute top-[calc(100%+8px)] left-1/2 -translate-x-1/2 bg-white border border-gray-200 rounded-xl p-2 min-w-40 shadow-lg opacity-0 invisible -translate-y-2 transition-all duration-200 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 pointer-events-none group-hover:pointer-events-auto">
+                <div className="flex flex-col">
+                  {["Testimonials", "Blog", "FAQ"].map((item) => (
+                    <a
+                      key={item}
+                      href={`#${item.toLowerCase()}`}
+                      className="px-4 py-2.5 text-sm font-medium text-gray-700 hover:bg-gray-50 hover:text-gray-900 rounded-lg no-underline transition-colors"
+                    >
+                      {item}
+                    </a>
+                  ))}
+                </div>
+              </div>
+            </li>
           </ul>
 
           {/* Desktop Actions */}
-          <div className="hidden md:flex items-center gap-3">
+          <div className="hidden lg:flex items-center gap-3">
             <button
               type="button"
               className={`text-sm font-medium py-2 px-5 rounded-full transition-all duration-200 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-900 focus-visible:ring-offset-2 ${
@@ -201,7 +252,7 @@ export function Navbar() {
           {/* Mobile Toggle */}
           <button
             type="button"
-            className={`md:hidden p-2 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-900 focus-visible:ring-offset-2 rounded-lg transition-colors duration-200 ${
+            className={`lg:hidden p-2 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-900 focus-visible:ring-offset-2 rounded-lg transition-colors duration-200 ${
               scrolled ? "" : ""
             }`}
             aria-label={menuOpen ? "Close menu" : "Open menu"}
@@ -223,7 +274,7 @@ export function Navbar() {
 
       {/* Mobile Menu */}
       <div
-        className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out bg-white border-t border-gray-200 ${
+        className={`lg:hidden overflow-hidden transition-all duration-300 ease-in-out bg-white border-t border-gray-200 ${
           menuOpen ? "max-h-200 opacity-100" : "max-h-0 opacity-0"
         }`}
       >
@@ -247,6 +298,18 @@ export function Navbar() {
             toggle={() => setMobileSolutionOpen(!mobileSolutionOpen)}
             title="Solutions"
             items={solutionsDropdown}
+          />
+          <MobileDropdown
+            isOpen={mobileAutomationOpen}
+            toggle={() => setMobileAutomationOpen(!mobileAutomationOpen)}
+            title="Automation"
+            items={automationDropdown}
+          />
+          <MobileDropdown
+            isOpen={mobileIndustriesOpen}
+            toggle={() => setMobileIndustriesOpen(!mobileIndustriesOpen)}
+            title="Industries"
+            items={industriesDropdown}
           />
 
           {["Pricing", "Testimonials", "Blog", "FAQ"].map((item) => (
