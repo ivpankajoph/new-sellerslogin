@@ -1,6 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
+import { navPageGroups } from "@/data/navPages";
 
 const footerLinks = {
   Automation: [
@@ -36,6 +38,10 @@ const footerLinks = {
     "Human Resource",
     "Professional Services",
   ],
+  Legal: [
+    "Terms and Conditions",
+    "Privacy Policy"
+  ],
 };
 
 const socialLinks = [
@@ -44,6 +50,17 @@ const socialLinks = [
   { name: "Instagram", href: "#", icon: "▣" },
   { name: "YouTube", href: "#", icon: "▷" },
 ] as const;
+
+const footerHrefByLabel: Record<string, string> = {
+  "Terms and Conditions": "/terms",
+  "Privacy Policy": "/privacy",
+  ...Object.values(navPageGroups)
+    .flat()
+    .reduce<Record<string, string>>((links, item) => {
+      links[item.label] = item.href;
+      return links;
+    }, {})
+};
 
 export function FooterSection() {
   const [email, setEmail] = useState("");
@@ -87,32 +104,42 @@ export function FooterSection() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-8 lg:gap-6 mb-12">
           {/* Brand Column (Spans 2 cols on large screens) */}
           <div className="lg:col-span-2">
-            <a
-              href="#hero"
-              className="inline-flex items-center gap-2 text-lg font-bold text-gray-900 no-underline focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-400 focus-visible:ring-offset-2 rounded-lg"
+            <Link
+              href="/#hero"
+              className="inline-flex items-center gap-3 no-underline focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-400 focus-visible:ring-offset-2 rounded-lg"
             >
-              <img src="/sellerslogin-logo (1).svg" alt="SellersLogin Logo" className="w-8 h-8 object-contain" />
-              SellersLogin
-            </a>
-            <p className="text-sm text-gray-600 leading-relaxed mt-4 mb-5 max-w-sm">
-              The all-in-one e-commerce platform for ambitious businesses
-              worldwide.
-            </p>
+              <img src="/sellerslogin-logo (1).svg" alt="SellersLogin Logo" className="w-12 h-12 object-contain bg-white rounded-xl shadow-sm p-1.5" />
+              <span className="text-2xl font-bold text-gray-900 leading-none">SellersLogin</span>
+            </Link>
+            <div className="mt-6 mb-5 text-sm text-gray-600 space-y-3">
+              <p>
+                Brand : SellersLogin ( Under Life Changing Networks Pvt Ltd )
+              </p>
+              <p className="flex items-start gap-2">
+                <svg className="w-5 h-5 text-gray-400 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+                <span>1405, Gaur city 2, Noida Extension, 10th Avenue, Ghaziabad 201009, UP, India</span>
+              </p>
+            </div>
             
             {/* Newsletter Signup */}
             <form onSubmit={handleSubmit} className="mt-4">
-              <label htmlFor="footer-email" className="block text-sm text-gray-600 mb-2">
-                Stay updated with the latest tips and product news
-              </label>
+            
               <div className="flex flex-col sm:flex-row gap-2">
-                <div className="flex-1 min-w-0 relative" suppressHydrationWarning>
+                <div className="flex-1 min-w-0 relative">
                   <input
-                    id="footer-email"
+                    id="newsletter-input"
+                    name="newsletter"
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="Enter your email"
                     required
+                    data-lpignore="true"
+                    data-1p-ignore="true"
+                    autoComplete="off"
                     className="w-full bg-gray-50 border border-gray-200 text-gray-900 rounded-lg py-2.5 px-4 text-sm placeholder-gray-500 outline-none focus:border-purple-400 focus:ring-2 focus:ring-purple-400/20 transition-colors"
                   />
                 </div>
@@ -138,12 +165,12 @@ export function FooterSection() {
               <ul className="space-y-2.5">
                 {links.map((label) => (
                   <li key={label}>
-                    <a
-                      href="#"
+                    <Link
+                      href={footerHrefByLabel[label] ?? "/"}
                       className="text-sm text-gray-600 no-underline transition-colors duration-150 hover:text-gray-900 hover:focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-400 focus-visible:ring-offset-2 rounded"
                     >
                       {label}
-                    </a>
+                    </Link>
                   </li>
                 ))}
               </ul>
@@ -154,14 +181,12 @@ export function FooterSection() {
         {/* Bottom Bar */}
         <div className="flex flex-col md:flex-row items-center justify-between pt-8 border-t border-gray-200 gap-4">
           <address className="not-italic text-sm text-gray-600 text-center md:text-left">
-            © 2025 SellersLogin. All rights reserved. ·{" "}
-            <a href="mailto:hello@sellerslogin.com" className="hover:text-gray-900 hover:transition-colors underline-offset-2 hover:underline">
-              hello@sellerslogin.com
+         All Rights Reserved 2026 with SellersLogin ( Under Life Changing Networks Pvt Ltd )
+            <a href="mailto:hello@sellerslogin.com" className="hover:text-gray-900 hover:transition-colors underline-offset-2 hover:underline ml-2">
+              info@sellerslogin.com
             </a>{" "}
             ·{" "}
-            <a href="tel:+18001234567" className="hover:text-gray-900 hover:transition-colors underline-offset-2 hover:underline">
-              +1 (800) 123-4567
-            </a>
+         
           </address>
           
           {/* Social Links */}

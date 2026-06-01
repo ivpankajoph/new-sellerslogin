@@ -1,60 +1,32 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
+import Link from "next/link";
 import { featureDropdown, solutionsDropdown, automationDropdown, industriesDropdown } from "@/data/landing";
+import { navPageGroups } from "@/data/navPages";
 import { LandingIcon } from "@/components/icons/LandingIcon";
 import type { LandingIconName } from "@/components/icons/LandingIcon";
 
-export function Navbar() {
-  const [menuOpen, setMenuOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-  const [mobileFeatureOpen, setMobileFeatureOpen] = useState(false);
-  const [mobileSolutionOpen, setMobileSolutionOpen] = useState(false);
-  const [mobileAutomationOpen, setMobileAutomationOpen] = useState(false);
-  const [mobileIndustriesOpen, setMobileIndustriesOpen] = useState(false);
+type DropdownItem = {
+  href: string;
+  icon: LandingIconName;
+  label: string;
+};
 
-  useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  // Close mobile menu on resize to desktop
-  useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth >= 1024) setMenuOpen(false);
-    };
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
-
-  const renderDesktopDropdown = (
-    items: { href: string; icon: LandingIconName; label: string }[]
-  ) =>
-    items.map((item) => (
-      <a
-        key={item.label}
-        href={item.href}
-        className="flex items-center gap-2.5 py-2.5 px-3 rounded-lg text-gray-700 hover:text-gray-900 no-underline text-sm font-medium transition-colors duration-150 hover:bg-gray-50"
-      >
-        <div className="w-8 h-8 bg-gray-100 rounded-lg flex items-center justify-center text-gray-700 shrink-0">
-          <LandingIcon name={item.icon} size={16} />
-        </div>
-        {item.label}
-      </a>
-    ));
-
-  const MobileDropdown = ({
-    isOpen,
-    toggle,
-    title,
-    items,
-  }: {
-    isOpen: boolean;
-    toggle: () => void;
-    title: string;
-    items: { href: string; icon: LandingIconName; label: string }[];
-  }) => (
+function MobileDropdown({
+  isOpen,
+  toggle,
+  title,
+  items,
+  onNavigate,
+}: {
+  isOpen: boolean;
+  toggle: () => void;
+  title: string;
+  items: DropdownItem[];
+  onNavigate: () => void;
+}) {
+  return (
     <div className="border-b border-gray-100 last:border-0">
       <button
         onClick={toggle}
@@ -71,27 +43,68 @@ export function Navbar() {
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
         </svg>
       </button>
-      <div
-        className={`overflow-hidden transition-all duration-300 ${isOpen ? "max-h-125 opacity-100" : "max-h-0 opacity-0"}`}
-      >
+      <div className={`overflow-hidden transition-all duration-300 ${isOpen ? "max-h-125 opacity-100" : "max-h-0 opacity-0"}`}>
         <div className="px-4 pb-3 space-y-1">
           {items.map((item) => (
-            <a
+            <Link
               key={item.label}
               href={item.href}
-              onClick={() => setMenuOpen(false)}
+              onClick={onNavigate}
               className="flex items-center gap-3 py-2 px-3 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50 hover:text-gray-900 no-underline transition-colors"
             >
-              <div className="w-8 h-8 bg-gray-100 rounded-lg flex items-center justify-center text-white shrink-0">
+              <div className="w-8 h-8 bg-gray-100 rounded-lg flex items-center justify-center text-gray-700 shrink-0">
                 <LandingIcon name={item.icon} size={16} />
               </div>
               {item.label}
-            </a>
+            </Link>
           ))}
         </div>
       </div>
     </div>
   );
+}
+
+export function Navbar() {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const [mobileFeatureOpen, setMobileFeatureOpen] = useState(false);
+  const [mobileSolutionOpen, setMobileSolutionOpen] = useState(false);
+  const [mobileAutomationOpen, setMobileAutomationOpen] = useState(false);
+  const [mobileIndustriesOpen, setMobileIndustriesOpen] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 20);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 1024) setMenuOpen(false);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  const topLinkClass = `flex items-center text-sm font-medium whitespace-nowrap no-underline py-2 px-2.5 xl:px-3 rounded-full transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-900 focus-visible:ring-offset-2 ${
+    scrolled
+      ? "text-gray-600 hover:text-gray-900 hover:bg-gray-100/50"
+      : "text-white/90 hover:text-white hover:bg-white/10"
+  }`;
+
+  const renderDesktopDropdown = (items: DropdownItem[]) =>
+    items.map((item) => (
+      <Link
+        key={item.label}
+        href={item.href}
+        className="flex items-center gap-2.5 py-2.5 px-3 rounded-lg text-gray-700 hover:text-gray-900 no-underline text-sm font-medium transition-colors duration-150 hover:bg-gray-50"
+      >
+        <div className="w-8 h-8 bg-gray-100 rounded-lg flex items-center justify-center text-gray-700 shrink-0">
+          <LandingIcon name={item.icon} size={16} />
+        </div>
+        {item.label}
+      </Link>
+    ));
 
   return (
     <nav
@@ -103,133 +116,91 @@ export function Navbar() {
     >
       <div className={`${scrolled ? "" : "max-w-7xl mx-auto"}`}>
         <div className="flex items-center justify-between h-16">
-          {/* Logo */}
-          <a
-            href="#hero"
+          <Link
+            href="/#hero"
             className={`text-lg font-bold no-underline flex items-center gap-2 shrink-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-900 focus-visible:ring-offset-2 rounded-md transition-colors duration-200 ${
               scrolled ? "text-gray-900" : "text-white"
             }`}
           >
             <img src="/sellerslogin-logo (1).svg" alt="SellersLogin Logo" className="w-8 h-8 object-contain" />
             <span className="hidden sm:inline">SellersLogin</span>
-          </a>
+          </Link>
 
-          {/* Desktop Menu */}
           <ul className="hidden lg:flex items-center gap-0.5 xl:gap-1 list-none">
             <li>
-              <a
-                href="#hero"
-                className={`flex items-center text-sm font-medium whitespace-nowrap no-underline py-2 px-2.5 xl:px-3 rounded-full transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-900 focus-visible:ring-offset-2 ${
-                  scrolled
-                    ? "text-gray-600 hover:text-gray-900 hover:bg-gray-100/50"
-                    : "text-white/90 hover:text-white hover:bg-white/10"
-                }`}
-              >
+              <Link href="/#hero" className={topLinkClass}>
                 Home
-              </a>
+              </Link>
             </li>
             <li className="relative group">
-              <a
-                href="#features"
-                className={`flex items-center text-sm font-medium whitespace-nowrap no-underline py-2 px-2.5 xl:px-3 rounded-full transition-colors duration-200 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-900 focus-visible:ring-offset-2 ${
-                  scrolled
-                    ? "text-gray-600 hover:text-gray-900 hover:bg-gray-100/50"
-                    : "text-white/90 hover:text-white hover:bg-white/10"
-                }`}
-              >
-                Features <span className="ml-1 text-[10px]">▼</span>
-              </a>
-              <div className="absolute top-[calc(100%+8px)] left-1/2 -translate-x-1/2 bg-white border border-gray-200 rounded-xl p-2 min-w-55 shadow-lg opacity-0 invisible -translate-y-2 transition-all duration-200 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 pointer-events-none group-hover:pointer-events-auto">
-                {renderDesktopDropdown(featureDropdown)}
+              <Link href="/#features" className={`${topLinkClass} cursor-pointer`}>
+                Features <span className="ml-1 text-[10px]">v</span>
+              </Link>
+              <div className="absolute top-full left-1/2 -translate-x-1/2 pt-2 opacity-0 invisible -translate-y-2 transition-all duration-200 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 pointer-events-none group-hover:pointer-events-auto">
+                <div className="bg-white border border-gray-200 rounded-xl p-2 min-w-55 shadow-lg">
+                  {renderDesktopDropdown(featureDropdown)}
+                </div>
               </div>
             </li>
             <li className="relative group">
-              <a
-                href="#why"
-                className={`flex items-center text-sm font-medium whitespace-nowrap no-underline py-2 px-2.5 xl:px-3 rounded-full transition-colors duration-200 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-900 focus-visible:ring-offset-2 ${
-                  scrolled
-                    ? "text-gray-600 hover:text-gray-900 hover:bg-gray-100/50"
-                    : "text-white/90 hover:text-white hover:bg-white/10"
-                }`}
-              >
-                Solutions <span className="ml-1 text-[10px]">▼</span>
-              </a>
-              <div className="absolute top-[calc(100%+8px)] left-1/2 -translate-x-1/2 bg-white border border-gray-200 rounded-xl p-2 min-w-55 shadow-lg opacity-0 invisible -translate-y-2 transition-all duration-200 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 pointer-events-none group-hover:pointer-events-auto">
-                {renderDesktopDropdown(solutionsDropdown)}
+              <Link href="/#why" className={`${topLinkClass} cursor-pointer`}>
+                Solutions <span className="ml-1 text-[10px]">v</span>
+              </Link>
+              <div className="absolute top-full left-1/2 -translate-x-1/2 pt-2 opacity-0 invisible -translate-y-2 transition-all duration-200 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 pointer-events-none group-hover:pointer-events-auto">
+                <div className="bg-white border border-gray-200 rounded-xl p-2 min-w-55 shadow-lg">
+                  {renderDesktopDropdown(solutionsDropdown)}
+                </div>
               </div>
             </li>
             <li className="relative group">
-              <a
-                href="#automation"
-                className={`flex items-center text-sm font-medium whitespace-nowrap no-underline py-2 px-2.5 xl:px-3 rounded-full transition-colors duration-200 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-900 focus-visible:ring-offset-2 ${
-                  scrolled
-                    ? "text-gray-600 hover:text-gray-900 hover:bg-gray-100/50"
-                    : "text-white/90 hover:text-white hover:bg-white/10"
-                }`}
-              >
-                Automation <span className="ml-1 text-[10px]">▼</span>
-              </a>
-              <div className="absolute top-[calc(100%+8px)] left-1/2 -translate-x-1/2 bg-white border border-gray-200 rounded-xl p-2 min-w-55 shadow-lg opacity-0 invisible -translate-y-2 transition-all duration-200 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 pointer-events-none group-hover:pointer-events-auto">
-                {renderDesktopDropdown(automationDropdown)}
+              <Link href="/#automation" className={`${topLinkClass} cursor-pointer`}>
+                Automation <span className="ml-1 text-[10px]">v</span>
+              </Link>
+              <div className="absolute top-full left-1/2 -translate-x-1/2 pt-2 opacity-0 invisible -translate-y-2 transition-all duration-200 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 pointer-events-none group-hover:pointer-events-auto">
+                <div className="bg-white border border-gray-200 rounded-xl p-2 min-w-55 shadow-lg">
+                  {renderDesktopDropdown(automationDropdown)}
+                </div>
               </div>
             </li>
             <li className="relative group">
-              <a
-                href="#industries"
-                className={`flex items-center text-sm font-medium whitespace-nowrap no-underline py-2 px-2.5 xl:px-3 rounded-full transition-colors duration-200 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-900 focus-visible:ring-offset-2 ${
-                  scrolled
-                    ? "text-gray-600 hover:text-gray-900 hover:bg-gray-100/50"
-                    : "text-white/90 hover:text-white hover:bg-white/10"
-                }`}
-              >
-                Industries <span className="ml-1 text-[10px]">▼</span>
-              </a>
-              <div className="absolute top-[calc(100%+8px)] left-1/2 -translate-x-1/2 bg-white border border-gray-200 rounded-xl p-4 min-w-[650px] shadow-lg opacity-0 invisible -translate-y-2 transition-all duration-200 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 pointer-events-none group-hover:pointer-events-auto">
-                <div className="grid grid-cols-3 gap-x-2 gap-y-1">
-                  {renderDesktopDropdown(industriesDropdown)}
+              <Link href="/#industries" className={`${topLinkClass} cursor-pointer`}>
+                Industries <span className="ml-1 text-[10px]">v</span>
+              </Link>
+              <div className="absolute top-full left-1/2 -translate-x-1/2 pt-2 opacity-0 invisible -translate-y-2 transition-all duration-200 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 pointer-events-none group-hover:pointer-events-auto">
+                <div className="bg-white border border-gray-200 rounded-xl p-4 min-w-[650px] shadow-lg">
+                  <div className="grid grid-cols-3 gap-x-2 gap-y-1">
+                    {renderDesktopDropdown(industriesDropdown)}
+                  </div>
                 </div>
               </div>
             </li>
             <li>
-              <a
-                href="#pricing"
-                className={`flex items-center text-sm font-medium whitespace-nowrap no-underline py-2 px-2.5 xl:px-3 rounded-full transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-900 focus-visible:ring-offset-2 ${
-                  scrolled
-                    ? "text-gray-600 hover:text-gray-900 hover:bg-gray-100/50"
-                    : "text-white/90 hover:text-white hover:bg-white/10"
-                }`}
-              >
+              <Link href="/#pricing" className={topLinkClass}>
                 Pricing
-              </a>
+              </Link>
             </li>
             <li className="relative group">
-              <a
-                href="#testimonials"
-                className={`flex items-center text-sm font-medium whitespace-nowrap no-underline py-2 px-2.5 xl:px-3 rounded-full transition-colors duration-200 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-900 focus-visible:ring-offset-2 ${
-                  scrolled
-                    ? "text-gray-600 hover:text-gray-900 hover:bg-gray-100/50"
-                    : "text-white/90 hover:text-white hover:bg-white/10"
-                }`}
-              >
-                Resources <span className="ml-1 text-[10px]">▼</span>
-              </a>
-              <div className="absolute top-[calc(100%+8px)] left-1/2 -translate-x-1/2 bg-white border border-gray-200 rounded-xl p-2 min-w-40 shadow-lg opacity-0 invisible -translate-y-2 transition-all duration-200 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 pointer-events-none group-hover:pointer-events-auto">
-                <div className="flex flex-col">
-                  {["Testimonials", "Blog", "FAQ"].map((item) => (
-                    <a
-                      key={item}
-                      href={`#${item.toLowerCase()}`}
-                      className="px-4 py-2.5 text-sm font-medium text-gray-700 hover:bg-gray-50 hover:text-gray-900 rounded-lg no-underline transition-colors"
-                    >
-                      {item}
-                    </a>
-                  ))}
+              <Link href="/#testimonials" className={`${topLinkClass} cursor-pointer`}>
+                Resources <span className="ml-1 text-[10px]">v</span>
+              </Link>
+              <div className="absolute top-full left-1/2 -translate-x-1/2 pt-2 opacity-0 invisible -translate-y-2 transition-all duration-200 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 pointer-events-none group-hover:pointer-events-auto">
+                <div className="bg-white border border-gray-200 rounded-xl p-2 min-w-40 shadow-lg">
+                  <div className="flex flex-col">
+                    {navPageGroups.resources.map((item) => (
+                      <Link
+                        key={item.label}
+                        href={item.href}
+                        className="px-4 py-2.5 text-sm font-medium text-gray-700 hover:bg-gray-50 hover:text-gray-900 rounded-lg no-underline transition-colors"
+                      >
+                        {item.label}
+                      </Link>
+                    ))}
+                  </div>
                 </div>
               </div>
             </li>
           </ul>
 
-          {/* Desktop Actions */}
           <div className="hidden lg:flex items-center gap-3">
             <button
               type="button"
@@ -249,12 +220,9 @@ export function Navbar() {
             </button>
           </div>
 
-          {/* Mobile Toggle */}
           <button
             type="button"
-            className={`lg:hidden p-2 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-900 focus-visible:ring-offset-2 rounded-lg transition-colors duration-200 ${
-              scrolled ? "" : ""
-            }`}
+            className="lg:hidden p-2 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-900 focus-visible:ring-offset-2 rounded-lg transition-colors duration-200"
             aria-label={menuOpen ? "Close menu" : "Open menu"}
             aria-expanded={menuOpen}
             onClick={() => setMenuOpen((o) => !o)}
@@ -272,55 +240,66 @@ export function Navbar() {
         </div>
       </div>
 
-      {/* Mobile Menu */}
       <div
         className={`lg:hidden overflow-hidden transition-all duration-300 ease-in-out bg-white border-t border-gray-200 ${
           menuOpen ? "max-h-200 opacity-100" : "max-h-0 opacity-0"
         }`}
       >
         <div className="px-4 py-3 space-y-1">
-          <a
-            href="#hero"
+          <Link
+            href="/#hero"
             onClick={() => setMenuOpen(false)}
             className="block py-3 px-4 text-base font-medium text-gray-700 rounded-lg hover:bg-gray-50 hover:text-gray-900 no-underline transition-colors"
           >
             Home
-          </a>
+          </Link>
 
           <MobileDropdown
             isOpen={mobileFeatureOpen}
             toggle={() => setMobileFeatureOpen(!mobileFeatureOpen)}
             title="Features"
             items={featureDropdown}
+            onNavigate={() => setMenuOpen(false)}
           />
           <MobileDropdown
             isOpen={mobileSolutionOpen}
             toggle={() => setMobileSolutionOpen(!mobileSolutionOpen)}
             title="Solutions"
             items={solutionsDropdown}
+            onNavigate={() => setMenuOpen(false)}
           />
           <MobileDropdown
             isOpen={mobileAutomationOpen}
             toggle={() => setMobileAutomationOpen(!mobileAutomationOpen)}
             title="Automation"
             items={automationDropdown}
+            onNavigate={() => setMenuOpen(false)}
           />
           <MobileDropdown
             isOpen={mobileIndustriesOpen}
             toggle={() => setMobileIndustriesOpen(!mobileIndustriesOpen)}
             title="Industries"
             items={industriesDropdown}
+            onNavigate={() => setMenuOpen(false)}
           />
 
-          {["Pricing", "Testimonials", "Blog", "FAQ"].map((item) => (
-            <a
-              key={item}
-              href={`#${item.toLowerCase()}`}
+          <Link
+            href="/#pricing"
+            onClick={() => setMenuOpen(false)}
+            className="block py-3 px-4 text-base font-medium text-gray-700 rounded-lg hover:bg-gray-50 hover:text-gray-900 no-underline transition-colors"
+          >
+            Pricing
+          </Link>
+
+          {navPageGroups.resources.map((item) => (
+            <Link
+              key={item.label}
+              href={item.href}
               onClick={() => setMenuOpen(false)}
               className="block py-3 px-4 text-base font-medium text-gray-700 rounded-lg hover:bg-gray-50 hover:text-gray-900 no-underline transition-colors"
             >
-              {item}
-            </a>
+              {item.label}
+            </Link>
           ))}
 
           <div className="pt-4 pb-2 flex flex-col gap-3">

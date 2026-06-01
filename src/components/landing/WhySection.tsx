@@ -90,8 +90,8 @@ export function WhySection() {
           </article>
 
           {/* Card 6: AI Automation (Large) */}
-          <article className="reveal reveal-delay-2 bg-white border border-gray-200 rounded-2xl p-6 md:p-7 flex flex-col relative overflow-hidden transition-all duration-300 hover:shadow-lg hover:border-gray-300 lg:col-span-2">
-            <div className="flex flex-col md:flex-row gap-6 h-full items-start md:items-center">
+          <article className="reveal reveal-delay-2 bg-white border border-gray-200 rounded-2xl p-6 md:p-7 flex flex-col relative overflow-hidden transition-all duration-300 hover:shadow-lg hover:border-gray-300 lg:col-span-2 lg:row-span-2">
+            <div className="flex flex-col md:flex-row lg:flex-col gap-6 h-full items-start md:items-center lg:items-start justify-center">
               <div className="flex-1 flex flex-col">
                 <BentoIcon name="bot" />
                 <h3 className="text-lg font-bold text-gray-900 mb-2">AI Automation</h3>
@@ -101,7 +101,7 @@ export function WhySection() {
                   growth.
                 </p>
               </div>
-              <div className="grid grid-cols-2 gap-2 md:gap-3 flex-1 w-full">
+              <div className="grid grid-cols-2 gap-2 md:gap-3 flex-1 w-full lg:mt-auto">
                 {[
                   { v: "80%", l: "Less manual work" },
                   { v: "2x", l: "Faster launches" },

@@ -1,13 +1,5 @@
 import type { Metadata } from "next";
-import { DM_Sans } from "next/font/google";
 import "./globals.css";
-
-const dmSans = DM_Sans({
-  subsets: ["latin"],
-  variable: "--font-dm-sans",
-  weight: ["300", "400", "500", "600", "700"],
-  style: ["normal", "italic"],
-});
 
 export const metadata: Metadata = {
   title: "SellersLogin — Build Your Online Store in Minutes",
@@ -22,6 +14,9 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
   },
+  other: {
+    "facebook-domain-verification": "7i0cyqq95aam0ac12gsywt3niirx2z",
+  },
 };
 
 export default function RootLayout({
@@ -30,8 +25,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={dmSans.variable}>
-      <body className="min-h-full antialiased">{children}</body>
+    <html lang="en">
+      <body className="min-h-full antialiased font-sans">{children}</body>
     </html>
   );
 }

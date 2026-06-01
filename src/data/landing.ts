@@ -1,5 +1,6 @@
 import type { LandingIconName } from "@/components/icons/LandingIcon";
 import { images } from "@/lib/images";
+import { navPageGroups } from "./navPages";
 
 export const heroChartBars = [
   "30%",
@@ -113,60 +114,25 @@ export const featureDropdown: {
   href: string;
   icon: LandingIconName;
   label: string;
-}[] = [
-  { href: "#features", icon: "layout", label: "Website Builder" },
-  { href: "#features", icon: "shopping-bag", label: "Store Management" },
-  { href: "#features", icon: "megaphone", label: "Marketing Automation" },
-  { href: "#features", icon: "package", label: "Inventory Tracking" },
-  { href: "#analytics", icon: "bar-chart", label: "Analytics Dashboard" },
-  { href: "#features", icon: "credit-card", label: "Payment Integration" },
-];
+}[] = navPageGroups.features;
 
 export const solutionsDropdown: {
   href: string;
   icon: LandingIconName;
   label: string;
-}[] = [
-  { href: "#why", icon: "layout", label: "B2b Dashboard" },
-  { href: "#why", icon: "shopping-bag", label: "B2c Dashboard" },
-];
+}[] = navPageGroups.solutions;
 
 export const automationDropdown: {
   href: string;
   icon: LandingIconName;
   label: string;
-}[] = [
-  { href: "#features", icon: "bot", label: "AI Voice Automation" },
-  { href: "#features", icon: "message", label: "AI Chat Automation" },
-  { href: "#features", icon: "megaphone", label: "Email Automation" },
-  { href: "#features", icon: "store", label: "E-commerce Automation" },
-  { href: "#features", icon: "smartphone", label: "Whatsapp Automation" },
-];
+}[] = navPageGroups.automation;
 
 export const industriesDropdown: {
   href: string;
   icon: LandingIconName;
   label: string;
-}[] = [
-  { href: "#why", icon: "building", label: "Manufacturing" },
-  { href: "#why", icon: "store", label: "Real estate" },
-  { href: "#why", icon: "shopping-bag", label: "Fashion" },
-  { href: "#why", icon: "package", label: "D2C" },
-  { href: "#why", icon: "store", label: "Food" },
-  { href: "#why", icon: "store", label: "Restaurants" },
-  { href: "#why", icon: "rocket", label: "Saas" },
-  { href: "#why", icon: "shield", label: "Healthcare" },
-  { href: "#why", icon: "zap", label: "Pharmaceutical" },
-  { href: "#why", icon: "credit-card", label: "Banking" },
-  { href: "#why", icon: "building", label: "Hospitality" },
-  { href: "#why", icon: "globe", label: "Tourism" },
-  { href: "#why", icon: "cart", label: "Ecommerce" },
-  { href: "#why", icon: "store", label: "Retail" },
-  { href: "#why", icon: "truck", label: "Logistics" },
-  { href: "#why", icon: "package", label: "FMCG" },
-  { href: "#why", icon: "user", label: "Human Resource" },
-  { href: "#why", icon: "target", label: "Professional Services" },
-];
+}[] = navPageGroups.industries;
 
 export const revenueMonths = [
   { label: "Jan", width: "45%", val: "$22K" },
@@ -179,20 +145,12 @@ export const revenueMonths = [
 
 export const counters = [
   {
-    target: 48200,
-    prefix: "$",
-    suffix: "",
-    label: "Monthly Revenue",
-    change: "↑ +18.4% MoM",
-    delay: "",
-  },
-  {
     target: 33700,
     prefix: "",
     suffix: "",
     label: "Unique Visitors",
     change: "↑ +23% MoM",
-    delay: "reveal-delay-1",
+    delay: "",
   },
   {
     target: 1284,
@@ -200,7 +158,7 @@ export const counters = [
     suffix: "",
     label: "Total Orders",
     change: "↑ +12.1% MoM",
-    delay: "reveal-delay-2",
+    delay: "reveal-delay-1",
   },
   {
     target: 38,
@@ -208,7 +166,7 @@ export const counters = [
     suffix: "%",
     label: "Customer Return Rate",
     change: "↑ +5% YoY",
-    delay: "reveal-delay-3",
+    delay: "reveal-delay-2",
   },
 ];
 

@@ -1,14 +1,15 @@
-import { AnalyticsSection } from "./AnalyticsSection";
+
 import { GlobalBackground } from "./GlobalBackground";
 import { AnnouncementBar } from "./AnnouncementBar";
 import { BackToTop } from "./BackToTop";
 import { BlogSection } from "./BlogSection";
-import { CasesSection } from "./CasesSection";
+
 import { CookieConsent } from "./CookieConsent";
 import { CtaSection } from "./CtaSection";
 import { CustomCursor } from "./CustomCursor";
 import { FaqSection } from "./FaqSection";
-import { FeaturesSection } from "./FeaturesSection";
+import { BrandsLoveSection } from "./BrandsLoveSection";
+import { HelpSection } from "./HelpSection";
 import { StepsSection } from "./StepsSection";
 import { FooterSection } from "./FooterSection";
 import { GlobeSection } from "./GlobeSection";
@@ -31,15 +32,17 @@ export function LandingPage() {
       <Navbar />
       <HeroSection />
       <TrustedMarquee />
-      <FeaturesSection />
+
+      <HelpSection />
       <ShowcaseSection />
       <WhySection />
       <ProcessSection />
-      <AnalyticsSection />
+
       <TestimonialsSection />
       <PricingSection />
-      <CasesSection />
+
       <StepsSection />
+      <BrandsLoveSection />
       <FaqSection />
  
       <CtaSection />
