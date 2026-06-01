@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import {
   enterpriseFeatures,
   growthFeatures,
@@ -16,9 +15,8 @@ function CheckIcon() {
 }
 
 export function PricingSection() {
-  const [yearly, setYearly] = useState(false);
-  const prices = yearly ? { starter: 19, growth: 55 } : { starter: 29, growth: 79 };
-  const period = yearly ? "per month, billed annually" : "per month, billed monthly";
+  const prices = { starter: "899", growth: "2,499" };
+  const period = "per month";
 
   return (
     <section id="pricing" className="py-20 md:py-28 px-4 sm:px-6 lg:px-8 bg-transparent">
@@ -35,31 +33,7 @@ export function PricingSection() {
             Start free, upgrade as you grow. No hidden fees, no surprises.
           </p>
 
-          {/* Billing Toggle */}
-          <div className="reveal reveal-delay-3 flex flex-wrap items-center justify-center gap-3">
-            <span className={`text-sm font-medium transition-colors ${!yearly ? 'text-gray-900' : 'text-gray-500'}`}>Monthly</span>
-            <button
-              type="button"
-              role="switch"
-              aria-checked={yearly}
-              onClick={() => setYearly(!yearly)}
-              className={`relative w-12 h-7 rounded-full transition-colors duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-900 focus-visible:ring-offset-2 ${
-                yearly ? 'bg-gray-900' : 'bg-gray-300'
-              }`}
-            >
-              <span
-                className={`absolute top-0.5 left-0.5 w-6 h-6 bg-white rounded-full shadow-sm transition-transform duration-300 ${
-                  yearly ? 'translate-x-5' : 'translate-x-0'
-                }`}
-              />
-            </button>
-            <span className={`text-sm font-medium transition-colors ${yearly ? 'text-gray-900' : 'text-gray-500'}`}>
-              Yearly
-              <span className="ml-1.5 bg-indigo-50 text-indigo-700 py-0.5 px-2 rounded-full text-[11px] font-bold uppercase tracking-wide">
-                Save 30%
-              </span>
-            </span>
-          </div>
+
         </header>
 
         {/* Pricing Cards Grid */}
@@ -68,7 +42,7 @@ export function PricingSection() {
           <article className={`reveal bg-white border border-gray-200 rounded-3xl p-6 md:p-8 relative transition-all duration-300 hover:shadow-lg hover:border-gray-300`}>
             <h3 className="text-lg font-bold text-gray-900 mb-2">Starter</h3>
             <div className="flex items-end gap-1 mb-1">
-              <span className="text-2xl text-gray-500 font-medium translate-y-1">$</span>
+              <span className="text-2xl text-gray-500 font-medium translate-y-1">₹</span>
               <span className="text-5xl font-bold text-gray-900 tracking-tight transition-all duration-300">
                 {prices.starter}
               </span>
@@ -96,7 +70,7 @@ export function PricingSection() {
             </div>
             <h3 className="text-lg font-bold text-white mb-2">Growth</h3>
             <div className="flex items-end gap-1 mb-1">
-              <span className="text-2xl text-gray-400 font-medium translate-y-1">$</span>
+              <span className="text-2xl text-gray-400 font-medium translate-y-1">₹</span>
               <span className="text-5xl font-bold text-white tracking-tight transition-all duration-300">
                 {prices.growth}
               </span>
