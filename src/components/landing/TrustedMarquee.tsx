@@ -1,12 +1,16 @@
 
 
 const integrationBrands = [
-  { name: "Borzo", logo: "https://www.google.com/s2/favicons?domain=borzodelivery.com&sz=128" },
+  { name: "Google", logo: "https://www.google.com/s2/favicons?domain=google.com&sz=128" },
   { name: "Delhivery", logo: "https://www.google.com/s2/favicons?domain=delhivery.com&sz=128" },
   { name: "WhatsApp", logo: "https://cdn.simpleicons.org/whatsapp/25D366" },
   { name: "Facebook", logo: "https://cdn.simpleicons.org/facebook/1877F2" },
   { name: "ChatGPT", logo: "https://www.google.com/s2/favicons?domain=chatgpt.com&sz=128" },
   { name: "Shadowfax", logo: "https://www.google.com/s2/favicons?domain=shadowfax.in&sz=128" },
+  { name: "Razorpay", logo: "https://www.google.com/s2/favicons?domain=razorpay.com&sz=128" },
+  { name: "Google Merchant", logo: "https://www.gstatic.com/images/branding/product/2x/merchant_center_48dp.png" },
+  { name: "Cashfree", logo: "https://www.google.com/s2/favicons?domain=cashfree.com&sz=128" },
+  { name: "Plivo", logo: "https://www.google.com/s2/favicons?domain=plivo.com&sz=128" },
 ];
 
 export function TrustedMarquee() {
@@ -16,7 +20,7 @@ export function TrustedMarquee() {
   return (
     <section id="trusted" className="py-6 md:py-8 border-y border-gray-200 bg-gray-50/50 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-5 text-center reveal">
-        <h2 className="text-sm font-semibold text-purple-600 tracking-wide uppercase">Integrate with your fav app</h2>
+        <h2 className="text-sm font-semibold text-purple-600 tracking-wide uppercase">Seamlessly integrate with top industry tools</h2>
       </div>
       
       <div className="reveal relative w-full overflow-hidden">
@@ -29,7 +33,7 @@ export function TrustedMarquee() {
           {items.map((brand, i) => (
             <div
               key={`${brand.name}-${i}`}
-              className="flex items-center gap-3 transition-opacity duration-300 hover:opacity-80 select-none grayscale hover:grayscale-0"
+              className="flex items-center gap-3 transition-opacity duration-300 hover:opacity-80 select-none"
             >
               <img src={brand.logo} alt={`${brand.name} logo`} className="w-10 h-10 md:w-12 md:h-12 object-contain" loading="lazy" />
               <span className="text-xl md:text-2xl font-bold text-gray-700 whitespace-nowrap">

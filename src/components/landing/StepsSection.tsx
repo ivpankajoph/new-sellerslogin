@@ -59,8 +59,9 @@ export function StepsSection() {
 
             <div className="mt-10 lg:mt-12 flex items-center justify-between gap-6">
               <a
-                href="#"
-                className="inline-flex items-center justify-center bg-gray-900 text-white rounded-full py-3.5 px-8 text-base font-semibold transition-all duration-200 hover:bg-gray-800 hover:shadow-lg hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-900 focus-visible:ring-offset-2 whitespace-nowrap"
+                href="https://web.sellerslogin.com/vendor/registration"
+                target="_blank" rel="noopener noreferrer"
+                className="inline-flex items-center justify-center bg-gray-900 text-white rounded-full py-3.5 px-8 text-base font-semibold transition-all duration-200 hover:bg-gray-800 hover:shadow-lg hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-900 focus-visible:ring-offset-2 whitespace-nowrap no-underline"
               >
                 Get Started Free
               </a>

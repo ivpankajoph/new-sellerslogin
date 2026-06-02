@@ -1,4 +1,4 @@
-
+import Link from "next/link";
 
 export function CtaSection() {
   return (
@@ -22,12 +22,13 @@ export function CtaSection() {
           </p>
           
           <div className="reveal reveal-delay-3 flex flex-col sm:flex-row items-center justify-center gap-4">
-            <button
-              type="button"
-              className="w-full sm:w-auto bg-purple-200 text-black py-3 px-8 rounded-full border border-purple-300 shadow-sm font-semibold text-sm md:text-base transition-all duration-300 hover:shadow-lg hover:bg-purple-300 hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-400 focus-visible:ring-offset-2 focus-visible:ring-offset-gray-900 cursor-pointer"
+            <Link
+              href="https://web.sellerslogin.com/vendor/registration"
+              target="_blank" rel="noopener noreferrer"
+              className="w-full sm:w-auto text-center inline-block bg-purple-200 text-black py-3 px-8 rounded-full border border-purple-300 shadow-sm font-semibold text-sm md:text-base transition-all duration-300 hover:shadow-lg hover:bg-purple-300 hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-400 focus-visible:ring-offset-2 focus-visible:ring-offset-gray-900 cursor-pointer no-underline"
             >
               Start Free Trial
-            </button>
+            </Link>
             <button
               type="button"
               className="w-full sm:w-auto bg-transparent text-white border border-white/25 py-3 px-8 rounded-full font-semibold text-sm md:text-base transition-all duration-300 hover:bg-white/10 hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-gray-900 cursor-pointer"

@@ -25,6 +25,7 @@ export const navPageGroups: Record<NavPageCategory, NavLink[]> = {
   solutions: [
     { href: "/solutions/b2b-dashboard", icon: "layout", label: "B2b Dashboard" },
     { href: "/solutions/b2c-dashboard", icon: "shopping-bag", label: "B2c Dashboard" },
+    { href: "/solutions/food-dashboard", icon: "store", label: "Food Dashboard" },
   ],
   automation: [
     { href: "/automation/ai-voice-automation", icon: "bot", label: "AI Voice Automation" },

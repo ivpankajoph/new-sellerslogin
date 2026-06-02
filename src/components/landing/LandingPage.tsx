@@ -13,7 +13,7 @@ import { FooterSection } from "./FooterSection";
 import { GlobeSection } from "./GlobeSection";
 import { HeroSection } from "./HeroSection";
 import { Navbar } from "./Navbar";
-import { PricingSection } from "./PricingSection";
+
 import { ProcessSection } from "./ProcessSection";
 import { ScrollRevealInit } from "./ScrollRevealInit";
 import { ShowcaseSection } from "./ShowcaseSection";
@@ -37,7 +37,7 @@ export function LandingPage() {
       <ProcessSection />
 
       <TestimonialsSection />
-      <PricingSection />
+
 
       <StepsSection />
       <BrandsLoveSection />

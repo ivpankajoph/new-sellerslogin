@@ -15,8 +15,23 @@
   100% { transform: translateX(0); }
 }
 
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-14px); }
+}
+
+@keyframes float-slower {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(10px); }
+}
+
+.animate-float-slow { animation: float-slow 6s ease-in-out infinite; }
+.animate-float-slower { animation: float-slower 8s ease-in-out infinite; }
+
 @media (prefers-reduced-motion: reduce) {
-  .animate-[marquee_45s_linear_infinite] {
+  .animate-[marquee_45s_linear_infinite],
+  .animate-float-slow,
+  .animate-float-slower {
     animation: none;
   }
 }
@@ -35,3 +50,9 @@
 .reveal-delay-2 { transition-delay: 0.2s; }
 .reveal-delay-3 { transition-delay: 0.3s; }
 .reveal-delay-4 { transition-delay: 0.4s; }
+.reveal-delay-5 { transition-delay: 0.5s; }
+.reveal-delay-6 { transition-delay: 0.6s; }
+
+/* Hide scrollbar for carousels while keeping scroll/drag behavior */
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+.no-scrollbar::-webkit-scrollbar { display: none; }

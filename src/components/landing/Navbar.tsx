@@ -174,17 +174,14 @@ export function Navbar() {
                 </div>
               </div>
             </li>
-            <li>
-              <Link href="/#pricing" className={topLinkClass}>
-                Pricing
-              </Link>
-            </li>
+
 
           </ul>
 
           <div className="hidden lg:flex items-center gap-3">
-            <button
-              type="button"
+            <Link
+              href="https://admin.sellerslogin.com/sign-in"
+              target="_blank" rel="noopener noreferrer"
               className={`text-sm font-medium py-2 px-5 rounded-full transition-all duration-200 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-900 focus-visible:ring-offset-2 ${
                 scrolled
                   ? "bg-white border border-gray-300 text-gray-700 hover:border-gray-900 hover:text-gray-900"
@@ -192,13 +189,14 @@ export function Navbar() {
               }`}
             >
               Log In
-            </button>
-            <button
-              type="button"
+            </Link>
+            <Link
+              href="https://web.sellerslogin.com/vendor/registration"
+              target="_blank" rel="noopener noreferrer"
               className="text-sm font-medium py-2 px-5 rounded-full border border-purple-300 shadow-sm transition-all duration-200 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-400 focus-visible:ring-offset-2 bg-purple-200 text-black hover:bg-purple-300 hover:-translate-y-0.5 active:translate-y-0"
             >
               Get Started Free
-            </button>
+            </Link>
           </div>
 
           <button
@@ -264,29 +262,25 @@ export function Navbar() {
             onNavigate={() => setMenuOpen(false)}
           />
 
-          <Link
-            href="/#pricing"
-            onClick={() => setMenuOpen(false)}
-            className="block py-3 px-4 text-base font-medium text-gray-700 rounded-lg hover:bg-gray-50 hover:text-gray-900 no-underline transition-colors"
-          >
-            Pricing
-          </Link>
+
 
 
 
           <div className="pt-4 pb-2 flex flex-col gap-3">
-            <button
-              type="button"
-              className="w-full bg-white border border-gray-300 text-gray-700 text-base font-medium py-2.5 px-5 rounded-full transition-colors duration-200 hover:border-gray-900 hover:text-gray-900 cursor-pointer"
+            <Link
+              href="https://admin.sellerslogin.com/sign-in"
+              target="_blank" rel="noopener noreferrer"
+              className="block text-center w-full bg-white border border-gray-300 text-gray-700 text-base font-medium py-2.5 px-5 rounded-full transition-colors duration-200 hover:border-gray-900 hover:text-gray-900 cursor-pointer no-underline"
             >
               Log In
-            </button>
-            <button
-              type="button"
-              className="w-full bg-purple-200 text-black text-base font-medium py-2.5 px-5 rounded-full border border-purple-300 shadow-sm transition-transform duration-200 hover:-translate-y-0.5 hover:bg-purple-300 active:translate-y-0 cursor-pointer"
+            </Link>
+            <Link
+              href="https://web.sellerslogin.com/vendor/registration"
+              target="_blank" rel="noopener noreferrer"
+              className="block text-center w-full bg-purple-200 text-black text-base font-medium py-2.5 px-5 rounded-full border border-purple-300 shadow-sm transition-transform duration-200 hover:-translate-y-0.5 hover:bg-purple-300 active:translate-y-0 cursor-pointer no-underline"
             >
               Get Started Free
-            </button>
+            </Link>
           </div>
         </div>
       </div>
