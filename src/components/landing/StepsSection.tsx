@@ -1,10 +1,13 @@
-"use client";
+
 
 import Image from "next/image";
 
 export function StepsSection() {
   return (
-    <section id="steps" className="py-20 md:py-28 px-4 sm:px-6 lg:px-8 bg-transparent">
+    <section
+      id="steps"
+      className="py-20 md:py-28 px-4 sm:px-6 lg:px-8 bg-transparent"
+    >
       <div className="max-w-7xl mx-auto">
         <header className="text-center mb-16 md:mb-24">
           <h2 className="reveal text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 leading-tight tracking-tight">
@@ -40,7 +43,10 @@ export function StepsSection() {
                 { num: "02", title: "Customize your store" },
                 { num: "03", title: "Set up payments" },
               ].map((step, i) => (
-                <div key={step.num} className={`group flex items-center gap-6 py-6 lg:py-8 border-b border-gray-200 transition-colors ${i === 0 ? "border-t" : ""}`}>
+                <div
+                  key={step.num}
+                  className={`group flex items-center gap-6 py-6 lg:py-8 border-b border-gray-200 transition-colors ${i === 0 ? "border-t" : ""}`}
+                >
                   <span className="text-xl md:text-2xl font-mono text-purple-600 font-medium opacity-80 group-hover:opacity-100 transition-opacity">
                     {step.num}
                   </span>
@@ -58,17 +64,6 @@ export function StepsSection() {
               >
                 Get Started Free
               </a>
-              
-              {/* Small floating image like in the screenshot */}
-              <div className="hidden sm:block w-32 h-20 rounded-xl overflow-hidden shadow-md border border-gray-200 bg-gray-50">
-                 <Image
-                    src="/images/product_closeup.png"
-                    alt="Action"
-                    width={128}
-                    height={80}
-                    className="w-full h-full object-cover"
-                 />
-              </div>
             </div>
           </div>
         </div>

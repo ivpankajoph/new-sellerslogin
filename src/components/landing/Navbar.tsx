@@ -123,7 +123,7 @@ export function Navbar() {
             }`}
           >
             <img src="/sellerslogin-logo (1).svg" alt="SellersLogin Logo" className="w-8 h-8 object-contain" />
-            <span className="hidden sm:inline">SellersLogin</span>
+            <span>SellersLogin</span>
           </Link>
 
           <ul className="hidden lg:flex items-center gap-0.5 xl:gap-1 list-none">
@@ -179,26 +179,7 @@ export function Navbar() {
                 Pricing
               </Link>
             </li>
-            <li className="relative group">
-              <Link href="/#testimonials" className={`${topLinkClass} cursor-pointer`}>
-                Resources <span className="ml-1 text-[10px]">v</span>
-              </Link>
-              <div className="absolute top-full left-1/2 -translate-x-1/2 pt-2 opacity-0 invisible -translate-y-2 transition-all duration-200 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 pointer-events-none group-hover:pointer-events-auto">
-                <div className="bg-white border border-gray-200 rounded-xl p-2 min-w-40 shadow-lg">
-                  <div className="flex flex-col">
-                    {navPageGroups.resources.map((item) => (
-                      <Link
-                        key={item.label}
-                        href={item.href}
-                        className="px-4 py-2.5 text-sm font-medium text-gray-700 hover:bg-gray-50 hover:text-gray-900 rounded-lg no-underline transition-colors"
-                      >
-                        {item.label}
-                      </Link>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </li>
+
           </ul>
 
           <div className="hidden lg:flex items-center gap-3">
@@ -291,16 +272,7 @@ export function Navbar() {
             Pricing
           </Link>
 
-          {navPageGroups.resources.map((item) => (
-            <Link
-              key={item.label}
-              href={item.href}
-              onClick={() => setMenuOpen(false)}
-              className="block py-3 px-4 text-base font-medium text-gray-700 rounded-lg hover:bg-gray-50 hover:text-gray-900 no-underline transition-colors"
-            >
-              {item.label}
-            </Link>
-          ))}
+
 
           <div className="pt-4 pb-2 flex flex-col gap-3">
             <button

@@ -1,8 +1,6 @@
-
 import { GlobalBackground } from "./GlobalBackground";
-import { AnnouncementBar } from "./AnnouncementBar";
+
 import { BackToTop } from "./BackToTop";
-import { BlogSection } from "./BlogSection";
 
 import { CookieConsent } from "./CookieConsent";
 import { CtaSection } from "./CtaSection";
@@ -44,7 +42,7 @@ export function LandingPage() {
       <StepsSection />
       <BrandsLoveSection />
       <FaqSection />
- 
+
       <CtaSection />
       <GlobeSection />
       <FooterSection />

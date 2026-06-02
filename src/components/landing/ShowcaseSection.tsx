@@ -17,9 +17,9 @@ const tabs = [
 type TabId = (typeof tabs)[number]["id"];
 
 const showcaseCategories = [
-  { image: images.heroFashion, name: "T-Shirts", price: "From $19" },
-  { image: images.showcaseFashion, name: "Dresses", price: "From $49" },
-  { image: images.productShoes, name: "Footwear", price: "From $79" },
+  { image: images.heroFashion, name: "T-Shirts", tag: "Apparel" },
+  { image: images.showcaseFashion, name: "Dresses", tag: "Womenswear" },
+  { image: images.productShoes, name: "Footwear", tag: "Sneakers" },
 ];
 
 const iconPanels: {
@@ -147,7 +147,7 @@ export function ShowcaseSection() {
                         />
                         <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/20 to-transparent flex flex-col justify-end p-2 md:p-4 ">
                           <div className="text-xs md:text-sm font-bold">{cat.name}</div>
-                          <div className="text-[10px] md:text-xs text-gray-200">{cat.price}</div>
+                          <div className="text-[10px] md:text-xs text-gray-200">{cat.tag}</div>
                         </div>
                       </div>
                     ))}
@@ -164,8 +164,8 @@ export function ShowcaseSection() {
                 {/* Stats Grid */}
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-4">
                   {[
-                    { label: "Revenue", val: "$48.2K", ch: "↑ +18%" },
-                    { label: "Orders", val: "1,284", ch: "↑ +12%" },
+                    { label: "Orders", val: "1,284", ch: "↑ +18%" },
+                    { label: "New Customers", val: "318", ch: "↑ +12%" },
                     { label: "Visitors", val: "33.7K", ch: "↑ +23%" },
                     { label: "Conv. Rate", val: "3.8%", ch: "↑ +0.4%" },
                   ].map((s) => (
@@ -180,9 +180,9 @@ export function ShowcaseSection() {
                 <div className="bg-gray-100 rounded-xl p-4 md:p-5 border border-gray-200">
                   <div className="text-sm font-bold text-gray-900 mb-3 md:mb-4">Top Products</div>
                   {[
-                    { name: "Nike Air Max 2024", val: "$14,200", w: "75%" },
-                    { name: "Premium Hoodie Set", val: "$9,800", w: "52%" },
-                    { name: "Wireless Earbuds Pro", val: "$7,400", w: "39%" },
+                    { name: "Nike Air Max 2024", val: "412 sold", w: "75%" },
+                    { name: "Premium Hoodie Set", val: "286 sold", w: "52%" },
+                    { name: "Wireless Earbuds Pro", val: "203 sold", w: "39%" },
                   ].map((p, i) => (
                     <div key={p.name} className="mb-3 last:mb-0">
                       <div className="flex items-center justify-between text-xs font-medium text-gray-900 mb-1.5">

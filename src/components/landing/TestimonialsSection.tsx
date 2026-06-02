@@ -1,4 +1,4 @@
-"use client";
+
 
 import { testimonials } from "@/data/landing";
 
@@ -14,7 +14,7 @@ export function TestimonialsSection() {
             Testimonials
           </div>
           <h2 className="reveal reveal-delay-1 text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 leading-tight tracking-tight">
-            Loved by 50,000+ sellers
+            Loved by top Sellers
           </h2>
         </header>
       </div>

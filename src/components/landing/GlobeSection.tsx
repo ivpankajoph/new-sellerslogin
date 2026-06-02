@@ -1,4 +1,4 @@
-"use client";
+
 
 const cityMarkers = [
   { label: "San Francisco", left: "18%", top: "36%" },

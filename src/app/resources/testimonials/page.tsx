@@ -13,7 +13,7 @@ const page: OptionPageContent = {
   title: "Learn from Testimonials",
   description: "Testimonials collects customer stories, growth examples, and migration wins from teams building with SellersLogin.",
   highlights: ["Customer stories", "Growth benchmarks", "Migration examples"],
-  stats: [{ value: "50K+", label: "stores" }, { value: "5-star", label: "feedback" }, { value: "$100M+", label: "sales" }],
+  stats: [{ value: "40+", label: "markets" }, { value: "5-star", label: "feedback" }, { value: "24×7", label: "support" }],
   outcomes: ["Clear guidance", "Real examples", "Better decisions"],
 };
 

@@ -1,4 +1,4 @@
-"use client";
+
 
 import type { LandingIconName } from "@/components/icons/LandingIcon";
 import { LandingIcon } from "@/components/icons/LandingIcon";

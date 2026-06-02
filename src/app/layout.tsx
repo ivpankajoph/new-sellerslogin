@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "SellersLogin — Build Your Online Store in Minutes",
     description:
-      "The all-in-one e-commerce platform for ambitious businesses. 50,000+ stores. $100M+ in sales generated.",
+      "The all-in-one e-commerce platform for ambitious businesses. A professional store, advanced dashboard, and inbuilt global payments in one place.",
     type: "website",
   },
   twitter: {

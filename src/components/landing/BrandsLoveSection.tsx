@@ -1,4 +1,4 @@
-"use client";
+
 
 import { images } from "@/lib/images";
 

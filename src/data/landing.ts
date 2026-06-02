@@ -135,12 +135,12 @@ export const industriesDropdown: {
 }[] = navPageGroups.industries;
 
 export const revenueMonths = [
-  { label: "Jan", width: "45%", val: "$22K" },
-  { label: "Feb", width: "52%", val: "$26K" },
-  { label: "Mar", width: "61%", val: "$31K" },
-  { label: "Apr", width: "70%", val: "$35K" },
-  { label: "May", width: "84%", val: "$42K" },
-  { label: "Jun", width: "96%", val: "$48K" },
+  { label: "Jan", width: "45%" },
+  { label: "Feb", width: "52%" },
+  { label: "Mar", width: "61%" },
+  { label: "Apr", width: "70%" },
+  { label: "May", width: "84%" },
+  { label: "Jun", width: "96%" },
 ];
 
 export const counters = [
@@ -174,7 +174,7 @@ export const testimonials = [
   {
     n: "Rohan Mehta",
     r: "Founder, StyleNova",
-    t: "SellersLogin transformed my side hustle into a $2M business. The AI tools are genuinely magic — it wrote all my product descriptions and set up email flows automatically.",
+    t: "SellersLogin transformed my side hustle into a thriving full-time business. The AI tools are genuinely magic — it wrote all my product descriptions and set up email flows automatically.",
     stars: 5,
   },
   {
@@ -198,7 +198,7 @@ export const testimonials = [
   {
     n: "Aisha Mohammed",
     r: "CMO, LuxLine",
-    t: "The marketing automation tools are on par with dedicated platforms costing 10x more. Abandoned cart recovery alone adds $8K/month.",
+    t: "The marketing automation tools are on par with dedicated platforms costing far more. Abandoned cart recovery alone adds a significant chunk of revenue every month.",
     stars: 5,
   },
   {

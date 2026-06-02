@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { navPageGroups } from "@/data/navPages";
 
@@ -44,12 +44,7 @@ const footerLinks = {
   ],
 };
 
-const socialLinks = [
-  { name: "Twitter", href: "#", icon: "𝕏" },
-  { name: "LinkedIn", href: "#", icon: "in" },
-  { name: "Instagram", href: "#", icon: "▣" },
-  { name: "YouTube", href: "#", icon: "▷" },
-] as const;
+
 
 const footerHrefByLabel: Record<string, string> = {
   "Terms and Conditions": "/terms",
@@ -65,6 +60,9 @@ const footerHrefByLabel: Record<string, string> = {
 export function FooterSection() {
   const [email, setEmail] = useState("");
   const [subscribed, setSubscribed] = useState(false);
+
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -129,19 +127,25 @@ export function FooterSection() {
             
               <div className="flex flex-col sm:flex-row gap-2">
                 <div className="flex-1 min-w-0 relative">
-                  <input
-                    id="newsletter-input"
-                    name="newsletter"
-                    type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    placeholder="Enter your email"
-                    required
-                    data-lpignore="true"
-                    data-1p-ignore="true"
-                    autoComplete="off"
-                    className="w-full bg-gray-50 border border-gray-200 text-gray-900 rounded-lg py-2.5 px-4 text-sm placeholder-gray-500 outline-none focus:border-purple-400 focus:ring-2 focus:ring-purple-400/20 transition-colors"
-                  />
+                  {mounted ? (
+                    <input
+                      id="newsletter-input"
+                      name="newsletter"
+                      type="email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      placeholder="Enter your email"
+                      required
+                      data-lpignore="true"
+                      data-1p-ignore="true"
+                      autoComplete="off"
+                      className="w-full bg-gray-50 border border-gray-200 text-gray-900 rounded-lg py-2.5 px-4 text-sm placeholder-gray-500 outline-none focus:border-purple-400 focus:ring-2 focus:ring-purple-400/20 transition-colors"
+                    />
+                  ) : (
+                    <div
+                      className="w-full h-[42px] bg-gray-50 border border-gray-200 rounded-lg"
+                    />
+                  )}
                 </div>
                 <button
                   type="submit"
@@ -189,20 +193,7 @@ export function FooterSection() {
          
           </address>
           
-          {/* Social Links */}
-          <div className="flex items-center gap-2">
-            {socialLinks.map((social) => (
-              <a
-                key={social.name}
-                href={social.href}
-                aria-label={social.name}
-                title={social.name}
-                className="w-9 h-9 bg-gray-50 border border-gray-200 rounded-lg flex items-center justify-center text-sm no-underline transition-all duration-150 text-gray-500 hover:text-gray-900 hover:bg-gray-100 hover:focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-400 focus-visible:ring-offset-2"
-              >
-                {social.icon}
-              </a>
-            ))}
-          </div>
+     
         </div>
       </div>
     </footer>
