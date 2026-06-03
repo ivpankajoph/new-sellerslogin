@@ -32,7 +32,7 @@ export function HeroSection() {
           playsInline
           className="absolute inset-0 w-full h-full object-cover z-0"
         >
-          <source src="/hero-bg.mp4" type="video/mp4" />
+          <source src="/videos/background2.mp4" type="video/mp4" />
           {/* Fallback */}
           <div className="absolute inset-0" />
         </video>
@@ -128,7 +128,7 @@ export function HeroSection() {
               controls
               className="w-full h-full object-cover"
             >
-              <source src="/hero-bg.mp4" type="video/mp4" />
+              <source src="/videos/background.mp4" type="video/mp4" />
               Your browser does not support the video tag.
             </video>
           )}

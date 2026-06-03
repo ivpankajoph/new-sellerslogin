@@ -67,7 +67,7 @@ export function ShowcaseSection() {
         playsInline
         className="absolute inset-0 w-full h-full object-cover z-0"
       >
-        <source src="/hero-bg.mp4" type="video/mp4" />
+        <source src="/videos/background3.mp4" type="video/mp4" />
       </video>
       {/* Light Overlay to keep text readable */}
       <div className="absolute inset-0  z-0 pointer-events-none" />

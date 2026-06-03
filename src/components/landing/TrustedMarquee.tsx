@@ -8,9 +8,9 @@ const integrationBrands = [
   { name: "ChatGPT", logo: "https://www.google.com/s2/favicons?domain=chatgpt.com&sz=128" },
   { name: "Shadowfax", logo: "https://www.google.com/s2/favicons?domain=shadowfax.in&sz=128" },
   { name: "Razorpay", logo: "https://www.google.com/s2/favicons?domain=razorpay.com&sz=128" },
-  { name: "Google Merchant", logo: "https://www.gstatic.com/images/branding/product/2x/merchant_center_48dp.png" },
+  { name: "AWS", logo: "https://www.google.com/s2/favicons?domain=aws.amazon.com&sz=128" },
   { name: "Cashfree", logo: "https://www.google.com/s2/favicons?domain=cashfree.com&sz=128" },
-  { name: "Plivo", logo: "https://www.google.com/s2/favicons?domain=plivo.com&sz=128" },
+  { name: "Google Cloud", logo: "https://www.google.com/s2/favicons?domain=cloud.google.com&sz=128" },
 ];
 
 export function TrustedMarquee() {
