@@ -10,18 +10,18 @@ import { Navbar } from "@/components/landing/Navbar";
 import { ScrollRevealInit } from "@/components/landing/ScrollRevealInit";
 
 export const metadata: Metadata = {
-  title: "Email Automation | SellersLogin",
-  description: "Build lifecycle email flows, cart recovery, and win-back campaigns in SellersLogin.",
+  title: "Delivery Automation | SellersLogin",
+  description: "Automate delivery dispatch, tracking, driver assignment, and fulfillment operations.",
 };
 
 const pageData = {
-  label: "Email Automation",
-  icon: "megaphone" as const,
+  label: "Delivery Automation",
+  icon: "truck" as const,
   eyebrow: "Automation",
-  title: "Automate growth with Email Automation",
-  description: "Email Automation turns customer events into targeted messages for onboarding, cart recovery, repeat purchase, and win-back campaigns.",
-  outcomes: ["Always-on workflows", "Smarter retention", "Higher repeat sales"],
-  video: "/videos/SellersLogin_Email_Marketing_demo_202606031120.mp4",
+  title: "Automate growth with Delivery Automation",
+  description: "Delivery Automation connects dispatch, tracking, driver assignment, and fulfillment events so operations teams can reduce manual work.",
+  outcomes: ["Always-on workflows", "Cleaner operations", "Less manual work"],
+  video: "/videos/SellersLogin_Delivery_System_Demo_202606031105.mp4",
 };
 
 export default function Page() {
@@ -78,10 +78,10 @@ export default function Page() {
             </div>
 
             <div className="reveal reveal-delay-2 rounded-4xl border border-white/12 bg-white/10 p-4 shadow-[0_30px_80px_-30px_rgba(124,58,237,0.65)] backdrop-blur-xl">
-              <div className="rounded-3xl text-gray-900">
-            
+              <div className="rounded-3xl  text-gray-900">
+                
 
-                <div className=" overflow-hidden rounded-xl bg-black/5 aspect-video relative">
+                <div className="overflow-hidden rounded-xl bg-black/5 aspect-video relative">
                   <video 
                     autoPlay 
                     loop 

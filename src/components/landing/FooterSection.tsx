@@ -7,7 +7,6 @@ import { navPageGroups } from "@/data/navPages";
 const footerLinks = {
   Automation: [
     "AI Voice Automation",
-    "AI Chat Automation",
     "Email Automation",
     "E-commerce Automation",
     "Whatsapp Automation",

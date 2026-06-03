@@ -29,9 +29,8 @@ export const navPageGroups: Record<NavPageCategory, NavLink[]> = {
   ],
   automation: [
     { href: "/automation/ai-voice-automation", icon: "bot", label: "AI Voice Automation" },
-    { href: "/automation/ai-chat-automation", icon: "message", label: "AI Chat Automation" },
     { href: "/automation/email-automation", icon: "megaphone", label: "Email Automation" },
-    { href: "/automation/e-commerce-automation", icon: "store", label: "E-commerce Automation" },
+    { href: "/automation/delivery-automation", icon: "truck", label: "Delivery Automation" },
     { href: "/automation/whatsapp-automation", icon: "smartphone", label: "Whatsapp Automation" },
   ],
   industries: [
