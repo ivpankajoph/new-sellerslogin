@@ -7,7 +7,7 @@ import { CtaSection } from "./CtaSection";
 import { CustomCursor } from "./CustomCursor";
 import { FaqSection } from "./FaqSection";
 import { BrandsLoveSection } from "./BrandsLoveSection";
-import { HelpSection } from "./HelpSection";
+
 import { StepsSection } from "./StepsSection";
 import { FooterSection } from "./FooterSection";
 import { GlobeSection } from "./GlobeSection";
@@ -31,13 +31,11 @@ export function LandingPage() {
       <HeroSection />
       <TrustedMarquee />
 
-      <HelpSection />
       <ShowcaseSection />
       <WhySection />
       <ProcessSection />
 
       <TestimonialsSection />
-
 
       <StepsSection />
       <BrandsLoveSection />
