@@ -40,7 +40,7 @@ const arcs = [
 
 export function GlobeSection() {
   return (
-    <section className="py-20 md:py-32 px-4 sm:px-6 lg:px-8 bg-gray-50 overflow-hidden relative">
+    <section className="pt-20 md:pt-32 pb-8 md:pb-12 px-4 sm:px-6 lg:px-8 bg-gray-50 overflow-hidden relative">
       <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-12 lg:gap-8">
         <div className="w-full lg:w-1/2 flex justify-center items-center relative">
           <div className="relative w-full max-w-[560px] aspect-square flex items-center justify-center">

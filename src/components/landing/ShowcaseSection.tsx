@@ -20,27 +20,14 @@ export function ShowcaseSection() {
   }, []);
 
   return (
-    <section id="showcase" className="relative py-10 md:py-16 px-4 sm:px-6 lg:px-8 overflow-hidden bg-white">
-      {/* Background Video */}
-      <video
-        autoPlay
-        loop
-        muted
-        playsInline
-        className="absolute inset-0 w-full h-full object-cover z-0"
-      >
-        <source src="/videos/background3.mp4" type="video/mp4" />
-      </video>
-      {/* Light Overlay to keep text readable */}
-      <div className="absolute inset-0 z-0 pointer-events-none" />
-
+    <section id="showcase" className="relative py-10 md:py-16 px-4 sm:px-6 lg:px-8 overflow-hidden bg-transparent">
       <div className="max-w-7xl mx-auto relative z-10">
         {/* Section Header */}
         <header className="text-center mb-6 md:mb-8">
-          <div className="reveal inline-flex items-center bg-white rounded-full py-1.5 px-4 text-xs font-bold uppercase tracking-wider mb-4">
+          <div className="reveal inline-flex items-center bg-gray-50 border border-gray-200 text-gray-700 rounded-full py-1.5 px-4 text-xs font-bold uppercase tracking-wider mb-4 shadow-sm">
             Product Tour
           </div>
-          <h2 className="reveal reveal-delay-1 text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight tracking-tight text-white">
+          <h2 className="reveal reveal-delay-1 text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight tracking-tight text-gray-900">
             The Most Powerful Dashboard for each Work
           </h2>
         </header>
