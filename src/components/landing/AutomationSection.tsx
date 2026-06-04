@@ -15,7 +15,7 @@ export function AutomationSection() {
             src="/images/dashboard/d3.png"
             width={500}
             height={500}
-            className="h-full w-full object-cover"
+            className="h-full w-full object-contain p-2"
             alt="AI Voice Automation"
           />
         </div>
@@ -31,7 +31,7 @@ export function AutomationSection() {
             src="/images/dashboard/d4.png"
             width={500}
             height={500}
-            className="h-full w-full object-cover"
+            className="h-full w-full object-contain p-2"
             alt="Email Marketing Automation"
           />
         </div>
@@ -47,7 +47,7 @@ export function AutomationSection() {
             src="/images/dashboard/d5.png"
             width={500}
             height={500}
-            className="h-full w-full object-cover"
+            className="h-full w-full object-contain p-2"
             alt="WhatsApp Marketing"
           />
         </div>
@@ -63,7 +63,7 @@ export function AutomationSection() {
             src="/images/dashboard/d6.png"
             width={500}
             height={500}
-            className="h-full w-full object-cover"
+            className="h-full w-full object-contain p-2"
             alt="Dashboard Analytics"
           />
         </div>
@@ -72,7 +72,7 @@ export function AutomationSection() {
   ];
 
   return (
-    <section className="py-20 bg-gray-50 overflow-hidden relative">
+    <section className="py-20 bg-gray-50 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <header className="text-center mb-16">
           <div className="inline-flex items-center bg-white border border-gray-200 rounded-full py-1.5 px-4 text-xs font-bold text-gray-700 uppercase tracking-wider mb-4 shadow-sm">

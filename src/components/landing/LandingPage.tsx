@@ -17,7 +17,6 @@ import { Navbar } from "./Navbar";
 import { ProcessSection } from "./ProcessSection";
 import { ScrollRevealInit } from "./ScrollRevealInit";
 import { ShowcaseSection } from "./ShowcaseSection";
-import { TestimonialsSection } from "./TestimonialsSection";
 import { TrustedMarquee } from "./TrustedMarquee";
 import { WhySection } from "./WhySection";
 
@@ -36,8 +35,6 @@ export function LandingPage() {
       <ShowcaseSection />
       <WhySection />
       <ProcessSection />
-
-      <TestimonialsSection />
 
       <StepsSection />
       <BrandsLoveSection />
