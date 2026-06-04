@@ -27,7 +27,7 @@ export function StepsSection() {
             </div>
             <div className="w-1/2 max-w-[280px] mt-12 lg:mt-24 rounded-2xl overflow-hidden shadow-xl border border-gray-200 bg-gray-50 aspect-[3/4] relative">
               <Image
-                src="/images/store_management.png"
+                src="/images/packing_orders.png"
                 alt="Product"
                 fill
                 className="object-cover scale-110"

@@ -260,7 +260,7 @@ export const faqs = [
   },
   {
     q: "What integrations are available?",
-    a: "We integrate with 200+ tools including Zapier, Mailchimp, HubSpot, Google Analytics, Facebook Pixel, WhatsApp Business, QuickBooks, Tally, and major shipping carriers like FedEx, UPS, and DHL.",
+    a: "We seamlessly integrate with top industry tools including Facebook, ChatGPT, Shadowfax, Razorpay, AWS, Cashfree, and many more.",
   },
 ];
 

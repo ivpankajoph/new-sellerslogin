@@ -64,9 +64,9 @@ export function GlobeSection() {
 
         <div className="w-full lg:w-1/2 lg:pl-12 reveal reveal-delay-2">
           <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight tracking-tight mb-6">
-            Rock steady.
+            Make Yourself
             <br />
-            Blazing fast.
+            At Gloabl Level
           </h2>
           <p className="text-lg md:text-xl text-gray-600 leading-relaxed mb-8 max-w-lg">
             Your SellersLogin store runs strong, even during your most epic

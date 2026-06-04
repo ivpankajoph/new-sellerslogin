@@ -55,7 +55,7 @@ export function FeatureCarousel({ features }: { features: SolutionFeature[] }) {
           <article
             key={feature.title}
             data-card
-            className="group relative flex w-[82%] shrink-0 snap-start flex-col overflow-hidden rounded-3xl border border-gray-200/80 bg-white shadow-[0_18px_50px_-32px_rgba(15,23,42,0.5)] transition-all duration-500 ease-out hover:-translate-y-2 hover:shadow-[0_45px_90px_-42px_rgba(76,29,149,0.6)] sm:w-[58%] lg:w-[calc((100%-3rem)*0.4)]"
+            className="group relative flex w-[82%] shrink-0 snap-start flex-col overflow-hidden rounded-3xl border border-gray-200/80 bg-white transition-all duration-500 ease-out hover:-translate-y-2 sm:w-[58%] lg:w-[calc((100%-3rem)*0.4)]"
           >
             {/* Image */}
             <div className="relative aspect-16/10 overflow-hidden">

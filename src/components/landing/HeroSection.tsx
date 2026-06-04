@@ -8,7 +8,7 @@ export function HeroSection() {
   const [isVideoOpen, setIsVideoOpen] = useState(false);
   const [charIndex, setCharIndex] = useState(0);
 
-  const text1 = "The World's first ";
+  const text1 = "The World's Most Advance ";
   const text2 = "AI Powered Online Store";
   const text3 = " with Automations";
   const totalChars = text1.length + text2.length + text3.length;

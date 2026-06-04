@@ -4,21 +4,17 @@ import { images } from "@/lib/images";
 
 export function BrandsLoveSection() {
   const row1 = [
-    images.heroStore,
-    images.heroFashion,
-    images.featureMarketing,
-    images.caseFood,
-    images.blogStrategy,
-    images.heroPayment,
+    "/images/testimonials/b1.png",
+    "/images/testimonials/b2.png",
+    "/images/testimonials/b3.png",
+    "/images/testimonials/b4.png",
   ];
 
   const row2 = [
-    images.heroProducts,
-    images.featureEditor,
-    images.caseTech,
-    images.featureMobile,
-    images.showcaseFashion,
-    images.heroWarehouse,
+    "/images/testimonials/b5.png",
+    "/images/testimonials/b6.png",
+    "/images/testimonials/b7.png",
+    "/images/testimonials/b8.png",
   ];
 
   // Duplicate arrays for seamless infinite loop
@@ -29,7 +25,7 @@ export function BrandsLoveSection() {
     <section className="py-20 md:py-32 bg-[#111] overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16 text-center">
         <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white tracking-tight">
-          The brands you love, love SellersLogin
+          Design which makes you feel amaze
         </h2>
       </div>
 
