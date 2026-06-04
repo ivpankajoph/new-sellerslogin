@@ -33,6 +33,7 @@ import {
   RiCloudLine,
   RiArrowDownLine,
   RiQuoteText,
+  RiMegaphoneLine,
 } from "react-icons/ri";
 
 /* ─── Utility ─────────────────────────────────────────────────────────── */
@@ -161,16 +162,16 @@ function Hero() {
           >
             scales
           </span>{" "}
-          <br />with your ambition.
+          <br />Automation.
         </h1>
 
         <p
           className="text-lg md:text-xl text-gray-500 max-w-2xl mx-auto mb-10 leading-relaxed"
           style={{ animation: "fadeUp 0.8s cubic-bezier(.22,1,.36,1) 0.25s both" }}
         >
-          A unified B2B e-commerce dashboard that brings orders, buyers, analytics,
-          and operations into one elegant command centre — built for enterprises
-          that refuse to compromise.
+          Launch segmented campaigns, cart recovery, and personalized
+          customer journeys that drive repeat sales — all natively integrated
+          within your SellerLogin dashboard.
         </p>
 
         <div
@@ -236,9 +237,9 @@ function DashboardPreview() {
           <div className="space-y-1">
             {[
               { icon: RiBarChartBoxLine, label: "Overview", active: true },
-              { icon: RiShoppingCart2Line, label: "Orders" },
-              { icon: RiTeamLine, label: "Buyers" },
-              { icon: RiFileChartLine, label: "Reports" },
+              { icon: RiLineChartLine, label: "Orders" },
+              { icon: RiShoppingCart2Line, label: "Buyers" },
+              { icon: RiMegaphoneLine, label: "Reports" },
               { icon: RiSettings4Line, label: "Settings" },
             ].map(({ icon: Icon, label, active }) => (
               <div
@@ -783,8 +784,8 @@ function Security() {
       <div className="max-w-5xl mx-auto px-6">
         <SectionHeader
           eyebrow="Security"
-          title="Enterprise-grade security by default."
-          sub="Not an add-on. Not a tier. Every customer gets the same bank-level security infrastructure."
+          title="Privacy by default."
+          sub="Fully compliant with GDPR, CCPA, and global anti-spam laws out of the box."
         />
         <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
           {pillars.map((p, i) => {
@@ -822,12 +823,12 @@ function CTA() {
           <div className="absolute bottom-4 left-6 w-20 h-20 rounded-full border border-white/10" />
           <div className="absolute top-1/2 left-8 w-3 h-3 rounded-full bg-white/20" />
 
-          <p className="text-xs font-semibold tracking-widest uppercase text-purple-200 mb-4">Ready to transform your B2B commerce?</p>
+          <p className="text-xs font-semibold tracking-widest uppercase text-purple-200 mb-4">Ready to transform your marketing?</p>
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-5 leading-tight" >
-            See the dashboard<br />live — in 30 minutes.
+            See the automation<br />live — in 30 minutes.
           </h2>
           <p className="text-purple-100 text-lg mb-10 max-w-xl mx-auto">
-            Book a personalised demo with a product specialist who knows your industry.
+            Book a personalised demo to see how we automate revenue generation.
             No sales pitch, just a real look at your use case.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -844,7 +845,7 @@ function CTA() {
 }
 
 /* ─── Page Assembly ───────────────────────────────────────────────────── */
-export default function B2BDashboardPage() {
+export default function MarketingAutomationPage() {
   return (
     <>
       <CustomCursor />

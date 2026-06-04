@@ -81,7 +81,7 @@ export function FooterSection() {
       style={{ backgroundColor: themeColor }}
     >
       {/* Wavy Divider at the top */}
-      <div className="absolute top-0 left-0 w-full overflow-hidden leading-none -translate-y-full">
+      <div className="absolute top-[1px] left-0 w-full overflow-hidden leading-none -translate-y-full">
         <svg
           className="relative block w-full h-15 md:h-25"
           viewBox="0 0 1440 120"

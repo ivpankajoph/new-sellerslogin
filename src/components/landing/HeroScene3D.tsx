@@ -67,7 +67,7 @@ function PurplePlatform() {
 
 function AccentCube() {
   const ref = useRef<Mesh>(null);
-  useFrame((state) => {
+  useFrame((state: any) => {
     if (ref.current) {
       ref.current.rotation.x = state.clock.elapsedTime * 0.4;
       ref.current.rotation.z = state.clock.elapsedTime * 0.25;

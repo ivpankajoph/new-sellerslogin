@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { featureDropdown, solutionsDropdown, automationDropdown, industriesDropdown } from "@/data/landing";
 import { navPageGroups } from "@/data/navPages";
 import { LandingIcon } from "@/components/icons/LandingIcon";
@@ -66,14 +67,17 @@ function MobileDropdown({
 
 export function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
+  const [scrolledState, setScrolledState] = useState(false);
   const [mobileFeatureOpen, setMobileFeatureOpen] = useState(false);
   const [mobileSolutionOpen, setMobileSolutionOpen] = useState(false);
   const [mobileAutomationOpen, setMobileAutomationOpen] = useState(false);
   const [mobileIndustriesOpen, setMobileIndustriesOpen] = useState(false);
 
+  const pathname = usePathname();
+  const scrolled = scrolledState || pathname !== '/';
+
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 20);
+    const handleScroll = () => setScrolledState(window.scrollY > 20);
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -97,7 +101,7 @@ export function Navbar() {
       <Link
         key={item.label}
         href={item.href}
-        className="flex items-center gap-2.5 py-2.5 px-3 rounded-lg text-gray-700 hover:text-gray-900 no-underline text-sm font-medium transition-colors duration-150 hover:bg-gray-50"
+        className="flex items-center gap-2.5 py-2.5 px-3 rounded-lg text-gray-700 hover:text-gray-900 no-underline text-sm font-medium transition-colors duration-150 hover:bg-gray-50 whitespace-nowrap"
       >
         <div className="w-8 h-8 bg-gray-100 rounded-lg flex items-center justify-center text-gray-700 shrink-0">
           <LandingIcon name={item.icon} size={16} />
@@ -137,7 +141,7 @@ export function Navbar() {
                 Features <span className="ml-1 text-[10px]">v</span>
               </Link>
               <div className="absolute top-full left-1/2 -translate-x-1/2 pt-2 opacity-0 invisible -translate-y-2 transition-all duration-200 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 pointer-events-none group-hover:pointer-events-auto">
-                <div className="bg-white border border-gray-200 rounded-xl p-2 min-w-55 shadow-lg">
+                <div className="bg-white border border-gray-200 rounded-xl p-2 min-w-[240px] shadow-lg">
                   {renderDesktopDropdown(featureDropdown)}
                 </div>
               </div>
@@ -147,7 +151,7 @@ export function Navbar() {
                 Solutions <span className="ml-1 text-[10px]">v</span>
               </Link>
               <div className="absolute top-full left-1/2 -translate-x-1/2 pt-2 opacity-0 invisible -translate-y-2 transition-all duration-200 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 pointer-events-none group-hover:pointer-events-auto">
-                <div className="bg-white border border-gray-200 rounded-xl p-2 min-w-55 shadow-lg">
+                <div className="bg-white border border-gray-200 rounded-xl p-2 min-w-[240px] shadow-lg">
                   {renderDesktopDropdown(solutionsDropdown)}
                 </div>
               </div>
@@ -157,7 +161,7 @@ export function Navbar() {
                 Automation <span className="ml-1 text-[10px]">v</span>
               </Link>
               <div className="absolute top-full left-1/2 -translate-x-1/2 pt-2 opacity-0 invisible -translate-y-2 transition-all duration-200 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 pointer-events-none group-hover:pointer-events-auto">
-                <div className="bg-white border border-gray-200 rounded-xl p-2 min-w-55 shadow-lg">
+                <div className="bg-white border border-gray-200 rounded-xl p-2 min-w-[240px] shadow-lg">
                   {renderDesktopDropdown(automationDropdown)}
                 </div>
               </div>

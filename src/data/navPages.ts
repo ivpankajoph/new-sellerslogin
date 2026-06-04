@@ -16,9 +16,8 @@ type NavLink = {
 export const navPageGroups: Record<NavPageCategory, NavLink[]> = {
   features: [
     { href: "/features/website-builder", icon: "layout", label: "Website Builder" },
-    { href: "/features/store-management", icon: "shopping-bag", label: "Store Management" },
-    { href: "/features/marketing-automation", icon: "megaphone", label: "Marketing Automation" },
     { href: "/features/inventory-tracking", icon: "package", label: "Inventory Tracking" },
+    { href: "/features/delivery-management", icon: "truck", label: "Delivery Management" },
     { href: "/features/analytics-dashboard", icon: "bar-chart", label: "Analytics Dashboard" },
     { href: "/features/payment-integration", icon: "credit-card", label: "Payment Integration" },
   ],
@@ -28,9 +27,9 @@ export const navPageGroups: Record<NavPageCategory, NavLink[]> = {
     { href: "/solutions/food-dashboard", icon: "store", label: "Food Dashboard" },
   ],
   automation: [
+    { href: "/automation/marketing-automation", icon: "megaphone", label: "Marketing Automation" },
     { href: "/automation/ai-voice-automation", icon: "bot", label: "AI Voice Automation" },
     { href: "/automation/email-automation", icon: "megaphone", label: "Email Automation" },
-    { href: "/automation/delivery-automation", icon: "truck", label: "Delivery Automation" },
     { href: "/automation/whatsapp-automation", icon: "smartphone", label: "Whatsapp Automation" },
   ],
   industries: [

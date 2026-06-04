@@ -8,18 +8,24 @@ import { GlobalBackground } from "@/components/landing/GlobalBackground";
 import { Navbar } from "@/components/landing/Navbar";
 import { ScrollRevealInit } from "@/components/landing/ScrollRevealInit";
 import {
-  FiCreditCard,
-  FiShield,
-  FiGlobe,
-  FiDollarSign,
-  FiRefreshCw,
+  FiTruck,
+  FiMapPin,
+  FiClock,
   FiCheckCircle,
-  FiLock,
-  FiSmartphone,
+  FiAlertCircle,
+  FiUser,
+  FiStar,
+  FiNavigation,
+  FiPackage,
   FiArrowRight,
   FiZap,
-  FiSettings,
-  FiRepeat
+  FiBell,
+  FiPhone,
+  FiTrendingUp,
+  FiActivity,
+  FiRepeat,
+  FiShield,
+  FiMessageSquare,
 } from "react-icons/fi";
 
 /* ─────────────────────────────────────────────
@@ -74,12 +80,14 @@ function Counter({ end, prefix = "", suffix = "", decimals = 0 }: { end: number;
 function HeroSection() {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-white px-6 pt-20">
+      {/* Dot grid texture */}
       <div className="pointer-events-none absolute inset-0"
         style={{
           backgroundImage: "radial-gradient(circle, #e9d5ff 1px, transparent 1px)",
           backgroundSize: "32px 32px",
           opacity: 0.35,
         }} />
+      {/* Blobs */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
         <div className="absolute w-[500px] h-[500px] rounded-full blur-3xl opacity-25 -top-24 -right-24"
           style={{ background: "radial-gradient(circle, #a855f7, #f3e8ff)" }} />
@@ -89,90 +97,153 @@ function HeroSection() {
 
       <div className="relative z-10 max-w-6xl mx-auto w-full">
         <div className="grid md:grid-cols-2 gap-16 items-center">
+          {/* Left */}
           <div>
-        
+         
             <h1 className="text-6xl md:text-7xl font-black text-gray-900 leading-[1.0] mb-6">
-              Accept payments
+              Deliver faster,
               <br />
               <span className="relative">
-                globally,
+                smarter
                 <span className="absolute -bottom-1 left-0 w-full h-1 rounded-full"
                   style={{ background: "linear-gradient(90deg, #9333ea, #e9d5ff)" }} />
               </span>
               <br />
-              securely.
+              & cheaper.
             </h1>
             <p className="text-gray-500 text-lg leading-relaxed mb-10 max-w-md">
-              Process payments in over 135 currencies. Reduce fraud with 3D Secure checkout, and increase conversions with one-click Apple Pay and Google Pay integrations.
+              Optimize routes, auto-dispatch drivers, and delight customers with real-time tracking and instant proof of delivery. Manage your entire fleet from one powerful dashboard.
             </p>
             <div className="flex flex-wrap gap-4">
               <button className="group flex items-center gap-3 px-8 py-4 rounded-full text-white font-semibold transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
                 style={{ background: "linear-gradient(135deg,#9333ea,#c084fc)" }}>
-                Start Accepting Payments
+                Optimize Deliveries
                 <FiArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
               </button>
+              <button className="flex items-center gap-3 px-8 py-4 rounded-full border-2 border-purple-200 text-purple-600 font-semibold hover:bg-purple-50 transition-all duration-300">
+                <FiNavigation size={16} />
+                Live Tracking Demo
+              </button>
+            </div>
+
+            {/* Trust row */}
+            <div className="flex items-center gap-6 mt-10 pt-10 border-t border-purple-100">
+              {[
+                { icon: FiMapPin, text: "Live GPS tracking" },
+                { icon: FiZap, text: "Auto-dispatch" },
+                { icon: FiCheckCircle, text: "Proof of delivery" },
+              ].map((item, i) => (
+                <div key={i} className="flex items-center gap-2 text-sm text-gray-500">
+                  <item.icon size={14} className="text-purple-400" />
+                  {item.text}
+                </div>
+              ))}
             </div>
           </div>
 
+          {/* Right — Dashboard mockup */}
           <div className="relative">
             <div className="rounded-3xl overflow-hidden border-2 border-purple-100 bg-white shadow-2xl"
               style={{ boxShadow: "0 40px 100px rgba(147,51,234,0.12)" }}>
+              {/* Header bar */}
               <div className="px-5 py-4 border-b border-purple-50 flex items-center justify-between"
                 style={{ background: "linear-gradient(135deg,#faf5ff,white)" }}>
                 <div className="flex items-center gap-3">
                   <div className="w-8 h-8 rounded-xl flex items-center justify-center"
                     style={{ background: "linear-gradient(135deg,#9333ea,#c084fc)" }}>
-                    <FiShield size={14} className="text-white" />
+                    <FiMapPin size={14} className="text-white" />
                   </div>
                   <span className="font-bold text-gray-800 text-sm">
-                    Secure Checkout
+                    Active Fleet Map
                   </span>
                 </div>
-                <div className="flex items-center gap-2 text-green-500 bg-green-50 px-2 py-1 rounded">
-                  <FiLock size={12} />
-                  <span className="text-xs font-semibold">Encrypted</span>
+                <div className="flex items-center gap-2">
+                  <div className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
+                  <span className="text-xs text-gray-400">Live</span>
                 </div>
               </div>
 
-              <div className="p-6">
-                {/* Mockup Checkout Form */}
-                <div className="mb-6">
-                  <p className="text-xl font-bold text-gray-900 mb-1">Total: $124.99</p>
-                  <p className="text-sm text-gray-500">Premium Subscription (Annual)</p>
+              {/* Map Mockup Area */}
+              <div className="h-48 bg-gray-100 relative overflow-hidden">
+                {/* Fake Map Background */}
+                <div className="absolute inset-0 opacity-20"
+                  style={{
+                    backgroundImage: "url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2240%22 height=%2240%22><path d=%22M0,0 L40,40 M40,0 L0,40%22 stroke=%22%239333ea%22 stroke-width=%221%22/></svg>')",
+                    backgroundSize: "40px 40px"
+                  }} />
+                {/* Route Line */}
+                <svg className="absolute inset-0 w-full h-full" style={{ strokeDasharray: "4,4" }}>
+                  <path d="M40,40 Q100,100 200,80 T350,150" fill="none" stroke="#9333ea" strokeWidth="3" className="animate-pulse" />
+                </svg>
+                {/* Driver Markers */}
+                <div className="absolute top-[30px] left-[30px] w-8 h-8 bg-white rounded-full shadow-lg flex items-center justify-center border-2 border-purple-500">
+                  <FiTruck size={14} className="text-purple-600" />
                 </div>
-                
-                <div className="space-y-3 mb-6">
-                  <div className="w-full h-12 rounded-lg border border-gray-200 flex items-center px-4 bg-gray-50">
-                    <FiCreditCard className="text-gray-400 mr-3" />
-                    <span className="text-gray-400 text-sm">•••• •••• •••• 4242</span>
-                    <span className="ml-auto text-gray-400 text-sm">12/28</span>
-                  </div>
-                  
-                  <div className="flex gap-3">
-                    <button className="flex-1 h-12 rounded-lg bg-black text-white flex items-center justify-center gap-2 hover:bg-gray-800 transition-colors">
-                      <FiSmartphone size={16} /> Pay
-                    </button>
-                    <button className="flex-1 h-12 rounded-lg bg-white border border-gray-200 text-gray-900 flex items-center justify-center hover:bg-gray-50 transition-colors">
-                      <FiGlobe size={16} className="text-blue-500 mr-1" /> Pay
-                    </button>
-                  </div>
+                <div className="absolute top-[70px] left-[190px] w-8 h-8 bg-white rounded-full shadow-lg flex items-center justify-center border-2 border-purple-500">
+                  <FiTruck size={14} className="text-purple-600" />
                 </div>
+                <div className="absolute top-[140px] left-[340px] w-8 h-8 bg-purple-600 rounded-full shadow-lg flex items-center justify-center border-2 border-white animate-bounce">
+                  <FiMapPin size={14} className="text-white" />
+                </div>
+              </div>
 
-                <button className="w-full h-12 rounded-lg text-white font-bold flex items-center justify-center gap-2 transition-all hover:opacity-90"
-                  style={{ background: "linear-gradient(135deg,#9333ea,#c084fc)" }}>
-                  Pay $124.99 <FiArrowRight />
-                </button>
+              {/* Driver List */}
+              <div className="p-4 space-y-2 bg-white">
+                <p className="text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-2">Active Drivers</p>
+                {[
+                  { name: "Alex Johnson", route: "Downtown Sector 4", eta: "12 min", status: "on-time" },
+                  { name: "Sarah Williams", route: "Westside Heights", eta: "5 min", status: "on-time" },
+                  { name: "Mike Davis", route: "North Hills", eta: "Delayed", status: "delayed" },
+                ].map((d, i) => (
+                  <div key={i} className="flex items-center justify-between py-2 px-3 rounded-xl hover:bg-purple-50 transition-colors">
+                    <div className="flex items-center gap-3">
+                      <div className="w-8 h-8 rounded-full bg-purple-100 flex items-center justify-center overflow-hidden border border-purple-200">
+                        <FiUser size={14} className="text-purple-400" />
+                      </div>
+                      <div>
+                        <p className="text-xs font-semibold text-gray-800">{d.name}</p>
+                        <p className="text-[10px] text-gray-400">{d.route}</p>
+                      </div>
+                    </div>
+                    <div className="flex flex-col items-end gap-1">
+                      <span
+                        className="text-[10px] px-2 py-0.5 rounded-full font-semibold"
+                        style={{
+                          background: d.status === "on-time" ? "#e8f5e9" : "#fff3e0",
+                          color: d.status === "on-time" ? "#2e7d32" : "#e65100",
+                        }}
+                      >
+                        {d.status === "on-time" ? "On Time" : "Delayed"}
+                      </span>
+                      <span className="text-[9px] font-bold text-gray-500">{d.eta}</span>
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
 
+            {/* Floating optimization card */}
             <div className="absolute -bottom-6 -left-6 bg-white rounded-2xl shadow-xl px-4 py-3 border-2 border-purple-100 flex items-center gap-3"
               style={{ boxShadow: "0 12px 40px rgba(147,51,234,0.1)" }}>
               <div className="w-8 h-8 rounded-xl bg-purple-50 flex items-center justify-center flex-shrink-0">
-                <FiCheckCircle size={14} className="text-purple-500" />
+                <FiActivity size={14} className="text-purple-500" />
               </div>
               <div>
-                <p className="text-xs font-bold text-gray-800">Payment Captured</p>
-                <p className="text-[10px] text-gray-400 font-semibold">Auth ID: #84920</p>
+                <p className="text-xs font-bold text-gray-800">Route Optimized</p>
+                <p className="text-[10px] text-green-500 font-semibold">-24 mins saved</p>
+              </div>
+            </div>
+
+            {/* Floating pod card */}
+            <div className="absolute -top-4 -right-4 bg-white rounded-2xl shadow-xl px-4 py-3 border-2 border-purple-100 flex items-center gap-3"
+              style={{ boxShadow: "0 12px 40px rgba(147,51,234,0.1)" }}>
+              <div className="w-8 h-8 rounded-xl flex items-center justify-center flex-shrink-0"
+                style={{ background: "linear-gradient(135deg,#9333ea,#c084fc)" }}>
+                <FiCheckCircle size={13} className="text-white" />
+              </div>
+              <div>
+                <p className="text-xs font-bold text-gray-800">POD Collected</p>
+                <p className="text-[10px] text-gray-400 font-semibold">Signature + Photo</p>
               </div>
             </div>
           </div>
@@ -188,10 +259,10 @@ function HeroSection() {
 function StatsBand() {
   const { ref, visible } = useInView();
   const stats = [
-    { value: 135, suffix: "+", label: "Supported Currencies", prefix: "", decimals: 0 },
-    { value: 99.99, suffix: "%", label: "Gateway Uptime", prefix: "", decimals: 2 },
-    { value: 0, suffix: "%", label: "Hidden Fees", prefix: "", decimals: 0 },
-    { value: 12, suffix: "x", label: "Faster Payouts", prefix: "", decimals: 0 },
+    { value: 99.8, suffix: "%", label: "On-Time Deliveries", prefix: "", decimals: 1 },
+    { value: 30, suffix: "%", label: "Route Efficiency", prefix: "+", decimals: 0 },
+    { value: 45, suffix: "%", label: "Fuel Cost Saved", prefix: "-", decimals: 0 },
+    { value: 1.2, suffix: "M", label: "Deliveries Handled", prefix: "", decimals: 1 },
   ];
   return (
     <section ref={ref} className="py-16 px-6"
@@ -217,14 +288,46 @@ function StatsBand() {
 function FeaturesSection() {
   const { ref, visible } = useInView();
   const features = [
-    { icon: FiGlobe, title: "Global Acquiring", desc: "Accept payments from anywhere in the world, settled in your local currency." },
-    { icon: FiShield, title: "Fraud Protection", desc: "Built-in 3D Secure and machine learning to block fraudulent transactions." },
-    { icon: FiRepeat, title: "Subscription Billing", desc: "Easily set up recurring payments, trials, and complex billing logic." },
-    { icon: FiZap, title: "Instant Payouts", desc: "Get access to your funds in minutes, not days, directly to your bank account." },
-    { icon: FiSmartphone, title: "Mobile Wallets", desc: "Native support for Apple Pay, Google Pay, and regional digital wallets." },
-    { icon: FiDollarSign, title: "Multi-Currency", desc: "Display prices in local currencies to boost international conversion rates." },
-    { icon: FiSettings, title: "Customizable UI", desc: "Embed checkout forms directly on your site, fully matching your brand." },
-    { icon: FiCheckCircle, title: "Automated Taxes", desc: "Automatically calculate and collect VAT, GST, and local sales taxes." },
+    {
+      icon: FiZap,
+      title: "Auto-Dispatch Engine",
+      desc: "Assign orders instantly based on driver proximity, vehicle capacity, and live traffic data.",
+    },
+    {
+      icon: FiNavigation,
+      title: "Route Optimization",
+      desc: "AI algorithms calculate the fastest, most fuel-efficient routes for multi-stop deliveries.",
+    },
+    {
+      icon: FiMapPin,
+      title: "Real-Time Tracking",
+      desc: "Give customers an Uber-like live tracking link so they always know where their order is.",
+    },
+    {
+      icon: FiCheckCircle,
+      title: "Proof of Delivery",
+      desc: "Drivers can capture e-signatures, photos, and notes via the mobile app to verify handoffs.",
+    },
+    {
+      icon: FiMessageSquare,
+      title: "Customer Notifications",
+      desc: "Send automated SMS and email updates at every milestone: dispatched, arriving, and delivered.",
+    },
+    {
+      icon: FiTruck,
+      title: "Fleet Management",
+      desc: "Track vehicle maintenance, driver performance, and shift schedules from a single hub.",
+    },
+    {
+      icon: FiRepeat,
+      title: "Automated Returns",
+      desc: "Handle reverse logistics smoothly by automatically dispatching drivers for return pickups.",
+    },
+    {
+      icon: FiShield,
+      title: "Secure Verification",
+      desc: "OTP verification for high-value items ensures packages are only handed to the right person.",
+    },
   ];
 
   return (
@@ -233,9 +336,9 @@ function FeaturesSection() {
         <div className="text-center mb-20">
           <p className="text-purple-500 font-semibold tracking-widest text-sm uppercase mb-4">Features</p>
           <h2 className="text-5xl md:text-6xl font-black text-gray-900">
-            A checkout that,
+            Logistics,
             <br />
-            <span className="text-purple-400">converts.</span>
+            <span className="text-purple-400">simplified.</span>
           </h2>
         </div>
 
@@ -269,27 +372,31 @@ function FeaturesSection() {
 function FlowSection() {
   const { ref, visible } = useInView();
   const steps = [
-    { icon: FiCreditCard, title: "Customer Checkout", desc: "User inputs payment details on a secure form.", color: "#f3e8ff" },
-    { icon: FiShield, title: "Fraud Check", desc: "AI instantly analyzes risk and applies 3D Secure.", color: "#e9d5ff" },
-    { icon: FiZap, title: "Payment Captured", desc: "Funds are verified and reserved immediately.", color: "#f3e8ff" },
-    { icon: FiDollarSign, title: "Funds Settled", desc: "Money arrives in your business bank account.", color: "#e8f5e9" },
+    { icon: FiPackage, title: "Order Received", desc: "System ingests order instantly.", color: "#f3e8ff" },
+    { icon: FiNavigation, title: "Route Optimized", desc: "AI builds the fastest path.", color: "#e9d5ff" },
+    { icon: FiTruck, title: "Dispatched", desc: "Assigned to best driver.", color: "#f3e8ff" },
+    { icon: FiMessageSquare, title: "Customer Alerted", desc: "SMS with live tracking link.", color: "#faf5ff" },
+    { icon: FiCheckCircle, title: "Delivered & POD", desc: "Signature captured securely.", color: "#e8f5e9" },
   ];
 
   return (
     <section className="py-32 px-6 bg-white overflow-hidden">
       <div className="max-w-5xl mx-auto">
         <div className="text-center mb-20">
-          <p className="text-purple-500 font-semibold tracking-widest text-sm uppercase mb-4">Payment Flow</p>
+          <p className="text-purple-500 font-semibold tracking-widest text-sm uppercase mb-4">Delivery Flow</p>
           <h2 className="text-5xl font-black text-gray-900">
-            From checkout to
+            A frictionless
             <br />
-            <span className="text-purple-400">your bank account.</span>
+            <span className="text-purple-400">delivery experience.</span>
           </h2>
+          <p className="text-gray-500 mt-4 max-w-md mx-auto">
+            From checkout to the front door, we automate every step of the journey.
+          </p>
         </div>
 
-        <div ref={ref} className="flex flex-col md:flex-row items-center justify-center gap-0">
+        <div ref={ref} className="flex flex-col md:flex-row items-center gap-0">
           {steps.map((s, i) => (
-            <div key={i} className="flex md:flex-col items-center gap-0 flex-1 w-full max-w-[200px]">
+            <div key={i} className="flex md:flex-col items-center gap-0 flex-1 w-full">
               <div
                 className="flex flex-col md:items-center items-start gap-3 p-4 flex-1 transition-all duration-700"
                 style={{
@@ -335,19 +442,19 @@ function CTASection() {
       <div ref={ref}
         className="relative z-10 max-w-3xl mx-auto text-center transition-all duration-1000"
         style={{ opacity: visible ? 1 : 0, transform: visible ? "translateY(0)" : "translateY(36px)" }}>
-        <FiCreditCard size={48} className="text-white/50 mx-auto mb-8" />
+        <FiTruck size={48} className="text-white/50 mx-auto mb-8" />
         <h2 className="text-5xl md:text-6xl font-black text-white mb-6" >
-          Start collecting
+          Ready to scale
           <br />
-          payments globally.
+          your deliveries?
         </h2>
         <p className="text-purple-100 text-xl mb-10 leading-relaxed">
-          The most reliable, developer-friendly payment gateway on the planet.
+          Start dispatching faster and saving on fuel costs today.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <button className="group flex items-center justify-center gap-3 px-10 py-4 rounded-full bg-white 
 text-purple-600 font-bold text-lg hover:bg-purple-50 transition-all hover:-translate-y-1 shadow-lg">
-            Create Free Account
+            Start Free
             <FiArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
           </button>
         </div>
@@ -356,13 +463,18 @@ text-purple-600 font-bold text-lg hover:bg-purple-50 transition-all hover:-trans
   );
 }
 
-export default function PaymentIntegrationPage() {
+const styles = `
+  @keyframes fadeSlideIn { from { opacity:0; transform:translateY(16px); } to { opacity:1; transform:translateY(0); } }
+`;
+
+export default function DeliveryManagementPage() {
   return (
     <>
       <CustomCursor />
       <GlobalBackground />
       <ScrollRevealInit />
       <Navbar />
+      <style>{styles}</style>
       <main className="font-sans antialiased">
         <HeroSection />
         <StatsBand />
