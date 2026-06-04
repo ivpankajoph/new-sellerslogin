@@ -7,6 +7,7 @@ import { cn } from "@/lib/utils";
 export const StickyScroll = ({
   content,
   contentClassName,
+  imagePosition = "left",
 }: {
   content: {
     title: string;
@@ -14,6 +15,7 @@ export const StickyScroll = ({
     content?: React.ReactNode | any;
   }[];
   contentClassName?: string;
+  imagePosition?: "left" | "right";
 }) => {
   const [activeCard, setActiveCard] = React.useState(0);
   const ref = useRef<any>(null);
@@ -40,7 +42,10 @@ export const StickyScroll = ({
 
   return (
     <motion.div
-      className="relative flex flex-row-reverse w-full justify-center gap-10 lg:gap-20 py-10"
+      className={cn(
+        "relative flex w-full justify-center gap-10 lg:gap-20 py-10",
+        imagePosition === "left" ? "flex-row-reverse" : "flex-row"
+      )}
       ref={ref}
     >
       <div className="relative flex items-start px-4">

@@ -21,6 +21,8 @@ import { TestimonialsSection } from "./TestimonialsSection";
 import { TrustedMarquee } from "./TrustedMarquee";
 import { WhySection } from "./WhySection";
 
+import { AutomationSection } from "./AutomationSection";
+
 export function LandingPage() {
   return (
     <>
@@ -39,6 +41,7 @@ export function LandingPage() {
 
       <StepsSection />
       <BrandsLoveSection />
+      <AutomationSection />
       <FaqSection />
 
       <CtaSection />
