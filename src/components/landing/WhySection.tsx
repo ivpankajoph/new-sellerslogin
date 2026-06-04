@@ -56,7 +56,7 @@ export function WhySection() {
             <div className="text-4xl font-bold text-gray-900 leading-none mb-auto tracking-tight">3.8%</div>
             <h3 className="text-lg font-bold text-gray-900 mb-2 mt-4">Higher Conversion</h3>
             <p className="text-sm text-gray-500 leading-relaxed">
-              Optimized checkout flows built from analyzing 50M+ transactions.
+              Optimized checkout flows built from analyzing multiple transactions.
             </p>
           </article>
 
@@ -74,7 +74,7 @@ export function WhySection() {
             <BentoIcon name="smartphone" />
             <h3 className="text-lg font-bold text-gray-900 mb-2">Mobile First</h3>
             <p className="text-sm text-gray-500 leading-relaxed">
-              72% of shoppers buy on mobile. Every SellersLogin store is
+              Every SellersLogin store is
               pixel-perfect on every screen.
             </p>
           </article>
