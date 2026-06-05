@@ -107,7 +107,7 @@ export function FooterSection() {
               className="inline-flex items-center gap-3 no-underline focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-400 focus-visible:ring-offset-2 rounded-full relative"
             >
               <div className="relative w-12 h-12 bg-white rounded-xl shadow-sm overflow-hidden p-1.5 shrink-0">
-                <Image src="/sellerslogin-logo (1).svg" alt="SellersLogin Logo" fill className="object-contain" />
+                <Image src="/sellerslogin-logo (1).svg" alt="SellersLogin Logo" fill sizes="48px" className="object-contain" />
               </div>
               <span className="text-2xl font-bold text-gray-900 leading-none">SellersLogin</span>
             </Link>

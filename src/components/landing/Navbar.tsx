@@ -128,7 +128,7 @@ export function Navbar() {
             }`}
           >
             <div className="relative w-8 h-8">
-              <Image src="/sellerslogin-logo (1).svg" alt="SellersLogin Logo" fill className="object-contain" />
+              <Image src="/sellerslogin-logo (1).svg" alt="SellersLogin Logo" fill sizes="32px" className="object-contain" />
             </div>
             <span>SellersLogin</span>
           </Link>

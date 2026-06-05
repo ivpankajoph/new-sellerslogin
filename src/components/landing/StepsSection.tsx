@@ -21,6 +21,7 @@ export function StepsSection() {
               src="/images/customize_store.jpg"
               alt="Customize Store"
               fill
+              sizes="(max-width: 768px) 100vw, 50vw"
               className="object-contain p-4 md:p-8"
             />
           </div>

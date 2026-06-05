@@ -399,17 +399,10 @@ function Hero() {
       />
 
       <div className="relative z-10 max-w-6xl mx-auto px-6 text-center">
-        {/* Pill */}
-        <div
-          className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-purple-200 bg-purple-200 text-purple-600 text-xs font-semibold uppercase tracking-widest mb-8"
-          style={{ animation: "fadeUp 0.6s cubic-bezier(.22,1,.36,1) both" }}
-        >
-          <RiMicLine />
-          AI Voice Automation Platform
-        </div>
+     
 
         <h1
-          className="font-sans text-6xl md:text-8xl font-bold leading-[1.04] text-gray-900 mb-6"
+          className="font-sans text-4xl md:text-6xl font-bold leading-[1.04] text-gray-900 mb-6"
           style={{
             fontFamily: "'Georgia', serif",
             animation: "fadeUp 0.8s cubic-bezier(.22,1,.36,1) 0.1s both",
@@ -462,10 +455,7 @@ function Hero() {
             </button>
           </Link>
           <Link href="#">
-            <button className="flex items-center gap-2 text-gray-700 hover:text-purple-600 font-semibold px-8 py-4 rounded-full border border-gray-200 hover:border-purple-200 transition-all duration-300 hover:-translate-y-0.5 bg-white/80">
-              Watch It Handle a Call
-              <RiArrowRightUpLine />
-            </button>
+         
           </Link>
         </div>
 
@@ -785,7 +775,7 @@ function NumberProvisioning() {
                 </li>
               ))}
             </ul>
-            <Link href="#">
+            <Link href="https://web.sellerslogin.com/vendor/registration">
               <button
                 className="group flex items-center gap-2 text-white font-semibold px-7 py-3.5 rounded-full transition-all hover:-translate-y-0.5 shadow-md hover:shadow-purple-200"
                 style={{ background: "linear-gradient(135deg,#9333ea,#c084fc)" }}
@@ -1478,60 +1468,7 @@ const testimonials = [
   },
 ];
 
-function Testimonials() {
-  return (
-    <section className="py-28 bg-transparent">
-      <div className="max-w-6xl mx-auto px-6">
-        <SectionHeader
-          eyebrow="Customer Stories"
-          title={<>Results that speak<br />for themselves.</>}
-        />
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {testimonials.map((t, i) => {
-            const { ref, visible } = useIntersection();
-            return (
-              <div
-                key={t.name}
-                ref={ref}
-                className={`bg-white rounded-3xl p-8 border-2 border-purple-200 hover:border-purple-200 hover:-translate-y-2 hover:shadow-xl hover:shadow-purple-200 transition-all duration-500 ${
-                  visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-                }`}
-                style={{
-                  transitionDelay: `${i * 120}ms`,
-                  boxShadow: "0 4px 24px rgba(219,39,119,0.06)",
-                }}
-              >
-                <div className="flex gap-1 mb-5">
-                  {Array.from({ length: 5 }).map((_, j) => (
-                    <RiStarLine key={j} className="text-purple-600" style={{ fill: "#f3e8ff" }} />
-                  ))}
-                </div>
-                <p
-                  className="text-gray-700 leading-relaxed mb-6 text-sm italic"
-                  
-                >
-                  "{t.quote}"
-                </p>
-                <div className="flex items-center gap-3">
-                  <div
-                    className="w-10 h-10 rounded-full flex items-center justify-center text-white text-xs font-bold"
-                    style={{ background: "linear-gradient(135deg,#9333ea,#c084fc)" }}
-                  >
-                    {t.initials}
-                  </div>
-                  <div>
-                    <p className="font-bold text-gray-900 text-sm">{t.name}</p>
-                    <p className="text-gray-400 text-xs">{t.role}</p>
-                  </div>
-                </div>
-              </div>
-            );
-          })}
-        </div>
-      </div>
-    </section>
-  );
-}
+
 
 /* ─── CTA ─────────────────────────────────────────────────────────────── */
 function CTA() {
@@ -1577,11 +1514,7 @@ function CTA() {
                 <RiArrowRightLine className="transition-transform group-hover:translate-x-1" />
               </button>
             </Link>
-            <Link href="#">
-              <button className="flex items-center gap-2 border-2 border-white/40 text-white font-semibold px-8 py-4 rounded-full hover:bg-white/10 transition-all">
-                Book a Live Demo
-              </button>
-            </Link>
+          
           </div>
           <p className="text-purple-100 text-sm mt-6">
             No credit card required. 14-day free trial. Cancel any time.

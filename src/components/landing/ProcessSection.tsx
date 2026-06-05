@@ -21,7 +21,7 @@ export function ProcessSection() {
             </p>
           </div>
           <div className="flex-1 w-full relative aspect-[4/3] rounded-2xl overflow-hidden shadow-lg border border-gray-100 bg-white">
-             <Image src="/images/create_account.png" alt="Create Account" fill className="object-contain p-4" />
+             <Image src="/images/create_account.png" alt="Create Account" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-contain p-4" />
           </div>
         </div>
       ),
@@ -41,7 +41,7 @@ export function ProcessSection() {
             </p>
           </div>
           <div className="flex-1 w-full relative aspect-[4/3] rounded-2xl overflow-hidden shadow-lg border border-gray-100 bg-white">
-             <Image src="/images/build_store.jpg" alt="Build Store" fill className="object-contain p-4" />
+             <Image src="/images/build_store.jpg" alt="Build Store" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-contain p-4" />
           </div>
         </div>
       ),
@@ -61,7 +61,7 @@ export function ProcessSection() {
             </p>
           </div>
           <div className="flex-1 w-full relative aspect-[4/3] rounded-2xl overflow-hidden shadow-lg border border-gray-100 bg-white">
-             <Image src="/images/add_products.png" alt="Add Products" fill className="object-contain p-4" />
+             <Image src="/images/add_products.png" alt="Add Products" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-contain p-4" />
           </div>
         </div>
       ),
@@ -81,7 +81,7 @@ export function ProcessSection() {
             </p>
           </div>
           <div className="flex-1 w-full relative aspect-[4/3] rounded-2xl overflow-hidden shadow-lg border border-gray-100 bg-white">
-             <Image src="/images/start_selling.jpg" alt="Start Selling" fill className="object-contain p-4" />
+             <Image src="/images/start_selling.jpg" alt="Start Selling" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-contain p-4" />
           </div>
         </div>
       ),

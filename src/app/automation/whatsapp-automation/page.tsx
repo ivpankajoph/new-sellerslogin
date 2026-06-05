@@ -72,6 +72,7 @@ import {
   RiCheckboxCircleLine,
   RiCloseCircleLine,
 } from "react-icons/ri";
+import Link from "next/link";
 
 /* ─── Utility ─────────────────────────────────────────────────────────── */
 function useIntersection(threshold = 0.12) {
@@ -305,11 +306,7 @@ function Hero() {
         style={{ backgroundImage: "radial-gradient(circle, #7e22ce 1px, transparent 1px)", backgroundSize: "36px 36px" }} />
 
       <div className="relative z-10 max-w-6xl mx-auto px-6 text-center">
-        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-purple-200 bg-purple-200 text-purple-600 text-xs font-semibold uppercase tracking-widest mb-8"
-          style={{ animation: "fadeUp 0.6s cubic-bezier(.22,1,.36,1) both" }}>
-          <RiWhatsappLine />
-          AI WhatsApp Marketing Automation Platform
-        </div>
+     
 
         <h1 className="font-sans text-6xl md:text-8xl font-bold leading-[1.04] text-gray-900 mb-6"
           style={{ fontFamily: "'Georgia', serif", animation: "fadeUp 0.8s cubic-bezier(.22,1,.36,1) 0.1s both" }}>
@@ -343,10 +340,7 @@ function Hero() {
             Connect Your Number Free
             <RiArrowRightLine className="transition-transform group-hover:translate-x-1" />
           </button>
-          <button className="flex items-center gap-2 text-gray-700 hover:text-purple-600 font-semibold px-8 py-4 rounded-full border border-gray-200 hover:border-purple-200 transition-all duration-300 hover:-translate-y-0.5 bg-white/80">
-            Watch a Live Demo
-            <RiArrowRightUpLine />
-          </button>
+       
         </div>
 
         <div className="mt-16 flex flex-wrap items-center justify-center gap-8 text-sm text-gray-400"
@@ -1806,13 +1800,12 @@ function CTA() {
             personalised message — all before your next meeting.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+           <Link href="https://web.sellerslogin.com/vendor/registration">
             <button className="group flex items-center gap-2 bg-white text-purple-600 hover:bg-purple-200 font-bold px-8 py-4 rounded-full transition-all duration-200 shadow-lg hover:-translate-y-0.5">
               Connect Your Number Free
               <RiArrowRightLine className="transition-transform group-hover:translate-x-1" />
-            </button>
-            <button className="flex items-center gap-2 border-2 border-white/40 text-white font-semibold px-8 py-4 rounded-full hover:bg-white/10 transition-all">
-              Book a Live Demo
-            </button>
+            </button></Link>
+           
           </div>
           <p className="text-purple-100 text-sm mt-6">
             14-day free trial. No credit card required. Cancel at any time.

@@ -63,6 +63,7 @@ export function FeatureCarousel({ features }: { features: SolutionFeature[] }) {
                 src={feature.image}
                 alt={feature.title}
                 fill
+                sizes="(max-width: 640px) 100vw, 33vw"
                 className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
               />
               <div className="absolute inset-0 bg-linear-to-t from-gray-950/45 via-transparent to-transparent" />

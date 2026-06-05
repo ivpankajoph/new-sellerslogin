@@ -365,12 +365,7 @@ function Hero() {
               <RiArrowRightLine className="transition-transform group-hover:translate-x-1" />
             </button>
           </Link>
-          <Link href="#">
-            <button className="flex items-center gap-2 text-gray-700 hover:text-purple-600 font-semibold px-8 py-4 rounded-full border border-gray-200 hover:border-purple-200 transition-all duration-300 hover:-translate-y-0.5 bg-white/80">
-              See a Live Campaign
-              <RiArrowRightUpLine />
-            </button>
-          </Link>
+      
         </div>
 
         {/* Trust row */}
@@ -1377,11 +1372,7 @@ function CTA() {
                 <RiArrowRightLine className="transition-transform group-hover:translate-x-1" />
               </button>
             </Link>
-            <Link href="#">
-              <button className="flex items-center gap-2 border-2 border-white/40 text-white font-semibold px-8 py-4 rounded-full hover:bg-white/10 transition-all">
-                Book a Live Demo
-              </button>
-            </Link>
+        
           </div>
           <p className="text-purple-100 text-sm mt-6">
             14-day free trial. No credit card required. Cancel any time.

@@ -184,10 +184,7 @@ function Hero() {
             Request Demo
             <RiArrowRightLine className="transition-transform duration-200 group-hover:translate-x-1" />
           </button></Link>
-          <button className="flex items-center gap-2 text-gray-700 hover:text-purple-600 font-semibold px-8 py-4 rounded-full border border-gray-200 hover:border-purple-200 transition-all duration-300 hover:-translate-y-0.5 bg-white/80">
-            View Live Dashboard
-            <RiArrowRightUpLine />
-          </button>
+      
         </div>
 
         {/* Trust row */}

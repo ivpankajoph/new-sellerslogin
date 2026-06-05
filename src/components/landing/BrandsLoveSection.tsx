@@ -36,7 +36,7 @@ export function BrandsLoveSection() {
         <div className="flex items-center gap-6 md:gap-8 w-max animate-[marquee_45s_linear_infinite] hover:[animation-play-state:paused] will-change-transform">
           {row1Items.map((img, i) => (
             <div key={`row1-${i}`} className="w-[280px] sm:w-[400px] h-[220px] sm:h-[300px] rounded-2xl overflow-hidden shrink-0 shadow-lg bg-gray-900 border border-white/10 relative group">
-              <Image src={img} alt="Showcase" fill className="object-cover group-hover:scale-105 transition-transform duration-700" />
+              <Image src={img} alt="Showcase" fill sizes="(max-width: 640px) 280px, 400px" className="object-cover group-hover:scale-105 transition-transform duration-700" />
             </div>
           ))}
         </div>
@@ -45,7 +45,7 @@ export function BrandsLoveSection() {
         <div className="flex items-center gap-6 md:gap-8 w-max animate-[marquee-reverse_50s_linear_infinite] hover:[animation-play-state:paused] will-change-transform -ml-32">
           {row2Items.map((img, i) => (
             <div key={`row2-${i}`} className="w-[280px] sm:w-[400px] h-[220px] sm:h-[300px] rounded-2xl overflow-hidden shrink-0 shadow-lg bg-gray-900 border border-white/10 relative group">
-              <Image src={img} alt="Showcase" fill className="object-cover group-hover:scale-105 transition-transform duration-700" />
+              <Image src={img} alt="Showcase" fill sizes="(max-width: 640px) 280px, 400px" className="object-cover group-hover:scale-105 transition-transform duration-700" />
             </div>
           ))}
         </div>

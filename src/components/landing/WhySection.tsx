@@ -44,6 +44,7 @@ const content = [
             src="/images/pagespeed.png"
             width={800}
             height={800}
+            sizes="(max-width: 768px) 100vw, 33vw"
             className="h-full w-full object-contain p-4"
             alt="PageSpeed"
           />
