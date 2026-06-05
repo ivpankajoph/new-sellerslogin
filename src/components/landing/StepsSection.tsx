@@ -16,23 +16,13 @@ export function StepsSection() {
         </header>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-8 items-center">
-          <div className="relative flex justify-center lg:justify-start gap-4 sm:gap-6 reveal reveal-delay-1">
-            <div className="w-1/2 max-w-[280px] mt-0 lg:-mt-12 rounded-2xl overflow-hidden shadow-xl border border-gray-200 bg-gray-50 aspect-[3/4] relative">
-              <Image
-                src="/images/store_management.png"
-                alt="Store Management"
-                fill
-                className="object-cover"
-              />
-            </div>
-            <div className="w-1/2 max-w-[280px] mt-12 lg:mt-24 rounded-2xl overflow-hidden shadow-xl border border-gray-200 bg-gray-50 aspect-[3/4] relative">
-              <Image
-                src="/images/packing_orders.png"
-                alt="Product"
-                fill
-                className="object-cover scale-110"
-              />
-            </div>
+          <div className="relative w-full aspect-[4/3] lg:aspect-[4/3] xl:aspect-[16/10] rounded-3xl overflow-hidden shadow-2xl border border-gray-100 bg-white reveal reveal-delay-1">
+            <Image
+              src="/images/customize_store.jpg"
+              alt="Customize Store"
+              fill
+              className="object-contain p-4 md:p-8"
+            />
           </div>
 
           {/* Right Side: Steps */}

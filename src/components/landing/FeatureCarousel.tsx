@@ -1,5 +1,5 @@
 "use client";
-
+import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { LandingIcon } from "@/components/icons/LandingIcon";
 import type { SolutionFeature } from "./SolutionPage";
@@ -55,15 +55,15 @@ export function FeatureCarousel({ features }: { features: SolutionFeature[] }) {
           <article
             key={feature.title}
             data-card
-            className="group relative flex w-[82%] shrink-0 snap-start flex-col overflow-hidden rounded-3xl border border-gray-200/80 bg-white transition-all duration-500 ease-out hover:-translate-y-2 sm:w-[58%] lg:w-[calc((100%-3rem)*0.4)]"
+            className="group relative flex w-[82%] shrink-0 snap-start flex-col overflow-hidden rounded-full border border-gray-200/80 bg-white transition-all duration-500 ease-out hover:-translate-y-2 sm:w-[58%] lg:w-[calc((100%-3rem)*0.4)]"
           >
             {/* Image */}
             <div className="relative aspect-16/10 overflow-hidden">
-              <img
+              <Image
                 src={feature.image}
                 alt={feature.title}
-                loading="lazy"
-                className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                fill
+                className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
               />
               <div className="absolute inset-0 bg-linear-to-t from-gray-950/45 via-transparent to-transparent" />
 

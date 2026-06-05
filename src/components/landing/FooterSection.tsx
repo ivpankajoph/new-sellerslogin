@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { navPageGroups } from "@/data/navPages";
 
 const footerLinks = {
@@ -103,9 +104,11 @@ export function FooterSection() {
           <div className="lg:col-span-2">
             <Link
               href="/#hero"
-              className="inline-flex items-center gap-3 no-underline focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-400 focus-visible:ring-offset-2 rounded-lg"
+              className="inline-flex items-center gap-3 no-underline focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-400 focus-visible:ring-offset-2 rounded-full relative"
             >
-              <img src="/sellerslogin-logo (1).svg" alt="SellersLogin Logo" className="w-12 h-12 object-contain bg-white rounded-xl shadow-sm p-1.5" />
+              <div className="relative w-12 h-12 bg-white rounded-xl shadow-sm overflow-hidden p-1.5 shrink-0">
+                <Image src="/sellerslogin-logo (1).svg" alt="SellersLogin Logo" fill className="object-contain" />
+              </div>
               <span className="text-2xl font-bold text-gray-900 leading-none">SellersLogin</span>
             </Link>
             <div className="mt-6 mb-5 text-sm text-gray-600 space-y-3">
@@ -149,7 +152,7 @@ export function FooterSection() {
                 <button
                   type="submit"
                   disabled={subscribed}
-                  className={`whitespace-nowrap bg-purple-200 text-black border border-purple-300 shadow-sm rounded-lg py-2.5 px-5 text-sm font-semibold transition-all duration-200 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-400 focus-visible:ring-offset-2 ${
+                  className={`whitespace-nowrap bg-purple-200 text-black border border-purple-300 shadow-sm rounded-full py-2.5 px-5 text-sm font-semibold transition-all duration-200 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-400 focus-visible:ring-offset-2 ${
                     subscribed ? "opacity-70 cursor-not-allowed bg-gray-200 text-gray-500 border-gray-300" : "hover:shadow-lg hover:bg-purple-300 hover:-translate-y-0.5"
                   }`}
                 >

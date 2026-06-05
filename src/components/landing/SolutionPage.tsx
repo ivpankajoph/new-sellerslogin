@@ -86,7 +86,7 @@ export function SolutionPage({ page }: { page: SolutionPageContent }) {
           </video>
           <div className="absolute inset-0 bg-linear-to-b from-gray-950/45 via-gray-950/80 to-gray-950" />
           <div className="pointer-events-none absolute -left-24 top-24 h-72 w-72 rounded-full bg-purple-600/30 blur-3xl animate-float-slow" />
-          <div className="pointer-events-none absolute -right-16 bottom-10 h-80 w-80 rounded-full bg-orange-500/20 blur-3xl animate-float-slower" />
+          <div className="pointer-events-none absolute -right-16 bottom-10 h-80 w-80 rounded-full bg-purple-200/20 blur-3xl animate-float-slower" />
 
           <div className="relative z-10 mx-auto grid max-w-7xl items-center gap-12 lg:grid-cols-[1.05fr_0.95fr]">
             <div className="max-w-3xl">
@@ -97,7 +97,7 @@ export function SolutionPage({ page }: { page: SolutionPageContent }) {
 
               <h1 className="reveal reveal-delay-1 text-[clamp(40px,6vw,72px)] font-bold leading-[1.05] tracking-tight">
                 {page.titleBefore}
-                <span className="bg-linear-to-r from-purple-300 via-fuchsia-300 to-orange-200 bg-clip-text text-transparent">
+                <span className="bg-linear-to-r from-purple-300 via-purple-200 to-purple-200 bg-clip-text text-transparent">
                   {page.titleHighlight}
                 </span>
                 {page.titleAfter}
@@ -196,7 +196,7 @@ export function SolutionPage({ page }: { page: SolutionPageContent }) {
               <p className="mt-4 text-base leading-relaxed text-gray-600 md:text-lg">
                 {page.featuresSubtitle}
               </p>
-              <div className="mx-auto mt-6 h-1 w-24 rounded-full bg-linear-to-r from-purple-500 via-fuchsia-500 to-orange-400" />
+              <div className="mx-auto mt-6 h-1 w-24 rounded-full bg-linear-to-r from-purple-500 via-purple-200 to-purple-200" />
             </div>
 
             <FeatureCarousel features={page.features} />
@@ -205,7 +205,7 @@ export function SolutionPage({ page }: { page: SolutionPageContent }) {
 
         {/* Stats strip */}
         <section className="px-4 pb-4 sm:px-6 lg:px-8">
-          <div className="mx-auto max-w-7xl overflow-hidden rounded-3xl bg-linear-to-br from-purple-700 via-fuchsia-700 to-purple-900 p-8 text-white shadow-[0_30px_80px_-40px_rgba(124,58,237,0.7)] sm:p-10 md:p-12">
+          <div className="mx-auto max-w-7xl overflow-hidden rounded-3xl bg-linear-to-br from-purple-700 via-purple-200 to-purple-900 p-8 text-white shadow-[0_30px_80px_-40px_rgba(124,58,237,0.7)] sm:p-10 md:p-12">
             <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
               {page.stats.map((stat, index) => (
                 <div key={stat.label} className={`reveal reveal-delay-${index + 1} text-center`}>
@@ -233,7 +233,7 @@ export function SolutionPage({ page }: { page: SolutionPageContent }) {
               {page.workflow.map((step, index) => (
                 <article
                   key={step.title}
-                  className={`reveal reveal-delay-${index + 1} group relative isolate overflow-hidden rounded-3xl border border-gray-200/80 bg-white p-8 transition-all duration-500 ease-out hover:-translate-y-2 hover:border-transparent hover:shadow-[0_40px_90px_-40px_rgba(76,29,149,0.65)]`}
+                  className={`reveal reveal-delay-${index + 1} group relative isolate overflow-hidden rounded-full border border-gray-200/80 bg-white p-8 transition-all duration-500 ease-out hover:-translate-y-2 hover:border-transparent hover:shadow-[0_40px_90px_-40px_rgba(76,29,149,0.65)]`}
                 >
                   <div className="pointer-events-none absolute inset-0 -z-10 translate-y-full bg-linear-to-br from-gray-950 via-purple-950 to-purple-900 transition-transform duration-500 ease-out group-hover:translate-y-0" />
 

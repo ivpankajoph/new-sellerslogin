@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { featureDropdown, solutionsDropdown, automationDropdown, industriesDropdown } from "@/data/landing";
 import { navPageGroups } from "@/data/navPages";
@@ -31,7 +32,7 @@ function MobileDropdown({
     <div className="border-b border-gray-100 last:border-0">
       <button
         onClick={toggle}
-        className="flex items-center justify-between w-full py-3 px-4 text-base font-medium text-gray-700 hover:bg-gray-50 hover:text-gray-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-900 focus-visible:ring-offset-2 rounded-lg"
+        className="flex items-center justify-between w-full py-3 px-4 text-base font-medium text-gray-700 hover:bg-gray-50 hover:text-gray-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-900 focus-visible:ring-offset-2 rounded-full"
         aria-expanded={isOpen}
       >
         {title}
@@ -51,7 +52,7 @@ function MobileDropdown({
               key={item.label}
               href={item.href}
               onClick={onNavigate}
-              className="flex items-center gap-3 py-2 px-3 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50 hover:text-gray-900 no-underline transition-colors"
+              className="flex items-center gap-3 py-2 px-3 rounded-full text-sm font-medium text-gray-700 hover:bg-gray-50 hover:text-gray-900 no-underline transition-colors"
             >
               <div className="w-8 h-8 bg-gray-100 rounded-lg flex items-center justify-center text-gray-700 shrink-0">
                 <LandingIcon name={item.icon} size={16} />
@@ -101,7 +102,7 @@ export function Navbar() {
       <Link
         key={item.label}
         href={item.href}
-        className="flex items-center gap-2.5 py-2.5 px-3 rounded-lg text-gray-700 hover:text-gray-900 no-underline text-sm font-medium transition-colors duration-150 hover:bg-gray-50 whitespace-nowrap"
+        className="flex items-center gap-2.5 py-2.5 px-3 rounded-full text-gray-700 hover:text-gray-900 no-underline text-sm font-medium transition-colors duration-150 hover:bg-gray-50 whitespace-nowrap"
       >
         <div className="w-8 h-8 bg-gray-100 rounded-lg flex items-center justify-center text-gray-700 shrink-0">
           <LandingIcon name={item.icon} size={16} />
@@ -122,11 +123,13 @@ export function Navbar() {
         <div className="flex items-center justify-between h-16">
           <Link
             href="/#hero"
-            className={`text-lg font-bold no-underline flex items-center gap-2 shrink-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-900 focus-visible:ring-offset-2 rounded-md transition-colors duration-200 ${
+            className={`text-lg font-bold no-underline flex items-center gap-2 shrink-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-900 focus-visible:ring-offset-2 rounded-full transition-colors duration-200 ${
               scrolled ? "text-gray-900" : "text-white"
             }`}
           >
-            <img src="/sellerslogin-logo (1).svg" alt="SellersLogin Logo" className="w-8 h-8 object-contain" />
+            <div className="relative w-8 h-8">
+              <Image src="/sellerslogin-logo (1).svg" alt="SellersLogin Logo" fill className="object-contain" />
+            </div>
             <span>SellersLogin</span>
           </Link>
 

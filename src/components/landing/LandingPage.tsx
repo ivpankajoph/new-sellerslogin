@@ -3,24 +3,23 @@ import { GlobalBackground } from "./GlobalBackground";
 import { BackToTop } from "./BackToTop";
 
 import { CookieConsent } from "./CookieConsent";
-import { CtaSection } from "./CtaSection";
 import { CustomCursor } from "./CustomCursor";
-import { FaqSection } from "./FaqSection";
-import { BrandsLoveSection } from "./BrandsLoveSection";
-
-import { StepsSection } from "./StepsSection";
-import { FooterSection } from "./FooterSection";
-import { GlobeSection } from "./GlobeSection";
 import { HeroSection } from "./HeroSection";
 import { Navbar } from "./Navbar";
-
-import { ProcessSection } from "./ProcessSection";
 import { ScrollRevealInit } from "./ScrollRevealInit";
-import { ShowcaseSection } from "./ShowcaseSection";
 import { TrustedMarquee } from "./TrustedMarquee";
-import { WhySection } from "./WhySection";
+import dynamic from "next/dynamic";
 
-import { AutomationSection } from "./AutomationSection";
+const ShowcaseSection = dynamic(() => import("./ShowcaseSection").then((mod) => mod.ShowcaseSection));
+const WhySection = dynamic(() => import("./WhySection").then((mod) => mod.WhySection));
+const ProcessSection = dynamic(() => import("./ProcessSection").then((mod) => mod.ProcessSection));
+const AutomationSection = dynamic(() => import("./AutomationSection").then((mod) => mod.AutomationSection));
+const StepsSection = dynamic(() => import("./StepsSection").then((mod) => mod.StepsSection));
+const BrandsLoveSection = dynamic(() => import("./BrandsLoveSection").then((mod) => mod.BrandsLoveSection));
+const FaqSection = dynamic(() => import("./FaqSection").then((mod) => mod.FaqSection));
+const CtaSection = dynamic(() => import("./CtaSection").then((mod) => mod.CtaSection));
+const GlobeSection = dynamic(() => import("./GlobeSection").then((mod) => mod.GlobeSection));
+const FooterSection = dynamic(() => import("./FooterSection").then((mod) => mod.FooterSection));
 
 export function LandingPage() {
   return (

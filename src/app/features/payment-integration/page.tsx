@@ -73,7 +73,7 @@ function Counter({ end, prefix = "", suffix = "", decimals = 0 }: { end: number;
 ───────────────────────────────────────────── */
 function HeroSection() {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-white px-6 pt-20">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-transparent px-6 pt-20">
       <div className="pointer-events-none absolute inset-0"
         style={{
           backgroundImage: "radial-gradient(circle, #e9d5ff 1px, transparent 1px)",
@@ -149,16 +149,16 @@ function HeroSection() {
                   </div>
                   
                   <div className="flex gap-3">
-                    <button className="flex-1 h-12 rounded-lg bg-black text-white flex items-center justify-center gap-2 hover:bg-gray-800 transition-colors">
+                    <button className="flex-1 h-12 rounded-full bg-black text-white flex items-center justify-center gap-2 hover:bg-gray-800 transition-colors">
                       <FiSmartphone size={16} /> Pay
                     </button>
-                    <button className="flex-1 h-12 rounded-lg bg-white border border-gray-200 text-gray-900 flex items-center justify-center hover:bg-gray-50 transition-colors">
-                      <FiGlobe size={16} className="text-blue-500 mr-1" /> Pay
+                    <button className="flex-1 h-12 rounded-full bg-white border border-gray-200 text-gray-900 flex items-center justify-center hover:bg-gray-50 transition-colors">
+                      <FiGlobe size={16} className="text-purple-600 mr-1" /> Pay
                     </button>
                   </div>
                 </div>
 
-                <button className="w-full h-12 rounded-lg text-white font-bold flex items-center justify-center gap-2 transition-all hover:opacity-90"
+                <button className="w-full h-12 rounded-full text-white font-bold flex items-center justify-center gap-2 transition-all hover:opacity-90"
                   style={{ background: "linear-gradient(135deg,#9333ea,#c084fc)" }}>
                   Pay $124.99 <FiArrowRight />
                 </button>
@@ -276,7 +276,7 @@ function FlowSection() {
   ];
 
   return (
-    <section className="py-32 px-6 bg-white overflow-hidden">
+    <section className="py-32 px-6 bg-transparent overflow-hidden">
       <div className="max-w-5xl mx-auto">
         <div className="text-center mb-20">
           <p className="text-purple-500 font-semibold tracking-widest text-sm uppercase mb-4">Payment Flow</p>

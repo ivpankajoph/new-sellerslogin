@@ -157,7 +157,7 @@ function GlobalStyles() {
       }
 
       .shimmer-text {
-        background: linear-gradient(90deg,#be185d,#ec4899,#fda4af,#be185d);
+        background: linear-gradient(90deg,#7e22ce,#a855f7,#fda4af,#7e22ce);
         background-size:200% auto;
         -webkit-background-clip:text;
         -webkit-text-fill-color:transparent;
@@ -171,13 +171,13 @@ function GlobalStyles() {
         box-shadow: 0 24px 64px -12px rgba(219,39,119,0.13);
       }
       .dot-grid {
-        background-image: radial-gradient(circle, #f9a8d4 1px, transparent 1px);
+        background-image: radial-gradient(circle, #d8b4fe 1px, transparent 1px);
         background-size: 32px 32px;
       }
       .line-grid {
         background-image:
-          linear-gradient(#fce7f3 1px, transparent 1px),
-          linear-gradient(90deg, #fce7f3 1px, transparent 1px);
+          linear-gradient(#f3e8ff 1px, transparent 1px),
+          linear-gradient(90deg, #f3e8ff 1px, transparent 1px);
         background-size: 56px 56px;
       }
     `}</style>
@@ -187,8 +187,8 @@ function GlobalStyles() {
 /* ─── Orb Background ──────────────────────────────────────────────────── */
 function OrbBg({ v = 0 }: { v?: number }) {
   const sets = [
-    ["#fda4af","#fbcfe8","#f9a8d4"],
-    ["#fce7f3","#fbcfe8","#fecdd3"],
+    ["#fda4af","#e9d5ff","#d8b4fe"],
+    ["#f3e8ff","#e9d5ff","#fecdd3"],
     ["#fecdd3","#fda4af","#fb7185"],
   ];
   const [a,b,c] = sets[v % 3];
@@ -226,7 +226,7 @@ function SH({ eyebrow, title, sub, align="center" }: {eyebrow:string;title:strin
 ══════════════════════════════════════════════════════════════ */
 function Hero() {
   return (
-    <section className="relative min-h-screen flex flex-col items-center justify-center bg-white overflow-hidden pt-24 pb-16">
+    <section className="relative min-h-screen flex flex-col items-center justify-center bg-transparent overflow-hidden pt-24 pb-16">
       <OrbBg v={0}/>
       <div className="pointer-events-none absolute inset-0 dot-grid opacity-[0.045]"/>
 
@@ -254,10 +254,7 @@ function Hero() {
             Start Free Trial
             <RiArrowRightLine className="transition-transform duration-200 group-hover:translate-x-1"/>
           </button></Link>
-          <button className="group flex items-center gap-2 text-gray-700 hover:text-purple-600 font-semibold font-body px-8 py-4 rounded-full border border-gray-200 hover:border-purple-200 transition-all duration-300 bg-white/80 hover:-translate-y-0.5">
-            Live Demo
-            <RiArrowRightUpLine/>
-          </button>
+        
         </div>
 
         <div className="mt-12 flex flex-wrap items-center justify-center gap-6 text-sm text-gray-400 font-body"
@@ -298,15 +295,15 @@ function DashboardPreview() {
     <div className="rounded-3xl border border-purple-100 bg-white shadow-2xl shadow-purple-100/60 overflow-hidden">
       {/* Chrome bar */}
       <div className="flex items-center gap-2 px-5 py-3 border-b border-purple-50 bg-purple-50/40">
-        <span className="w-3 h-3 rounded-full bg-red-300"/>
+        <span className="w-3 h-3 rounded-full bg-purple-200"/>
         <span className="w-3 h-3 rounded-full bg-yellow-300"/>
         <span className="w-3 h-3 rounded-full bg-green-300"/>
         <div className="ml-4 flex-1 max-w-xs bg-white/80 rounded-full px-3 py-1 text-xs text-gray-400 font-mono border border-purple-50">
           app.shopflow.io/dashboard
         </div>
         <div className="ml-auto flex items-center gap-3">
-          <span className="text-[10px] text-emerald-500 font-semibold font-body flex items-center gap-1">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" style={{animation:"ping-sm 1.5s infinite"}}/>
+          <span className="text-[10px] text-purple-600 font-semibold font-body flex items-center gap-1">
+            <span className="w-1.5 h-1.5 rounded-full bg-purple-200" style={{animation:"ping-sm 1.5s infinite"}}/>
             Live
           </span>
           <span className="text-[10px] text-gray-400 font-body">23 visitors online</span>
@@ -371,7 +368,7 @@ function DashboardPreview() {
                   <k.icon className="text-purple-300 text-sm flex-shrink-0"/>
                 </div>
                 <p className="text-lg md:text-xl font-bold text-gray-800 font-mono">{k.val}</p>
-                <p className={`text-[10px] font-semibold font-body mt-0.5 ${k.up?"text-emerald-500":"text-rose-400"}`}>{k.delta}</p>
+                <p className={`text-[10px] font-semibold font-body mt-0.5 ${k.up?"text-purple-600":"text-purple-600"}`}>{k.delta}</p>
               </div>
             ))}
           </div>
@@ -386,7 +383,7 @@ function DashboardPreview() {
               <div className="flex items-end gap-1.5 h-20">
                 {bars.map((h,i)=>(
                   <div key={i} className="flex-1 rounded-t-md"
-                    style={{height:`${h}%`,background:i===9?"#db2777":i===5?"#f9a8d4":"#fce7f3",
+                    style={{height:`${h}%`,background:i===9?"#9333ea":i===5?"#d8b4fe":"#f3e8ff",
                     transformOrigin:"bottom",animation:`barGrow 0.5s cubic-bezier(.22,1,.36,1) ${i*0.04}s both`}}/>
                 ))}
               </div>
@@ -403,7 +400,7 @@ function DashboardPreview() {
                     </div>
                     <div className="text-right">
                       <p className="text-xs font-bold text-purple-600 font-mono">{p.revenue}</p>
-                      <p className={`text-[9px] font-body ${p.stock===0?"text-rose-400":p.stock<20?"text-amber-400":"text-emerald-400"}`}>
+                      <p className={`text-[9px] font-body ${p.stock===0?"text-purple-600":p.stock<20?"text-purple-600":"text-purple-600"}`}>
                         {p.stock===0?"Out of stock":`${p.stock} left`}
                       </p>
                     </div>
@@ -426,13 +423,13 @@ function DashboardPreview() {
 function StorefrontBuilder() {
   const {ref,visible} = useIntersection();
   const themes = [
-    {name:"Aura",tag:"Bestseller",color:"from-purple-400 to-rose-500"},
+    {name:"Aura",tag:"Bestseller",color:"from-purple-400 to-purple-200"},
     {name:"Slate",tag:"Minimal",color:"from-gray-400 to-gray-600"},
-    {name:"Bloom",tag:"Fashion",color:"from-fuchsia-400 to-purple-500"},
-    {name:"Lux",tag:"Premium",color:"from-amber-400 to-orange-500"},
+    {name:"Bloom",tag:"Fashion",color:"from-purple-200 to-purple-500"},
+    {name:"Lux",tag:"Premium",color:"from-purple-200 to-purple-200"},
   ];
   return (
-    <section className="py-28 bg-white overflow-hidden">
+    <section className="py-28 bg-transparent overflow-hidden">
       <div className="max-w-7xl mx-auto px-6">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
           {/* Left */}
@@ -518,7 +515,7 @@ function StorefrontBuilder() {
               </div>
 
               <div className="px-4 pb-4">
-                <button className="w-full flex items-center justify-center gap-2 bg-purple-600 text-white text-xs font-semibold font-body py-3 rounded-xl hover:bg-purple-700 transition-colors">
+                <button className="w-full flex items-center justify-center gap-2 bg-purple-600 text-white text-xs font-semibold font-body py-3 rounded-full hover:bg-purple-700 transition-colors">
                   <RiRocketLine/> Publish Store
                 </button>
               </div>
@@ -557,7 +554,7 @@ function ProductCatalogue() {
                   <div className="flex items-center gap-1.5 bg-gray-50 rounded-lg px-2.5 py-1.5 text-[10px] text-gray-400 font-body border border-gray-100">
                     <RiSearchLine className="text-xs"/> Search
                   </div>
-                  <button className="text-xs text-purple-600 bg-purple-50 px-3 py-1.5 rounded-lg font-body font-semibold flex items-center gap-1 border border-purple-100">
+                  <button className="text-xs text-purple-600 bg-purple-50 px-3 py-1.5 rounded-full font-body font-semibold flex items-center gap-1 border border-purple-100">
                     <RiAddLine/> Add
                   </button>
                 </div>
@@ -585,9 +582,9 @@ function ProductCatalogue() {
                     <div className="text-right flex-shrink-0">
                       <p className="text-xs font-bold text-gray-800 font-mono">{p.price}</p>
                       <span className={`text-[9px] px-1.5 py-0.5 rounded-full font-body ${
-                        p.status==="Active"?"bg-emerald-50 text-emerald-600":
-                        p.status==="Low Stock"?"bg-amber-50 text-amber-600":
-                        "bg-rose-50 text-rose-500"
+                        p.status==="Active"?"bg-purple-200 text-purple-600":
+                        p.status==="Low Stock"?"bg-purple-200 text-purple-600":
+                        "bg-purple-200 text-purple-600"
                       }`}>{p.status}</span>
                     </div>
                   </div>
@@ -595,10 +592,10 @@ function ProductCatalogue() {
               </div>
 
               <div className="px-4 pb-4 flex gap-2">
-                <button className="flex-1 flex items-center justify-center gap-1 text-[11px] text-purple-600 bg-purple-50 border border-purple-100 rounded-xl py-2.5 font-body font-semibold hover:bg-purple-100 transition-colors">
+                <button className="flex-1 flex items-center justify-center gap-1 text-[11px] text-purple-600 bg-purple-50 border border-purple-100 rounded-full py-2.5 font-body font-semibold hover:bg-purple-100 transition-colors">
                   <RiImageLine/> Bulk Image Upload
                 </button>
-                <button className="flex-1 flex items-center justify-center gap-1 text-[11px] text-gray-500 bg-gray-50 border border-gray-100 rounded-xl py-2.5 font-body font-semibold hover:bg-gray-100 transition-colors">
+                <button className="flex-1 flex items-center justify-center gap-1 text-[11px] text-gray-500 bg-gray-50 border border-gray-100 rounded-full py-2.5 font-body font-semibold hover:bg-gray-100 transition-colors">
                   <RiTableLine/> Import CSV
                 </button>
               </div>
@@ -647,14 +644,14 @@ function ProductCatalogue() {
 function OrderManagement() {
   const {ref,visible} = useIntersection();
   const orders = [
-    {id:"#ORD-8841",customer:"Aisha Mehta",items:"2 items",val:"₹6,799",status:"Shipped",statusColor:"bg-blue-400",time:"2h ago"},
-    {id:"#ORD-8840",customer:"Rohan Kapoor",items:"1 item",val:"₹2,899",status:"Processing",statusColor:"bg-amber-400",time:"3h ago"},
-    {id:"#ORD-8839",customer:"Divya Sharma",items:"4 items",val:"₹18,300",status:"Delivered",statusColor:"bg-emerald-400",time:"5h ago"},
-    {id:"#ORD-8838",customer:"Kabir Singh",items:"1 item",val:"₹4,299",status:"Return Req.",statusColor:"bg-rose-400",time:"6h ago"},
-    {id:"#ORD-8837",customer:"Meera Nair",items:"3 items",val:"₹9,997",status:"Shipped",statusColor:"bg-blue-400",time:"8h ago"},
+    {id:"#ORD-8841",customer:"Aisha Mehta",items:"2 items",val:"₹6,799",status:"Shipped",statusColor:"bg-purple-200",time:"2h ago"},
+    {id:"#ORD-8840",customer:"Rohan Kapoor",items:"1 item",val:"₹2,899",status:"Processing",statusColor:"bg-purple-200",time:"3h ago"},
+    {id:"#ORD-8839",customer:"Divya Sharma",items:"4 items",val:"₹18,300",status:"Delivered",statusColor:"bg-purple-200",time:"5h ago"},
+    {id:"#ORD-8838",customer:"Kabir Singh",items:"1 item",val:"₹4,299",status:"Return Req.",statusColor:"bg-purple-200",time:"6h ago"},
+    {id:"#ORD-8837",customer:"Meera Nair",items:"3 items",val:"₹9,997",status:"Shipped",statusColor:"bg-purple-200",time:"8h ago"},
   ];
   return (
-    <section className="py-28 bg-white overflow-hidden">
+    <section className="py-28 bg-transparent overflow-hidden">
       <div className="max-w-7xl mx-auto px-6">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
           {/* Left text */}
@@ -726,10 +723,10 @@ function OrderManagement() {
                     <div className="text-right flex-shrink-0">
                       <p className="text-xs font-bold text-gray-800 font-mono">{o.val}</p>
                       <span className={`text-[9px] px-1.5 py-0.5 rounded-full font-body ${
-                        o.status==="Delivered"?"bg-emerald-50 text-emerald-600":
-                        o.status==="Shipped"?"bg-blue-50 text-blue-600":
-                        o.status==="Processing"?"bg-amber-50 text-amber-600":
-                        "bg-rose-50 text-rose-500"
+                        o.status==="Delivered"?"bg-purple-200 text-purple-600":
+                        o.status==="Shipped"?"bg-purple-200 text-purple-600":
+                        o.status==="Processing"?"bg-purple-200 text-purple-600":
+                        "bg-purple-200 text-purple-600"
                       }`}>{o.status}</span>
                     </div>
                   </div>
@@ -763,10 +760,10 @@ function OrderManagement() {
 function CustomerIntelligence() {
   const {ref,visible} = useIntersection();
   const segments = [
-    {label:"Champions",count:"4,821",pct:28,color:"#db2777"},
-    {label:"Loyal",count:"6,203",pct:36,color:"#ec4899"},
+    {label:"Champions",count:"4,821",pct:28,color:"#9333ea"},
+    {label:"Loyal",count:"6,203",pct:36,color:"#a855f7"},
     {label:"At Risk",count:"2,114",pct:12,color:"#fda4af"},
-    {label:"Lost",count:"4,081",pct:24,color:"#fce7f3"},
+    {label:"Lost",count:"4,081",pct:24,color:"#f3e8ff"},
   ];
   const customers = [
     {name:"Aisha Mehta",orders:24,ltv:"₹1.2L",segment:"Champion",avatar:"AM"},
@@ -814,7 +811,7 @@ function CustomerIntelligence() {
                     <div key={c.name}
                       className="flex items-center gap-3 p-2.5 rounded-xl hover:bg-purple-50/30 transition-colors cursor-pointer"
                       style={{animation:`fadeUp 0.35s ease ${i*0.06}s both`}}>
-                      <div className="w-8 h-8 rounded-full bg-gradient-to-br from-purple-300 to-rose-400 flex items-center justify-center text-white text-xs font-bold font-body flex-shrink-0">
+                      <div className="w-8 h-8 rounded-full bg-gradient-to-br from-purple-300 to-purple-200 flex items-center justify-center text-white text-xs font-bold font-body flex-shrink-0">
                         {c.avatar}
                       </div>
                       <div className="flex-1 min-w-0">
@@ -825,8 +822,8 @@ function CustomerIntelligence() {
                         <p className="text-xs font-bold text-purple-600 font-mono">{c.ltv}</p>
                         <span className={`text-[9px] px-1.5 py-0.5 rounded-full font-body ${
                           c.segment==="Champion"?"bg-purple-50 text-purple-600":
-                          c.segment==="Loyal"?"bg-emerald-50 text-emerald-600":
-                          "bg-amber-50 text-amber-600"
+                          c.segment==="Loyal"?"bg-purple-200 text-purple-600":
+                          "bg-purple-200 text-purple-600"
                         }`}>{c.segment}</span>
                       </div>
                     </div>
@@ -835,7 +832,7 @@ function CustomerIntelligence() {
               </div>
 
               <div className="px-4 pb-4 mt-2">
-                <button className="w-full flex items-center justify-center gap-2 text-xs font-semibold text-purple-600 bg-purple-50 hover:bg-purple-100 border border-purple-100 rounded-xl py-2.5 font-body transition-colors">
+                <button className="w-full flex items-center justify-center gap-2 text-xs font-semibold text-purple-600 bg-purple-50 hover:bg-purple-100 border border-purple-100 rounded-full py-2.5 font-body transition-colors">
                   <RiMailLine/> Launch Win-back Campaign
                 </button>
               </div>
@@ -890,7 +887,7 @@ function StatsBand() {
     {val:4,suf:"x",label:"Average ROI in 6 months"},
   ];
   return (
-    <section ref={ref} className="py-20 bg-linear-to-r from-purple-600 via-rose-500 to-purple-500 text-white relative overflow-hidden">
+    <section ref={ref} className="py-20 bg-linear-to-r from-purple-600 via-purple-200 to-purple-500 text-white relative overflow-hidden">
       <div className="pointer-events-none absolute inset-0">
         <div className="absolute top-0 right-1/4 w-64 h-64 rounded-full bg-white/5"/>
         <div className="absolute -bottom-10 left-1/3 w-48 h-48 rounded-full bg-white/5"/>
@@ -919,13 +916,13 @@ function StatsBand() {
 function Promotions() {
   const {ref,visible} = useIntersection();
   const campaigns = [
-    {name:"Summer Sale 2024",type:"Discount",reach:"24K",status:"Live",conv:"4.2%",color:"bg-emerald-400"},
-    {name:"Abandonment Flow",type:"Email",reach:"8.1K",status:"Active",conv:"11%",color:"bg-blue-400"},
-    {name:"Flash Sale — Friday",type:"Timer",reach:"—",status:"Scheduled",conv:"—",color:"bg-amber-400"},
+    {name:"Summer Sale 2024",type:"Discount",reach:"24K",status:"Live",conv:"4.2%",color:"bg-purple-200"},
+    {name:"Abandonment Flow",type:"Email",reach:"8.1K",status:"Active",conv:"11%",color:"bg-purple-200"},
+    {name:"Flash Sale — Friday",type:"Timer",reach:"—",status:"Scheduled",conv:"—",color:"bg-purple-200"},
     {name:"Loyalty Points Boost",type:"Loyalty",reach:"12K",status:"Live",conv:"6.8%",color:"bg-purple-400"},
   ];
   return (
-    <section className="py-28 bg-white overflow-hidden">
+    <section className="py-28 bg-transparent overflow-hidden">
       <div className="max-w-7xl mx-auto px-6">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
           {/* Left text */}
@@ -968,7 +965,7 @@ function Promotions() {
               <div className="flex items-center gap-3 px-5 py-4 border-b border-purple-50">
                 <RiCoupon3Line className="text-purple-400"/>
                 <span className="font-display font-semibold text-gray-700">Campaigns</span>
-                <button className="ml-auto text-xs text-purple-600 bg-purple-50 px-3 py-1.5 rounded-lg font-body font-semibold flex items-center gap-1 border border-purple-100">
+                <button className="ml-auto text-xs text-purple-600 bg-purple-50 px-3 py-1.5 rounded-full font-body font-semibold flex items-center gap-1 border border-purple-100">
                   <RiAddLine/> New Campaign
                 </button>
               </div>
@@ -985,9 +982,9 @@ function Promotions() {
                     </div>
                     <div className="text-right flex-shrink-0">
                       <span className={`text-[10px] px-2 py-0.5 rounded-full font-body font-semibold ${
-                        c.status==="Live"?"bg-emerald-50 text-emerald-600":
-                        c.status==="Active"?"bg-blue-50 text-blue-600":
-                        "bg-amber-50 text-amber-600"
+                        c.status==="Live"?"bg-purple-200 text-purple-600":
+                        c.status==="Active"?"bg-purple-200 text-purple-600":
+                        "bg-purple-200 text-purple-600"
                       }`}>{c.status}</span>
                       {c.conv!=="—" && <p className="text-[10px] text-purple-500 font-mono mt-0.5">{c.conv} CVR</p>}
                     </div>
@@ -1076,7 +1073,7 @@ function Omnichannel() {
     {icon:RiGlobalLine,name:"International",desc:"Multi-currency, localised catalogues, and cross-border shipping"},
   ];
   return (
-    <section className="py-28 bg-white">
+    <section className="py-28 bg-transparent">
       <div className="max-w-6xl mx-auto px-6">
         <SH eyebrow="Omnichannel Commerce" title="Sell everywhere from one place." sub="Your customer doesn't think in channels. Your operations shouldn't either."/>
         <div ref={ref} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
@@ -1157,7 +1154,7 @@ const usecases = [
 
 function UseCases() {
   return (
-    <section className="py-28 bg-white relative overflow-hidden">
+    <section className="py-28 bg-transparent relative overflow-hidden">
       <OrbBg v={0}/>
       <div className="max-w-6xl mx-auto px-6 relative z-10">
         <SH eyebrow="Use Cases" title="Every B2C category. One platform." sub="Whether you sell skincare, sofas, or sneakers — the platform reshapes itself around your product and customer model."/>
@@ -1272,7 +1269,7 @@ function Security() {
     {icon:RiTeamLine,label:"Role-based access control"},
   ];
   return (
-    <section className="py-24 bg-white">
+    <section className="py-24 bg-transparent">
       <div className="max-w-5xl mx-auto px-6">
         <SH eyebrow="Security & Trust" title="Your customers' data, protected." sub="Every transaction, every session, every byte — secured to the standard your brand reputation demands."/>
         <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
@@ -1311,7 +1308,7 @@ function CTA() {
           <div className="absolute top-10 left-1/3 w-4 h-4 rounded-full bg-white/10"/>
           <div className="absolute bottom-14 right-24 w-6 h-6 rounded-full bg-white/10"/>
 
-          <span className="inline-block text-[10px] font-semibold tracking-[0.22em] uppercase text-purple-200 mb-4 font-body">Ready to build your D2C empire?</span>
+          <span className="inline-block text-[10px] font-semibold tracking-[0.22em] uppercase text-purple-600 mb-4 font-body">Ready to build your D2C empire?</span>
           <h2 className="font-display text-4xl md:text-5xl font-bold text-white mb-5 leading-tight">
             Your brand deserves<br/>a dashboard this good.
           </h2>
@@ -1328,7 +1325,7 @@ function CTA() {
            
            
           </div>
-          <p className="mt-6 text-purple-200 text-xs font-body">14-day free trial · Migrate in 24h · Cancel anytime</p>
+          <p className="mt-6 text-purple-100 text-xs font-body">14-day free trial · Migrate in 24h · Cancel anytime</p>
         </div>
       </div>
     </section>
@@ -1345,7 +1342,7 @@ export default function B2CDashboardPage() {
       <GlobalBackground />
       <ScrollRevealInit />
       <Navbar />
-      <main className="bg-white text-gray-900 overflow-x-hidden antialiased">
+      <main className="bg-transparent text-gray-900 overflow-x-hidden antialiased">
         <GlobalStyles/>
         <Hero/>
     

@@ -39,7 +39,7 @@ export function PricingSection() {
         {/* Pricing Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 items-start max-w-6xl mx-auto">
           {/* Starter */}
-          <article className={`reveal bg-white border border-gray-200 rounded-3xl p-6 md:p-8 relative transition-all duration-300 hover:shadow-lg hover:border-gray-300`}>
+          <article className={`reveal bg-white border border-gray-200 rounded-full p-6 md:p-8 relative transition-all duration-300 hover:shadow-lg hover:border-gray-300`}>
             <h3 className="text-lg font-bold text-gray-900 mb-2">Starter</h3>
             <div className="flex items-end gap-1 mb-1">
               <span className="text-2xl text-gray-500 font-medium translate-y-1">₹</span>
@@ -64,8 +64,8 @@ export function PricingSection() {
           </article>
 
           {/* Growth (Popular) */}
-          <article className={`reveal reveal-delay-1 relative bg-gray-900 rounded-3xl p-6 md:p-8 shadow-2xl ring-1 ring-indigo-500/20 md:-mt-4 md:mb-4`}>
-            <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-linear-to-r from-indigo-500 to-purple-500 text-white py-1 px-3 rounded-full text-[11px] font-bold uppercase tracking-wide shadow-md whitespace-nowrap">
+          <article className={`reveal reveal-delay-1 relative bg-gray-900 rounded-full p-6 md:p-8 shadow-2xl ring-1 ring-purple-200/20 md:-mt-4 md:mb-4`}>
+            <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-linear-to-r from-purple-200 to-purple-500 text-white py-1 px-3 rounded-full text-[11px] font-bold uppercase tracking-wide shadow-md whitespace-nowrap">
               Most Popular
             </div>
             <h3 className="text-lg font-bold text-white mb-2">Growth</h3>
@@ -79,7 +79,7 @@ export function PricingSection() {
             <ul className="space-y-3.5 mb-8">
               {growthFeatures.map((f) => (
                 <li key={f} className="flex items-start gap-3 text-sm text-gray-200">
-                  <svg className="w-4 h-4 shrink-0 text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                  <svg className="w-4 h-4 shrink-0 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                   </svg>
                   {f}
@@ -95,7 +95,7 @@ export function PricingSection() {
           </article>
 
           {/* Enterprise */}
-          <article className={`reveal reveal-delay-2 bg-white border border-gray-200 rounded-3xl p-6 md:p-8 relative transition-all duration-300 hover:shadow-lg hover:border-gray-300`}>
+          <article className={`reveal reveal-delay-2 bg-white border border-gray-200 rounded-full p-6 md:p-8 relative transition-all duration-300 hover:shadow-lg hover:border-gray-300`}>
             <h3 className="text-lg font-bold text-gray-900 mb-2">Enterprise</h3>
             <div className="flex items-end gap-1 mb-1">
               <span className="text-4xl font-bold text-gray-900 tracking-tight">Custom</span>

@@ -150,7 +150,7 @@ function GlobalStyles() {
         50% { transform: translateY(-10px); }
       }
       .shimmer-text {
-        background: linear-gradient(90deg, #be185d, #ec4899, #fda4af, #be185d);
+        background: linear-gradient(90deg, #7e22ce, #a855f7, #fda4af, #7e22ce);
         background-size: 200% auto;
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
@@ -170,9 +170,9 @@ function GlobalStyles() {
 /* ─── Orb Background ──────────────────────────────────────────────────── */
 function OrbBg({ variant = "default" }: { variant?: "default" | "warm" | "soft" }) {
   const colors = {
-    default: ["#fda4af", "#fbcfe8", "#f9a8d4"],
+    default: ["#fda4af", "#e9d5ff", "#d8b4fe"],
     warm: ["#fecdd3", "#fda4af", "#fb7185"],
-    soft: ["#fce7f3", "#fbcfe8", "#f9a8d4"],
+    soft: ["#f3e8ff", "#e9d5ff", "#d8b4fe"],
   }[variant];
   return (
     <div className="pointer-events-none absolute inset-0 overflow-hidden">
@@ -210,11 +210,11 @@ function SectionHeader({ eyebrow, title, sub, align = "center" }: {
 ═══════════════════════════════════════════════════════════════════════ */
 function Hero() {
   return (
-    <section className="relative min-h-screen flex flex-col items-center justify-center bg-white overflow-hidden pt-24 pb-16">
+    <section className="relative min-h-screen flex flex-col items-center justify-center bg-transparent overflow-hidden pt-24 pb-16">
       <OrbBg />
       {/* Dot grid */}
       <div className="pointer-events-none absolute inset-0 opacity-[0.04]"
-        style={{ backgroundImage: "radial-gradient(circle, #be185d 1.2px, transparent 1.2px)", backgroundSize: "36px 36px" }} />
+        style={{ backgroundImage: "radial-gradient(circle, #7e22ce 1.2px, transparent 1.2px)", backgroundSize: "36px 36px" }} />
 
       <div className="relative z-10 max-w-6xl mx-auto px-6 text-center">
     
@@ -275,24 +275,24 @@ function Hero() {
 function FoodDashboardPreview() {
   const bars = [45, 70, 55, 90, 65, 80, 48, 95, 72, 88, 60, 75];
   const orders = [
-    { id: "#4821", item: "Truffle Risotto", status: "Preparing", time: "4 min", dot: "bg-amber-400" },
-    { id: "#4820", item: "Grilled Salmon", status: "Ready", time: "0 min", dot: "bg-emerald-400" },
+    { id: "#4821", item: "Truffle Risotto", status: "Preparing", time: "4 min", dot: "bg-purple-200" },
+    { id: "#4820", item: "Grilled Salmon", status: "Ready", time: "0 min", dot: "bg-purple-200" },
     { id: "#4819", item: "Wagyu Burger", status: "Delivered", time: "12 min", dot: "bg-gray-300" },
-    { id: "#4818", item: "Caesar Salad", status: "Preparing", time: "7 min", dot: "bg-amber-400" },
+    { id: "#4818", item: "Caesar Salad", status: "Preparing", time: "7 min", dot: "bg-purple-200" },
   ];
   return (
     <div className="rounded-3xl border border-purple-100 bg-white shadow-2xl shadow-purple-100/50 overflow-hidden">
       {/* Browser bar */}
       <div className="flex items-center gap-2 px-5 py-3 border-b border-purple-50 bg-purple-50/50">
-        <span className="w-3 h-3 rounded-full bg-red-300" />
+        <span className="w-3 h-3 rounded-full bg-purple-200" />
         <span className="w-3 h-3 rounded-full bg-yellow-300" />
         <span className="w-3 h-3 rounded-full bg-green-300" />
         <div className="ml-4 flex-1 max-w-xs bg-white/80 rounded-full px-3 py-1 text-xs text-gray-400 font-mono border border-purple-50">
           app.foodnest.io/dashboard
         </div>
         <div className="ml-auto flex items-center gap-2">
-          <span className="flex items-center gap-1 text-xs text-emerald-500 font-semibold font-body">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 inline-block" style={{ animation: "ping-sm 1.5s infinite" }} />
+          <span className="flex items-center gap-1 text-xs text-purple-600 font-semibold font-body">
+            <span className="w-1.5 h-1.5 rounded-full bg-purple-200 inline-block" style={{ animation: "ping-sm 1.5s infinite" }} />
             Live
           </span>
         </div>
@@ -354,7 +354,7 @@ function FoodDashboardPreview() {
                   <k.icon className="text-purple-300 text-sm flex-shrink-0" />
                 </div>
                 <p className="text-lg md:text-xl font-bold text-gray-800 font-mono">{k.val}</p>
-                <p className={`text-[10px] font-semibold font-body mt-0.5 ${k.up ? "text-emerald-500" : "text-rose-400"}`}>{k.delta}</p>
+                <p className={`text-[10px] font-semibold font-body mt-0.5 ${k.up ? "text-purple-600" : "text-purple-600"}`}>{k.delta}</p>
               </div>
             ))}
           </div>
@@ -372,7 +372,7 @@ function FoodDashboardPreview() {
                   <div key={i} className="flex-1 rounded-t-md"
                     style={{
                       height: `${h}%`,
-                      background: i === 9 ? "#db2777" : i === 7 ? "#f9a8d4" : "#fce7f3",
+                      background: i === 9 ? "#9333ea" : i === 7 ? "#d8b4fe" : "#f3e8ff",
                       transformOrigin: "bottom",
                       animation: `barGrow 0.5s cubic-bezier(.22,1,.36,1) ${i * 0.04}s both`,
                     }} />
@@ -428,7 +428,7 @@ function MenuBuilder() {
   const { ref: secRef, visible: secVisible } = useIntersection();
 
   return (
-    <section className="py-28 bg-white overflow-hidden">
+    <section className="py-28 bg-transparent overflow-hidden">
       <div className="max-w-7xl mx-auto px-6">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
           {/* Left text */}
@@ -553,7 +553,7 @@ function InventorySection() {
                 <RiDatabase2Line className="text-purple-400" />
                 <span className="font-display font-semibold text-gray-700">Inventory Control</span>
                 <div className="ml-auto flex items-center gap-2">
-                  <span className="text-[10px] bg-rose-50 text-rose-500 border border-rose-100 px-2 py-1 rounded-full font-body font-semibold flex items-center gap-1">
+                  <span className="text-[10px] bg-purple-200 text-purple-600 border border-purple-200 px-2 py-1 rounded-full font-body font-semibold flex items-center gap-1">
                     <RiAlertLine className="text-xs" /> 3 Critical
                   </span>
                   <button className="text-xs text-purple-600 bg-purple-50 px-3 py-1.5 rounded-full font-body font-semibold flex items-center gap-1">
@@ -598,7 +598,7 @@ function InventorySection() {
 
               {/* Footer action */}
               <div className="px-4 pb-4">
-                <button className="w-full flex items-center justify-center gap-2 text-xs font-semibold text-purple-600 bg-purple-50 hover:bg-purple-100 rounded-xl py-2.5 font-body transition-colors">
+                <button className="w-full flex items-center justify-center gap-2 text-xs font-semibold text-purple-600 bg-purple-50 hover:bg-purple-100 rounded-full py-2.5 font-body transition-colors">
                   <RiQrCodeLine /> Scan barcode to update stock
                 </button>
               </div>
@@ -654,15 +654,15 @@ function OrderTracking() {
     { label: "Delivered", time: "—", done: false },
   ];
   const liveOrders = [
-    { id: "#4824", buyer: "Table 7", item: "3 items · ₹1,840", stage: 2, color: "bg-amber-400" },
-    { id: "#4823", buyer: "Delivery · Arjun S.", item: "2 items · ₹760", stage: 4, color: "bg-emerald-400" },
-    { id: "#4822", buyer: "Table 12", item: "5 items · ₹3,200", stage: 1, color: "bg-blue-400" },
-    { id: "#4821", buyer: "Swiggy #Z8821", item: "1 item · ₹620", stage: 3, color: "bg-amber-400" },
+    { id: "#4824", buyer: "Table 7", item: "3 items · ₹1,840", stage: 2, color: "bg-purple-200" },
+    { id: "#4823", buyer: "Delivery · Arjun S.", item: "2 items · ₹760", stage: 4, color: "bg-purple-200" },
+    { id: "#4822", buyer: "Table 12", item: "5 items · ₹3,200", stage: 1, color: "bg-purple-200" },
+    { id: "#4821", buyer: "Swiggy #Z8821", item: "1 item · ₹620", stage: 3, color: "bg-purple-200" },
     { id: "#4820", buyer: "Zomato #R4412", item: "4 items · ₹2,100", stage: 5, color: "bg-gray-300" },
   ];
 
   return (
-    <section className="py-28 bg-white overflow-hidden">
+    <section className="py-28 bg-transparent overflow-hidden">
       <div className="max-w-7xl mx-auto px-6">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
           {/* Left text */}
@@ -774,7 +774,7 @@ function StatsBand() {
     { val: 32, suf: "%", label: "Reduction in food waste" },
   ];
   return (
-    <section ref={ref} className="py-20 bg-linear-to-r from-purple-600 via-rose-500 to-purple-500 text-white relative overflow-hidden">
+    <section ref={ref} className="py-20 bg-linear-to-r from-purple-600 via-purple-200 to-purple-500 text-white relative overflow-hidden">
       <div className="pointer-events-none absolute inset-0">
         <div className="absolute top-0 right-1/4 w-64 h-64 rounded-full bg-white/5" />
         <div className="absolute -bottom-10 left-1/3 w-40 h-40 rounded-full bg-white/5" />
@@ -856,7 +856,7 @@ function HowItWorks() {
     { num: "05", icon: RiPulseLine, title: "Go live and monitor everything", desc: "Watch revenue, orders, and stock levels update in real time. Set alerts. Print KDS tickets. Run your service." },
   ];
   return (
-    <section className="py-28 bg-white">
+    <section className="py-28 bg-transparent">
       <div className="max-w-6xl mx-auto px-6">
         <SectionHeader
           eyebrow="Getting Started"
@@ -1017,7 +1017,7 @@ function Security() {
     { icon: RiPrinterLine, label: "Offline-first architecture" },
   ];
   return (
-    <section className="py-24 bg-white">
+    <section className="py-24 bg-transparent">
       <div className="max-w-5xl mx-auto px-6">
         <SectionHeader
           eyebrow="Security & Compliance"
@@ -1089,7 +1089,7 @@ function FeatureHighlights() {
 function CTA() {
   const { ref, visible } = useIntersection();
   return (
-    <section className="py-28 bg-white">
+    <section className="py-28 bg-transparent">
       <div ref={ref}
         className={`max-w-4xl mx-auto px-6 transition-all duration-700 ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
         <div className="relative rounded-[2.5rem] overflow-hidden bg-gradient-to-br from-purple-600 via-purple-500 to-purple-400 p-16 text-center shadow-2xl shadow-purple-200">
@@ -1099,7 +1099,7 @@ function CTA() {
           <div className="absolute top-1/2 left-6 w-3 h-3 rounded-full bg-white/20" />
           <div className="absolute bottom-12 right-20 w-5 h-5 rounded-full bg-white/10" />
 
-          <p className="text-[10px] font-semibold tracking-[0.2em] uppercase text-purple-200 mb-4 font-body">Ready to transform your food operations?</p>
+          <p className="text-[10px] font-semibold tracking-[0.2em] uppercase text-purple-100 mb-4 font-body">Ready to transform your food operations?</p>
           <h2 className="font-display text-4xl md:text-5xl font-bold text-white mb-5 leading-tight">
             Your kitchen deserves<br />better intelligence.
           </h2>
@@ -1115,7 +1115,7 @@ function CTA() {
             </button></Link>
           
           </div>
-          <p className="mt-6 text-purple-200 text-xs font-body">15-minute setup · Works offline · Cancel anytime</p>
+          <p className="mt-6 text-purple-100 text-xs font-body">15-minute setup · Works offline · Cancel anytime</p>
         </div>
       </div>
     </section>
@@ -1132,7 +1132,7 @@ export default function FoodDashboardPage() {
       <GlobalBackground />
       <ScrollRevealInit />
       <Navbar />
-      <main className="bg-white text-gray-900 overflow-x-hidden antialiased">
+      <main className="bg-transparent text-gray-900 overflow-x-hidden antialiased">
         <GlobalStyles />
         <Hero />
     

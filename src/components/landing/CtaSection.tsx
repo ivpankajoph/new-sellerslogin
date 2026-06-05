@@ -29,12 +29,6 @@ export function CtaSection() {
             >
               Start Free Trial
             </Link>
-            <button
-              type="button"
-              className="w-full sm:w-auto bg-transparent text-white border border-white/25 py-3 px-8 rounded-full font-semibold text-sm md:text-base transition-all duration-300 hover:bg-white/10 hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-gray-900 cursor-pointer"
-            >
-              Book a Demo
-            </button>
           </div>
         </div>
       </div>

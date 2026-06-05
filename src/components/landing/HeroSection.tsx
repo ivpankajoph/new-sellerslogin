@@ -46,7 +46,7 @@ export function HeroSection() {
             {text1.slice(0, charIndex)}
             <span className="opacity-0">{text1.slice(charIndex)}</span>
 
-            <span className="text-purple-200">
+            <span className="text-purple-600">
               {text2.slice(0, Math.max(0, charIndex - text1.length))}
               <span className="opacity-0">{text2.slice(Math.max(0, charIndex - text1.length))}</span>
             </span>
@@ -73,14 +73,6 @@ export function HeroSection() {
             >
               Start Free Trial
             </Link>
-            <button
-              type="button"
-              onClick={() => setIsVideoOpen(true)}
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-white/90 backdrop-blur-sm border border-gray-300 text-gray-900 text-[15px] font-medium py-3.5 px-8 rounded-full transition-all duration-200 hover:border-gray-900 hover:bg-white cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-900 focus-visible:ring-offset-2"
-            >
-              <LandingIcon name="play" size={16} />
-              Watch Demo
-            </button>
           </div>
 
           <div className="reveal reveal-delay-3 flex flex-wrap items-center justify-center gap-8 md:gap-12">

@@ -40,7 +40,7 @@ export function TestimonialsSection() {
               <article
                 key={`${t.n}-${i}`}
                 role="listitem"
-                className="w-70 sm:w-[320px] md:w-90 bg-white border border-gray-200 rounded-2xl p-6 md:p-7 shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:shadow-lg hover:border-gray-300 shrink-0"
+                className="w-70 sm:w-[320px] md:w-90 bg-white border border-gray-200 rounded-full p-6 md:p-7 shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:shadow-lg hover:border-gray-300 shrink-0"
               >
                 {/* Stars */}
                 <div className="text-yellow-400 text-lg mb-4 tracking-wider" aria-label={`${t.stars} out of 5 stars`}>

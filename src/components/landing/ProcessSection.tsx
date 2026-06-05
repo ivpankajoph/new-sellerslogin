@@ -20,8 +20,8 @@ export function ProcessSection() {
               Sign up free in 30 seconds. No credit card required. Choose your plan later when you're ready to scale.
             </p>
           </div>
-          <div className="flex-1 w-full relative aspect-[4/3] rounded-2xl overflow-hidden shadow-lg border border-gray-100 bg-gray-50">
-             <Image src="/images/dashboard/d1.png" alt="Create Account" fill className="object-cover object-top scale-105" />
+          <div className="flex-1 w-full relative aspect-[4/3] rounded-2xl overflow-hidden shadow-lg border border-gray-100 bg-white">
+             <Image src="/images/create_account.png" alt="Create Account" fill className="object-contain p-4" />
           </div>
         </div>
       ),
@@ -40,8 +40,8 @@ export function ProcessSection() {
               Use AI or our drag-and-drop editor to design your perfect storefront in minutes. Zero coding required.
             </p>
           </div>
-          <div className="flex-1 w-full relative aspect-[4/3] rounded-2xl overflow-hidden shadow-lg border border-gray-100 bg-gray-50">
-             <Image src="/images/store_management.png" alt="Build Store" fill className="object-cover scale-105" />
+          <div className="flex-1 w-full relative aspect-[4/3] rounded-2xl overflow-hidden shadow-lg border border-gray-100 bg-white">
+             <Image src="/images/build_store.jpg" alt="Build Store" fill className="object-contain p-4" />
           </div>
         </div>
       ),
@@ -60,8 +60,8 @@ export function ProcessSection() {
               Import from CSV, add manually, or sync with your existing inventory systems instantly.
             </p>
           </div>
-          <div className="flex-1 w-full relative aspect-[4/3] rounded-2xl overflow-hidden shadow-lg border border-gray-100 bg-gray-50">
-             <Image src="/images/packing_orders.png" alt="Add Products" fill className="object-cover scale-105" />
+          <div className="flex-1 w-full relative aspect-[4/3] rounded-2xl overflow-hidden shadow-lg border border-gray-100 bg-white">
+             <Image src="/images/add_products.png" alt="Add Products" fill className="object-contain p-4" />
           </div>
         </div>
       ),
@@ -80,8 +80,8 @@ export function ProcessSection() {
               Go live and start accepting orders from day one. We handle hosting, security, and global delivery.
             </p>
           </div>
-          <div className="flex-1 w-full relative aspect-[4/3] rounded-2xl overflow-hidden shadow-lg border border-gray-100 bg-gray-50">
-             <Image src="/images/dashboard/d2.png" alt="Start Selling" fill className="object-cover object-top scale-105" />
+          <div className="flex-1 w-full relative aspect-[4/3] rounded-2xl overflow-hidden shadow-lg border border-gray-100 bg-white">
+             <Image src="/images/start_selling.jpg" alt="Start Selling" fill className="object-contain p-4" />
           </div>
         </div>
       ),

@@ -79,7 +79,7 @@ function Counter({ end, prefix = "", suffix = "", decimals = 0 }: { end: number;
 function HeroSection() {
   const bars = [40, 65, 50, 80, 55, 90, 72, 85, 60, 95];
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-white px-6 pt-20">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-transparent px-6 pt-20">
       <div className="pointer-events-none absolute inset-0"
         style={{
           backgroundImage: "radial-gradient(circle, #e9d5ff 1px, transparent 1px)",
@@ -164,8 +164,8 @@ function HeroSection() {
                 
                 <div className="grid grid-cols-2 gap-4 mt-6 pt-6 border-t border-purple-50">
                   <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-full bg-blue-50 flex items-center justify-center">
-                      <FiUsers size={16} className="text-blue-500" />
+                    <div className="w-10 h-10 rounded-full bg-purple-200 flex items-center justify-center">
+                      <FiUsers size={16} className="text-purple-600" />
                     </div>
                     <div>
                       <p className="text-[10px] text-gray-400 font-bold uppercase">Visitors</p>
@@ -296,7 +296,7 @@ function FlowSection() {
   ];
 
   return (
-    <section className="py-32 px-6 bg-white overflow-hidden">
+    <section className="py-32 px-6 bg-transparent overflow-hidden">
       <div className="max-w-5xl mx-auto">
         <div className="text-center mb-20">
           <p className="text-purple-500 font-semibold tracking-widest text-sm uppercase mb-4">How it works</p>

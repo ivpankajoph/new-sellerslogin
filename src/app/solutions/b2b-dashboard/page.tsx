@@ -84,21 +84,21 @@ function OrbBg() {
       <div
         className="absolute -top-32 -left-32 w-[520px] h-[520px] rounded-full opacity-20"
         style={{
-          background: "radial-gradient(circle, #f9a8d4 0%, transparent 70%)",
+          background: "radial-gradient(circle, #d8b4fe 0%, transparent 70%)",
           animation: "orbFloat 8s ease-in-out infinite",
         }}
       />
       <div
         className="absolute top-1/2 -right-48 w-[400px] h-[400px] rounded-full opacity-15"
         style={{
-          background: "radial-gradient(circle, #fbcfe8 0%, transparent 70%)",
+          background: "radial-gradient(circle, #e9d5ff 0%, transparent 70%)",
           animation: "orbFloat 11s ease-in-out infinite reverse",
         }}
       />
       <div
         className="absolute bottom-0 left-1/3 w-[300px] h-[300px] rounded-full opacity-10"
         style={{
-          background: "radial-gradient(circle, #f472b6 0%, transparent 70%)",
+          background: "radial-gradient(circle, #c084fc 0%, transparent 70%)",
           animation: "orbFloat 9s ease-in-out infinite 2s",
         }}
       />
@@ -146,7 +146,7 @@ function OrbBg() {
 /* ─── Hero ────────────────────────────────────────────────────────────── */
 function Hero() {
   return (
-    <section className="relative min-h-screen flex flex-col items-center justify-center bg-white overflow-hidden pt-24 pb-20">
+    <section className="relative min-h-screen flex flex-col items-center justify-center bg-transparent overflow-hidden pt-24 pb-20">
       <OrbBg />
 
       {/* Grid overlay */}
@@ -154,7 +154,7 @@ function Hero() {
         className="pointer-events-none absolute inset-0 opacity-[0.035]"
         style={{
           backgroundImage:
-            "linear-gradient(#be185d 1px, transparent 1px), linear-gradient(90deg, #be185d 1px, transparent 1px)",
+            "linear-gradient(#7e22ce 1px, transparent 1px), linear-gradient(90deg, #7e22ce 1px, transparent 1px)",
           backgroundSize: "60px 60px",
         }}
       />
@@ -163,7 +163,7 @@ function Hero() {
         {/* Pill badge */}
 
         <h1
-          className="font-serif text-6xl md:text-8xl font-bold leading-[1.05] text-gray-900 mb-6"
+          className="font-sans text-6xl md:text-8xl font-bold leading-[1.05] text-gray-900 mb-6"
           style={{
             animation: "fadeUp 0.8s cubic-bezier(.22,1,.36,1) 0.1s both",
           }}
@@ -172,7 +172,7 @@ function Hero() {
           <span
             style={{
               background:
-                "linear-gradient(90deg, #db2777, #ec4899, #f9a8d4, #db2777)",
+                "linear-gradient(90deg, #9333ea, #a855f7, #d8b4fe, #9333ea)",
               backgroundSize: "200% auto",
               WebkitBackgroundClip: "text",
               WebkitTextFillColor: "transparent",
@@ -255,7 +255,7 @@ function DashboardPreview() {
     <div className="rounded-3xl border border-purple-100 bg-white shadow-2xl shadow-purple-100/60 overflow-hidden">
       {/* Titlebar */}
       <div className="flex items-center gap-2 px-5 py-3 border-b border-purple-50 bg-purple-50/40">
-        <span className="w-3 h-3 rounded-full bg-red-300" />
+        <span className="w-3 h-3 rounded-full bg-purple-200" />
         <span className="w-3 h-3 rounded-full bg-yellow-300" />
         <span className="w-3 h-3 rounded-full bg-green-300" />
         <span className="ml-auto text-xs text-gray-400 font-mono">
@@ -308,7 +308,7 @@ function DashboardPreview() {
                   {k.value}
                 </p>
                 <p
-                  className={`text-xs font-semibold mt-1 ${k.up ? "text-emerald-500" : "text-rose-400"}`}
+                  className={`text-xs font-semibold mt-1 ${k.up ? "text-purple-600" : "text-purple-600"}`}
                 >
                   {k.delta}
                 </p>
@@ -330,7 +330,7 @@ function DashboardPreview() {
                     className="flex-1 rounded-t-md"
                     style={{
                       height: `${h}%`,
-                      background: i === 10 ? "#db2777" : "#fce7f3",
+                      background: i === 10 ? "#9333ea" : "#f3e8ff",
                       transformOrigin: "bottom",
                       animation: `barGrow 0.6s cubic-bezier(.22,1,.36,1) ${i * 0.04}s both`,
                     }}
@@ -410,43 +410,43 @@ const features = [
     icon: RiBarChartBoxLine,
     title: "Real-time Analytics",
     desc: "Live dashboards powered by streaming data pipelines. Track GMV, conversion rates, and buyer behaviour as they happen — not hours later.",
-    color: "#db2777",
+    color: "#9333ea",
   },
   {
     icon: RiShoppingCart2Line,
     title: "Order Management",
     desc: "Unified order lifecycle from quote to fulfilment. Handle bulk orders, custom pricing tiers, and partial shipments with no manual overhead.",
-    color: "#ec4899",
+    color: "#a855f7",
   },
   {
     icon: RiTeamLine,
     title: "Buyer Accounts",
     desc: "Multi-user buyer portals with granular roles, credit limits, and approval workflows — tailored to how enterprise procurement actually works.",
-    color: "#f472b6",
+    color: "#c084fc",
   },
   {
     icon: RiGlobalLine,
     title: "Multi-region Commerce",
     desc: "Sell across geographies with localised pricing, currencies, tax rules, and regulatory compliance baked into every transaction.",
-    color: "#db2777",
+    color: "#9333ea",
   },
   {
     icon: RiSecurePaymentLine,
     title: "Flexible Payments",
     desc: "Net 30/60/90, PO-based invoicing, ACH, wire, and card — every B2B payment method supported without third-party patchwork.",
-    color: "#ec4899",
+    color: "#a855f7",
   },
   {
     icon: RiDatabase2Line,
     title: "Product Catalogue",
     desc: "Manage millions of SKUs with variant matrices, tiered pricing, contract-specific catalogues, and ERP-synced inventory in real time.",
-    color: "#f472b6",
+    color: "#c084fc",
   },
 ];
 
 function FeaturesSection() {
   return (
-    <section className="py-28 bg-white">
+    <section className="py-28 bg-transparent">
       <div className="max-w-6xl mx-auto px-6">
         <SectionHeader
           eyebrow="Platform Features"
@@ -499,7 +499,7 @@ function HowBuilt() {
         className="pointer-events-none absolute inset-0 opacity-[0.03]"
         style={{
           backgroundImage:
-            "radial-gradient(circle, #db2777 1px, transparent 1px)",
+            "radial-gradient(circle, #9333ea 1px, transparent 1px)",
           backgroundSize: "32px 32px",
         }}
       />
@@ -541,7 +541,7 @@ const usecases = [
 
 function UseCases() {
   return (
-    <section className="py-28 bg-white">
+    <section className="py-28 bg-transparent">
       <div className="max-w-6xl mx-auto px-6">
         <SectionHeader
           eyebrow="Use Cases"
@@ -611,7 +611,7 @@ function StatsBand() {
   return (
     <section
       ref={ref}
-      className="py-20 bg-gradient-to-r from-purple-600 via-purple-500 to-rose-400 text-white"
+      className="py-20 bg-gradient-to-r from-purple-600 via-purple-500 to-purple-200 text-white"
     >
       <div className="max-w-6xl mx-auto px-6">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-10 text-center">
@@ -764,7 +764,7 @@ function Security() {
 function CTA() {
   const { ref, visible } = useIntersection();
   return (
-    <section className="py-28 bg-white">
+    <section className="py-28 bg-transparent">
       <div
         ref={ref}
         className={`max-w-4xl mx-auto px-6 text-center transition-all duration-700 ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
@@ -775,7 +775,7 @@ function CTA() {
           <div className="absolute bottom-4 left-6 w-20 h-20 rounded-full border border-white/10" />
           <div className="absolute top-1/2 left-8 w-3 h-3 rounded-full bg-white/20" />
 
-          <p className="text-xs font-semibold tracking-widest uppercase text-purple-200 mb-4">
+          <p className="text-xs font-semibold tracking-widest uppercase text-purple-100 mb-4">
             Ready to transform your B2B commerce?
           </p>
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-5 leading-tight">
@@ -811,7 +811,7 @@ export default function B2BDashboardPage() {
       <GlobalBackground />
       <ScrollRevealInit />
       <Navbar />
-      <main className="font-sans antialiased bg-white text-gray-900 overflow-x-hidden">
+      <main className="font-sans antialiased bg-transparent text-gray-900 overflow-x-hidden">
         <Hero />
 
         <FeaturesSection />

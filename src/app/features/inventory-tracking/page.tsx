@@ -114,7 +114,7 @@ function Counter({ end, prefix = "", suffix = "", decimals = 0 }: { end: number;
 ───────────────────────────────────────────── */
 function HeroSection() {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-white px-6 pt-20">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-transparent px-6 pt-20">
       {/* Dot grid texture */}
       <div className="pointer-events-none absolute inset-0"
         style={{
@@ -270,10 +270,10 @@ function HeroSection() {
             </div>
 
             {/* Floating alert card */}
-            <div className="absolute -bottom-6 -left-6 bg-white rounded-2xl shadow-xl px-4 py-3 border-2 border-orange-100 flex items-center gap-3"
+            <div className="absolute -bottom-6 -left-6 bg-white rounded-2xl shadow-xl px-4 py-3 border-2 border-purple-200 flex items-center gap-3"
               style={{ boxShadow: "0 12px 40px rgba(147,51,234,0.1)" }}>
-              <div className="w-8 h-8 rounded-xl bg-orange-50 flex items-center justify-center flex-shrink-0">
-                <FiBell size={14} className="text-orange-500" />
+              <div className="w-8 h-8 rounded-xl bg-purple-200 flex items-center justify-center flex-shrink-0">
+                <FiBell size={14} className="text-purple-600" />
               </div>
               <div>
                 <p className="text-xs font-bold text-gray-800">Low Stock Alert</p>
@@ -359,7 +359,7 @@ function InventoryTableDemo() {
   };
 
   return (
-    <section className="py-32 px-6 bg-white">
+    <section className="py-32 px-6 bg-transparent">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-16">
           <p className="text-purple-500 font-semibold tracking-widest text-sm uppercase mb-4">Live Dashboard</p>
@@ -411,7 +411,7 @@ function InventoryTableDemo() {
             </div>
             {/* Actions */}
             <div className="flex items-center gap-2 ml-auto">
-              <button className="p-2 rounded-xl border border-purple-200 text-purple-400 hover:bg-purple-50 transition-colors">
+              <button className="p-2 rounded-full border border-purple-200 text-purple-400 hover:bg-purple-50 transition-colors">
                 <FiDownload size={14} />
               </button>
               <button className="flex items-center gap-2 px-4 py-2 rounded-full text-white text-xs font-bold transition-all hover:-translate-y-0.5"
@@ -499,10 +499,10 @@ function InventoryTableDemo() {
                       {/* Actions */}
                       <td className="px-6 py-4">
                         <div className="flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                          <button className="p-1.5 rounded-lg hover:bg-purple-100 text-purple-400 transition-colors">
+                          <button className="p-1.5 rounded-full hover:bg-purple-100 text-purple-400 transition-colors">
                             <FiEdit3 size={13} />
                           </button>
-                          <button className="p-1.5 rounded-lg hover:bg-red-50 text-red-400 transition-colors">
+                          <button className="p-1.5 rounded-full hover:bg-purple-200 text-purple-600 transition-colors">
                             <FiTrash2 size={13} />
                           </button>
                         </div>
@@ -649,7 +649,7 @@ function AlertFlowSection() {
   ];
 
   return (
-    <section className="py-32 px-6 bg-white overflow-hidden">
+    <section className="py-32 px-6 bg-transparent overflow-hidden">
       <div className="max-w-5xl mx-auto">
         <div className="text-center mb-20">
           <p className="text-purple-500 font-semibold tracking-widest text-sm uppercase mb-4">Alert System</p>
@@ -722,7 +722,7 @@ function AnalyticsSection() {
             <div className="space-y-4">
               {[
                 { icon: FiTrendingUp, text: "Top-selling products by revenue and units", color: "text-green-500" },
-                { icon: FiTrendingDown, text: "Dead stock flagged before it hurts margins", color: "text-orange-500" },
+                { icon: FiTrendingDown, text: "Dead stock flagged before it hurts margins", color: "text-purple-600" },
                 { icon: FiClock, text: "Lead time analysis per supplier", color: "text-purple-500" },
                 { icon: FiDollarSign, text: "COGS and margin tracking per SKU", color: "text-purple-500" },
               ].map((item, i) => (
@@ -988,7 +988,7 @@ function CTASection() {
           </button></Link>
       
         </div>
-        <p className="text-purple-200 text-sm mt-6">No credit card required. Free forever plan available.</p>
+        <p className="text-purple-600 text-sm mt-6">No credit card required. Free forever plan available.</p>
       </div>
     </section>
   );

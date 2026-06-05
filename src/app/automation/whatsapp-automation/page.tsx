@@ -1,6 +1,12 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { BackToTop } from "@/components/landing/BackToTop";
+import { CustomCursor } from "@/components/landing/CustomCursor";
+import { FooterSection } from "@/components/landing/FooterSection";
+import { GlobalBackground } from "@/components/landing/GlobalBackground";
+import { Navbar } from "@/components/landing/Navbar";
+import { ScrollRevealInit } from "@/components/landing/ScrollRevealInit";
 import {
   RiWhatsappLine,
   RiArrowRightLine,
@@ -84,7 +90,7 @@ function useIntersection(threshold = 0.12) {
   return { ref, visible };
 }
 
-function Counter({ to, suffix = "", prefix = "" }) {
+function Counter({ to, suffix = "", prefix = "" }: any) {
   const [val, setVal] = useState(0);
   const { ref, visible } = useIntersection();
   useEffect(() => {
@@ -106,11 +112,11 @@ function OrbBg() {
   return (
     <div className="pointer-events-none absolute inset-0 overflow-hidden">
       <div className="absolute -top-40 -left-40 w-[600px] h-[600px] rounded-full opacity-20"
-        style={{ background: "radial-gradient(circle, #f9a8d4 0%, transparent 70%)", animation: "orbFloat 8s ease-in-out infinite" }} />
+        style={{ background: "radial-gradient(circle, #d8b4fe 0%, transparent 70%)", animation: "orbFloat 8s ease-in-out infinite" }} />
       <div className="absolute top-1/3 -right-52 w-[450px] h-[450px] rounded-full opacity-15"
-        style={{ background: "radial-gradient(circle, #fbcfe8 0%, transparent 70%)", animation: "orbFloat 11s ease-in-out infinite reverse" }} />
+        style={{ background: "radial-gradient(circle, #e9d5ff 0%, transparent 70%)", animation: "orbFloat 11s ease-in-out infinite reverse" }} />
       <div className="absolute bottom-10 left-1/4 w-[350px] h-[350px] rounded-full opacity-10"
-        style={{ background: "radial-gradient(circle, #f472b6 0%, transparent 70%)", animation: "orbFloat 9s ease-in-out infinite 2s" }} />
+        style={{ background: "radial-gradient(circle, #c084fc 0%, transparent 70%)", animation: "orbFloat 9s ease-in-out infinite 2s" }} />
       <style>{`
         @keyframes orbFloat { 0%,100%{transform:translateY(0) scale(1)} 50%{transform:translateY(-28px) scale(1.04)} }
         @keyframes fadeUp { from{opacity:0;transform:translateY(32px)} to{opacity:1;transform:translateY(0)} }
@@ -125,7 +131,7 @@ function OrbBg() {
         @keyframes progressFill { from{width:0%} }
         @keyframes waveIn { 0%{transform:scaleX(0);transform-origin:left} 100%{transform:scaleX(1);transform-origin:left} }
         @keyframes pingRing { 0%{transform:scale(1);opacity:0.6} 100%{transform:scale(2.2);opacity:0} }
-        .typing-cursor::after { content:'|'; animation:blink 1s step-end infinite; color:#db2777; margin-left:2px; }
+        .typing-cursor::after { content:'|'; animation:blink 1s step-end infinite; color:#9333ea; margin-left:2px; }
         @keyframes floatY { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
         @keyframes rotateIn { from{opacity:0;transform:rotate(-8deg) scale(0.92)} to{opacity:1;transform:rotate(0deg) scale(1)} }
       `}</style>
@@ -134,15 +140,15 @@ function OrbBg() {
 }
 
 /* ─── Section Header ──────────────────────────────────────────────────── */
-function SectionHeader({ eyebrow, title, sub }) {
+function SectionHeader({ eyebrow, title, sub }: { eyebrow: any, title: any, sub?: any }) {
   const { ref, visible } = useIntersection();
   return (
     <div ref={ref} className="text-center max-w-2xl mx-auto mb-16 px-4">
-      <span className={`inline-block text-xs font-semibold tracking-widest uppercase text-pink-500 mb-3 transition-all duration-500 ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}>
+      <span className={`inline-block text-xs font-semibold tracking-widest uppercase text-purple-600 mb-3 transition-all duration-500 ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}>
         {eyebrow}
       </span>
       <h2 className={`text-4xl md:text-5xl font-bold text-gray-900 leading-tight mb-4 transition-all duration-700 delay-100 ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
-        style={{ fontFamily: "'Georgia', serif" }}>
+        >
         {title}
       </h2>
       {sub && (
@@ -171,25 +177,25 @@ function ChatPreview() {
   }, [step]);
 
   return (
-    <div className="rounded-3xl border border-pink-100 bg-white overflow-hidden"
+    <div className="rounded-3xl border border-purple-200 bg-white overflow-hidden"
       style={{ boxShadow: "0 40px 80px -20px rgba(219,39,119,0.14)" }}>
       {/* Titlebar */}
-      <div className="flex items-center gap-2 px-5 py-3 border-b border-pink-50 bg-pink-50/40">
-        <span className="w-3 h-3 rounded-full bg-red-300" />
+      <div className="flex items-center gap-2 px-5 py-3 border-b border-purple-200 bg-purple-200/40">
+        <span className="w-3 h-3 rounded-full bg-purple-200" />
         <span className="w-3 h-3 rounded-full bg-yellow-300" />
         <span className="w-3 h-3 rounded-full bg-green-300" />
         <span className="ml-3 flex items-center gap-2 text-xs text-gray-400 font-mono">
-          <RiWhatsappLine className="text-pink-400" /> wa.autopilot.io — Live Conversations
+          <RiWhatsappLine className="text-purple-600" /> wa.autopilot.io — Live Conversations
         </span>
         <div className="ml-auto flex items-center gap-1.5">
-          <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+          <div className="w-2 h-2 rounded-full bg-purple-200 animate-pulse" />
           <span className="text-xs text-gray-400 font-medium">8,412 active threads</span>
         </div>
       </div>
 
       <div className="grid grid-cols-12 gap-0 min-h-[420px]">
         {/* Sidebar */}
-        <div className="col-span-3 border-r border-pink-50 p-3 bg-white hidden md:block">
+        <div className="col-span-3 border-r border-purple-200 p-3 bg-white hidden md:block">
           <div className="space-y-1 mb-4">
             {[
               { icon: RiDashboardLine, label: "Overview", active: true },
@@ -200,7 +206,7 @@ function ChatPreview() {
               { icon: RiSettings4Line, label: "Settings" },
             ].map(({ icon: Icon, label, active }) => (
               <div key={label}
-                className={`flex items-center gap-2 text-xs px-3 py-2 rounded-xl cursor-pointer transition-colors ${active ? "bg-pink-50 text-pink-600 font-semibold" : "text-gray-400 hover:text-gray-600"}`}>
+                className={`flex items-center gap-2 text-xs px-3 py-2 rounded-xl cursor-pointer transition-colors ${active ? "bg-purple-200 text-purple-600 font-semibold" : "text-gray-400 hover:text-gray-600"}`}>
                 <Icon className="text-base flex-shrink-0" />
                 <span className="truncate">{label}</span>
               </div>
@@ -213,7 +219,7 @@ function ChatPreview() {
               { name: "Priya K.", msg: "Promo code applied", time: "5m" },
               { name: "Rohit D.", msg: "Refund status?", time: "12m" },
             ].map((c) => (
-              <div key={c.name} className={`p-2.5 rounded-xl cursor-pointer border transition-all ${c.active ? "bg-pink-50 border-pink-100" : "border-transparent hover:bg-gray-50"}`}>
+              <div key={c.name} className={`p-2.5 rounded-xl cursor-pointer border transition-all ${c.active ? "bg-purple-200 border-purple-200" : "border-transparent hover:bg-gray-50"}`}>
                 <div className="flex justify-between items-center mb-0.5">
                   <span className="text-xs font-semibold text-gray-800">{c.name}</span>
                   <span className="text-[10px] text-gray-400">{c.time}</span>
@@ -225,16 +231,16 @@ function ChatPreview() {
         </div>
 
         {/* Chat */}
-        <div className="col-span-12 md:col-span-6 flex flex-col bg-[#fff9fb]">
-          <div className="flex items-center gap-3 px-4 py-3 border-b border-pink-50 bg-white">
+        <div className="col-span-12 md:col-span-6 flex flex-col bg-[#faf5ff]">
+          <div className="flex items-center gap-3 px-4 py-3 border-b border-purple-200 bg-white">
             <div className="w-8 h-8 rounded-full flex items-center justify-center text-white text-xs font-bold"
-              style={{ background: "linear-gradient(135deg,#db2777,#f472b6)" }}>RM</div>
+              style={{ background: "linear-gradient(135deg,#9333ea,#c084fc)" }}>RM</div>
             <div>
               <p className="text-sm font-bold text-gray-800">Riya M.</p>
-              <p className="text-xs text-emerald-500 font-medium">Online</p>
+              <p className="text-xs text-purple-600 font-medium">Online</p>
             </div>
             <div className="ml-auto flex items-center gap-1.5">
-              <span className="text-[10px] text-gray-400 bg-pink-50 px-2 py-0.5 rounded-full border border-pink-100">AI Agent Active</span>
+              <span className="text-[10px] text-gray-400 bg-purple-200 px-2 py-0.5 rounded-full border border-purple-200">AI Agent Active</span>
             </div>
           </div>
           <div className="flex-1 p-4 space-y-3 overflow-hidden">
@@ -242,35 +248,35 @@ function ChatPreview() {
               <div key={i}
                 className={`flex ${m.from === "user" ? "justify-end" : "justify-start"}`}
                 style={{ animation: "messageSlide 0.35s ease both" }}>
-                <div className={`max-w-[80%] px-3.5 py-2.5 rounded-2xl text-xs leading-relaxed shadow-sm ${m.from === "bot" ? "bg-white text-gray-700 border border-pink-50" : "text-white"}`}
-                  style={m.from === "user" ? { background: "linear-gradient(135deg,#db2777,#f472b6)" } : {}}>
+                <div className={`max-w-[80%] px-3.5 py-2.5 rounded-2xl text-xs leading-relaxed shadow-sm ${m.from === "bot" ? "bg-white text-gray-700 border border-purple-200" : "text-white"}`}
+                  style={m.from === "user" ? { background: "linear-gradient(135deg,#9333ea,#c084fc)" } : {}}>
                   <p>{m.text}</p>
-                  <p className={`text-[10px] mt-1 text-right ${m.from === "bot" ? "text-gray-400" : "text-pink-100"}`}>{m.time}</p>
+                  <p className={`text-[10px] mt-1 text-right ${m.from === "bot" ? "text-gray-400" : "text-purple-600"}`}>{m.time}</p>
                 </div>
               </div>
             ))}
             {step < messages.length && (
               <div className="flex justify-start">
-                <div className="bg-white border border-pink-50 rounded-2xl px-4 py-3 flex gap-1 shadow-sm">
+                <div className="bg-white border border-purple-200 rounded-2xl px-4 py-3 flex gap-1 shadow-sm">
                   {[0, 1, 2].map(d => (
-                    <span key={d} className="w-1.5 h-1.5 rounded-full bg-pink-300"
+                    <span key={d} className="w-1.5 h-1.5 rounded-full bg-purple-200"
                       style={{ animation: `dotBounce 1.2s ease-in-out infinite ${d * 0.2}s` }} />
                   ))}
                 </div>
               </div>
             )}
           </div>
-          <div className="px-4 py-3 border-t border-pink-50 bg-white flex items-center gap-2">
-            <input className="flex-1 text-xs rounded-xl border border-pink-100 px-3 py-2 outline-none bg-pink-50/30 placeholder:text-gray-300" placeholder="AI is composing a reply..." readOnly />
-            <button className="w-8 h-8 rounded-xl flex items-center justify-center text-white flex-shrink-0"
-              style={{ background: "linear-gradient(135deg,#db2777,#f472b6)" }}>
+          <div className="px-4 py-3 border-t border-purple-200 bg-white flex items-center gap-2">
+            <input className="flex-1 text-xs rounded-xl border border-purple-200 px-3 py-2 outline-none bg-purple-200/30 placeholder:text-gray-300" placeholder="AI is composing a reply..." readOnly />
+            <button className="w-8 h-8 rounded-full flex items-center justify-center text-white flex-shrink-0"
+              style={{ background: "linear-gradient(135deg,#9333ea,#c084fc)" }}>
               <RiSendPlaneLine className="text-sm" />
             </button>
           </div>
         </div>
 
         {/* Right KPIs */}
-        <div className="col-span-3 border-l border-pink-50 p-4 bg-white hidden md:block">
+        <div className="col-span-3 border-l border-purple-200 p-4 bg-white hidden md:block">
           <p className="text-xs font-semibold text-gray-600 mb-3">Today — Live Stats</p>
           {[
             { label: "Messages Sent", val: "48,210", up: true },
@@ -279,7 +285,7 @@ function ChatPreview() {
             { label: "Conversions", val: "3,812", up: true },
             { label: "Avg CSAT", val: "4.8 / 5", up: true },
           ].map((s) => (
-            <div key={s.label} className="mb-3 p-3 rounded-2xl bg-pink-50/50 border border-pink-50">
+            <div key={s.label} className="mb-3 p-3 rounded-2xl bg-purple-200/50 border border-purple-200">
               <p className="text-[11px] text-gray-400 mb-0.5">{s.label}</p>
               <p className="text-base font-bold text-gray-800 font-mono">{s.val}</p>
             </div>
@@ -293,23 +299,23 @@ function ChatPreview() {
 /* ─── Hero ────────────────────────────────────────────────────────────── */
 function Hero() {
   return (
-    <section className="relative min-h-screen flex flex-col items-center justify-center bg-white overflow-hidden pt-24 pb-20">
+    <section className="relative min-h-screen flex flex-col items-center justify-center bg-transparent overflow-hidden pt-24 pb-20">
       <OrbBg />
       <div className="pointer-events-none absolute inset-0 opacity-[0.025]"
-        style={{ backgroundImage: "radial-gradient(circle, #be185d 1px, transparent 1px)", backgroundSize: "36px 36px" }} />
+        style={{ backgroundImage: "radial-gradient(circle, #7e22ce 1px, transparent 1px)", backgroundSize: "36px 36px" }} />
 
       <div className="relative z-10 max-w-6xl mx-auto px-6 text-center">
-        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-pink-200 bg-pink-50 text-pink-600 text-xs font-semibold uppercase tracking-widest mb-8"
+        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-purple-200 bg-purple-200 text-purple-600 text-xs font-semibold uppercase tracking-widest mb-8"
           style={{ animation: "fadeUp 0.6s cubic-bezier(.22,1,.36,1) both" }}>
           <RiWhatsappLine />
           AI WhatsApp Marketing Automation Platform
         </div>
 
-        <h1 className="font-serif text-6xl md:text-8xl font-bold leading-[1.04] text-gray-900 mb-6"
+        <h1 className="font-sans text-6xl md:text-8xl font-bold leading-[1.04] text-gray-900 mb-6"
           style={{ fontFamily: "'Georgia', serif", animation: "fadeUp 0.8s cubic-bezier(.22,1,.36,1) 0.1s both" }}>
           WhatsApp that{" "}
           <span style={{
-            background: "linear-gradient(90deg, #db2777, #ec4899, #f9a8d4, #db2777)",
+            background: "linear-gradient(90deg, #9333ea, #a855f7, #d8b4fe, #9333ea)",
             backgroundSize: "200% auto",
             WebkitBackgroundClip: "text",
             WebkitTextFillColor: "transparent",
@@ -332,12 +338,12 @@ function Hero() {
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4"
           style={{ animation: "fadeUp 0.8s cubic-bezier(.22,1,.36,1) 0.4s both" }}>
-          <button className="group flex items-center gap-2 text-white font-semibold px-8 py-4 rounded-full transition-all duration-300 hover:-translate-y-0.5 shadow-lg hover:shadow-pink-200"
-            style={{ background: "linear-gradient(135deg, #db2777, #f472b6)" }}>
+          <button className="group flex items-center gap-2 text-white font-semibold px-8 py-4 rounded-full transition-all duration-300 hover:-translate-y-0.5 shadow-lg hover:shadow-purple-200"
+            style={{ background: "linear-gradient(135deg, #9333ea, #c084fc)" }}>
             Connect Your Number Free
             <RiArrowRightLine className="transition-transform group-hover:translate-x-1" />
           </button>
-          <button className="flex items-center gap-2 text-gray-700 hover:text-pink-600 font-semibold px-8 py-4 rounded-full border border-gray-200 hover:border-pink-200 transition-all duration-300 hover:-translate-y-0.5 bg-white/80">
+          <button className="flex items-center gap-2 text-gray-700 hover:text-purple-600 font-semibold px-8 py-4 rounded-full border border-gray-200 hover:border-purple-200 transition-all duration-300 hover:-translate-y-0.5 bg-white/80">
             Watch a Live Demo
             <RiArrowRightUpLine />
           </button>
@@ -347,7 +353,7 @@ function Hero() {
           style={{ animation: "fadeIn 1s ease 0.7s both" }}>
           {["Meta Official BSP Partner", "GDPR Compliant", "End-to-End Encrypted", "99.9% Uptime SLA"].map((t) => (
             <span key={t} className="flex items-center gap-2">
-              <RiCheckLine className="text-pink-400" /> {t}
+              <RiCheckLine className="text-purple-600" /> {t}
             </span>
           ))}
         </div>
@@ -378,11 +384,11 @@ function Ticker() {
   ];
   const doubled = [...items, ...items];
   return (
-    <div className="py-4 overflow-hidden border-y border-pink-100" style={{ background: "#fff9fb" }}>
+    <div className="py-4 overflow-hidden border-y border-purple-200" style={{ background: "#faf5ff" }}>
       <div className="flex gap-12 whitespace-nowrap" style={{ animation: "tickerScroll 30s linear infinite" }}>
         {doubled.map((item, i) => (
           <span key={i} className="flex items-center gap-3 text-sm font-medium text-gray-400">
-            <RiWhatsappLine className="text-pink-300" />
+            <RiWhatsappLine className="text-purple-600" />
             {item}
           </span>
         ))}
@@ -417,7 +423,7 @@ const steps = [
 
 function HowItWorks() {
   return (
-    <section className="py-28 bg-pink-50/30">
+    <section className="py-28 bg-purple-200/30">
       <div className="max-w-6xl mx-auto px-6">
         <SectionHeader
           eyebrow="Getting Started"
@@ -425,21 +431,21 @@ function HowItWorks() {
           sub="No technical team required. From number connection to first automated message, the entire setup is designed to be completed by a marketing manager, not an engineer."
         />
         <div className="relative grid grid-cols-1 md:grid-cols-4 gap-6">
-          <div className="absolute top-10 left-[12.5%] right-[12.5%] h-px bg-gradient-to-r from-pink-100 via-pink-400 to-pink-100 hidden md:block" />
+          <div className="absolute top-10 left-[12.5%] right-[12.5%] h-px bg-gradient-to-r from-purple-200 via-purple-200 to-purple-200 hidden md:block" />
           {steps.map((s, i) => {
             const { ref, visible } = useIntersection();
             return (
               <div key={s.num} ref={ref}
                 className={`flex flex-col items-center text-center transition-all duration-700 ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
                 style={{ transitionDelay: `${i * 150}ms` }}>
-                <div className="relative w-20 h-20 rounded-full bg-white border-2 border-pink-200 flex items-center justify-center mb-5 shadow-md shadow-pink-100 z-10">
-                  <span className="text-2xl font-bold text-pink-500 font-mono"
-                    style={{ fontFamily: "'Georgia', serif" }}>{s.num}</span>
-                  <div className="absolute inset-0 rounded-full border-2 border-pink-300 opacity-0"
+                <div className="relative w-20 h-20 rounded-full bg-white border-2 border-purple-200 flex items-center justify-center mb-5 shadow-md shadow-purple-200 z-10">
+                  <span className="text-2xl font-bold text-purple-600 font-mono"
+                    >{s.num}</span>
+                  <div className="absolute inset-0 rounded-full border-2 border-purple-200 opacity-0"
                     style={{ animation: `pulseRing 2.5s ease-out infinite ${i * 0.5}s` }} />
                 </div>
                 <h4 className="font-bold text-gray-800 mb-2 text-lg"
-                  style={{ fontFamily: "'Georgia', serif" }}>{s.title}</h4>
+                  >{s.title}</h4>
                 <p className="text-gray-500 text-sm leading-relaxed">{s.desc}</p>
               </div>
             );
@@ -456,79 +462,79 @@ const features = [
     icon: RiQrCodeLine,
     title: "Official WhatsApp Business API",
     desc: "Send messages at scale through Meta's official cloud API. No unofficial libraries, no grey-area tools, no risk of number ban. Full template management with instant approval workflows.",
-    color: "#db2777",
+    color: "#9333ea",
   },
   {
     icon: RiFlowChart,
     title: "Visual Flow Automation Builder",
     desc: "Drag-and-drop canvas for multi-step, multi-branch WhatsApp flows. Set triggers, delays, condition splits, and fallback paths. Publish a fully automated conversation flow in minutes.",
-    color: "#ec4899",
+    color: "#a855f7",
   },
   {
     icon: RiRobot2Line,
     title: "AI Conversational Agent",
     desc: "Deploy an AI agent that reads, understands, and replies to incoming messages in natural language. Handles FAQs, order queries, complaints, and escalations — 24 hours a day.",
-    color: "#f472b6",
+    color: "#c084fc",
   },
   {
     icon: RiFilterLine,
     title: "Precision Audience Segmentation",
     desc: "Build hyper-targeted audiences using 50-plus filter dimensions: RFM score, purchase category, city, language, opt-in source, custom tags, and real-time behavioural events.",
-    color: "#db2777",
+    color: "#9333ea",
   },
   {
     icon: RiImageLine,
     title: "Rich Media Message Builder",
     desc: "Create and send text, images, videos, PDFs, location pins, product catalogues, and interactive buttons — all within a single drag-and-drop message template editor.",
-    color: "#ec4899",
+    color: "#a855f7",
   },
   {
     icon: RiTestTubeLine,
     title: "Multivariate A/B Testing",
     desc: "Test message copy, media, CTA button labels, and send times simultaneously across split audiences. The winning variant is auto-promoted to the remaining segment at your confidence threshold.",
-    color: "#f472b6",
+    color: "#c084fc",
   },
   {
     icon: RiTimeLine,
     title: "Send-time Optimisation",
     desc: "Machine learning analyses each contact's historical read patterns and delivers every message at their personal peak-engagement window rather than a single broadcast time.",
-    color: "#db2777",
+    color: "#9333ea",
   },
   {
     icon: RiShoppingCartLine,
     title: "WhatsApp Commerce Integration",
     desc: "Sync your product catalogue, enable in-chat add-to-cart, and process orders end-to-end without the customer leaving WhatsApp. Native payment link support across major gateways.",
-    color: "#ec4899",
+    color: "#a855f7",
   },
   {
     icon: RiLineChartLine,
     title: "Revenue Attribution Analytics",
     desc: "Tie every WhatsApp touchpoint to downstream purchases. See message-to-conversion attribution, assisted revenue, flow-level ROI, and cohort performance in one unified dashboard.",
-    color: "#f472b6",
+    color: "#c084fc",
   },
   {
     icon: RiCustomerService2Line,
     title: "Live Agent Handoff",
     desc: "When the AI reaches its confidence threshold, the conversation is instantly handed to a human agent with full context — chat history, customer profile, and sentiment score attached.",
-    color: "#db2777",
+    color: "#9333ea",
   },
   {
     icon: RiBrainLine,
     title: "AI Copy Generation",
     desc: "The AI copywriter generates personalised message text for every recipient — drawing on their name, last purchase, browse behaviour, and predicted intent — and tests variants automatically.",
-    color: "#ec4899",
+    color: "#a855f7",
   },
   {
     icon: RiDatabase2Line,
     title: "Live Data Personalisation",
     desc: "Embed real-time product recommendations, live inventory counts, dynamic pricing, order status, and loyalty points pulled fresh from your data sources at message-send time.",
-    color: "#f472b6",
+    color: "#c084fc",
   },
 ];
 
 function FeaturesSection() {
   return (
-    <section className="py-28 bg-white">
+    <section className="py-28 bg-transparent">
       <div className="max-w-6xl mx-auto px-6">
         <SectionHeader
           eyebrow="Platform Capabilities"
@@ -540,14 +546,14 @@ function FeaturesSection() {
             const { ref, visible } = useIntersection();
             return (
               <div key={f.title} ref={ref}
-                className={`group relative bg-white border border-pink-50 hover:border-pink-200 rounded-3xl p-7 transition-all duration-500 hover:shadow-xl hover:shadow-pink-50 hover:-translate-y-1 ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
+                className={`group relative bg-white border border-purple-200 hover:border-purple-200 rounded-3xl p-7 transition-all duration-500 hover:shadow-xl hover:shadow-purple-200 hover:-translate-y-1 ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
                 style={{ transitionDelay: `${i * 70}ms` }}>
                 <div className="w-12 h-12 rounded-2xl flex items-center justify-center mb-5 transition-transform duration-300 group-hover:scale-110"
                   style={{ background: `${f.color}15` }}>
                   <f.icon style={{ color: f.color, fontSize: "1.4rem" }} />
                 </div>
                 <h3 className="font-bold text-gray-800 text-lg mb-2"
-                  style={{ fontFamily: "'Georgia', serif" }}>{f.title}</h3>
+                  >{f.title}</h3>
                 <p className="text-gray-500 text-sm leading-relaxed">{f.desc}</p>
                 <div className="absolute bottom-0 left-0 right-0 h-0.5 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                   style={{ background: `linear-gradient(90deg, transparent, ${f.color}, transparent)` }} />
@@ -571,7 +577,7 @@ function StatsBand() {
   ];
   return (
     <section ref={ref} className="py-20"
-      style={{ background: "linear-gradient(135deg, #db2777 0%, #ec4899 60%, #f9a8d4 100%)" }}>
+      style={{ background: "linear-gradient(135deg, #9333ea 0%, #a855f7 60%, #d8b4fe 100%)" }}>
       <div className="max-w-6xl mx-auto px-6">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-10 text-center">
           {stats.map((s, i) => (
@@ -581,7 +587,7 @@ function StatsBand() {
               <p className="text-5xl font-bold font-mono mb-2 text-white">
                 {visible ? <Counter to={s.value} suffix={s.suffix} /> : `0${s.suffix}`}
               </p>
-              <p className="text-pink-100 text-sm leading-relaxed">{s.label}</p>
+              <p className="text-purple-100 text-sm leading-relaxed">{s.label}</p>
             </div>
           ))}
         </div>
@@ -605,8 +611,8 @@ function FlowBuilderSection() {
     { label: "Yes — Send Order Confirmation Flow", type: "action", delay: 700 },
   ];
 
-  const typeStyle = {
-    trigger: { bg: "#fce7f3", text: "#db2777", border: "#f9a8d4" },
+  const typeStyle: any = {
+    trigger: { bg: "#f3e8ff", text: "#9333ea", border: "#d8b4fe" },
     wait: { bg: "#fef9c3", text: "#92400e", border: "#fde68a" },
     message: { bg: "#f0fdf4", text: "#065f46", border: "#bbf7d0" },
     condition: { bg: "#eff6ff", text: "#1e40af", border: "#bfdbfe" },
@@ -614,19 +620,19 @@ function FlowBuilderSection() {
   };
 
   return (
-    <section className="py-28 bg-white overflow-hidden">
+    <section className="py-28 bg-transparent overflow-hidden">
       <div className="max-w-6xl mx-auto px-6">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-start">
           <div>
-            <span className="inline-block text-xs font-semibold tracking-widest uppercase text-pink-500 mb-4">
+            <span className="inline-block text-xs font-semibold tracking-widest uppercase text-purple-600 mb-4">
               Flow Automation Builder
             </span>
             <h2 className="text-4xl md:text-5xl font-bold text-gray-900 leading-tight mb-6"
-              style={{ fontFamily: "'Georgia', serif" }}>
+              >
               Build flows as complex
               <br />as your strategy.
               <br />
-              <span style={{ background: "linear-gradient(90deg,#db2777,#f9a8d4)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
+              <span style={{ background: "linear-gradient(90deg,#9333ea,#d8b4fe)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
                 Without the complexity.
               </span>
             </h2>
@@ -647,7 +653,7 @@ function FlowBuilderSection() {
                 "Drag-to-connect nodes with auto-layout and collision avoidance",
               ].map((pt) => (
                 <li key={pt} className="flex items-center gap-3 text-sm text-gray-600">
-                  <RiCheckLine className="text-pink-400 flex-shrink-0 text-base" />
+                  <RiCheckLine className="text-purple-600 flex-shrink-0 text-base" />
                   {pt}
                 </li>
               ))}
@@ -656,15 +662,15 @@ function FlowBuilderSection() {
 
           {/* Flow diagram */}
           <div ref={ref} className="relative">
-            <div className="rounded-3xl border-2 border-pink-100 bg-white overflow-hidden"
+            <div className="rounded-3xl border-2 border-purple-200 bg-white overflow-hidden"
               style={{ boxShadow: "0 20px 60px rgba(219,39,119,0.08)" }}>
-              <div className="px-5 py-4 border-b border-pink-50 flex items-center gap-2"
-                style={{ background: "linear-gradient(135deg,#fce7f3,#fff9fb)" }}>
-                <RiFlowChart className="text-pink-500" />
+              <div className="px-5 py-4 border-b border-purple-200 flex items-center gap-2"
+                style={{ background: "linear-gradient(135deg,#f3e8ff,#faf5ff)" }}>
+                <RiFlowChart className="text-purple-600" />
                 <span className="font-bold text-sm text-gray-700"
-                  style={{ fontFamily: "'Georgia', serif" }}>Cart Abandonment Flow</span>
+                  >Cart Abandonment Flow</span>
                 <div className="ml-auto flex items-center gap-1.5">
-                  <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                  <div className="w-2 h-2 rounded-full bg-purple-200 animate-pulse" />
                   <span className="text-xs text-gray-400">Live — 5,291 enrolled</span>
                 </div>
               </div>
@@ -685,14 +691,14 @@ function FlowBuilderSection() {
                           style={{ color: s.text }}>{n.type}</span>
                       </div>
                       {i < flowNodes.length - 1 && (
-                        <div className="absolute left-[1.35rem] -bottom-2 w-0.5 h-2 bg-pink-200" />
+                        <div className="absolute left-[1.35rem] -bottom-2 w-0.5 h-2 bg-purple-200" />
                       )}
                     </div>
                   );
                 })}
               </div>
               <div className="px-5 pb-5">
-                <button className="w-full py-3 rounded-2xl border-2 border-dashed border-pink-200 text-pink-400 font-semibold text-sm hover:bg-pink-50 hover:border-pink-400 transition-all flex items-center justify-center gap-2">
+                <button className="w-full py-3 rounded-full border-2 border-dashed border-purple-200 text-purple-600 font-semibold text-sm hover:bg-purple-200 hover:border-purple-200 transition-all flex items-center justify-center gap-2">
                   <RiPencilLine /> Add a step
                 </button>
               </div>
@@ -728,19 +734,19 @@ function AIAgentSection() {
   ];
 
   return (
-    <section className="py-28 bg-pink-50/30 overflow-hidden">
+    <section className="py-28 bg-purple-200/30 overflow-hidden">
       <div className="max-w-6xl mx-auto px-6">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
           <div>
-            <span className="inline-block text-xs font-semibold tracking-widest uppercase text-pink-500 mb-4">
+            <span className="inline-block text-xs font-semibold tracking-widest uppercase text-purple-600 mb-4">
               AI Conversational Agent
             </span>
             <h2 className="text-4xl md:text-5xl font-bold text-gray-900 leading-tight mb-6"
-              style={{ fontFamily: "'Georgia', serif" }}>
+              >
               A support team that
               <br />never sleeps, never
               <br />
-              <span style={{ background: "linear-gradient(90deg,#db2777,#f9a8d4)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
+              <span style={{ background: "linear-gradient(90deg,#9333ea,#d8b4fe)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
                 misses a message.
               </span>
             </h2>
@@ -758,11 +764,11 @@ function AIAgentSection() {
                 { icon: RiCustomerService2Line, title: "Intelligent human handoff", desc: "Detects sentiment, frustration, and confidence thresholds. Passes to a live agent with full context — history, profile, and urgency score — in one tap." },
               ].map((f) => (
                 <div key={f.title} className="flex items-start gap-4">
-                  <div className="w-9 h-9 rounded-xl bg-pink-50 flex items-center justify-center flex-shrink-0 mt-0.5">
-                    <f.icon className="text-pink-500 text-base" />
+                  <div className="w-9 h-9 rounded-xl bg-purple-200 flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <f.icon className="text-purple-600 text-base" />
                   </div>
                   <div>
-                    <p className="font-bold text-gray-800 text-sm mb-0.5" style={{ fontFamily: "'Georgia', serif" }}>{f.title}</p>
+                    <p className="font-bold text-gray-800 text-sm mb-0.5" >{f.title}</p>
                     <p className="text-gray-500 text-sm leading-relaxed">{f.desc}</p>
                   </div>
                 </div>
@@ -771,19 +777,19 @@ function AIAgentSection() {
           </div>
 
           <div ref={ref}>
-            <div className="rounded-3xl border-2 border-pink-100 bg-white overflow-hidden"
+            <div className="rounded-3xl border-2 border-purple-200 bg-white overflow-hidden"
               style={{ boxShadow: "0 20px 60px rgba(219,39,119,0.08)" }}>
-              <div className="px-5 py-4 border-b border-pink-50 flex items-center gap-2"
-                style={{ background: "linear-gradient(135deg,#fce7f3,#fff9fb)" }}>
-                <RiRobot2Line className="text-pink-500" />
-                <span className="font-bold text-sm text-gray-700" style={{ fontFamily: "'Georgia', serif" }}>AI Agent — Live Processing</span>
-                <span className="ml-auto text-xs font-bold text-emerald-600 bg-emerald-50 px-2.5 py-1 rounded-full">Active</span>
+              <div className="px-5 py-4 border-b border-purple-200 flex items-center gap-2"
+                style={{ background: "linear-gradient(135deg,#f3e8ff,#faf5ff)" }}>
+                <RiRobot2Line className="text-purple-600" />
+                <span className="font-bold text-sm text-gray-700" >AI Agent — Live Processing</span>
+                <span className="ml-auto text-xs font-bold text-purple-600 bg-purple-200 px-2.5 py-1 rounded-full">Active</span>
               </div>
 
-              <div className="p-5 border-b border-pink-50">
+              <div className="p-5 border-b border-purple-200">
                 <p className="text-xs text-gray-400 uppercase tracking-widest font-semibold mb-2">Incoming message</p>
-                <div className="flex items-start gap-3 p-3 rounded-xl bg-pink-50 border border-pink-100">
-                  <RiUserLine className="text-pink-400 flex-shrink-0 mt-0.5" />
+                <div className="flex items-start gap-3 p-3 rounded-xl bg-purple-200 border border-purple-200">
+                  <RiUserLine className="text-purple-600 flex-shrink-0 mt-0.5" />
                   <div>
                     <p className="text-sm font-semibold text-gray-800">Vikram S. — +91 98765 43210</p>
                     <p className="text-xs text-gray-500 mt-0.5">where is my order 4821 please tell me</p>
@@ -791,19 +797,19 @@ function AIAgentSection() {
                 </div>
               </div>
 
-              <div className="p-5 border-b border-pink-50">
+              <div className="p-5 border-b border-purple-200">
                 <p className="text-xs text-gray-400 uppercase tracking-widest font-semibold mb-3">Intent classification</p>
                 <div className="space-y-2">
                   {intents.map((it, i) => (
                     <div key={i}
-                      className={`flex items-center gap-3 p-2.5 rounded-xl border transition-all duration-500 ${i === 0 ? "border-pink-200 bg-pink-50" : "border-pink-50"} ${visible ? "opacity-100 translate-x-0" : "opacity-0 translate-x-6"}`}
+                      className={`flex items-center gap-3 p-2.5 rounded-xl border transition-all duration-500 ${i === 0 ? "border-purple-200 bg-purple-200" : "border-purple-200"} ${visible ? "opacity-100 translate-x-0" : "opacity-0 translate-x-6"}`}
                       style={{ transitionDelay: `${i * 80 + 200}ms` }}>
-                      <span className={`text-xs font-semibold w-28 ${i === 0 ? "text-pink-600" : "text-gray-500"}`}>{it.label}</span>
-                      <div className="flex-1 h-1.5 rounded-full bg-pink-100 overflow-hidden">
+                      <span className={`text-xs font-semibold w-28 ${i === 0 ? "text-purple-600" : "text-gray-500"}`}>{it.label}</span>
+                      <div className="flex-1 h-1.5 rounded-full bg-purple-200 overflow-hidden">
                         <div className="h-full rounded-full"
                           style={{
                             width: visible ? it.confidence : "0%",
-                            background: "linear-gradient(90deg,#db2777,#f9a8d4)",
+                            background: "linear-gradient(90deg,#9333ea,#d8b4fe)",
                             transition: `width 0.8s cubic-bezier(.22,1,.36,1) ${i * 80 + 400}ms`,
                           }} />
                       </div>
@@ -815,13 +821,13 @@ function AIAgentSection() {
 
               <div className="p-5">
                 <p className="text-xs text-gray-400 uppercase tracking-widest font-semibold mb-3">AI-generated reply</p>
-                <div className="p-4 rounded-xl bg-pink-50 border-2 border-pink-200 min-h-[52px]">
+                <div className="p-4 rounded-xl bg-purple-200 border-2 border-purple-200 min-h-[52px]">
                   <p className="text-sm font-semibold text-gray-800 typing-cursor">{visible ? typedLine : ""}</p>
                 </div>
                 <div className="flex gap-2 mt-3">
-                  <button className="flex-1 py-2 rounded-xl text-xs font-semibold text-white transition-all hover:-translate-y-0.5"
-                    style={{ background: "linear-gradient(135deg,#db2777,#f472b6)" }}>Send Reply</button>
-                  <button className="flex-1 py-2 rounded-xl text-xs font-semibold text-pink-500 border border-pink-200 hover:bg-pink-50 transition-all">
+                  <button className="flex-1 py-2 rounded-full text-xs font-semibold text-white transition-all hover:-translate-y-0.5"
+                    style={{ background: "linear-gradient(135deg,#9333ea,#c084fc)" }}>Send Reply</button>
+                  <button className="flex-1 py-2 rounded-full text-xs font-semibold text-purple-600 border border-purple-200 hover:bg-purple-200 transition-all">
                     Edit First
                   </button>
                 </div>
@@ -851,27 +857,27 @@ function BroadcastSection() {
     { name: "Win-back — 60-day Lapsed", reach: "12,300", read: "34.1%", click: "12.6%", revenue: "Rs. 0.8L", status: "paused" },
   ];
 
-  const statusStyle = {
-    active: "bg-emerald-50 text-emerald-600",
-    paused: "bg-amber-50 text-amber-600",
-    sent: "bg-pink-50 text-pink-500",
+  const statusStyle: any = {
+    active: "bg-purple-200 text-purple-600",
+    paused: "bg-purple-200 text-purple-600",
+    sent: "bg-purple-200 text-purple-600",
   };
 
   const bars = [42, 58, 47, 73, 61, 85, 69, 78, 63, 91, 74, 96];
 
   return (
-    <section className="py-28 bg-white overflow-hidden">
+    <section className="py-28 bg-transparent overflow-hidden">
       <div className="max-w-6xl mx-auto px-6">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-start">
           <div>
-            <span className="inline-block text-xs font-semibold tracking-widest uppercase text-pink-500 mb-4">
+            <span className="inline-block text-xs font-semibold tracking-widest uppercase text-purple-600 mb-4">
               Broadcast Campaigns
             </span>
             <h2 className="text-4xl md:text-5xl font-bold text-gray-900 leading-tight mb-6"
-              style={{ fontFamily: "'Georgia', serif" }}>
+              >
               Reach a million customers.
               <br />
-              <span style={{ background: "linear-gradient(90deg,#db2777,#f9a8d4)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
+              <span style={{ background: "linear-gradient(90deg,#9333ea,#d8b4fe)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
                 Each one personalised.
               </span>
             </h2>
@@ -893,7 +899,7 @@ function BroadcastSection() {
                 "Unsubscribe and opt-out management across all campaigns",
               ].map((pt) => (
                 <li key={pt} className="flex items-center gap-3 text-sm text-gray-600">
-                  <RiCheckLine className="text-pink-400 flex-shrink-0 text-base" />
+                  <RiCheckLine className="text-purple-600 flex-shrink-0 text-base" />
                   {pt}
                 </li>
               ))}
@@ -901,12 +907,12 @@ function BroadcastSection() {
           </div>
 
           <div ref={ref} className="space-y-4">
-            <div className="rounded-3xl border border-pink-100 bg-white overflow-hidden"
+            <div className="rounded-3xl border border-purple-200 bg-white overflow-hidden"
               style={{ boxShadow: "0 20px 60px rgba(219,39,119,0.08)" }}>
-              <div className="flex items-center gap-2 px-5 py-3 border-b border-pink-50"
-                style={{ background: "linear-gradient(135deg,#fce7f3,#fff9fb)" }}>
-                <RiMegaphoneLine className="text-pink-500" />
-                <span className="font-bold text-sm text-gray-700" style={{ fontFamily: "'Georgia', serif" }}>Campaign Performance</span>
+              <div className="flex items-center gap-2 px-5 py-3 border-b border-purple-200"
+                style={{ background: "linear-gradient(135deg,#f3e8ff,#faf5ff)" }}>
+                <RiMegaphoneLine className="text-purple-600" />
+                <span className="font-bold text-sm text-gray-700" >Campaign Performance</span>
                 <span className="ml-auto text-xs text-gray-400">Last 30 days</span>
               </div>
               <div className="p-5">
@@ -915,7 +921,7 @@ function BroadcastSection() {
                     <div key={i} className="flex-1 rounded-t-md"
                       style={{
                         height: `${h}%`,
-                        background: i === 11 ? "#db2777" : "#fce7f3",
+                        background: i === 11 ? "#9333ea" : "#f3e8ff",
                         transformOrigin: "bottom",
                         animation: `barGrow 0.6s cubic-bezier(.22,1,.36,1) ${i * 0.04}s both`,
                       }} />
@@ -924,12 +930,12 @@ function BroadcastSection() {
                 <div className="space-y-2">
                   {campaigns.slice(0, 4).map((c, i) => (
                     <div key={i}
-                      className={`flex items-center gap-3 text-xs p-2.5 rounded-xl transition-all duration-500 ${i === activeRow ? "bg-pink-50 border border-pink-100" : "border border-transparent"}`}>
+                      className={`flex items-center gap-3 text-xs p-2.5 rounded-xl transition-all duration-500 ${i === activeRow ? "bg-purple-200 border border-purple-200" : "border border-transparent"}`}>
                       <div className="flex-1 min-w-0">
                         <p className="text-gray-700 font-semibold truncate">{c.name}</p>
                         <p className="text-gray-400">{c.reach} recipients — {c.read} read</p>
                       </div>
-                      <span className="font-bold text-pink-600 whitespace-nowrap">{c.revenue}</span>
+                      <span className="font-bold text-purple-600 whitespace-nowrap">{c.revenue}</span>
                       <span className={`text-xs font-semibold px-2 py-0.5 rounded-full flex-shrink-0 ${statusStyle[c.status]}`}>
                         {c.status}
                       </span>
@@ -955,14 +961,14 @@ function StatsBand2() {
     { value: 40, suffix: "%", label: "Average click-through rate on WhatsApp CTAs" },
   ];
   return (
-    <section ref={ref} className="py-20 bg-pink-50/30">
+    <section ref={ref} className="py-20 bg-purple-200/30">
       <div className="max-w-6xl mx-auto px-6">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-10 text-center">
           {stats.map((s, i) => (
             <div key={s.label}
               className={`transition-all duration-700 ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
               style={{ transitionDelay: `${i * 120}ms` }}>
-              <p className="text-5xl font-bold font-mono mb-2 text-gray-900" style={{ fontFamily: "'Georgia', serif" }}>
+              <p className="text-5xl font-bold font-mono mb-2 text-gray-900" >
                 {visible ? <Counter to={s.value} suffix={s.suffix} /> : `0${s.suffix}`}
               </p>
               <p className="text-gray-500 text-sm leading-relaxed">{s.label}</p>
@@ -996,7 +1002,7 @@ function VendorDashboard() {
   ];
 
   return (
-    <section className="py-28 bg-white overflow-hidden">
+    <section className="py-28 bg-transparent overflow-hidden">
       <div className="max-w-6xl mx-auto px-6">
         <SectionHeader
           eyebrow="Vendor Dashboard"
@@ -1008,20 +1014,20 @@ function VendorDashboard() {
           <div className="md:col-span-2 grid grid-cols-2 sm:grid-cols-3 gap-4">
             {kpis.map((m, i) => (
               <div key={m.label}
-                className={`bg-white border-2 border-pink-50 rounded-2xl p-5 hover:border-pink-200 hover:shadow-md hover:shadow-pink-50 transition-all duration-500 ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
+                className={`bg-white border-2 border-purple-200 rounded-2xl p-5 hover:border-purple-200 hover:shadow-md hover:shadow-purple-200 transition-all duration-500 ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
                 style={{ transitionDelay: `${i * 80}ms` }}>
                 <p className="text-xs text-gray-400 mb-1">{m.label}</p>
                 <p className="text-2xl font-bold text-gray-800"
-                  style={{ fontFamily: "'Georgia', serif" }}>{m.value}</p>
-                <p className="text-xs font-semibold mt-1 text-emerald-500">{m.delta} vs last month</p>
+                  >{m.value}</p>
+                <p className="text-xs font-semibold mt-1 text-purple-600">{m.delta} vs last month</p>
               </div>
             ))}
           </div>
 
           <div
-            className={`bg-white border-2 border-pink-50 rounded-3xl p-6 transition-all duration-700 ${visible ? "opacity-100 translate-x-0" : "opacity-0 translate-x-8"}`}
+            className={`bg-white border-2 border-purple-200 rounded-3xl p-6 transition-all duration-700 ${visible ? "opacity-100 translate-x-0" : "opacity-0 translate-x-8"}`}
             style={{ transitionDelay: "480ms" }}>
-            <p className="text-sm font-bold text-gray-700 mb-5" style={{ fontFamily: "'Georgia', serif" }}>Message Funnel</p>
+            <p className="text-sm font-bold text-gray-700 mb-5" >Message Funnel</p>
             <div className="space-y-3">
               {funnelSteps.map((s, i) => (
                 <div key={s.label}>
@@ -1029,11 +1035,11 @@ function VendorDashboard() {
                     <span className="text-gray-600 font-medium">{s.label}</span>
                     <span className="text-gray-500">{s.val}</span>
                   </div>
-                  <div className="h-2 rounded-full bg-pink-50 overflow-hidden">
+                  <div className="h-2 rounded-full bg-purple-200 overflow-hidden">
                     <div className="h-full rounded-full"
                       style={{
                         width: visible ? `${s.pct}%` : "0%",
-                        background: "linear-gradient(90deg,#db2777,#f9a8d4)",
+                        background: "linear-gradient(90deg,#9333ea,#d8b4fe)",
                         transition: `width 0.8s cubic-bezier(.22,1,.36,1) ${300 + i * 100}ms`,
                       }} />
                   </div>
@@ -1095,7 +1101,7 @@ const usecases = [
 
 function UseCases() {
   return (
-    <section className="py-28 bg-pink-50/30">
+    <section className="py-28 bg-purple-200/30">
       <div className="max-w-6xl mx-auto px-6">
         <SectionHeader
           eyebrow="Use Cases"
@@ -1107,23 +1113,23 @@ function UseCases() {
             const { ref, visible } = useIntersection();
             return (
               <div key={u.industry} ref={ref}
-                className={`group relative overflow-hidden border border-pink-50 hover:border-pink-200 rounded-3xl p-8 transition-all duration-500 hover:shadow-xl hover:shadow-pink-50 hover:-translate-y-1 bg-white ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
+                className={`group relative overflow-hidden border border-purple-200 hover:border-purple-200 rounded-3xl p-8 transition-all duration-500 hover:shadow-xl hover:shadow-purple-200 hover:-translate-y-1 bg-white ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
                 style={{ transitionDelay: `${i * 90}ms` }}>
-                <div className="absolute top-0 right-0 w-40 h-40 rounded-bl-full opacity-[0.04] bg-pink-400 transition-all duration-500 group-hover:opacity-[0.08] group-hover:w-52 group-hover:h-52" />
+                <div className="absolute top-0 right-0 w-40 h-40 rounded-bl-full opacity-[0.04] bg-purple-200 transition-all duration-500 group-hover:opacity-[0.08] group-hover:w-52 group-hover:h-52" />
                 <div className="flex items-start gap-4 mb-5">
-                  <div className="w-12 h-12 rounded-2xl bg-pink-50 flex items-center justify-center flex-shrink-0">
-                    <u.icon className="text-pink-500 text-xl" />
+                  <div className="w-12 h-12 rounded-2xl bg-purple-200 flex items-center justify-center flex-shrink-0">
+                    <u.icon className="text-purple-600 text-xl" />
                   </div>
                   <div>
-                    <p className="text-xs font-semibold uppercase tracking-widest text-pink-400 mb-1">{u.industry}</p>
+                    <p className="text-xs font-semibold uppercase tracking-widest text-purple-600 mb-1">{u.industry}</p>
                     <h3 className="font-bold text-gray-800 text-base leading-snug"
-                      style={{ fontFamily: "'Georgia', serif" }}>{u.heading}</h3>
+                      >{u.heading}</h3>
                   </div>
                 </div>
                 <p className="text-gray-500 text-sm leading-relaxed mb-5">{u.body}</p>
                 <div className="flex flex-wrap gap-2">
                   {u.tags.map((t) => (
-                    <span key={t} className="text-xs px-3 py-1 rounded-full bg-pink-50 text-pink-600 font-medium border border-pink-100">
+                    <span key={t} className="text-xs px-3 py-1 rounded-full bg-purple-200 text-purple-600 font-medium border border-purple-200">
                       {t}
                     </span>
                   ))}
@@ -1149,23 +1155,23 @@ function NumberConnectSection() {
     { icon: RiCheckboxCircleLine, label: "Send First Test Message", desc: "Verify end-to-end delivery with a test message to your own number before activating any live flow.", status: "pending" },
   ];
 
-  const statusStyle = { done: "text-emerald-500", active: "text-pink-500", pending: "text-gray-400" };
-  const statusLabel = { done: "Complete", active: "In Progress", pending: "Pending" };
+  const statusStyle: any = { done: "text-purple-600", active: "text-purple-600", pending: "text-gray-400" };
+  const statusLabel: any = { done: "Complete", active: "In Progress", pending: "Pending" };
 
   return (
-    <section className="py-28 bg-white overflow-hidden">
+    <section className="py-28 bg-transparent overflow-hidden">
       <div className="max-w-6xl mx-auto px-6">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
           <div>
-            <span className="inline-block text-xs font-semibold tracking-widest uppercase text-pink-500 mb-4">
+            <span className="inline-block text-xs font-semibold tracking-widest uppercase text-purple-600 mb-4">
               Number Integration
             </span>
             <h2 className="text-4xl md:text-5xl font-bold text-gray-900 leading-tight mb-6"
-              style={{ fontFamily: "'Georgia', serif" }}>
+              >
               Your number, your brand,
               <br />your inbox —
               <br />
-              <span style={{ background: "linear-gradient(90deg,#db2777,#f9a8d4)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
+              <span style={{ background: "linear-gradient(90deg,#9333ea,#d8b4fe)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
                 fully in your control.
               </span>
             </h2>
@@ -1187,7 +1193,7 @@ function NumberConnectSection() {
                 "Green tick application assistance for eligible businesses",
               ].map((pt) => (
                 <li key={pt} className="flex items-center gap-3 text-sm text-gray-600">
-                  <RiCheckLine className="text-pink-400 flex-shrink-0 text-base" />
+                  <RiCheckLine className="text-purple-600 flex-shrink-0 text-base" />
                   {pt}
                 </li>
               ))}
@@ -1195,19 +1201,19 @@ function NumberConnectSection() {
           </div>
 
           <div ref={ref}>
-            <div className="rounded-3xl border-2 border-pink-100 bg-white overflow-hidden"
+            <div className="rounded-3xl border-2 border-purple-200 bg-white overflow-hidden"
               style={{ boxShadow: "0 20px 60px rgba(219,39,119,0.08)" }}>
-              <div className="px-5 py-4 border-b border-pink-50 flex items-center gap-2"
-                style={{ background: "linear-gradient(135deg,#fce7f3,#fff9fb)" }}>
-                <RiPhoneLine className="text-pink-500" />
-                <span className="font-bold text-sm text-gray-700" style={{ fontFamily: "'Georgia', serif" }}>Number Onboarding Checklist</span>
+              <div className="px-5 py-4 border-b border-purple-200 flex items-center gap-2"
+                style={{ background: "linear-gradient(135deg,#f3e8ff,#faf5ff)" }}>
+                <RiPhoneLine className="text-purple-600" />
+                <span className="font-bold text-sm text-gray-700" >Number Onboarding Checklist</span>
                 <span className="ml-auto text-xs text-gray-400">3 / 5 complete</span>
               </div>
 
               <div className="p-4 space-y-3">
                 {connectSteps.map((s, i) => (
                   <div key={i}
-                    className={`flex items-start gap-4 p-4 rounded-2xl border-2 transition-all duration-500 ${s.status === "active" ? "border-pink-200 bg-pink-50" : s.status === "done" ? "border-emerald-100 bg-emerald-50/40" : "border-pink-50 bg-white"} ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}
+                    className={`flex items-start gap-4 p-4 rounded-2xl border-2 transition-all duration-500 ${s.status === "active" ? "border-purple-200 bg-purple-200" : s.status === "done" ? "border-purple-200 bg-purple-200/40" : "border-purple-200 bg-white"} ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}
                     style={{ transitionDelay: `${i * 100}ms` }}>
                     <s.icon className={`flex-shrink-0 text-lg mt-0.5 ${statusStyle[s.status]}`} />
                     <div className="flex-1 min-w-0">
@@ -1222,17 +1228,17 @@ function NumberConnectSection() {
               </div>
 
               <div className="px-5 pb-5">
-                <div className="p-4 rounded-2xl bg-pink-50 border border-pink-100">
+                <div className="p-4 rounded-2xl bg-purple-200 border border-purple-200">
                   <p className="text-xs text-gray-500 mb-2 font-semibold">Onboarding Progress</p>
                   <div className="h-2 rounded-full bg-white overflow-hidden">
                     <div className="h-full rounded-full"
                       style={{
                         width: visible ? "60%" : "0%",
-                        background: "linear-gradient(90deg,#db2777,#f9a8d4)",
+                        background: "linear-gradient(90deg,#9333ea,#d8b4fe)",
                         transition: "width 1.2s cubic-bezier(.22,1,.36,1) 600ms",
                       }} />
                   </div>
-                  <p className="text-xs text-right text-pink-500 font-bold mt-1">3 of 5 steps complete</p>
+                  <p className="text-xs text-right text-purple-600 font-bold mt-1">3 of 5 steps complete</p>
                 </div>
               </div>
             </div>
@@ -1259,7 +1265,7 @@ function Analytics() {
   ];
 
   return (
-    <section className="py-28 bg-pink-50/30">
+    <section className="py-28 bg-purple-200/30">
       <div className="max-w-6xl mx-auto px-6">
         <SectionHeader
           eyebrow="Analytics and Reporting"
@@ -1270,11 +1276,11 @@ function Analytics() {
           <div className="md:col-span-3 grid grid-cols-2 sm:grid-cols-3 gap-4">
             {metrics.map((m, i) => (
               <div key={m.label}
-                className={`bg-white border-2 border-pink-50 rounded-2xl p-5 hover:border-pink-200 hover:shadow-md hover:shadow-pink-50 transition-all duration-500 ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
+                className={`bg-white border-2 border-purple-200 rounded-2xl p-5 hover:border-purple-200 hover:shadow-md hover:shadow-purple-200 transition-all duration-500 ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
                 style={{ transitionDelay: `${i * 60}ms` }}>
                 <p className="text-xs text-gray-400 mb-1">{m.label}</p>
-                <p className="text-2xl font-bold text-gray-800" style={{ fontFamily: "'Georgia', serif" }}>{m.value}</p>
-                <p className="text-xs font-semibold mt-1 text-emerald-500">{m.delta} vs last month</p>
+                <p className="text-2xl font-bold text-gray-800" >{m.value}</p>
+                <p className="text-xs font-semibold mt-1 text-purple-600">{m.delta} vs last month</p>
               </div>
             ))}
           </div>
@@ -1305,12 +1311,12 @@ function Analytics() {
             const { ref: r, visible: v } = useIntersection();
             return (
               <div key={item.title} ref={r}
-                className={`group bg-white border border-pink-50 hover:border-pink-200 rounded-3xl p-7 transition-all duration-500 hover:shadow-lg hover:shadow-pink-50 hover:-translate-y-1 ${v ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
+                className={`group bg-white border border-purple-200 hover:border-purple-200 rounded-3xl p-7 transition-all duration-500 hover:shadow-lg hover:shadow-purple-200 hover:-translate-y-1 ${v ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
                 style={{ transitionDelay: `${i * 80}ms` }}>
-                <div className="w-11 h-11 rounded-2xl bg-pink-50 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                  <item.icon className="text-pink-500 text-lg" />
+                <div className="w-11 h-11 rounded-2xl bg-purple-200 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                  <item.icon className="text-purple-600 text-lg" />
                 </div>
-                <h3 className="font-bold text-gray-800 text-lg mb-2" style={{ fontFamily: "'Georgia', serif" }}>{item.title}</h3>
+                <h3 className="font-bold text-gray-800 text-lg mb-2" >{item.title}</h3>
                 <p className="text-gray-500 text-sm leading-relaxed">{item.desc}</p>
               </div>
             );
@@ -1333,18 +1339,18 @@ function ComplianceSection() {
     { icon: RiZoomInLine, label: "Message Quality Rating", val: "High" },
   ];
   return (
-    <section className="py-28 bg-white overflow-hidden">
+    <section className="py-28 bg-transparent overflow-hidden">
       <div className="max-w-6xl mx-auto px-6">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
           <div>
-            <span className="inline-block text-xs font-semibold tracking-widest uppercase text-pink-500 mb-4">
+            <span className="inline-block text-xs font-semibold tracking-widest uppercase text-purple-600 mb-4">
               Compliance and Quality
             </span>
             <h2 className="text-4xl md:text-5xl font-bold text-gray-900 leading-tight mb-6"
-              style={{ fontFamily: "'Georgia', serif" }}>
+              >
               Stay in Meta's good books.
               <br />
-              <span style={{ background: "linear-gradient(90deg,#db2777,#f9a8d4)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
+              <span style={{ background: "linear-gradient(90deg,#9333ea,#d8b4fe)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
                 Always.
               </span>
             </h2>
@@ -1366,46 +1372,46 @@ function ComplianceSection() {
                 "GDPR and India PDPB compliant data processing and storage",
               ].map((pt) => (
                 <li key={pt} className="flex items-center gap-3 text-sm text-gray-600">
-                  <RiCheckLine className="text-pink-400 flex-shrink-0 text-base" />
+                  <RiCheckLine className="text-purple-600 flex-shrink-0 text-base" />
                   {pt}
                 </li>
               ))}
             </ul>
           </div>
           <div ref={ref}>
-            <div className="rounded-3xl border-2 border-pink-100 bg-white overflow-hidden"
+            <div className="rounded-3xl border-2 border-purple-200 bg-white overflow-hidden"
               style={{ boxShadow: "0 20px 60px rgba(219,39,119,0.08)" }}>
-              <div className="px-5 py-4 border-b border-pink-50 flex items-center gap-2"
-                style={{ background: "linear-gradient(135deg,#fce7f3,#fff9fb)" }}>
-                <RiShieldCheckLine className="text-pink-500" />
-                <span className="font-bold text-sm text-gray-700" style={{ fontFamily: "'Georgia', serif" }}>Compliance Health Dashboard</span>
-                <span className="ml-auto text-xs font-bold text-emerald-600 bg-emerald-50 px-2.5 py-1 rounded-full">All Healthy</span>
+              <div className="px-5 py-4 border-b border-purple-200 flex items-center gap-2"
+                style={{ background: "linear-gradient(135deg,#f3e8ff,#faf5ff)" }}>
+                <RiShieldCheckLine className="text-purple-600" />
+                <span className="font-bold text-sm text-gray-700" >Compliance Health Dashboard</span>
+                <span className="ml-auto text-xs font-bold text-purple-600 bg-purple-200 px-2.5 py-1 rounded-full">All Healthy</span>
               </div>
               <div className="p-4 space-y-2">
                 {checks.map((c, i) => (
                   <div key={c.label}
-                    className={`flex items-center gap-4 p-3 rounded-2xl hover:bg-pink-50 transition-all duration-500 ${visible ? "opacity-100 translate-x-0" : "opacity-0 translate-x-8"}`}
+                    className={`flex items-center gap-4 p-3 rounded-2xl hover:bg-purple-200 transition-all duration-500 ${visible ? "opacity-100 translate-x-0" : "opacity-0 translate-x-8"}`}
                     style={{ transitionDelay: `${i * 90}ms` }}>
-                    <div className="w-9 h-9 rounded-xl bg-pink-50 flex items-center justify-center flex-shrink-0">
-                      <c.icon className="text-pink-500 text-base" />
+                    <div className="w-9 h-9 rounded-xl bg-purple-200 flex items-center justify-center flex-shrink-0">
+                      <c.icon className="text-purple-600 text-base" />
                     </div>
                     <span className="flex-1 text-sm text-gray-700 font-medium">{c.label}</span>
-                    <span className="text-xs font-semibold text-emerald-600 bg-emerald-50 px-2.5 py-1 rounded-full">{c.val}</span>
+                    <span className="text-xs font-semibold text-purple-600 bg-purple-200 px-2.5 py-1 rounded-full">{c.val}</span>
                   </div>
                 ))}
               </div>
               <div className="px-5 pb-5 pt-2">
-                <div className="p-4 rounded-2xl bg-pink-50 border border-pink-100">
+                <div className="p-4 rounded-2xl bg-purple-200 border border-purple-200">
                   <p className="text-xs text-gray-500 mb-2 font-semibold">Number Quality Rating</p>
                   <div className="h-2 rounded-full bg-white overflow-hidden">
                     <div className="h-full rounded-full"
                       style={{
                         width: visible ? "94%" : "0%",
-                        background: "linear-gradient(90deg,#db2777,#f9a8d4)",
+                        background: "linear-gradient(90deg,#9333ea,#d8b4fe)",
                         transition: "width 1.2s cubic-bezier(.22,1,.36,1) 800ms",
                       }} />
                   </div>
-                  <p className="text-xs text-right text-pink-500 font-bold mt-1">94 / 100 — High</p>
+                  <p className="text-xs text-right text-purple-600 font-bold mt-1">94 / 100 — High</p>
                 </div>
               </div>
             </div>
@@ -1434,7 +1440,7 @@ const integrations = [
 
 function Integrations() {
   return (
-    <section className="py-28 bg-pink-50/30">
+    <section className="py-28 bg-purple-200/30">
       <div className="max-w-5xl mx-auto px-6">
         <SectionHeader
           eyebrow="Integrations"
@@ -1446,13 +1452,13 @@ function Integrations() {
             const { ref, visible } = useIntersection();
             return (
               <div key={it.name} ref={ref}
-                className={`group flex flex-col items-center gap-3 p-6 rounded-3xl bg-white border border-pink-100 hover:border-pink-300 hover:-translate-y-2 hover:shadow-lg hover:shadow-pink-50 transition-all duration-400 ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
+                className={`group flex flex-col items-center gap-3 p-6 rounded-3xl bg-white border border-purple-200 hover:border-purple-200 hover:-translate-y-2 hover:shadow-lg hover:shadow-purple-200 transition-all duration-400 ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
                 style={{ transitionDelay: `${i * 50}ms` }}>
-                <div className="w-12 h-12 rounded-2xl bg-pink-50 flex items-center justify-center group-hover:scale-110 transition-transform">
-                  <it.icon className="text-pink-500 text-xl" />
+                <div className="w-12 h-12 rounded-2xl bg-purple-200 flex items-center justify-center group-hover:scale-110 transition-transform">
+                  <it.icon className="text-purple-600 text-xl" />
                 </div>
                 <div className="text-center">
-                  <p className="font-bold text-gray-800 text-sm" style={{ fontFamily: "'Georgia', serif" }}>{it.name}</p>
+                  <p className="font-bold text-gray-800 text-sm" >{it.name}</p>
                   <p className="text-gray-400 text-xs mt-0.5">{it.desc}</p>
                 </div>
               </div>
@@ -1511,7 +1517,7 @@ const testimonials = [
 
 function Testimonials() {
   return (
-    <section className="py-28 bg-white">
+    <section className="py-28 bg-transparent">
       <div className="max-w-6xl mx-auto px-6">
         <SectionHeader
           eyebrow="Customer Results"
@@ -1522,20 +1528,20 @@ function Testimonials() {
             const { ref, visible } = useIntersection();
             return (
               <div key={t.name} ref={ref}
-                className={`bg-white rounded-3xl p-8 border-2 border-pink-50 hover:border-pink-200 hover:-translate-y-2 hover:shadow-xl hover:shadow-pink-50 transition-all duration-500 ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
+                className={`bg-white rounded-3xl p-8 border-2 border-purple-200 hover:border-purple-200 hover:-translate-y-2 hover:shadow-xl hover:shadow-purple-200 transition-all duration-500 ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
                 style={{ transitionDelay: `${i * 100}ms`, boxShadow: "0 4px 24px rgba(219,39,119,0.05)" }}>
                 <div className="flex gap-1 mb-5">
                   {Array.from({ length: 5 }).map((_, j) => (
-                    <RiStarLine key={j} className="text-pink-300" style={{ fill: "#fce7f3" }} />
+                    <RiStarLine key={j} className="text-purple-600" style={{ fill: "#f3e8ff" }} />
                   ))}
                 </div>
                 <p className="text-gray-700 leading-relaxed mb-6 text-sm italic"
-                  style={{ fontFamily: "'Georgia', serif" }}>
+                  >
                   "{t.quote}"
                 </p>
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 rounded-full flex items-center justify-center text-white text-xs font-bold"
-                    style={{ background: "linear-gradient(135deg,#db2777,#f472b6)" }}>
+                    style={{ background: "linear-gradient(135deg,#9333ea,#c084fc)" }}>
                     {t.initials}
                   </div>
                   <div>
@@ -1566,7 +1572,7 @@ function Security() {
    
   ];
   return (
-    <section className="py-24 bg-pink-50/30">
+    <section className="py-24 bg-purple-200/30">
       <div className="max-w-5xl mx-auto px-6">
         <SectionHeader
           eyebrow="Security and Compliance"
@@ -1578,9 +1584,9 @@ function Security() {
             const { ref, visible } = useIntersection();
             return (
               <div key={p.label} ref={ref}
-                className={`flex items-center gap-3 bg-white rounded-2xl px-5 py-4 border border-pink-50 hover:border-pink-200 hover:shadow transition-all duration-500 ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
+                className={`flex items-center gap-3 bg-white rounded-2xl px-5 py-4 border border-purple-200 hover:border-purple-200 hover:shadow transition-all duration-500 ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
                 style={{ transitionDelay: `${i * 70}ms` }}>
-                <p.icon className="text-pink-400 text-lg flex-shrink-0" />
+                <p.icon className="text-purple-600 text-lg flex-shrink-0" />
                 <span className="text-sm font-medium text-gray-700">{p.label}</span>
               </div>
             );
@@ -1650,7 +1656,7 @@ const plans = [
 
 function Pricing() {
   return (
-    <section className="py-28 bg-white">
+    <section className="py-28 bg-transparent">
       <div className="max-w-6xl mx-auto px-6">
         <SectionHeader
           eyebrow="Pricing"
@@ -1663,38 +1669,38 @@ function Pricing() {
             return (
               <div key={p.name} ref={ref}
                 className={`relative rounded-3xl p-8 border-2 transition-all duration-700 hover:-translate-y-2 ${
-                  p.highlight ? "border-transparent text-white" : "border-pink-100 bg-white hover:border-pink-300 hover:shadow-xl hover:shadow-pink-50"
+                  p.highlight ? "border-transparent text-white" : "border-purple-200 bg-white hover:border-purple-200 hover:shadow-xl hover:shadow-purple-200"
                 } ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
                 style={{
                   transitionDelay: `${i * 120}ms`,
-                  background: p.highlight ? "linear-gradient(135deg,#db2777,#f472b6)" : undefined,
+                  background: p.highlight ? "linear-gradient(135deg,#9333ea,#c084fc)" : undefined,
                   boxShadow: p.highlight ? "0 30px 60px rgba(219,39,119,0.28)" : undefined,
                 }}>
                 {p.highlight && (
-                  <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-4 py-1.5 bg-white rounded-full text-pink-600 text-xs font-black shadow">
+                  <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-4 py-1.5 bg-white rounded-full text-purple-600 text-xs font-black shadow">
                     Most Popular
                   </div>
                 )}
-                <p className={`font-bold tracking-wide text-sm uppercase mb-4 ${p.highlight ? "text-pink-100" : "text-pink-500"}`}>
+                <p className={`font-bold tracking-wide text-sm uppercase mb-4 ${p.highlight ? "text-purple-600" : "text-purple-600"}`}>
                   {p.name}
                 </p>
                 <div className="flex items-baseline gap-1 mb-2">
-                  <span className="text-3xl font-black" style={{ fontFamily: "'Georgia', serif" }}>{p.price}</span>
-                  <span className={`text-sm ${p.highlight ? "text-pink-100" : "text-gray-400"}`}>{p.period}</span>
+                  <span className="text-3xl font-black" >{p.price}</span>
+                  <span className={`text-sm ${p.highlight ? "text-purple-600" : "text-gray-400"}`}>{p.period}</span>
                 </div>
-                <p className={`text-sm mb-6 leading-relaxed ${p.highlight ? "text-pink-100" : "text-gray-500"}`}>{p.desc}</p>
+                <p className={`text-sm mb-6 leading-relaxed ${p.highlight ? "text-purple-600" : "text-gray-500"}`}>{p.desc}</p>
                 <ul className="space-y-3 mb-8">
                   {p.features.map((f) => (
-                    <li key={f} className={`flex items-center gap-2.5 text-sm ${p.highlight ? "text-pink-50" : "text-gray-600"}`}>
-                      <RiCheckLine className={`flex-shrink-0 ${p.highlight ? "text-pink-200" : "text-pink-400"}`} />
+                    <li key={f} className={`flex items-center gap-2.5 text-sm ${p.highlight ? "text-purple-600" : "text-gray-600"}`}>
+                      <RiCheckLine className={`flex-shrink-0 ${p.highlight ? "text-purple-600" : "text-purple-600"}`} />
                       {f}
                     </li>
                   ))}
                 </ul>
                 <button className="w-full py-3.5 rounded-full font-bold text-sm transition-all duration-300 hover:-translate-y-0.5"
                   style={{
-                    background: p.highlight ? "white" : "linear-gradient(135deg,#db2777,#f472b6)",
-                    color: p.highlight ? "#db2777" : "white",
+                    background: p.highlight ? "white" : "linear-gradient(135deg,#9333ea,#c084fc)",
+                    color: p.highlight ? "#9333ea" : "white",
                   }}>
                   {p.cta}
                 </button>
@@ -1739,9 +1745,9 @@ const faqs = [
 ];
 
 function FAQ() {
-  const [open, setOpen] = useState(null);
+  const [open, setOpen] = useState<number | null>(null);
   return (
-    <section className="py-28 bg-pink-50/30">
+    <section className="py-28 bg-purple-200/30">
       <div className="max-w-3xl mx-auto px-6">
         <SectionHeader
           eyebrow="Frequently Asked Questions"
@@ -1752,13 +1758,13 @@ function FAQ() {
             const { ref, visible } = useIntersection();
             return (
               <div key={i} ref={ref}
-                className={`bg-white border-2 rounded-2xl overflow-hidden transition-all duration-500 ${open === i ? "border-pink-200" : "border-pink-50"} ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
+                className={`bg-white border-2 rounded-2xl overflow-hidden transition-all duration-500 ${open === i ? "border-purple-200" : "border-purple-200"} ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
                 style={{ transitionDelay: `${i * 70}ms` }}>
                 <button
                   className="w-full flex items-center justify-between px-6 py-5 text-left group"
                   onClick={() => setOpen(open === i ? null : i)}>
-                  <span className="font-bold text-gray-800 text-sm pr-4" style={{ fontFamily: "'Georgia', serif" }}>{f.q}</span>
-                  <span className={`flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center text-xs transition-all duration-300 ${open === i ? "bg-pink-500 text-white rotate-45" : "bg-pink-50 text-pink-400"}`}>+</span>
+                  <span className="font-bold text-gray-800 text-sm pr-4" >{f.q}</span>
+                  <span className={`flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center text-xs transition-all duration-300 ${open === i ? "bg-purple-200 text-gray-900 rotate-45" : "bg-purple-200 text-purple-600"}`}>+</span>
                 </button>
                 <div className={`px-6 overflow-hidden transition-all duration-400 ${open === i ? "max-h-48 pb-5" : "max-h-0"}`}>
                   <p className="text-gray-500 text-sm leading-relaxed">{f.a}</p>
@@ -1776,31 +1782,31 @@ function FAQ() {
 function CTA() {
   const { ref, visible } = useIntersection();
   return (
-    <section className="py-28 bg-white">
+    <section className="py-28 bg-transparent">
       <div ref={ref}
         className={`max-w-4xl mx-auto px-6 text-center transition-all duration-700 ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
-        <div className="relative rounded-3xl overflow-hidden p-16 shadow-2xl shadow-pink-200"
-          style={{ background: "linear-gradient(135deg,#db2777 0%,#ec4899 60%,#f9a8d4 100%)" }}>
+        <div className="relative rounded-3xl overflow-hidden p-16 shadow-2xl shadow-purple-200"
+          style={{ background: "linear-gradient(135deg,#9333ea 0%,#a855f7 60%,#d8b4fe 100%)" }}>
           <div className="absolute top-6 right-10 w-32 h-32 rounded-full border-2 border-white/10" />
           <div className="absolute bottom-4 left-6 w-20 h-20 rounded-full border border-white/10" />
           <div className="absolute top-1/2 left-8 w-3 h-3 rounded-full bg-white/20" />
           <div className="absolute bottom-12 right-20 w-5 h-5 rounded-full bg-white/10" />
           <div className="absolute top-16 left-1/3 w-2 h-2 rounded-full bg-white/15" />
 
-          <p className="text-xs font-semibold tracking-widest uppercase text-pink-200 mb-4">
+          <p className="text-xs font-semibold tracking-widest uppercase text-purple-100 mb-4">
             Ready to put your WhatsApp programme on autopilot?
           </p>
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-5 leading-tight"
-            style={{ fontFamily: "'Georgia', serif" }}>
+            >
             Your first automated
             <br />flow is 15 minutes away.
           </h2>
-          <p className="text-pink-100 text-lg mb-10 max-w-xl mx-auto leading-relaxed">
+          <p className="text-purple-100 text-lg mb-10 max-w-xl mx-auto leading-relaxed">
             Connect your number, import your contacts, build a flow, and let the AI send the first
             personalised message — all before your next meeting.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <button className="group flex items-center gap-2 bg-white text-pink-600 hover:bg-pink-50 font-bold px-8 py-4 rounded-full transition-all duration-200 shadow-lg hover:-translate-y-0.5">
+            <button className="group flex items-center gap-2 bg-white text-purple-600 hover:bg-purple-200 font-bold px-8 py-4 rounded-full transition-all duration-200 shadow-lg hover:-translate-y-0.5">
               Connect Your Number Free
               <RiArrowRightLine className="transition-transform group-hover:translate-x-1" />
             </button>
@@ -1808,7 +1814,7 @@ function CTA() {
               Book a Live Demo
             </button>
           </div>
-          <p className="text-pink-200 text-sm mt-6">
+          <p className="text-purple-100 text-sm mt-6">
             14-day free trial. No credit card required. Cancel at any time.
           </p>
         </div>
@@ -1820,27 +1826,31 @@ function CTA() {
 /* ─── Page Assembly ───────────────────────────────────────────────────── */
 export default function WhatsAppAutomationPage() {
   return (
-    <main className="font-sans antialiased bg-white text-gray-900 overflow-x-hidden">
-      <Hero />
-      <Ticker />
-      <HowItWorks />
-      <FeaturesSection />
-      <StatsBand />
-      <FlowBuilderSection />
-      <AIAgentSection />
-      <BroadcastSection />
-      <StatsBand2 />
-      <VendorDashboard />
-      <UseCases />
-      <Analytics />
-      <NumberConnectSection />
-      <ComplianceSection />
-      <Integrations />
-      <Testimonials />
-      <Security />
-      <Pricing />
-      <FAQ />
-      <CTA />
-    </main>
+    <>
+      <CustomCursor />
+      <GlobalBackground />
+      <ScrollRevealInit />
+      <Navbar />
+      <main className="font-sans antialiased bg-transparent text-gray-900 overflow-x-hidden">
+        <Hero />
+        <HowItWorks />
+        <FeaturesSection />
+        <StatsBand />
+        <FlowBuilderSection />
+        <AIAgentSection />
+        <BroadcastSection />
+        <StatsBand2 />
+        <VendorDashboard />
+        <UseCases />
+        <Analytics />
+        <NumberConnectSection />
+        <ComplianceSection />
+        <Security />
+        <FAQ />
+        <CTA />
+        <FooterSection />
+        <BackToTop />
+      </main>
+    </>
   );
 }

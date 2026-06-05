@@ -1,6 +1,12 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { BackToTop } from "@/components/landing/BackToTop";
+import { CustomCursor } from "@/components/landing/CustomCursor";
+import { FooterSection } from "@/components/landing/FooterSection";
+import { GlobalBackground } from "@/components/landing/GlobalBackground";
+import { Navbar } from "@/components/landing/Navbar";
+import { ScrollRevealInit } from "@/components/landing/ScrollRevealInit";
 import {
   RiMailLine,
   RiMailSendLine,
@@ -96,11 +102,11 @@ function OrbBg() {
   return (
     <div className="pointer-events-none absolute inset-0 overflow-hidden">
       <div className="absolute -top-40 -left-40 w-[560px] h-[560px] rounded-full opacity-20"
-        style={{ background: "radial-gradient(circle, #f9a8d4 0%, transparent 70%)", animation: "orbFloat 8s ease-in-out infinite" }} />
+        style={{ background: "radial-gradient(circle, #d8b4fe 0%, transparent 70%)", animation: "orbFloat 8s ease-in-out infinite" }} />
       <div className="absolute top-1/2 -right-52 w-[420px] h-[420px] rounded-full opacity-15"
-        style={{ background: "radial-gradient(circle, #fbcfe8 0%, transparent 70%)", animation: "orbFloat 11s ease-in-out infinite reverse" }} />
+        style={{ background: "radial-gradient(circle, #e9d5ff 0%, transparent 70%)", animation: "orbFloat 11s ease-in-out infinite reverse" }} />
       <div className="absolute bottom-0 left-1/3 w-[320px] h-[320px] rounded-full opacity-10"
-        style={{ background: "radial-gradient(circle, #f472b6 0%, transparent 70%)", animation: "orbFloat 9s ease-in-out infinite 2s" }} />
+        style={{ background: "radial-gradient(circle, #c084fc 0%, transparent 70%)", animation: "orbFloat 9s ease-in-out infinite 2s" }} />
       <style>{`
         @keyframes orbFloat {
           0%, 100% { transform: translateY(0px) scale(1); }
@@ -152,7 +158,7 @@ function OrbBg() {
         .typing-cursor::after {
           content: '|';
           animation: blink 1s step-end infinite;
-          color: #db2777;
+          color: #9333ea;
           margin-left: 2px;
         }
       `}</style>
@@ -171,11 +177,11 @@ function SectionHeader({
   const { ref, visible } = useIntersection();
   return (
     <div ref={ref} className="text-center max-w-2xl mx-auto mb-16 px-4">
-      <span className={`inline-block text-xs font-semibold tracking-widest uppercase text-pink-500 mb-3 transition-all duration-500 ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}>
+      <span className={`inline-block text-xs font-semibold tracking-widest uppercase text-purple-600 mb-3 transition-all duration-500 ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}>
         {eyebrow}
       </span>
       <h2 className={`text-4xl md:text-5xl font-bold text-gray-900 leading-tight mb-4 transition-all duration-700 delay-100 ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
-        style={{ fontFamily: "'Georgia', serif" }}>
+        >
         {title}
       </h2>
       {sub && (
@@ -204,33 +210,33 @@ function DashboardPreview() {
   ];
 
   const statusStyle: Record<string, string> = {
-    active: "bg-emerald-50 text-emerald-600",
-    paused: "bg-amber-50 text-amber-600",
-    draft:  "bg-pink-50 text-pink-500",
+    active: "bg-purple-200 text-purple-600",
+    paused: "bg-purple-200 text-purple-600",
+    draft:  "bg-purple-200 text-purple-600",
   };
 
   const bars = [38, 55, 42, 70, 58, 82, 65, 74, 60, 88, 72, 91];
 
   return (
-    <div className="rounded-3xl border border-pink-100 bg-white overflow-hidden"
+    <div className="rounded-3xl border border-purple-200 bg-white overflow-hidden"
       style={{ boxShadow: "0 40px 80px -20px rgba(219,39,119,0.14)" }}>
       {/* Titlebar */}
-      <div className="flex items-center gap-2 px-5 py-3 border-b border-pink-50 bg-pink-50/40">
-        <span className="w-3 h-3 rounded-full bg-red-300" />
+      <div className="flex items-center gap-2 px-5 py-3 border-b border-purple-200 bg-purple-200/40">
+        <span className="w-3 h-3 rounded-full bg-purple-200" />
         <span className="w-3 h-3 rounded-full bg-yellow-300" />
         <span className="w-3 h-3 rounded-full bg-green-300" />
         <span className="ml-3 flex items-center gap-2 text-xs text-gray-400 font-mono">
-          <RiMailLine className="text-pink-400" /> email.autopilot.io — Campaigns
+          <RiMailLine className="text-purple-600" /> email.autopilot.io — Campaigns
         </span>
         <div className="ml-auto flex items-center gap-1.5">
-          <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+          <div className="w-2 h-2 rounded-full bg-purple-200 animate-pulse" />
           <span className="text-xs text-gray-400 font-medium">14 flows running</span>
         </div>
       </div>
 
       <div className="grid grid-cols-12 gap-0">
         {/* Sidebar */}
-        <div className="col-span-2 border-r border-pink-50 p-4 bg-white hidden md:block">
+        <div className="col-span-2 border-r border-purple-200 p-4 bg-white hidden md:block">
           <div className="space-y-1">
             {[
               { icon: RiBarChartBoxLine, label: "Overview",  active: true },
@@ -240,7 +246,7 @@ function DashboardPreview() {
               { icon: RiSettings4Line,   label: "Settings" },
             ].map(({ icon: Icon, label, active }) => (
               <div key={label}
-                className={`flex items-center gap-2 text-xs px-3 py-2 rounded-xl cursor-pointer transition-colors ${active ? "bg-pink-50 text-pink-600 font-semibold" : "text-gray-400 hover:text-gray-600"}`}>
+                className={`flex items-center gap-2 text-xs px-3 py-2 rounded-xl cursor-pointer transition-colors ${active ? "bg-purple-200 text-purple-600 font-semibold" : "text-gray-400 hover:text-gray-600"}`}>
                 <Icon className="text-base flex-shrink-0" />
                 <span className="truncate">{label}</span>
               </div>
@@ -258,10 +264,10 @@ function DashboardPreview() {
               { label: "Avg Click Rate", value: "19.6%",  delta: "+5.2%",  up: true },
               { label: "Unsubscribes",   value: "0.24%",  delta: "-0.11%", up: true },
             ].map((k) => (
-              <div key={k.label} className="bg-white rounded-2xl p-4 border border-pink-50 shadow-sm">
+              <div key={k.label} className="bg-white rounded-2xl p-4 border border-purple-200 shadow-sm">
                 <p className="text-xs text-gray-400 mb-1">{k.label}</p>
                 <p className="text-xl font-bold text-gray-800 font-mono">{k.value}</p>
-                <p className={`text-xs font-semibold mt-1 ${k.up ? "text-emerald-500" : "text-rose-400"}`}>{k.delta}</p>
+                <p className={`text-xs font-semibold mt-1 ${k.up ? "text-purple-600" : "text-purple-600"}`}>{k.delta}</p>
               </div>
             ))}
           </div>
@@ -269,17 +275,17 @@ function DashboardPreview() {
           {/* Chart + campaign list */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
             {/* Bar chart */}
-            <div className="md:col-span-2 bg-white rounded-2xl border border-pink-50 p-4 shadow-sm">
+            <div className="md:col-span-2 bg-white rounded-2xl border border-purple-200 p-4 shadow-sm">
               <div className="flex items-center justify-between mb-3">
                 <p className="text-xs font-semibold text-gray-600">Daily Sends — Last 12 Days</p>
-                <span className="text-xs text-pink-400 font-semibold">71.2K this period</span>
+                <span className="text-xs text-purple-600 font-semibold">71.2K this period</span>
               </div>
               <div className="flex items-end gap-1.5 h-24">
                 {bars.map((h, i) => (
                   <div key={i} className="flex-1 rounded-t-md"
                     style={{
                       height: `${h}%`,
-                      background: i === 11 ? "#db2777" : "#fce7f3",
+                      background: i === 11 ? "#9333ea" : "#f3e8ff",
                       transformOrigin: "bottom",
                       animation: `barGrow 0.6s cubic-bezier(.22,1,.36,1) ${i * 0.04}s both`,
                     }} />
@@ -288,12 +294,12 @@ function DashboardPreview() {
             </div>
 
             {/* Campaign list */}
-            <div className="bg-white rounded-2xl border border-pink-50 p-4 shadow-sm">
+            <div className="bg-white rounded-2xl border border-purple-200 p-4 shadow-sm">
               <p className="text-xs font-semibold text-gray-600 mb-3">Active Campaigns</p>
               <div className="space-y-2">
                 {campaigns.slice(0, 4).map((c, i) => (
                   <div key={i}
-                    className={`flex items-center justify-between text-xs p-2 rounded-xl transition-all duration-500 ${i === activeRow ? "bg-pink-50 border border-pink-100" : ""}`}>
+                    className={`flex items-center justify-between text-xs p-2 rounded-xl transition-all duration-500 ${i === activeRow ? "bg-purple-200 border border-purple-200" : ""}`}>
                     <p className="text-gray-700 font-medium truncate pr-2">{c.name}</p>
                     <span className={`text-xs font-semibold px-2 py-0.5 rounded-full flex-shrink-0 ${statusStyle[c.status]}`}>
                       {c.status}
@@ -312,24 +318,24 @@ function DashboardPreview() {
 /* ─── Hero ────────────────────────────────────────────────────────────── */
 function Hero() {
   return (
-    <section className="relative min-h-screen flex flex-col items-center justify-center bg-white overflow-hidden pt-24 pb-20">
+    <section className="relative min-h-screen flex flex-col items-center justify-center bg-transparent overflow-hidden pt-24 pb-20">
       <OrbBg />
       <div className="pointer-events-none absolute inset-0 opacity-[0.03]"
-        style={{ backgroundImage: "radial-gradient(circle, #be185d 1px, transparent 1px)", backgroundSize: "36px 36px" }} />
+        style={{ backgroundImage: "radial-gradient(circle, #7e22ce 1px, transparent 1px)", backgroundSize: "36px 36px" }} />
 
       <div className="relative z-10 max-w-6xl mx-auto px-6 text-center">
         {/* Pill */}
-        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-pink-200 bg-pink-50 text-pink-600 text-xs font-semibold uppercase tracking-widest mb-8"
+        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-purple-200 bg-purple-200 text-purple-600 text-xs font-semibold uppercase tracking-widest mb-8"
           style={{ animation: "fadeUp 0.6s cubic-bezier(.22,1,.36,1) both" }}>
           <RiMailLine />
           AI Email Automation Platform
         </div>
 
-        <h1 className="font-serif text-6xl md:text-8xl font-bold leading-[1.04] text-gray-900 mb-6"
+        <h1 className="font-sans text-6xl md:text-8xl font-bold leading-[1.04] text-gray-900 mb-6"
           style={{ fontFamily: "'Georgia', serif", animation: "fadeUp 0.8s cubic-bezier(.22,1,.36,1) 0.1s both" }}>
           Emails that{" "}
           <span style={{
-            background: "linear-gradient(90deg, #db2777, #ec4899, #f9a8d4, #db2777)",
+            background: "linear-gradient(90deg, #9333ea, #a855f7, #d8b4fe, #9333ea)",
             backgroundSize: "200% auto",
             WebkitBackgroundClip: "text",
             WebkitTextFillColor: "transparent",
@@ -353,14 +359,14 @@ function Hero() {
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4"
           style={{ animation: "fadeUp 0.8s cubic-bezier(.22,1,.36,1) 0.4s both" }}>
           <Link href="#">
-            <button className="group flex items-center gap-2 text-white font-semibold px-8 py-4 rounded-full transition-all duration-300 hover:-translate-y-0.5 shadow-lg hover:shadow-pink-200"
-              style={{ background: "linear-gradient(135deg, #db2777, #f472b6)" }}>
+            <button className="group flex items-center gap-2 text-white font-semibold px-8 py-4 rounded-full transition-all duration-300 hover:-translate-y-0.5 shadow-lg hover:shadow-purple-200"
+              style={{ background: "linear-gradient(135deg, #9333ea, #c084fc)" }}>
               Start Automating Free
               <RiArrowRightLine className="transition-transform group-hover:translate-x-1" />
             </button>
           </Link>
           <Link href="#">
-            <button className="flex items-center gap-2 text-gray-700 hover:text-pink-600 font-semibold px-8 py-4 rounded-full border border-gray-200 hover:border-pink-200 transition-all duration-300 hover:-translate-y-0.5 bg-white/80">
+            <button className="flex items-center gap-2 text-gray-700 hover:text-purple-600 font-semibold px-8 py-4 rounded-full border border-gray-200 hover:border-purple-200 transition-all duration-300 hover:-translate-y-0.5 bg-white/80">
               See a Live Campaign
               <RiArrowRightUpLine />
             </button>
@@ -372,7 +378,7 @@ function Hero() {
           style={{ animation: "fadeIn 1s ease 0.7s both" }}>
           {["GDPR Compliant", "CAN-SPAM Ready", "99.99% Deliverability SLA", "SOC 2 Certified"].map((t) => (
             <span key={t} className="flex items-center gap-2">
-              <RiCheckLine className="text-pink-400" /> {t}
+              <RiCheckLine className="text-purple-600" /> {t}
             </span>
           ))}
         </div>
@@ -403,11 +409,11 @@ function Ticker() {
   ];
   const doubled = [...items, ...items];
   return (
-    <div className="py-4 overflow-hidden border-y border-pink-100" style={{ background: "#fff9fb" }}>
+    <div className="py-4 overflow-hidden border-y border-purple-200" style={{ background: "#faf5ff" }}>
       <div className="flex gap-12 whitespace-nowrap" style={{ animation: "tickerScroll 26s linear infinite" }}>
         {doubled.map((item, i) => (
           <span key={i} className="flex items-center gap-3 text-sm font-medium text-gray-400">
-            <RiMailLine className="text-pink-300" />
+            <RiMailLine className="text-purple-600" />
             {item}
           </span>
         ))}
@@ -442,28 +448,28 @@ const steps = [
 
 function HowItWorks() {
   return (
-    <section className="py-28 bg-pink-50/30">
+    <section className="py-28 bg-purple-200/30">
       <div className="max-w-6xl mx-auto px-6">
         <SectionHeader
           eyebrow="Getting Started"
           title={<>From zero to converting<br />in under 30 minutes.</>}
         />
         <div className="relative grid grid-cols-1 md:grid-cols-4 gap-6">
-          <div className="absolute top-10 left-[12.5%] right-[12.5%] h-px bg-gradient-to-r from-pink-100 via-pink-400 to-pink-100 hidden md:block" />
+          <div className="absolute top-10 left-[12.5%] right-[12.5%] h-px bg-gradient-to-r from-purple-200 via-purple-200 to-purple-200 hidden md:block" />
           {steps.map((s, i) => {
             const { ref, visible } = useIntersection();
             return (
               <div key={s.num} ref={ref}
                 className={`flex flex-col items-center text-center transition-all duration-700 ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
                 style={{ transitionDelay: `${i * 150}ms` }}>
-                <div className="relative w-20 h-20 rounded-full bg-white border-2 border-pink-200 flex items-center justify-center mb-5 shadow-md shadow-pink-100 z-10">
-                  <span className="text-2xl font-bold text-pink-500 font-mono"
-                    style={{ fontFamily: "'Georgia', serif" }}>{s.num}</span>
-                  <div className="absolute inset-0 rounded-full border-2 border-pink-300 opacity-0"
+                <div className="relative w-20 h-20 rounded-full bg-white border-2 border-purple-200 flex items-center justify-center mb-5 shadow-md shadow-purple-200 z-10">
+                  <span className="text-2xl font-bold text-purple-600 font-mono"
+                    >{s.num}</span>
+                  <div className="absolute inset-0 rounded-full border-2 border-purple-200 opacity-0"
                     style={{ animation: `pulseRing 2.5s ease-out infinite ${i * 0.5}s` }} />
                 </div>
                 <h4 className="font-bold text-gray-800 mb-2 text-lg"
-                  style={{ fontFamily: "'Georgia', serif" }}>{s.title}</h4>
+                  >{s.title}</h4>
                 <p className="text-gray-500 text-sm leading-relaxed">{s.desc}</p>
               </div>
             );
@@ -480,61 +486,61 @@ const features = [
     icon: RiRobot2Line,
     title: "AI Copywriting Engine",
     desc: "Generates subject lines, preview text, and body copy personalised to each recipient — their name, purchase history, browse behaviour, and predicted intent.",
-    color: "#db2777",
+    color: "#9333ea",
   },
   {
     icon: RiFlowChart,
     title: "Visual Flow Builder",
     desc: "Drag-and-drop canvas for multi-step, multi-branch automation flows. Set time delays, behavioural triggers, and conditional splits without any code.",
-    color: "#ec4899",
+    color: "#a855f7",
   },
   {
     icon: RiFilterLine,
     title: "Advanced Segmentation",
     desc: "Build hyper-precise audiences with 50+ filter dimensions — RFM scores, product category affinity, engagement tier, geography, and custom attributes.",
-    color: "#f472b6",
+    color: "#c084fc",
   },
   {
     icon: RiTestTubeLine,
     title: "Multivariate A/B Testing",
     desc: "Test subject lines, send times, CTA copy, layout, and personalisation tokens simultaneously. The winning variant is auto-deployed to the remaining audience.",
-    color: "#db2777",
+    color: "#9333ea",
   },
   {
     icon: RiLayoutLine,
     title: "Drag-and-Drop Email Editor",
     desc: "Build pixel-perfect, mobile-responsive emails using a block-based editor. 200+ pre-built blocks, brand kit management, and live mobile preview.",
-    color: "#ec4899",
+    color: "#a855f7",
   },
   {
     icon: RiTimeLine,
     title: "Send-time Optimisation",
     desc: "ML model analyses each contact's historical open patterns and delivers every email at their personal peak-engagement window — not a broadcast time.",
-    color: "#f472b6",
+    color: "#c084fc",
   },
   {
     icon: RiPercentLine,
     title: "Deliverability Suite",
     desc: "Dedicated IP warm-up, DKIM/DMARC management, spam-score previewing, bounce and complaint handling, and ISP reputation monitoring — all automated.",
-    color: "#db2777",
+    color: "#9333ea",
   },
   {
     icon: RiDatabase2Line,
     title: "Live Data Personalisation",
     desc: "Embed real-time product recommendations, live inventory counts, dynamic pricing, and personalised content blocks pulled fresh at send time.",
-    color: "#ec4899",
+    color: "#a855f7",
   },
   {
     icon: RiLineChartLine,
     title: "Revenue Attribution",
     desc: "Tie every email to downstream revenue. See click-to-purchase attribution, assisted conversions, and campaign ROI calculated automatically from order data.",
-    color: "#f472b6",
+    color: "#c084fc",
   },
 ];
 
 function FeaturesSection() {
   return (
-    <section className="py-28 bg-white">
+    <section className="py-28 bg-transparent">
       <div className="max-w-6xl mx-auto px-6">
         <SectionHeader
           eyebrow="Platform Features"
@@ -546,14 +552,14 @@ function FeaturesSection() {
             const { ref, visible } = useIntersection();
             return (
               <div key={f.title} ref={ref}
-                className={`group relative bg-white border border-pink-50 hover:border-pink-200 rounded-3xl p-7 transition-all duration-500 hover:shadow-xl hover:shadow-pink-50 hover:-translate-y-1 ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
+                className={`group relative bg-white border border-purple-200 hover:border-purple-200 rounded-3xl p-7 transition-all duration-500 hover:shadow-xl hover:shadow-purple-200 hover:-translate-y-1 ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
                 style={{ transitionDelay: `${i * 80}ms` }}>
                 <div className="w-12 h-12 rounded-2xl flex items-center justify-center mb-5 transition-transform duration-300 group-hover:scale-110"
                   style={{ background: `${f.color}15` }}>
                   <f.icon style={{ color: f.color, fontSize: "1.4rem" }} />
                 </div>
                 <h3 className="font-bold text-gray-800 text-lg mb-2"
-                  style={{ fontFamily: "'Georgia', serif" }}>{f.title}</h3>
+                  >{f.title}</h3>
                 <p className="text-gray-500 text-sm leading-relaxed">{f.desc}</p>
                 <div className="absolute bottom-0 left-0 right-0 h-0.5 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                   style={{ background: `linear-gradient(90deg, transparent, ${f.color}, transparent)` }} />
@@ -577,7 +583,7 @@ function StatsBand() {
   ];
   return (
     <section ref={ref} className="py-20"
-      style={{ background: "linear-gradient(135deg, #db2777 0%, #ec4899 60%, #f9a8d4 100%)" }}>
+      style={{ background: "linear-gradient(135deg, #9333ea 0%, #a855f7 60%, #d8b4fe 100%)" }}>
       <div className="max-w-6xl mx-auto px-6">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-10 text-center">
           {stats.map((s, i) => (
@@ -587,7 +593,7 @@ function StatsBand() {
               <p className="text-5xl font-bold font-mono mb-2 text-white">
                 {visible ? <Counter to={s.value} suffix={s.suffix} /> : `0${s.suffix}`}
               </p>
-              <p className="text-pink-100 text-sm">{s.label}</p>
+              <p className="text-purple-100 text-sm">{s.label}</p>
             </div>
           ))}
         </div>
@@ -610,7 +616,7 @@ function FlowBuilderSection() {
   ];
 
   const typeStyle: Record<string, { bg: string; text: string; border: string }> = {
-    trigger:   { bg: "#fce7f3", text: "#db2777", border: "#f9a8d4" },
+    trigger:   { bg: "#f3e8ff", text: "#9333ea", border: "#d8b4fe" },
     wait:      { bg: "#fef9c3", text: "#92400e", border: "#fde68a" },
     email:     { bg: "#f0fdf4", text: "#065f46", border: "#bbf7d0" },
     condition: { bg: "#eff6ff", text: "#1e40af", border: "#bfdbfe" },
@@ -618,20 +624,20 @@ function FlowBuilderSection() {
   };
 
   return (
-    <section className="py-28 bg-white overflow-hidden">
+    <section className="py-28 bg-transparent overflow-hidden">
       <div className="max-w-6xl mx-auto px-6">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
           <div>
-            <span className="inline-block text-xs font-semibold tracking-widest uppercase text-pink-500 mb-4">
+            <span className="inline-block text-xs font-semibold tracking-widest uppercase text-purple-600 mb-4">
               Flow Builder
             </span>
             <h2 className="text-4xl md:text-5xl font-bold text-gray-900 leading-tight mb-6"
-              style={{ fontFamily: "'Georgia', serif" }}>
+              >
               Build flows as complex
               <br />as your strategy.
               <br />
               <span style={{
-                background: "linear-gradient(90deg,#db2777,#f9a8d4)",
+                background: "linear-gradient(90deg,#9333ea,#d8b4fe)",
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
               }}>
@@ -652,7 +658,7 @@ function FlowBuilderSection() {
                 "Live flow analytics while it runs",
               ].map((pt) => (
                 <li key={pt} className="flex items-center gap-3 text-sm text-gray-600">
-                  <RiCheckLine className="text-pink-400 flex-shrink-0 text-base" />
+                  <RiCheckLine className="text-purple-600 flex-shrink-0 text-base" />
                   {pt}
                 </li>
               ))}
@@ -661,15 +667,15 @@ function FlowBuilderSection() {
 
           {/* Flow diagram */}
           <div ref={ref} className="relative">
-            <div className="rounded-3xl border-2 border-pink-100 bg-white overflow-hidden"
+            <div className="rounded-3xl border-2 border-purple-200 bg-white overflow-hidden"
               style={{ boxShadow: "0 20px 60px rgba(219,39,119,0.08)" }}>
-              <div className="px-5 py-4 border-b border-pink-50 flex items-center gap-2"
-                style={{ background: "linear-gradient(135deg,#fce7f3,#fff9fb)" }}>
-                <RiFlowChart className="text-pink-500" />
+              <div className="px-5 py-4 border-b border-purple-200 flex items-center gap-2"
+                style={{ background: "linear-gradient(135deg,#f3e8ff,#faf5ff)" }}>
+                <RiFlowChart className="text-purple-600" />
                 <span className="font-bold text-sm text-gray-700"
-                  style={{ fontFamily: "'Georgia', serif" }}>Cart Abandonment Flow</span>
+                  >Cart Abandonment Flow</span>
                 <div className="ml-auto flex items-center gap-1.5">
-                  <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                  <div className="w-2 h-2 rounded-full bg-purple-200 animate-pulse" />
                   <span className="text-xs text-gray-400">Live · 3,812 enrolled</span>
                 </div>
               </div>
@@ -692,14 +698,14 @@ function FlowBuilderSection() {
                           style={{ color: s.text }}>{n.type}</span>
                       </div>
                       {i < flowNodes.length - 1 && (
-                        <div className="absolute left-[1.35rem] -bottom-2 w-0.5 h-2 bg-pink-200" />
+                        <div className="absolute left-[1.35rem] -bottom-2 w-0.5 h-2 bg-purple-200" />
                       )}
                     </div>
                   );
                 })}
               </div>
               <div className="px-5 pb-5">
-                <button className="w-full py-3 rounded-2xl border-2 border-dashed border-pink-200 text-pink-400 font-semibold text-sm hover:bg-pink-50 hover:border-pink-400 transition-all flex items-center justify-center gap-2">
+                <button className="w-full py-3 rounded-full border-2 border-dashed border-purple-200 text-purple-600 font-semibold text-sm hover:bg-purple-200 hover:border-purple-200 transition-all flex items-center justify-center gap-2">
                   <RiPencilLine /> Add a step
                 </button>
               </div>
@@ -735,16 +741,16 @@ function AICopySection() {
   ];
 
   return (
-    <section className="py-28 bg-pink-50/30 overflow-hidden">
+    <section className="py-28 bg-purple-200/30 overflow-hidden">
       <div className="max-w-6xl mx-auto px-6">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
           {/* Copy */}
           <div>
-            <span className="inline-block text-xs font-semibold tracking-widest uppercase text-pink-500 mb-4">
+            <span className="inline-block text-xs font-semibold tracking-widest uppercase text-purple-600 mb-4">
               AI Copywriting
             </span>
             <h2 className="text-4xl md:text-5xl font-bold text-gray-900 leading-tight mb-6"
-              style={{ fontFamily: "'Georgia', serif" }}>
+              >
               Subject lines that
               <br />actually get opened.
             </h2>
@@ -761,12 +767,12 @@ function AICopySection() {
                 { icon: RiTestTubeLine, title: "Auto A/B testing",           desc: "Generates 3–5 subject-line variants, splits the audience, and promotes the winner at your configured confidence threshold." },
               ].map((f) => (
                 <div key={f.title} className="flex items-start gap-4">
-                  <div className="w-9 h-9 rounded-xl bg-pink-50 flex items-center justify-center flex-shrink-0 mt-0.5">
-                    <f.icon className="text-pink-500 text-base" />
+                  <div className="w-9 h-9 rounded-xl bg-purple-200 flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <f.icon className="text-purple-600 text-base" />
                   </div>
                   <div>
                     <p className="font-bold text-gray-800 text-sm mb-0.5"
-                      style={{ fontFamily: "'Georgia', serif" }}>{f.title}</p>
+                      >{f.title}</p>
                     <p className="text-gray-500 text-sm leading-relaxed">{f.desc}</p>
                   </div>
                 </div>
@@ -776,20 +782,20 @@ function AICopySection() {
 
           {/* Right panel */}
           <div ref={ref}>
-            <div className="rounded-3xl border-2 border-pink-100 bg-white overflow-hidden"
+            <div className="rounded-3xl border-2 border-purple-200 bg-white overflow-hidden"
               style={{ boxShadow: "0 20px 60px rgba(219,39,119,0.08)" }}>
-              <div className="px-5 py-4 border-b border-pink-50 flex items-center gap-2"
-                style={{ background: "linear-gradient(135deg,#fce7f3,#fff9fb)" }}>
-                <RiRobot2Line className="text-pink-500" />
+              <div className="px-5 py-4 border-b border-purple-200 flex items-center gap-2"
+                style={{ background: "linear-gradient(135deg,#f3e8ff,#faf5ff)" }}>
+                <RiRobot2Line className="text-purple-600" />
                 <span className="font-bold text-sm text-gray-700"
-                  style={{ fontFamily: "'Georgia', serif" }}>AI Subject Line Generator</span>
+                  >AI Subject Line Generator</span>
               </div>
 
               {/* Input mock */}
-              <div className="p-5 border-b border-pink-50">
+              <div className="p-5 border-b border-purple-200">
                 <p className="text-xs text-gray-400 uppercase tracking-widest font-semibold mb-2">Generating for</p>
-                <div className="flex items-center gap-3 p-3 rounded-xl bg-pink-50 border border-pink-100">
-                  <RiUserLine className="text-pink-400 flex-shrink-0" />
+                <div className="flex items-center gap-3 p-3 rounded-xl bg-purple-200 border border-purple-200">
+                  <RiUserLine className="text-purple-600 flex-shrink-0" />
                   <div>
                     <p className="text-sm font-semibold text-gray-800">Sarah M. — Cart Abandonment</p>
                     <p className="text-xs text-gray-400">3 items · $124 cart value · High LTV segment</p>
@@ -798,9 +804,9 @@ function AICopySection() {
               </div>
 
               {/* Typing area */}
-              <div className="p-5 border-b border-pink-50">
+              <div className="p-5 border-b border-purple-200">
                 <p className="text-xs text-gray-400 uppercase tracking-widest font-semibold mb-3">Generated subject line</p>
-                <div className="p-4 rounded-xl bg-pink-50 border-2 border-pink-200 min-h-[52px]">
+                <div className="p-4 rounded-xl bg-purple-200 border-2 border-purple-200 min-h-[52px]">
                   <p className="text-sm font-semibold text-gray-800 typing-cursor">{typedLine}</p>
                 </div>
               </div>
@@ -810,14 +816,14 @@ function AICopySection() {
                 <p className="text-xs text-gray-400 uppercase tracking-widest font-semibold mb-3">A/B Variants — predicted performance</p>
                 {variants.map((v, i) => (
                   <div key={i}
-                    className={`flex items-center gap-3 p-3 rounded-xl border transition-all duration-600 hover:border-pink-300 hover:bg-pink-50 cursor-default ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}
+                    className={`flex items-center gap-3 p-3 rounded-xl border transition-all duration-600 hover:border-purple-200 hover:bg-purple-200 cursor-default ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}
                     style={{
-                      borderColor: "#fce7f3",
+                      borderColor: "#f3e8ff",
                       transitionDelay: `${i * 100 + 400}ms`,
                       transition: "opacity 0.5s ease, transform 0.5s ease, border-color 0.2s, background 0.2s",
                     }}>
                     <p className="text-sm text-gray-700 flex-1">{v.line}</p>
-                    <span className="text-xs font-bold text-pink-500 bg-pink-50 px-2.5 py-1 rounded-full whitespace-nowrap">
+                    <span className="text-xs font-bold text-purple-600 bg-purple-200 px-2.5 py-1 rounded-full whitespace-nowrap">
                       {v.score}
                     </span>
                   </div>
@@ -865,7 +871,7 @@ const usecases = [
 
 function UseCases() {
   return (
-    <section className="py-28 bg-white">
+    <section className="py-28 bg-transparent">
       <div className="max-w-6xl mx-auto px-6">
         <SectionHeader
           eyebrow="Use Cases"
@@ -877,23 +883,23 @@ function UseCases() {
             const { ref, visible } = useIntersection();
             return (
               <div key={u.industry} ref={ref}
-                className={`group relative overflow-hidden border border-pink-50 hover:border-pink-200 rounded-3xl p-8 transition-all duration-500 hover:shadow-xl hover:shadow-pink-50 hover:-translate-y-1 ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
-                style={{ transitionDelay: `${i * 100}ms`, background: i % 2 === 0 ? "white" : "#fff9fb" }}>
-                <div className="absolute top-0 right-0 w-40 h-40 rounded-bl-full opacity-5 bg-pink-400 transition-all duration-500 group-hover:opacity-10 group-hover:w-52 group-hover:h-52" />
+                className={`group relative overflow-hidden border border-purple-200 hover:border-purple-200 rounded-3xl p-8 transition-all duration-500 hover:shadow-xl hover:shadow-purple-200 hover:-translate-y-1 ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
+                style={{ transitionDelay: `${i * 100}ms`, background: i % 2 === 0 ? "white" : "#faf5ff" }}>
+                <div className="absolute top-0 right-0 w-40 h-40 rounded-bl-full opacity-5 bg-purple-200 transition-all duration-500 group-hover:opacity-10 group-hover:w-52 group-hover:h-52" />
                 <div className="flex items-start gap-4 mb-5">
-                  <div className="w-12 h-12 rounded-2xl bg-pink-50 flex items-center justify-center flex-shrink-0">
-                    <u.icon className="text-pink-500 text-xl" />
+                  <div className="w-12 h-12 rounded-2xl bg-purple-200 flex items-center justify-center flex-shrink-0">
+                    <u.icon className="text-purple-600 text-xl" />
                   </div>
                   <div>
-                    <p className="text-xs font-semibold uppercase tracking-widest text-pink-400 mb-1">{u.industry}</p>
+                    <p className="text-xs font-semibold uppercase tracking-widest text-purple-600 mb-1">{u.industry}</p>
                     <h3 className="font-bold text-gray-800 text-lg leading-snug"
-                      style={{ fontFamily: "'Georgia', serif" }}>{u.heading}</h3>
+                      >{u.heading}</h3>
                   </div>
                 </div>
                 <p className="text-gray-500 text-sm leading-relaxed mb-6">{u.body}</p>
                 <div className="flex flex-wrap gap-2">
                   {u.tags.map((t) => (
-                    <span key={t} className="text-xs px-3 py-1 rounded-full bg-pink-50 text-pink-600 font-medium border border-pink-100">
+                    <span key={t} className="text-xs px-3 py-1 rounded-full bg-purple-200 text-purple-600 font-medium border border-purple-200">
                       {t}
                     </span>
                   ))}
@@ -928,7 +934,7 @@ function Analytics() {
   ];
 
   return (
-    <section className="py-28 bg-pink-50/30">
+    <section className="py-28 bg-purple-200/30">
       <div className="max-w-6xl mx-auto px-6">
         <SectionHeader
           eyebrow="Analytics"
@@ -940,12 +946,12 @@ function Analytics() {
           <div className="md:col-span-2 grid grid-cols-2 sm:grid-cols-3 gap-4">
             {metrics.map((m, i) => (
               <div key={m.label}
-                className={`bg-white border-2 border-pink-50 rounded-2xl p-5 hover:border-pink-200 hover:shadow-md hover:shadow-pink-50 transition-all duration-500 ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
+                className={`bg-white border-2 border-purple-200 rounded-2xl p-5 hover:border-purple-200 hover:shadow-md hover:shadow-purple-200 transition-all duration-500 ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
                 style={{ transitionDelay: `${i * 80}ms` }}>
                 <p className="text-xs text-gray-400 mb-1">{m.label}</p>
                 <p className="text-2xl font-bold text-gray-800"
-                  style={{ fontFamily: "'Georgia', serif" }}>{m.value}</p>
-                <p className={`text-xs font-semibold mt-1 ${m.up ? "text-emerald-500" : "text-rose-400"}`}>
+                  >{m.value}</p>
+                <p className={`text-xs font-semibold mt-1 ${m.up ? "text-purple-600" : "text-purple-600"}`}>
                   {m.delta} vs last month
                 </p>
               </div>
@@ -954,10 +960,10 @@ function Analytics() {
 
           {/* Funnel */}
           <div
-            className={`bg-white border-2 border-pink-50 rounded-3xl p-6 transition-all duration-700 ${visible ? "opacity-100 translate-x-0" : "opacity-0 translate-x-8"}`}
+            className={`bg-white border-2 border-purple-200 rounded-3xl p-6 transition-all duration-700 ${visible ? "opacity-100 translate-x-0" : "opacity-0 translate-x-8"}`}
             style={{ transitionDelay: "480ms" }}>
             <p className="text-sm font-bold text-gray-700 mb-5"
-              style={{ fontFamily: "'Georgia', serif" }}>Engagement Funnel</p>
+              >Engagement Funnel</p>
             <div className="space-y-3">
               {funnelSteps.map((s, i) => (
                 <div key={s.label}>
@@ -965,11 +971,11 @@ function Analytics() {
                     <span className="text-gray-600 font-medium">{s.label}</span>
                     <span className="text-gray-500">{s.val}</span>
                   </div>
-                  <div className="h-2 rounded-full bg-pink-50 overflow-hidden">
+                  <div className="h-2 rounded-full bg-purple-200 overflow-hidden">
                     <div className="h-full rounded-full"
                       style={{
                         width: visible ? `${s.pct}%` : "0%",
-                        background: "linear-gradient(90deg,#db2777,#f9a8d4)",
+                        background: "linear-gradient(90deg,#9333ea,#d8b4fe)",
                         transition: `width 0.8s cubic-bezier(.22,1,.36,1) ${300 + i * 100}ms`,
                       }} />
                   </div>
@@ -996,15 +1002,15 @@ function DeliverabilitySection() {
   ];
 
   return (
-    <section className="py-28 bg-white overflow-hidden">
+    <section className="py-28 bg-transparent overflow-hidden">
       <div className="max-w-6xl mx-auto px-6">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
           <div>
-            <span className="inline-block text-xs font-semibold tracking-widest uppercase text-pink-500 mb-4">
+            <span className="inline-block text-xs font-semibold tracking-widest uppercase text-purple-600 mb-4">
               Deliverability
             </span>
             <h2 className="text-4xl md:text-5xl font-bold text-gray-900 leading-tight mb-6"
-              style={{ fontFamily: "'Georgia', serif" }}>
+              >
               99.99% delivered.
               <br />Not 99.99% sent.
             </h2>
@@ -1023,7 +1029,7 @@ function DeliverabilitySection() {
                 "Real-time bounce classification and contact hygiene",
               ].map((pt) => (
                 <li key={pt} className="flex items-center gap-3 text-sm text-gray-600">
-                  <RiCheckLine className="text-pink-400 flex-shrink-0 text-base" />
+                  <RiCheckLine className="text-purple-600 flex-shrink-0 text-base" />
                   {pt}
                 </li>
               ))}
@@ -1032,44 +1038,44 @@ function DeliverabilitySection() {
 
           {/* Health card */}
           <div ref={ref}>
-            <div className="rounded-3xl border-2 border-pink-100 bg-white overflow-hidden"
+            <div className="rounded-3xl border-2 border-purple-200 bg-white overflow-hidden"
               style={{ boxShadow: "0 20px 60px rgba(219,39,119,0.08)" }}>
-              <div className="px-5 py-4 border-b border-pink-50 flex items-center gap-2"
-                style={{ background: "linear-gradient(135deg,#fce7f3,#fff9fb)" }}>
-                <RiShieldCheckLine className="text-pink-500" />
+              <div className="px-5 py-4 border-b border-purple-200 flex items-center gap-2"
+                style={{ background: "linear-gradient(135deg,#f3e8ff,#faf5ff)" }}>
+                <RiShieldCheckLine className="text-purple-600" />
                 <span className="font-bold text-sm text-gray-700"
-                  style={{ fontFamily: "'Georgia', serif" }}>Deliverability Health Check</span>
-                <span className="ml-auto text-xs font-bold text-emerald-600 bg-emerald-50 px-2.5 py-1 rounded-full">
+                  >Deliverability Health Check</span>
+                <span className="ml-auto text-xs font-bold text-purple-600 bg-purple-200 px-2.5 py-1 rounded-full">
                   All systems healthy
                 </span>
               </div>
               <div className="p-4 space-y-2">
                 {checks.map((c, i) => (
                   <div key={c.label}
-                    className={`flex items-center gap-4 p-3 rounded-2xl hover:bg-pink-50 transition-all duration-500 ${visible ? "opacity-100 translate-x-0" : "opacity-0 translate-x-8"}`}
+                    className={`flex items-center gap-4 p-3 rounded-2xl hover:bg-purple-200 transition-all duration-500 ${visible ? "opacity-100 translate-x-0" : "opacity-0 translate-x-8"}`}
                     style={{ transitionDelay: `${i * 90}ms` }}>
-                    <div className="w-9 h-9 rounded-xl bg-pink-50 flex items-center justify-center flex-shrink-0">
-                      <c.icon className="text-pink-500 text-base" />
+                    <div className="w-9 h-9 rounded-xl bg-purple-200 flex items-center justify-center flex-shrink-0">
+                      <c.icon className="text-purple-600 text-base" />
                     </div>
                     <span className="flex-1 text-sm text-gray-700 font-medium">{c.label}</span>
-                    <span className="text-xs font-semibold text-emerald-600 bg-emerald-50 px-2.5 py-1 rounded-full">
+                    <span className="text-xs font-semibold text-purple-600 bg-purple-200 px-2.5 py-1 rounded-full">
                       {c.val}
                     </span>
                   </div>
                 ))}
               </div>
               <div className="px-5 pb-5 pt-2">
-                <div className="p-4 rounded-2xl bg-pink-50 border border-pink-100">
+                <div className="p-4 rounded-2xl bg-purple-200 border border-purple-200">
                   <p className="text-xs text-gray-500 mb-2 font-semibold">Sender Reputation Score</p>
                   <div className="h-2 rounded-full bg-white overflow-hidden">
                     <div className="h-full rounded-full"
                       style={{
                         width: visible ? "96%" : "0%",
-                        background: "linear-gradient(90deg,#db2777,#f9a8d4)",
+                        background: "linear-gradient(90deg,#9333ea,#d8b4fe)",
                         transition: "width 1.2s cubic-bezier(.22,1,.36,1) 800ms",
                       }} />
                   </div>
-                  <p className="text-xs text-right text-pink-500 font-bold mt-1">96 / 100</p>
+                  <p className="text-xs text-right text-purple-600 font-bold mt-1">96 / 100</p>
                 </div>
               </div>
             </div>
@@ -1094,7 +1100,7 @@ const integrations = [
 
 function Integrations() {
   return (
-    <section className="py-28 bg-pink-50/30">
+    <section className="py-28 bg-purple-200/30">
       <div className="max-w-5xl mx-auto px-6">
         <SectionHeader
           eyebrow="Integrations"
@@ -1106,14 +1112,14 @@ function Integrations() {
             const { ref, visible } = useIntersection();
             return (
               <div key={it.name} ref={ref}
-                className={`group flex flex-col items-center gap-3 p-6 rounded-3xl bg-white border border-pink-100 hover:border-pink-300 hover:-translate-y-2 hover:shadow-lg hover:shadow-pink-50 transition-all duration-400 ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
+                className={`group flex flex-col items-center gap-3 p-6 rounded-3xl bg-white border border-purple-200 hover:border-purple-200 hover:-translate-y-2 hover:shadow-lg hover:shadow-purple-200 transition-all duration-400 ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
                 style={{ transitionDelay: `${i * 60}ms` }}>
-                <div className="w-12 h-12 rounded-2xl bg-pink-50 flex items-center justify-center group-hover:scale-110 transition-transform">
-                  <it.icon className="text-pink-500 text-xl" />
+                <div className="w-12 h-12 rounded-2xl bg-purple-200 flex items-center justify-center group-hover:scale-110 transition-transform">
+                  <it.icon className="text-purple-600 text-xl" />
                 </div>
                 <div className="text-center">
                   <p className="font-bold text-gray-800 text-sm"
-                    style={{ fontFamily: "'Georgia', serif" }}>{it.name}</p>
+                    >{it.name}</p>
                   <p className="text-gray-400 text-xs mt-0.5">{it.desc}</p>
                 </div>
               </div>
@@ -1136,7 +1142,7 @@ function Security() {
     { icon: RiCloudLine,       label: "Geo-redundant infrastructure" },
   ];
   return (
-    <section className="py-24 bg-white">
+    <section className="py-24 bg-transparent">
       <div className="max-w-5xl mx-auto px-6">
         <SectionHeader
           eyebrow="Security & Compliance"
@@ -1148,9 +1154,9 @@ function Security() {
             const { ref, visible } = useIntersection();
             return (
               <div key={p.label} ref={ref}
-                className={`flex items-center gap-3 bg-white rounded-2xl px-5 py-4 border border-pink-50 hover:border-pink-200 hover:shadow transition-all duration-500 ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
+                className={`flex items-center gap-3 bg-white rounded-2xl px-5 py-4 border border-purple-200 hover:border-purple-200 hover:shadow transition-all duration-500 ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
                 style={{ transitionDelay: `${i * 80}ms` }}>
-                <p.icon className="text-pink-400 text-lg flex-shrink-0" />
+                <p.icon className="text-purple-600 text-lg flex-shrink-0" />
                 <span className="text-sm font-medium text-gray-700">{p.label}</span>
               </div>
             );
@@ -1185,7 +1191,7 @@ const testimonials = [
 
 function Testimonials() {
   return (
-    <section className="py-28 bg-pink-50/30">
+    <section className="py-28 bg-purple-200/30">
       <div className="max-w-6xl mx-auto px-6">
         <SectionHeader
           eyebrow="Customer Stories"
@@ -1196,20 +1202,20 @@ function Testimonials() {
             const { ref, visible } = useIntersection();
             return (
               <div key={t.name} ref={ref}
-                className={`bg-white rounded-3xl p-8 border-2 border-pink-50 hover:border-pink-200 hover:-translate-y-2 hover:shadow-xl hover:shadow-pink-50 transition-all duration-500 ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
+                className={`bg-white rounded-3xl p-8 border-2 border-purple-200 hover:border-purple-200 hover:-translate-y-2 hover:shadow-xl hover:shadow-purple-200 transition-all duration-500 ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
                 style={{ transitionDelay: `${i * 120}ms`, boxShadow: "0 4px 24px rgba(219,39,119,0.06)" }}>
                 <div className="flex gap-1 mb-5">
                   {Array.from({ length: 5 }).map((_, j) => (
-                    <RiStarLine key={j} className="text-pink-300" style={{ fill: "#fce7f3" }} />
+                    <RiStarLine key={j} className="text-purple-600" style={{ fill: "#f3e8ff" }} />
                   ))}
                 </div>
                 <p className="text-gray-700 leading-relaxed mb-6 text-sm italic"
-                  style={{ fontFamily: "'Georgia', serif" }}>
+                  >
                   "{t.quote}"
                 </p>
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 rounded-full flex items-center justify-center text-white text-xs font-bold"
-                    style={{ background: "linear-gradient(135deg,#db2777,#f472b6)" }}>
+                    style={{ background: "linear-gradient(135deg,#9333ea,#c084fc)" }}>
                     {t.initials}
                   </div>
                   <div>
@@ -1280,7 +1286,7 @@ const plans = [
 
 function Pricing() {
   return (
-    <section className="py-28 bg-white">
+    <section className="py-28 bg-transparent">
       <div className="max-w-6xl mx-auto px-6">
         <SectionHeader
           eyebrow="Pricing"
@@ -1293,39 +1299,39 @@ function Pricing() {
             return (
               <div key={p.name} ref={ref}
                 className={`relative rounded-3xl p-8 border-2 transition-all duration-700 hover:-translate-y-2 ${
-                  p.highlight ? "border-transparent text-white" : "border-pink-100 bg-white hover:border-pink-300 hover:shadow-xl hover:shadow-pink-50"
+                  p.highlight ? "border-transparent text-white" : "border-purple-200 bg-white hover:border-purple-200 hover:shadow-xl hover:shadow-purple-200"
                 } ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
                 style={{
                   transitionDelay: `${i * 120}ms`,
-                  background: p.highlight ? "linear-gradient(135deg,#db2777,#f472b6)" : undefined,
+                  background: p.highlight ? "linear-gradient(135deg,#9333ea,#c084fc)" : undefined,
                   boxShadow: p.highlight ? "0 30px 60px rgba(219,39,119,0.28)" : undefined,
                 }}>
                 {p.highlight && (
-                  <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-4 py-1.5 bg-white rounded-full text-pink-600 text-xs font-black shadow">
+                  <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-4 py-1.5 bg-white rounded-full text-purple-600 text-xs font-black shadow">
                     Most Popular
                   </div>
                 )}
-                <p className={`font-bold tracking-wide text-sm uppercase mb-4 ${p.highlight ? "text-pink-100" : "text-pink-500"}`}>
+                <p className={`font-bold tracking-wide text-sm uppercase mb-4 ${p.highlight ? "text-purple-600" : "text-purple-600"}`}>
                   {p.name}
                 </p>
                 <div className="flex items-baseline gap-1 mb-2">
                   <span className="text-4xl font-black"
-                    style={{ fontFamily: "'Georgia', serif" }}>{p.price}</span>
-                  <span className={`text-sm ${p.highlight ? "text-pink-100" : "text-gray-400"}`}>{p.period}</span>
+                    >{p.price}</span>
+                  <span className={`text-sm ${p.highlight ? "text-purple-600" : "text-gray-400"}`}>{p.period}</span>
                 </div>
-                <p className={`text-sm mb-6 leading-relaxed ${p.highlight ? "text-pink-100" : "text-gray-500"}`}>{p.desc}</p>
+                <p className={`text-sm mb-6 leading-relaxed ${p.highlight ? "text-purple-600" : "text-gray-500"}`}>{p.desc}</p>
                 <ul className="space-y-3 mb-8">
                   {p.features.map((f) => (
-                    <li key={f} className={`flex items-center gap-2.5 text-sm ${p.highlight ? "text-pink-50" : "text-gray-600"}`}>
-                      <RiCheckLine className={`flex-shrink-0 ${p.highlight ? "text-pink-200" : "text-pink-400"}`} />
+                    <li key={f} className={`flex items-center gap-2.5 text-sm ${p.highlight ? "text-purple-600" : "text-gray-600"}`}>
+                      <RiCheckLine className={`flex-shrink-0 ${p.highlight ? "text-purple-600" : "text-purple-600"}`} />
                       {f}
                     </li>
                   ))}
                 </ul>
                 <button className="w-full py-3.5 rounded-full font-bold text-sm transition-all duration-300 hover:-translate-y-0.5"
                   style={{
-                    background: p.highlight ? "white" : "linear-gradient(135deg,#db2777,#f472b6)",
-                    color: p.highlight ? "#db2777" : "white",
+                    background: p.highlight ? "white" : "linear-gradient(135deg,#9333ea,#c084fc)",
+                    color: p.highlight ? "#9333ea" : "white",
                   }}>
                   {p.cta}
                 </button>
@@ -1342,31 +1348,31 @@ function Pricing() {
 function CTA() {
   const { ref, visible } = useIntersection();
   return (
-    <section className="py-28 bg-pink-50/30">
+    <section className="py-28 bg-purple-200/30">
       <div ref={ref}
         className={`max-w-4xl mx-auto px-6 text-center transition-all duration-700 ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
-        <div className="relative rounded-3xl overflow-hidden p-16 shadow-2xl shadow-pink-200"
-          style={{ background: "linear-gradient(135deg,#db2777 0%,#ec4899 60%,#f9a8d4 100%)" }}>
+        <div className="relative rounded-3xl overflow-hidden p-16 shadow-2xl shadow-purple-200"
+          style={{ background: "linear-gradient(135deg,#9333ea 0%,#a855f7 60%,#d8b4fe 100%)" }}>
           <div className="absolute top-6 right-10 w-32 h-32 rounded-full border-2 border-white/10" />
           <div className="absolute bottom-4 left-6 w-20 h-20 rounded-full border border-white/10" />
           <div className="absolute top-1/2 left-8 w-3 h-3 rounded-full bg-white/20" />
           <div className="absolute bottom-12 right-20 w-5 h-5 rounded-full bg-white/10" />
 
-          <p className="text-xs font-semibold tracking-widest uppercase text-pink-200 mb-4">
+          <p className="text-xs font-semibold tracking-widest uppercase text-purple-100 mb-4">
             Ready to put your email programme on autopilot?
           </p>
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-5 leading-tight"
-            style={{ fontFamily: "'Georgia', serif" }}>
+            >
             Your first automated
             <br />flow is 20 minutes away.
           </h2>
-          <p className="text-pink-100 text-lg mb-10 max-w-xl mx-auto leading-relaxed">
+          <p className="text-purple-100 text-lg mb-10 max-w-xl mx-auto leading-relaxed">
             Connect your store, build a flow, and let the AI write and send the first campaign —
             all before your next standup.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link href="#">
-              <button className="group flex items-center gap-2 bg-white text-pink-600 hover:bg-pink-50 font-bold px-8 py-4 rounded-full transition-all duration-200 shadow-lg hover:-translate-y-0.5">
+              <button className="group flex items-center gap-2 bg-white text-purple-600 hover:bg-purple-200 font-bold px-8 py-4 rounded-full transition-all duration-200 shadow-lg hover:-translate-y-0.5">
                 Start Free — No Card Needed
                 <RiArrowRightLine className="transition-transform group-hover:translate-x-1" />
               </button>
@@ -1377,7 +1383,7 @@ function CTA() {
               </button>
             </Link>
           </div>
-          <p className="text-pink-200 text-sm mt-6">
+          <p className="text-purple-100 text-sm mt-6">
             14-day free trial. No credit card required. Cancel any time.
           </p>
         </div>
@@ -1389,23 +1395,27 @@ function CTA() {
 /* ─── Page Assembly ───────────────────────────────────────────────────── */
 export default function EmailAutomationPage() {
   return (
-    <main className="font-sans antialiased bg-white text-gray-900 overflow-x-hidden">
-      <Hero />
-      <Ticker />
-      <HowItWorks />
-      <FeaturesSection />
-      <StatsBand />
-      <FlowBuilderSection />
-      <AICopySection />
-      <UseCases />
-      <Analytics />
-      <DeliverabilitySection />
-      <Integrations />
-      <Testimonials />
-      <Security />
-      <Pricing />
-      <CTA />
-    </main>
+    <>
+      <CustomCursor />
+      <GlobalBackground />
+      <ScrollRevealInit />
+      <Navbar />
+      <main className="font-sans antialiased bg-transparent text-gray-900 overflow-x-hidden">
+        <Hero />
+        <HowItWorks />
+        <FeaturesSection />
+        <StatsBand />
+        <FlowBuilderSection />
+        <AICopySection />
+        <UseCases />
+        <Analytics />
+        <DeliverabilitySection />
+        <Security />
+        <CTA />
+        <FooterSection />
+        <BackToTop />
+      </main>
+    </>
   );
 }
 

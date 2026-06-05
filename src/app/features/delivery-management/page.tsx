@@ -80,7 +80,7 @@ function Counter({ end, prefix = "", suffix = "", decimals = 0 }: { end: number;
 ───────────────────────────────────────────── */
 function HeroSection() {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-white px-6 pt-20">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-transparent px-6 pt-20">
       {/* Dot grid texture */}
       <div className="pointer-events-none absolute inset-0"
         style={{
@@ -383,7 +383,7 @@ function FlowSection() {
   ];
 
   return (
-    <section className="py-32 px-6 bg-white overflow-hidden">
+    <section className="py-32 px-6 bg-transparent overflow-hidden">
       <div className="max-w-5xl mx-auto">
         <div className="text-center mb-20">
           <p className="text-purple-500 font-semibold tracking-widest text-sm uppercase mb-4">Delivery Flow</p>

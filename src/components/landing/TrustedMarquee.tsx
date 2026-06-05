@@ -1,4 +1,4 @@
-
+import Image from "next/image";
 
 const integrationBrands = [
   { name: "Google", logo: "https://www.google.com/s2/favicons?domain=google.com&sz=128" },
@@ -35,7 +35,9 @@ export function TrustedMarquee() {
               key={`${brand.name}-${i}`}
               className="flex items-center gap-3 transition-opacity duration-300 hover:opacity-80 select-none"
             >
-              <img src={brand.logo} alt={`${brand.name} logo`} className="w-10 h-10 md:w-12 md:h-12 object-contain" loading="lazy" />
+              <div className="relative w-10 h-10 md:w-12 md:h-12 shrink-0">
+                <Image src={brand.logo} alt={`${brand.name} logo`} fill className="object-contain" />
+              </div>
               <span className="text-xl md:text-2xl font-bold text-gray-700 whitespace-nowrap">
                 {brand.name}
               </span>

@@ -119,7 +119,7 @@ function FloatingShapes() {
 ───────────────────────────────────────────── */
 function HeroSection() {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-white px-6 mt-14">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-transparent px-6 mt-14">
       <FloatingShapes />
 
       {/* Grid texture */}
@@ -379,7 +379,7 @@ function HowItWorks() {
   ];
 
   return (
-    <section className="py-32 px-6 bg-white">
+    <section className="py-32 px-6 bg-transparent">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-20">
           <p className="text-purple-500 font-semibold tracking-widest text-sm uppercase mb-4">
@@ -626,7 +626,7 @@ function UseCasesSection() {
   ];
 
   return (
-    <section className="py-32 px-6 bg-white overflow-hidden">
+    <section className="py-32 px-6 bg-transparent overflow-hidden">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-16">
           <p className="text-purple-500 font-semibold tracking-widest text-sm uppercase mb-4">
@@ -889,7 +889,7 @@ function ResponsiveSection() {
   ];
 
   return (
-    <section className="py-32 px-6 bg-white">
+    <section className="py-32 px-6 bg-transparent">
       <div className="max-w-5xl mx-auto text-center">
         <p className="text-purple-500 font-semibold tracking-widest text-sm uppercase mb-4">
           Responsive
@@ -989,7 +989,7 @@ function CTASection() {
           </button></Link>
         
         </div>
-        <p className="text-purple-200 text-sm mt-6">
+        <p className="text-purple-600 text-sm mt-6">
           No credit card required. Free forever plan available.
         </p>
       </div>
