@@ -35,6 +35,7 @@ import {
   RiQuoteText,
   RiMegaphoneLine,
 } from "react-icons/ri";
+import Link from "next/link";
 
 /* ─── Utility ─────────────────────────────────────────────────────────── */
 function useIntersection(threshold = 0.15) {
@@ -178,10 +179,11 @@ function Hero() {
           className="flex flex-col sm:flex-row items-center justify-center gap-4"
           style={{ animation: "fadeUp 0.8s cubic-bezier(.22,1,.36,1) 0.4s both" }}
         >
+         <Link href="https://web.sellerslogin.com/vendor/registration">
           <button className="group flex items-center gap-2 bg-purple-600 hover:bg-purple-700 text-white font-semibold px-8 py-4 rounded-full transition-all duration-300 shadow-lg shadow-purple-200 hover:shadow-purple-300 hover:-translate-y-0.5">
             Request Demo
             <RiArrowRightLine className="transition-transform duration-200 group-hover:translate-x-1" />
-          </button>
+          </button></Link>
           <button className="flex items-center gap-2 text-gray-700 hover:text-purple-600 font-semibold px-8 py-4 rounded-full border border-gray-200 hover:border-purple-200 transition-all duration-300 hover:-translate-y-0.5 bg-white/80">
             View Live Dashboard
             <RiArrowRightUpLine />
@@ -318,33 +320,7 @@ function DashboardPreview() {
   );
 }
 
-/* ─── Logos strip ─────────────────────────────────────────────────────── */
-function LogosStrip() {
-  const logos = ["Nexora", "BlueWave", "Stratus", "Vantex", "Orbitex", "Crystallis", "Prismatech", "Luminary"];
-  return (
-    <section className="py-14 border-y border-purple-50 bg-purple-50/30 overflow-hidden">
-      <p className="text-center text-xs tracking-widest uppercase text-gray-400 mb-8">Trusted by category leaders</p>
-      <div className="relative">
-        <div
-          className="flex gap-20 items-center w-max"
-          style={{ animation: "marquee 28s linear infinite" }}
-        >
-          {[...logos, ...logos].map((l, i) => (
-            <span key={i} className="text-sm font-bold tracking-wide text-gray-300 uppercase whitespace-nowrap select-none" >
-              {l}
-            </span>
-          ))}
-        </div>
-      </div>
-      <style>{`
-        @keyframes marquee {
-          from { transform: translateX(0); }
-          to { transform: translateX(-50%); }
-        }
-      `}</style>
-    </section>
-  );
-}
+
 
 /* ─── Section Header ──────────────────────────────────────────────────── */
 function SectionHeader({ eyebrow, title, sub }: { eyebrow: string; title: string; sub?: string }) {
@@ -832,10 +808,11 @@ function CTA() {
             No sales pitch, just a real look at your use case.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+         <Link href="https://web.sellerslogin.com/vendor/registration">
             <button className="group flex items-center gap-2 bg-white text-purple-600 hover:bg-purple-50 font-bold px-8 py-4 rounded-full transition-all duration-200 shadow-lg hover:-translate-y-0.5">
               Book a Demo
               <RiArrowRightLine className="transition-transform duration-200 group-hover:translate-x-1" />
-            </button>
+            </button></Link>
         
           </div>
         </div>
@@ -854,13 +831,13 @@ export default function MarketingAutomationPage() {
       <Navbar />
       <main className="font-sans antialiased bg-white text-gray-900 overflow-x-hidden">
         <Hero />
-        <LogosStrip />
+   
         <FeaturesSection />
         <StatsBand />
         <HowItWorks />
         <UseCases />
-        <HowBuilt />
-        <Integrations />
+     
+
      
         <Security />
         <CTA />

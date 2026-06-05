@@ -95,7 +95,7 @@ export function ProcessSection() {
           How It Works
         </div>
         <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 leading-tight tracking-tight mb-4">
-          From zero to selling in 4 steps
+          From Zero to Selling in 4 Steps
         </h2>
         <p className="text-base md:text-lg text-gray-500 leading-relaxed max-w-2xl mx-auto">
           No technical skills needed. Our guided setup gets your store live and ready to sell in minutes.

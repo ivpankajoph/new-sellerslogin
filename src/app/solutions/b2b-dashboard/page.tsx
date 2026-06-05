@@ -14,26 +14,21 @@ import {
   RiFileChartLine,
   RiArrowRightLine,
   RiCheckLine,
-  RiStarLine,
   RiDatabase2Line,
   RiGlobalLine,
   RiSecurePaymentLine,
   RiLineChartLine,
   RiSettings4Line,
-  RiCodeSSlashLine,
-  RiStackLine,
   RiShieldCheckLine,
-  RiRocketLine,
   RiArrowRightUpLine,
   RiPulseLine,
   RiBuildingLine,
   RiFlowChart,
-  RiAppsLine,
   RiLockLine,
   RiCloudLine,
   RiArrowDownLine,
-  RiQuoteText,
 } from "react-icons/ri";
+import Link from "next/link";
 
 /* ─── Utility ─────────────────────────────────────────────────────────── */
 function useIntersection(threshold = 0.15) {
@@ -43,8 +38,13 @@ function useIntersection(threshold = 0.15) {
     const el = ref.current;
     if (!el) return;
     const obs = new IntersectionObserver(
-      ([e]) => { if (e.isIntersecting) { setVisible(true); obs.disconnect(); } },
-      { threshold }
+      ([e]) => {
+        if (e.isIntersecting) {
+          setVisible(true);
+          obs.disconnect();
+        }
+      },
+      { threshold },
     );
     obs.observe(el);
     return () => obs.disconnect();
@@ -62,11 +62,19 @@ function Counter({ to, suffix = "" }: { to: number; suffix?: string }) {
     const step = Math.ceil(to / 60);
     const t = setInterval(() => {
       start += step;
-      if (start >= to) { setVal(to); clearInterval(t); } else setVal(start);
+      if (start >= to) {
+        setVal(to);
+        clearInterval(t);
+      } else setVal(start);
     }, 20);
     return () => clearInterval(t);
   }, [visible, to]);
-  return <span ref={ref}>{val.toLocaleString()}{suffix}</span>;
+  return (
+    <span ref={ref}>
+      {val.toLocaleString()}
+      {suffix}
+    </span>
+  );
 }
 
 /* ─── Floating Orb Background ─────────────────────────────────────────── */
@@ -75,15 +83,24 @@ function OrbBg() {
     <div className="pointer-events-none absolute inset-0 overflow-hidden">
       <div
         className="absolute -top-32 -left-32 w-[520px] h-[520px] rounded-full opacity-20"
-        style={{ background: "radial-gradient(circle, #f9a8d4 0%, transparent 70%)", animation: "orbFloat 8s ease-in-out infinite" }}
+        style={{
+          background: "radial-gradient(circle, #f9a8d4 0%, transparent 70%)",
+          animation: "orbFloat 8s ease-in-out infinite",
+        }}
       />
       <div
         className="absolute top-1/2 -right-48 w-[400px] h-[400px] rounded-full opacity-15"
-        style={{ background: "radial-gradient(circle, #fbcfe8 0%, transparent 70%)", animation: "orbFloat 11s ease-in-out infinite reverse" }}
+        style={{
+          background: "radial-gradient(circle, #fbcfe8 0%, transparent 70%)",
+          animation: "orbFloat 11s ease-in-out infinite reverse",
+        }}
       />
       <div
         className="absolute bottom-0 left-1/3 w-[300px] h-[300px] rounded-full opacity-10"
-        style={{ background: "radial-gradient(circle, #f472b6 0%, transparent 70%)", animation: "orbFloat 9s ease-in-out infinite 2s" }}
+        style={{
+          background: "radial-gradient(circle, #f472b6 0%, transparent 70%)",
+          animation: "orbFloat 9s ease-in-out infinite 2s",
+        }}
       />
       <style>{`
         @keyframes orbFloat {
@@ -136,23 +153,26 @@ function Hero() {
       <div
         className="pointer-events-none absolute inset-0 opacity-[0.035]"
         style={{
-          backgroundImage: "linear-gradient(#be185d 1px, transparent 1px), linear-gradient(90deg, #be185d 1px, transparent 1px)",
+          backgroundImage:
+            "linear-gradient(#be185d 1px, transparent 1px), linear-gradient(90deg, #be185d 1px, transparent 1px)",
           backgroundSize: "60px 60px",
         }}
       />
 
       <div className="relative z-10 max-w-6xl mx-auto px-6 text-center">
         {/* Pill badge */}
-    
 
         <h1
           className="font-serif text-6xl md:text-8xl font-bold leading-[1.05] text-gray-900 mb-6"
-          style={{ animation: "fadeUp 0.8s cubic-bezier(.22,1,.36,1) 0.1s both" }}
+          style={{
+            animation: "fadeUp 0.8s cubic-bezier(.22,1,.36,1) 0.1s both",
+          }}
         >
           Commerce that{" "}
           <span
             style={{
-              background: "linear-gradient(90deg, #db2777, #ec4899, #f9a8d4, #db2777)",
+              background:
+                "linear-gradient(90deg, #db2777, #ec4899, #f9a8d4, #db2777)",
               backgroundSize: "200% auto",
               WebkitBackgroundClip: "text",
               WebkitTextFillColor: "transparent",
@@ -161,30 +181,33 @@ function Hero() {
           >
             scales
           </span>{" "}
-          <br />with your ambition.
+          <br />
+          with your ambition.
         </h1>
 
         <p
           className="text-lg md:text-xl text-gray-500 max-w-2xl mx-auto mb-10 leading-relaxed"
-          style={{ animation: "fadeUp 0.8s cubic-bezier(.22,1,.36,1) 0.25s both" }}
+          style={{
+            animation: "fadeUp 0.8s cubic-bezier(.22,1,.36,1) 0.25s both",
+          }}
         >
-          A unified B2B e-commerce dashboard that brings orders, buyers, analytics,
-          and operations into one elegant command centre — built for enterprises
-          that refuse to compromise.
+          A unified B2B e-commerce dashboard that brings orders, buyers,
+          analytics, and operations into one elegant command centre — built for
+          enterprises that refuse to compromise.
         </p>
 
         <div
           className="flex flex-col sm:flex-row items-center justify-center gap-4"
-          style={{ animation: "fadeUp 0.8s cubic-bezier(.22,1,.36,1) 0.4s both" }}
+          style={{
+            animation: "fadeUp 0.8s cubic-bezier(.22,1,.36,1) 0.4s both",
+          }}
         >
-          <button className="group flex items-center gap-2 bg-purple-600 hover:bg-purple-700 text-white font-semibold px-8 py-4 rounded-full transition-all duration-300 shadow-lg shadow-purple-200 hover:shadow-purple-300 hover:-translate-y-0.5">
-            Request Demo
-            <RiArrowRightLine className="transition-transform duration-200 group-hover:translate-x-1" />
-          </button>
-          <button className="flex items-center gap-2 text-gray-700 hover:text-purple-600 font-semibold px-8 py-4 rounded-full border border-gray-200 hover:border-purple-200 transition-all duration-300 hover:-translate-y-0.5 bg-white/80">
-            View Live Dashboard
-            <RiArrowRightUpLine />
-          </button>
+          <Link href="https://web.sellerslogin.com/vendor/registration">
+            <button className="flex items-center gap-2 text-gray-700 hover:text-purple-600 font-semibold px-8 py-4 rounded-full border border-gray-200 hover:border-purple-200 transition-all duration-300 hover:-translate-y-0.5 bg-white/80">
+              View Live Dashboard
+              <RiArrowRightUpLine />
+            </button>
+          </Link>
         </div>
 
         {/* Trust row */}
@@ -192,7 +215,12 @@ function Hero() {
           className="mt-16 flex flex-wrap items-center justify-center gap-8 text-sm text-gray-400"
           style={{ animation: "fadeIn 1s ease 0.7s both" }}
         >
-          {["SOC 2 Type II", "GDPR Ready", "99.99% Uptime", "24 / 7 Support"].map((t) => (
+          {[
+            "SOC 2 Type II",
+            "GDPR Ready",
+            "99.99% Uptime",
+            "24 / 7 Support",
+          ].map((t) => (
             <span key={t} className="flex items-center gap-2">
               <RiCheckLine className="text-purple-400" /> {t}
             </span>
@@ -209,7 +237,10 @@ function Hero() {
       </div>
 
       {/* Scroll indicator */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-gray-300 text-xs" style={{ animation: "fadeIn 1.2s ease 1s both" }}>
+      <div
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-gray-300 text-xs"
+        style={{ animation: "fadeIn 1.2s ease 1s both" }}
+      >
         <span className="tracking-widest uppercase">Scroll</span>
         <RiArrowDownLine className="text-lg animate-bounce" />
       </div>
@@ -227,7 +258,9 @@ function DashboardPreview() {
         <span className="w-3 h-3 rounded-full bg-red-300" />
         <span className="w-3 h-3 rounded-full bg-yellow-300" />
         <span className="w-3 h-3 rounded-full bg-green-300" />
-        <span className="ml-auto text-xs text-gray-400 font-mono">dashboard.b2bpro.io</span>
+        <span className="ml-auto text-xs text-gray-400 font-mono">
+          dashboard.b2bpro.io
+        </span>
       </div>
 
       <div className="grid grid-cols-12 gap-0">
@@ -244,7 +277,9 @@ function DashboardPreview() {
               <div
                 key={label}
                 className={`flex items-center gap-2 text-xs px-3 py-2 rounded-xl cursor-pointer transition-colors ${
-                  active ? "bg-purple-50 text-purple-600 font-semibold" : "text-gray-400 hover:text-gray-600"
+                  active
+                    ? "bg-purple-50 text-purple-600 font-semibold"
+                    : "text-gray-400 hover:text-gray-600"
                 }`}
               >
                 <Icon className="text-base flex-shrink-0" />
@@ -264,10 +299,19 @@ function DashboardPreview() {
               { label: "Buyers", value: "1,209", delta: "+9.1%", up: true },
               { label: "Avg. Order", value: "$287", delta: "-2.3%", up: false },
             ].map((k) => (
-              <div key={k.label} className="bg-white rounded-2xl p-4 border border-purple-50 shadow-sm">
+              <div
+                key={k.label}
+                className="bg-white rounded-2xl p-4 border border-purple-50 shadow-sm"
+              >
                 <p className="text-xs text-gray-400 mb-1">{k.label}</p>
-                <p className="text-xl font-bold text-gray-800 font-mono">{k.value}</p>
-                <p className={`text-xs font-semibold mt-1 ${k.up ? "text-emerald-500" : "text-rose-400"}`}>{k.delta}</p>
+                <p className="text-xl font-bold text-gray-800 font-mono">
+                  {k.value}
+                </p>
+                <p
+                  className={`text-xs font-semibold mt-1 ${k.up ? "text-emerald-500" : "text-rose-400"}`}
+                >
+                  {k.delta}
+                </p>
               </div>
             ))}
           </div>
@@ -276,7 +320,9 @@ function DashboardPreview() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
             {/* Bar chart */}
             <div className="md:col-span-2 bg-white rounded-2xl border border-purple-50 p-4 shadow-sm">
-              <p className="text-xs font-semibold text-gray-600 mb-3">Monthly Revenue</p>
+              <p className="text-xs font-semibold text-gray-600 mb-3">
+                Monthly Revenue
+              </p>
               <div className="flex items-end gap-1.5 h-24">
                 {bars.map((h, i) => (
                   <div
@@ -295,7 +341,9 @@ function DashboardPreview() {
 
             {/* Mini table */}
             <div className="bg-white rounded-2xl border border-purple-50 p-4 shadow-sm">
-              <p className="text-xs font-semibold text-gray-600 mb-3">Top Buyers</p>
+              <p className="text-xs font-semibold text-gray-600 mb-3">
+                Top Buyers
+              </p>
               <div className="space-y-2">
                 {[
                   { name: "Nexora Corp", val: "$124K" },
@@ -303,9 +351,14 @@ function DashboardPreview() {
                   { name: "Stratus Inc", val: "$76K" },
                   { name: "Vantex Group", val: "$61K" },
                 ].map((b) => (
-                  <div key={b.name} className="flex items-center justify-between text-xs">
+                  <div
+                    key={b.name}
+                    className="flex items-center justify-between text-xs"
+                  >
                     <span className="text-gray-600 truncate">{b.name}</span>
-                    <span className="font-semibold text-purple-600 font-mono">{b.val}</span>
+                    <span className="font-semibold text-purple-600 font-mono">
+                      {b.val}
+                    </span>
                   </div>
                 ))}
               </div>
@@ -317,36 +370,16 @@ function DashboardPreview() {
   );
 }
 
-/* ─── Logos strip ─────────────────────────────────────────────────────── */
-function LogosStrip() {
-  const logos = ["Nexora", "BlueWave", "Stratus", "Vantex", "Orbitex", "Crystallis", "Prismatech", "Luminary"];
-  return (
-    <section className="py-14 border-y border-purple-50 bg-purple-50/30 overflow-hidden">
-      <p className="text-center text-xs tracking-widest uppercase text-gray-400 mb-8">Trusted by category leaders</p>
-      <div className="relative">
-        <div
-          className="flex gap-20 items-center w-max"
-          style={{ animation: "marquee 28s linear infinite" }}
-        >
-          {[...logos, ...logos].map((l, i) => (
-            <span key={i} className="text-sm font-bold tracking-wide text-gray-300 uppercase whitespace-nowrap select-none" >
-              {l}
-            </span>
-          ))}
-        </div>
-      </div>
-      <style>{`
-        @keyframes marquee {
-          from { transform: translateX(0); }
-          to { transform: translateX(-50%); }
-        }
-      `}</style>
-    </section>
-  );
-}
-
 /* ─── Section Header ──────────────────────────────────────────────────── */
-function SectionHeader({ eyebrow, title, sub }: { eyebrow: string; title: string; sub?: string }) {
+function SectionHeader({
+  eyebrow,
+  title,
+  sub,
+}: {
+  eyebrow: string;
+  title: string;
+  sub?: string;
+}) {
   const { ref, visible } = useIntersection();
   return (
     <div ref={ref} className="text-center max-w-2xl mx-auto mb-16 px-4">
@@ -357,12 +390,13 @@ function SectionHeader({ eyebrow, title, sub }: { eyebrow: string; title: string
       </span>
       <h2
         className={`text-4xl md:text-5xl font-bold text-gray-900 leading-tight mb-4 transition-all duration-700 delay-100 ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
-        
       >
         {title}
       </h2>
       {sub && (
-        <p className={`text-gray-500 text-lg leading-relaxed transition-all duration-700 delay-200 ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
+        <p
+          className={`text-gray-500 text-lg leading-relaxed transition-all duration-700 delay-200 ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
+        >
           {sub}
         </p>
       )}
@@ -435,13 +469,19 @@ function FeaturesSection() {
                 >
                   <f.icon style={{ color: f.color, fontSize: "1.4rem" }} />
                 </div>
-                <h3 className="font-bold text-gray-800 text-lg mb-2" >{f.title}</h3>
-                <p className="text-gray-500 text-sm leading-relaxed">{f.desc}</p>
+                <h3 className="font-bold text-gray-800 text-lg mb-2">
+                  {f.title}
+                </h3>
+                <p className="text-gray-500 text-sm leading-relaxed">
+                  {f.desc}
+                </p>
 
                 {/* Hover accent */}
                 <div
                   className="absolute bottom-0 left-0 right-0 h-0.5 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                  style={{ background: `linear-gradient(90deg, transparent, ${f.color}, transparent)` }}
+                  style={{
+                    background: `linear-gradient(90deg, transparent, ${f.color}, transparent)`,
+                  }}
                 />
               </div>
             );
@@ -452,27 +492,17 @@ function FeaturesSection() {
   );
 }
 
-/* ─── How It's Built ──────────────────────────────────────────────────── */
-const stack = [
-  { icon: RiCodeSSlashLine, layer: "Frontend", tech: "Next.js 14 + TypeScript", note: "App Router, Server Components, streaming UI" },
-  { icon: RiDatabase2Line, layer: "Data Layer", tech: "PostgreSQL + Redis", note: "OLTP + real-time caching for sub-50ms reads" },
-  { icon: RiCloudLine, layer: "Infrastructure", tech: "AWS / GCP multi-region", note: "Kubernetes, auto-scaling, 99.99% SLA" },
-  { icon: RiStackLine, layer: "APIs", tech: "GraphQL + REST", tech2: "Webhooks", note: "Federated graph for composable integrations" },
-  { icon: RiLockLine, layer: "Auth & Security", tech: "OAuth 2.0 + SSO", note: "SAML, SCIM, row-level security, audit logs" },
-  { icon: RiAppsLine, layer: "Integrations", tech: "100+ connectors", note: "ERP, CRM, WMS, shipping, payments, tax" },
-];
-
 function HowBuilt() {
   return (
     <section className="py-28 bg-purple-50/40 relative overflow-hidden">
       <div
         className="pointer-events-none absolute inset-0 opacity-[0.03]"
         style={{
-          backgroundImage: "radial-gradient(circle, #db2777 1px, transparent 1px)",
+          backgroundImage:
+            "radial-gradient(circle, #db2777 1px, transparent 1px)",
           backgroundSize: "32px 32px",
         }}
       />
-      
     </section>
   );
 }
@@ -526,7 +556,10 @@ function UseCases() {
                 key={u.industry}
                 ref={ref}
                 className={`group relative overflow-hidden border border-purple-50 hover:border-purple-200 rounded-3xl p-8 transition-all duration-500 hover:shadow-xl hover:shadow-purple-50 hover:-translate-y-1 ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
-                style={{ transitionDelay: `${i * 100}ms`, background: i % 2 === 0 ? "white" : "#faf5ff" }}
+                style={{
+                  transitionDelay: `${i * 100}ms`,
+                  background: i % 2 === 0 ? "white" : "#faf5ff",
+                }}
               >
                 {/* Background accent */}
                 <div className="absolute top-0 right-0 w-40 h-40 rounded-bl-full opacity-5 bg-purple-400 transition-all duration-500 group-hover:opacity-10 group-hover:w-52 group-hover:h-52" />
@@ -536,14 +569,23 @@ function UseCases() {
                     <u.icon className="text-purple-500 text-xl" />
                   </div>
                   <div>
-                    <p className="text-xs font-semibold uppercase tracking-widest text-purple-400 mb-1">{u.industry}</p>
-                    <h3 className="font-bold text-gray-800 text-lg leading-snug" >{u.heading}</h3>
+                    <p className="text-xs font-semibold uppercase tracking-widest text-purple-400 mb-1">
+                      {u.industry}
+                    </p>
+                    <h3 className="font-bold text-gray-800 text-lg leading-snug">
+                      {u.heading}
+                    </h3>
                   </div>
                 </div>
-                <p className="text-gray-500 text-sm leading-relaxed mb-6">{u.body}</p>
+                <p className="text-gray-500 text-sm leading-relaxed mb-6">
+                  {u.body}
+                </p>
                 <div className="flex flex-wrap gap-2">
                   {u.tags.map((t) => (
-                    <span key={t} className="text-xs px-3 py-1 rounded-full bg-purple-50 text-purple-600 font-medium border border-purple-100">
+                    <span
+                      key={t}
+                      className="text-xs px-3 py-1 rounded-full bg-purple-50 text-purple-600 font-medium border border-purple-100"
+                    >
                       {t}
                     </span>
                   ))}
@@ -561,8 +603,8 @@ function UseCases() {
 function StatsBand() {
   const { ref, visible } = useIntersection();
   const stats = [
-    { value: 340, suffix: "%", label: "Average ROI in year one" },
-    { value: 4200, suffix: "+", label: "Enterprise customers" },
+    { value: 20, suffix: "+", label: "No. of templates" },
+    { value: 40, suffix: "+", label: "Enterprise customers" },
     { value: 99, suffix: ".99%", label: "Guaranteed uptime" },
     { value: 48, suffix: "hr", label: "Average onboarding time" },
   ];
@@ -580,7 +622,11 @@ function StatsBand() {
               style={{ transitionDelay: `${i * 120}ms` }}
             >
               <p className="text-5xl font-bold font-mono mb-2">
-                {visible ? <Counter to={s.value} suffix={s.suffix} /> : `0${s.suffix}`}
+                {visible ? (
+                  <Counter to={s.value} suffix={s.suffix} />
+                ) : (
+                  `0${s.suffix}`
+                )}
               </p>
               <p className="text-purple-100 text-sm">{s.label}</p>
             </div>
@@ -593,10 +639,26 @@ function StatsBand() {
 
 /* ─── Workflow / How It Works ─────────────────────────────────────────── */
 const steps = [
-  { num: "01", title: "Connect your data sources", desc: "Sync your ERP, CRM, and warehouse systems in hours using pre-built connectors. No custom ETL required." },
-  { num: "02", title: "Configure your storefront", desc: "Set up buyer portals, custom catalogues, pricing rules, and payment terms through a no-code visual editor." },
-  { num: "03", title: "Invite your buyers", desc: "Send branded invite links. Buyers self-register, get assigned roles, and can place orders immediately." },
-  { num: "04", title: "Go live and monitor", desc: "Launch with confidence. Real-time dashboards surface every KPI you care about from the moment orders start flowing." },
+  {
+    num: "01",
+    title: "Connect your data sources",
+    desc: "Sync your ERP, CRM, and warehouse systems in hours using pre-built connectors. No custom ETL required.",
+  },
+  {
+    num: "02",
+    title: "Configure your storefront",
+    desc: "Set up buyer portals, custom catalogues, pricing rules, and payment terms through a no-code visual editor.",
+  },
+  {
+    num: "03",
+    title: "Invite your buyers",
+    desc: "Send branded invite links. Buyers self-register, get assigned roles, and can place orders immediately.",
+  },
+  {
+    num: "04",
+    title: "Go live and monitor",
+    desc: "Launch with confidence. Real-time dashboards surface every KPI you care about from the moment orders start flowing.",
+  },
 ];
 
 function HowItWorks() {
@@ -621,10 +683,14 @@ function HowItWorks() {
                 style={{ transitionDelay: `${i * 150}ms` }}
               >
                 <div className="relative w-20 h-20 rounded-full bg-white border-2 border-purple-200 flex items-center justify-center mb-5 shadow-md shadow-purple-100 z-10">
-                  <span className="text-2xl font-bold text-purple-500 font-mono">{s.num}</span>
+                  <span className="text-2xl font-bold text-purple-500 font-mono">
+                    {s.num}
+                  </span>
                 </div>
-                <h4 className="font-bold text-gray-800 mb-2" >{s.title}</h4>
-                <p className="text-gray-500 text-sm leading-relaxed">{s.desc}</p>
+                <h4 className="font-bold text-gray-800 mb-2">{s.title}</h4>
+                <p className="text-gray-500 text-sm leading-relaxed">
+                  {s.desc}
+                </p>
               </div>
             );
           })}
@@ -636,137 +702,22 @@ function HowItWorks() {
 
 /* ─── Integrations Grid ───────────────────────────────────────────────── */
 const integrations = [
-  "Salesforce", "SAP", "Oracle", "NetSuite", "Shopify Plus",
-  "QuickBooks", "Stripe", "Avalara", "FedEx", "UPS",
-  "Workday", "HubSpot", "Zendesk", "Slack", "Zapier",
+  "Salesforce",
+  "SAP",
+  "Oracle",
+  "NetSuite",
+  "Shopify Plus",
+  "QuickBooks",
+  "Stripe",
+  "Avalara",
+  "FedEx",
+  "UPS",
+  "Workday",
+  "HubSpot",
+  "Zendesk",
+  "Slack",
+  "Zapier",
 ];
-
-function Integrations() {
-  const { ref, visible } = useIntersection();
-  return (
-    <section className="py-28 bg-white">
-      <div className="max-w-5xl mx-auto px-6">
-        <SectionHeader
-          eyebrow="Integrations"
-          title="Plugs into your existing stack."
-          sub="100+ pre-built integrations across ERP, CRM, payments, shipping, and beyond. Custom webhooks for everything else."
-        />
-        <div ref={ref} className="flex flex-wrap justify-center gap-3">
-          {integrations.map((name, i) => (
-            <div
-              key={name}
-              className={`px-5 py-2.5 rounded-full border border-purple-100 bg-white text-sm font-medium text-gray-600 hover:border-purple-300 hover:text-purple-600 hover:shadow-md transition-all duration-300 cursor-default ${visible ? "opacity-100 scale-100" : "opacity-0 scale-90"}`}
-              style={{ transitionDelay: `${i * 50}ms` }}
-            >
-              {name}
-            </div>
-          ))}
-        </div>
-        <div className={`mt-10 text-center transition-all duration-700 delay-700 ${visible ? "opacity-100" : "opacity-0"}`}>
-          <a href="#" className="inline-flex items-center gap-2 text-purple-600 font-semibold text-sm hover:gap-3 transition-all duration-200">
-            View all integrations <RiArrowRightLine />
-          </a>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* ─── Testimonials ────────────────────────────────────────────────────── */
-const testimonials = [
-  {
-    quote: "We replaced a patchwork of spreadsheets and three separate SaaS tools with this platform. Our order processing time dropped by 74% in the first month.",
-    name: "Meredith Cole",
-    role: "VP Operations, Nexora Manufacturing",
-  },
-  {
-    quote: "The buyer portal changed how our distributors interact with us. They self-serve everything now — POs, invoices, shipment tracking. Our CS team finally has room to breathe.",
-    name: "James Okafor",
-    role: "Head of Sales, BlueWave Distribution",
-  },
-  {
-    quote: "The analytics are genuinely best-in-class. I can drill from top-line GMV all the way down to an individual buyer's order history in two clicks. Phenomenal product.",
-    name: "Priya Shankar",
-    role: "Chief Revenue Officer, Stratus Group",
-  },
-];
-
-function Testimonials() {
-  return (
-    <section className="py-28 bg-purple-50/40 relative overflow-hidden">
-      <OrbBg />
-      <div className="max-w-6xl mx-auto px-6 relative z-10">
-        <SectionHeader
-          eyebrow="Customer Stories"
-          title="Loved by the teams that run it."
-        />
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {testimonials.map((t, i) => {
-            const { ref, visible } = useIntersection();
-            return (
-              <div
-                key={t.name}
-                ref={ref}
-                className={`bg-white rounded-3xl border border-purple-50 p-8 shadow-sm hover:shadow-lg hover:shadow-purple-50 transition-all duration-500 hover:-translate-y-1 ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
-                style={{ transitionDelay: `${i * 120}ms` }}
-              >
-                <RiQuoteText className="text-3xl text-purple-200 mb-4" />
-                <p className="text-gray-600 text-sm leading-relaxed mb-6 italic" >
-                  {t.quote}
-                </p>
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-gradient-to-br from-purple-300 to-rose-400 flex items-center justify-center text-white font-bold text-sm">
-                    {t.name[0]}
-                  </div>
-                  <div>
-                    <p className="font-semibold text-gray-800 text-sm">{t.name}</p>
-                    <p className="text-gray-400 text-xs">{t.role}</p>
-                  </div>
-                </div>
-                <div className="flex gap-0.5 mt-4">
-                  {Array(5).fill(0).map((_, j) => <RiStarLine key={j} className="text-purple-400 text-sm" />)}
-                </div>
-              </div>
-            );
-          })}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* ─── Pricing teaser ──────────────────────────────────────────────────── */
-const plans = [
-  {
-    name: "Growth",
-    price: "$499",
-    period: "/mo",
-    note: "Up to 500 orders / month",
-    features: ["5 buyer portals", "Core analytics", "10 integrations", "Email support"],
-    cta: "Start free trial",
-    highlight: false,
-  },
-  {
-    name: "Scale",
-    price: "$1,299",
-    period: "/mo",
-    note: "Unlimited orders",
-    features: ["Unlimited buyer portals", "Advanced analytics", "50+ integrations", "Priority support", "Custom pricing rules", "SSO / SAML"],
-    cta: "Start free trial",
-    highlight: true,
-  },
-  {
-    name: "Enterprise",
-    price: "Custom",
-    period: "",
-    note: "Tailored to your volume",
-    features: ["Everything in Scale", "Dedicated CSM", "Custom SLA", "On-prem option", "Compliance packages"],
-    cta: "Talk to sales",
-    highlight: false,
-  },
-];
-
-
 
 /* ─── Security Section ────────────────────────────────────────────────── */
 function Security() {
@@ -797,7 +748,9 @@ function Security() {
                 style={{ transitionDelay: `${i * 80}ms` }}
               >
                 <p.icon className="text-purple-400 text-lg flex-shrink-0" />
-                <span className="text-sm font-medium text-gray-700">{p.label}</span>
+                <span className="text-sm font-medium text-gray-700">
+                  {p.label}
+                </span>
               </div>
             );
           })}
@@ -822,20 +775,27 @@ function CTA() {
           <div className="absolute bottom-4 left-6 w-20 h-20 rounded-full border border-white/10" />
           <div className="absolute top-1/2 left-8 w-3 h-3 rounded-full bg-white/20" />
 
-          <p className="text-xs font-semibold tracking-widest uppercase text-purple-200 mb-4">Ready to transform your B2B commerce?</p>
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-5 leading-tight" >
-            See the dashboard<br />live — in 30 minutes.
+          <p className="text-xs font-semibold tracking-widest uppercase text-purple-200 mb-4">
+            Ready to transform your B2B commerce?
+          </p>
+          <h2 className="text-4xl md:text-5xl font-bold text-white mb-5 leading-tight">
+            See the dashboard
+            <br />
+            live — in 30 minutes.
           </h2>
           <p className="text-purple-100 text-lg mb-10 max-w-xl mx-auto">
-            Book a personalised demo with a product specialist who knows your industry.
-            No sales pitch, just a real look at your use case.
+            Book a personalised demo with a product specialist who knows your
+            industry. No sales pitch, just a real look at your use case.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <button className="group flex items-center gap-2 bg-white text-purple-600 hover:bg-purple-50 font-bold px-8 py-4 rounded-full transition-all duration-200 shadow-lg hover:-translate-y-0.5">
-              Book a Demo
-              <RiArrowRightLine className="transition-transform duration-200 group-hover:translate-x-1" />
-            </button>
-        
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+              <Link href="https://web.sellerslogin.com/vendor/registration">
+                <button className="group flex items-center gap-2 bg-white text-purple-600 hover:bg-purple-50 font-bold font-body px-8 py-4 rounded-full transition-all duration-200 shadow-lg hover:-translate-y-0.5">
+                  Start Free
+                  <RiArrowRightLine className="transition-transform group-hover:translate-x-1" />
+                </button>
+              </Link>
+            </div>
           </div>
         </div>
       </div>
@@ -853,14 +813,12 @@ export default function B2BDashboardPage() {
       <Navbar />
       <main className="font-sans antialiased bg-white text-gray-900 overflow-x-hidden">
         <Hero />
-        <LogosStrip />
+
         <FeaturesSection />
         <StatsBand />
         <HowItWorks />
         <UseCases />
-        <HowBuilt />
-        <Integrations />
-     
+
         <Security />
         <CTA />
         <FooterSection />

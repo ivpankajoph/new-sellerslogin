@@ -36,9 +36,11 @@ export function LandingPage() {
       <WhySection />
       <ProcessSection />
 
-      <StepsSection />
+     
+        <AutomationSection />
+         <StepsSection />
       <BrandsLoveSection />
-      <AutomationSection />
+    
       <FaqSection />
 
       <CtaSection />

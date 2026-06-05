@@ -46,6 +46,7 @@ import {
   FiArrowDown,
   FiMoreVertical,
 } from "react-icons/fi";
+import Link from "next/link";
 
 /* ─────────────────────────────────────────────
    TYPES
@@ -150,11 +151,12 @@ function HeroSection() {
               Track every product, variant, and warehouse location in real time. Get smart alerts before you run out, and reorder automatically — all from one elegant dashboard.
             </p>
             <div className="flex flex-wrap gap-4">
+             <Link href="https://web.sellerslogin.com/vendor/registration">
               <button className="group flex items-center gap-3 px-8 py-4 rounded-full text-white font-semibold transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
                 style={{ background: "linear-gradient(135deg,#9333ea,#c084fc)" }}>
                 Start Managing
                 <FiArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
-              </button>
+              </button></Link>
               <button className="flex items-center gap-3 px-8 py-4 rounded-full border-2 border-purple-200 text-purple-600 font-semibold hover:bg-purple-50 transition-all duration-300">
                 <FiEye size={16} />
                 Live Preview
@@ -305,7 +307,7 @@ function StatsBand() {
   const { ref, visible } = useInView();
   const stats = [
     { value: 99.9, suffix: "%", label: "Inventory Accuracy", prefix: "", decimals: 1 },
-    { value: 2400, suffix: "+", label: "Products Supported", prefix: "", decimals: 0 },
+    { value: 24, suffix: "+", label: "Products Supported", prefix: "", decimals: 0 },
     { value: 38, suffix: "%", label: "Fewer Stockouts", prefix: "", decimals: 0 },
     { value: 12, suffix: "min", label: "Avg Setup Time", prefix: "<", decimals: 0 },
   ];
@@ -979,13 +981,12 @@ function CTASection() {
           Set up your inventory in minutes. No spreadsheets, no guesswork — just clarity.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
+         <Link href="https://web.sellerslogin.com/vendor/registration">
           <button className="group flex items-center justify-center gap-3 px-10 py-4 rounded-full bg-white text-purple-600 font-bold text-lg hover:bg-purple-50 transition-all hover:-translate-y-1 shadow-lg">
             Start Free
             <FiArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
-          </button>
-          <button className="px-10 py-4 rounded-full border-2 border-white/50 text-white font-bold text-lg hover:bg-white/10 transition-all">
-            Book a Demo
-          </button>
+          </button></Link>
+      
         </div>
         <p className="text-purple-200 text-sm mt-6">No credit card required. Free forever plan available.</p>
       </div>

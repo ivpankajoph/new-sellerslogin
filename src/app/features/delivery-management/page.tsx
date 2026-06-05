@@ -27,6 +27,7 @@ import {
   FiShield,
   FiMessageSquare,
 } from "react-icons/fi";
+import Link from "next/link";
 
 /* ─────────────────────────────────────────────
    ANIMATION HOOK
@@ -115,11 +116,13 @@ function HeroSection() {
               Optimize routes, auto-dispatch drivers, and delight customers with real-time tracking and instant proof of delivery. Manage your entire fleet from one powerful dashboard.
             </p>
             <div className="flex flex-wrap gap-4">
+             <Link href="https://web.sellerslogin.com/vendor/registration">
               <button className="group flex items-center gap-3 px-8 py-4 rounded-full text-white font-semibold transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
                 style={{ background: "linear-gradient(135deg,#9333ea,#c084fc)" }}>
                 Optimize Deliveries
                 <FiArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
               </button>
+              </Link>
               <button className="flex items-center gap-3 px-8 py-4 rounded-full border-2 border-purple-200 text-purple-600 font-semibold hover:bg-purple-50 transition-all duration-300">
                 <FiNavigation size={16} />
                 Live Tracking Demo
@@ -262,7 +265,7 @@ function StatsBand() {
     { value: 99.8, suffix: "%", label: "On-Time Deliveries", prefix: "", decimals: 1 },
     { value: 30, suffix: "%", label: "Route Efficiency", prefix: "+", decimals: 0 },
     { value: 45, suffix: "%", label: "Fuel Cost Saved", prefix: "-", decimals: 0 },
-    { value: 1.2, suffix: "M", label: "Deliveries Handled", prefix: "", decimals: 1 },
+    { value: 10, suffix: "+", label: "Deliveries Handled", prefix: "", decimals: 1 },
   ];
   return (
     <section ref={ref} className="py-16 px-6"
@@ -452,11 +455,11 @@ function CTASection() {
           Start dispatching faster and saving on fuel costs today.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <button className="group flex items-center justify-center gap-3 px-10 py-4 rounded-full bg-white 
-text-purple-600 font-bold text-lg hover:bg-purple-50 transition-all hover:-translate-y-1 shadow-lg">
+       <Link href="https://web.sellerslogin.com/vendor/registration">
+          <button className="group flex items-center justify-center gap-3 px-10 py-4 rounded-full bg-white text-purple-600 font-bold text-lg hover:bg-purple-50 transition-all hover:-translate-y-1 shadow-lg">
             Start Free
             <FiArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
-          </button>
+          </button></Link>
         </div>
       </div>
     </section>

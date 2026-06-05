@@ -71,6 +71,7 @@ import {
   RiArrowDownSLine,
   RiDonutChartLine,
 } from "react-icons/ri";
+import Link from "next/link";
 
 /* ─── Utility ─────────────────────────────────────────────────────────── */
 function useIntersection(threshold = 0.12) {
@@ -248,10 +249,11 @@ function Hero() {
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4"
           style={{animation:"fadeUp 0.8s cubic-bezier(.22,1,.36,1) 0.4s both"}}>
+      <Link href="https://web.sellerslogin.com/vendor/registration">
           <button className="group flex items-center gap-2 bg-purple-600 hover:bg-purple-700 text-white font-semibold font-body px-8 py-4 rounded-full transition-all duration-300 shadow-lg shadow-purple-200 hover:shadow-purple-300 hover:-translate-y-0.5">
             Start Free Trial
             <RiArrowRightLine className="transition-transform duration-200 group-hover:translate-x-1"/>
-          </button>
+          </button></Link>
           <button className="group flex items-center gap-2 text-gray-700 hover:text-purple-600 font-semibold font-body px-8 py-4 rounded-full border border-gray-200 hover:border-purple-200 transition-all duration-300 bg-white/80 hover:-translate-y-0.5">
             Live Demo
             <RiArrowRightUpLine/>
@@ -883,12 +885,12 @@ function StatsBand() {
   const {ref,visible} = useIntersection();
   const stats = [
     {val:38,suf:"%",label:"Average conversion lift"},
-    {val:12000,suf:"+",label:"D2C brands on platform"},
+    {val:12,suf:"+",label:"B2C brands on platform"},
     {val:99,suf:".99%",label:"Platform uptime"},
     {val:4,suf:"x",label:"Average ROI in 6 months"},
   ];
   return (
-    <section ref={ref} className="py-20 bg-gradient-to-r from-purple-600 via-rose-500 to-purple-500 text-white relative overflow-hidden">
+    <section ref={ref} className="py-20 bg-linear-to-r from-purple-600 via-rose-500 to-purple-500 text-white relative overflow-hidden">
       <div className="pointer-events-none absolute inset-0">
         <div className="absolute top-0 right-1/4 w-64 h-64 rounded-full bg-white/5"/>
         <div className="absolute -bottom-10 left-1/3 w-48 h-48 rounded-full bg-white/5"/>
@@ -1318,13 +1320,13 @@ function CTA() {
             and run leaner operations. Start free — upgrade when you're ready.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+           <Link href="https://web.sellerslogin.com/vendor/registration">
             <button className="group flex items-center gap-2 bg-white text-purple-600 hover:bg-purple-50 font-bold font-body px-8 py-4 rounded-full transition-all duration-200 shadow-lg hover:-translate-y-0.5">
               Start Free — No Card Needed
               <RiArrowRightLine className="transition-transform group-hover:translate-x-1"/>
-            </button>
-            <button className="text-white/80 hover:text-white font-semibold font-body text-sm underline underline-offset-4 transition-colors duration-200">
-              Book a 30-min demo
-            </button>
+            </button></Link>
+           
+           
           </div>
           <p className="mt-6 text-purple-200 text-xs font-body">14-day free trial · Migrate in 24h · Cancel anytime</p>
         </div>

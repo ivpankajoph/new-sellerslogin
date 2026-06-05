@@ -58,6 +58,7 @@ import {
   RiFileChartLine,
   RiPulseLine,
 } from "react-icons/ri";
+import Link from "next/link";
 
 /* ─── Utility Hook ────────────────────────────────────────────────────── */
 function useIntersection(threshold = 0.12) {
@@ -216,15 +217,7 @@ function Hero() {
         style={{ backgroundImage: "radial-gradient(circle, #be185d 1.2px, transparent 1.2px)", backgroundSize: "36px 36px" }} />
 
       <div className="relative z-10 max-w-6xl mx-auto px-6 text-center">
-        {/* Pill */}
-        <div className="inline-flex items-center gap-2 bg-purple-50 border border-purple-200 text-purple-600 text-xs font-semibold tracking-widest uppercase px-5 py-2.5 rounded-full mb-8 font-body"
-          style={{ animation: "fadeIn 0.5s ease both" }}>
-          <span className="relative flex h-2 w-2">
-            <span className="absolute inline-flex h-full w-full rounded-full bg-purple-400 opacity-75" style={{ animation: "ping-sm 1.5s ease-out infinite" }} />
-            <span className="relative inline-flex h-2 w-2 rounded-full bg-purple-500" />
-          </span>
-          Food Operations Intelligence Platform
-        </div>
+    
 
         <h1 className="font-display text-6xl md:text-8xl font-bold leading-[1.03] text-gray-900 mb-6"
           style={{ animation: "fadeUp 0.8s cubic-bezier(.22,1,.36,1) 0.1s both" }}>
@@ -242,10 +235,11 @@ function Hero() {
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4"
           style={{ animation: "fadeUp 0.8s cubic-bezier(.22,1,.36,1) 0.4s both" }}>
+       <Link href="https://web.sellerslogin.com/vendor/registration">
           <button className="group flex items-center gap-2 bg-purple-600 hover:bg-purple-700 text-white font-semibold font-body px-8 py-4 rounded-full transition-all duration-300 shadow-lg shadow-purple-200 hover:shadow-purple-300 hover:-translate-y-0.5">
             Get Started Free
             <RiArrowRightLine className="transition-transform duration-200 group-hover:translate-x-1" />
-          </button>
+          </button></Link>
           <button className="group flex items-center gap-2 text-gray-700 hover:text-purple-600 font-semibold font-body px-8 py-4 rounded-full border border-gray-200 hover:border-purple-200 transition-all duration-300 bg-white/80 hover:-translate-y-0.5">
             Watch Demo
             <RiArrowRightUpLine />
@@ -417,24 +411,6 @@ function FoodDashboardPreview() {
   );
 }
 
-/* ═══════════════════════════════════════════════════════════════════════
-   LOGOS STRIP
-═══════════════════════════════════════════════════════════════════════ */
-function LogosStrip() {
-  const names = ["Zomato", "Swiggy", "UberEats", "DoorDash", "Deliveroo", "Talabat", "Grubhub", "Foodpanda", "Grab Food"];
-  return (
-    <section className="py-12 border-y border-purple-50 bg-purple-50/20 overflow-hidden">
-      <p className="text-center text-[10px] tracking-[0.25em] uppercase text-gray-400 mb-6 font-body">Integrates with every major delivery platform</p>
-      <div className="relative">
-        <div className="flex gap-16 items-center w-max" style={{ animation: "marquee 30s linear infinite" }}>
-          {[...names, ...names].map((n, i) => (
-            <span key={i} className="text-xs font-bold tracking-widest text-gray-300 uppercase whitespace-nowrap select-none font-body">{n}</span>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
 
 /* ═══════════════════════════════════════════════════════════════════════
    MENU BUILDER SECTION
@@ -471,7 +447,7 @@ function MenuBuilder() {
             <ul className="space-y-3 mb-8">
               {[
                 "Drag-and-drop menu builder with live preview",
-                "Auto-sync to Zomato, Swiggy, and 7 more platforms",
+             
                 "Modifier groups, add-ons, and combo logic",
                 "Schedule seasonal menus in advance",
                 "AI-powered item description generator",
@@ -698,17 +674,16 @@ function OrderTracking() {
               Every order,<br /><em className="shimmer-text not-italic">every second.</em>
             </h2>
             <p className={`font-body text-gray-500 text-lg leading-relaxed mb-8 transition-all duration-700 delay-200 ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
-              A single Kanban board that unifies dine-in, takeaway, and all delivery platforms.
+              A single dashboard that unifies dine-in, takeaway, and all delivery platforms.
               Track every order through each kitchen stage in real time — with one-tap escalation
               for issues.
             </p>
             <ul className="space-y-3 mb-8">
               {[
-                "Unified view across Zomato, Swiggy, UberEats & POS",
                 "Kitchen Display System (KDS) integration",
                 "Live delivery driver location tracking",
                 "Auto SMS & WhatsApp notifications to customers",
-                "SLA breach alerts and manager escalation",
+           
                 "Post-delivery rating capture and response tools",
               ].map((f, i) => (
                 <li key={f}
@@ -795,11 +770,11 @@ function StatsBand() {
   const stats = [
     { val: 99, suf: ".9%", label: "Order accuracy rate" },
     { val: 14, suf: " min", label: "Average prep time saved" },
-    { val: 2800, suf: "+", label: "Restaurants on platform" },
+    { val: 2, suf: "+", label: "Restaurants on platform" },
     { val: 32, suf: "%", label: "Reduction in food waste" },
   ];
   return (
-    <section ref={ref} className="py-20 bg-gradient-to-r from-purple-600 via-rose-500 to-purple-500 text-white relative overflow-hidden">
+    <section ref={ref} className="py-20 bg-linear-to-r from-purple-600 via-rose-500 to-purple-500 text-white relative overflow-hidden">
       <div className="pointer-events-none absolute inset-0">
         <div className="absolute top-0 right-1/4 w-64 h-64 rounded-full bg-white/5" />
         <div className="absolute -bottom-10 left-1/3 w-40 h-40 rounded-full bg-white/5" />
@@ -996,57 +971,6 @@ function UseCases() {
   );
 }
 
-/* ═══════════════════════════════════════════════════════════════════════
-   HOW IT'S BUILT
-═══════════════════════════════════════════════════════════════════════ */
-function HowBuilt() {
-  const stack = [
-    { icon: RiCodeSSlashLine, layer: "Frontend", tech: "Next.js 14 + TypeScript", note: "App Router, Server Components, optimistic UI updates" },
-    { icon: RiDatabase2Line, layer: "Database", tech: "PostgreSQL + TimescaleDB", note: "Time-series order & stock data with sub-100ms reads" },
-    { icon: RiPulseLine, layer: "Real-time", tech: "WebSockets + Redis Streams", note: "Live order push, KDS sync, and inventory events" },
-    { icon: RiStackLine, layer: "APIs", tech: "REST + GraphQL", note: "Aggregator platform APIs + open webhook system" },
-    { icon: RiLockLine, layer: "Security", tech: "OAuth 2.0 + RBAC", note: "Role-based access: owner, manager, chef, delivery" },
-    { icon: RiAppsLine, layer: "Integrations", tech: "60+ connectors", note: "All major delivery platforms, POS, accounting, and WhatsApp" },
-  ];
-  return (
-    <section className="py-28 bg-white">
-      <div className="max-w-6xl mx-auto px-6">
-        <SectionHeader
-          eyebrow="Architecture"
-          title="Built for kitchens that never stop."
-          sub="Every layer is chosen for real-time reliability. Offline mode for when the internet drops. Failover so your service never stalls."
-        />
-        <div className="relative max-w-3xl mx-auto">
-          <div className="absolute left-8 top-8 bottom-8 w-px bg-gradient-to-b from-purple-200 to-transparent hidden md:block" />
-          <div className="space-y-4">
-            {stack.map((s, i) => {
-              const { ref, visible } = useIntersection();
-              return (
-                <div key={s.layer} ref={ref}
-                  className={`flex items-start gap-6 bg-white border border-purple-50 hover:border-purple-200 rounded-2xl p-6 card-hover transition-all duration-600 ${visible ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-8"}`}
-                  style={{ transitionDelay: `${i * 90}ms` }}>
-                  <div className="relative flex-shrink-0 z-10">
-                    <div className="w-14 h-14 rounded-2xl bg-purple-50 border border-purple-100 flex items-center justify-center">
-                      <s.icon className="text-purple-500 text-xl" />
-                    </div>
-                    <div className="absolute inset-0 rounded-2xl border border-purple-300"
-                      style={{ animation: `pulse-ring 2.2s ease-out infinite ${i * 0.35}s` }} />
-                  </div>
-                  <div className="flex-1">
-                    <p className="text-[10px] font-semibold uppercase tracking-widest text-purple-400 mb-0.5 font-body">{s.layer}</p>
-                    <h4 className="font-display font-bold text-gray-800 mb-1">{s.tech}</h4>
-                    <p className="font-body text-sm text-gray-500">{s.note}</p>
-                  </div>
-                  <RiArrowRightLine className="text-purple-200 text-xl self-center flex-shrink-0 hidden md:block" />
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
 
 /* ═══════════════════════════════════════════════════════════════════════
    INTEGRATIONS
@@ -1184,13 +1108,12 @@ function CTA() {
             smarter kitchens. Start your 14-day free trial — no credit card required.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+         <Link href="https://web.sellerslogin.com/vendor/registration">
             <button className="group flex items-center gap-2 bg-white text-purple-600 hover:bg-purple-50 font-bold font-body px-8 py-4 rounded-full transition-all duration-200 shadow-lg hover:-translate-y-0.5">
               Start Free Trial
               <RiArrowRightLine className="transition-transform group-hover:translate-x-1" />
-            </button>
-            <button className="text-white/80 hover:text-white font-semibold font-body text-sm underline underline-offset-4 transition-colors duration-200">
-              Book a personalised demo
-            </button>
+            </button></Link>
+          
           </div>
           <p className="mt-6 text-purple-200 text-xs font-body">15-minute setup · Works offline · Cancel anytime</p>
         </div>
@@ -1212,7 +1135,7 @@ export default function FoodDashboardPage() {
       <main className="bg-white text-gray-900 overflow-x-hidden antialiased">
         <GlobalStyles />
         <Hero />
-        <LogosStrip />
+    
         <MenuBuilder />
         <StatsBand />
         <InventorySection />
@@ -1221,8 +1144,8 @@ export default function FoodDashboardPage() {
         <HowItWorks />
         <UseCases />
         <FeatureHighlights />
-        <HowBuilt />
-        <Integrations />
+   
+   
         <Security />
         <CTA />
         <FooterSection />

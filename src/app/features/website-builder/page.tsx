@@ -9,6 +9,7 @@ import { FooterSection } from "@/components/landing/FooterSection";
 import { GlobalBackground } from "@/components/landing/GlobalBackground";
 import { Navbar } from "@/components/landing/Navbar";
 import { ScrollRevealInit } from "@/components/landing/ScrollRevealInit";
+import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import {
   FiLayers,
@@ -178,6 +179,7 @@ function HeroSection() {
 
         {/* CTAs */}
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-20">
+ <Link href="https://web.sellerslogin.com/vendor/registration">
           <button
             className="group flex items-center gap-3 px-8 py-4 rounded-full text-white font-semibold text-lg transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1"
             style={{ background: "linear-gradient(135deg, #9333ea, #c084fc)" }}
@@ -188,10 +190,8 @@ function HeroSection() {
               className="group-hover:translate-x-1 transition-transform"
             />
           </button>
-          <button className="flex items-center gap-3 px-8 py-4 rounded-full border-2 border-purple-200 text-purple-600 font-semibold text-lg hover:bg-purple-50 transition-all duration-300">
-            <FiEye size={18} />
-            Watch Demo
-          </button>
+ </Link>
+       
         </div>
 
         {/* Device mockup strip */}
@@ -294,10 +294,10 @@ function HeroSection() {
 function StatsSection() {
   const { ref, visible } = useInView();
   const stats = [
-    { value: 50000, suffix: "+", label: "Websites Built" },
+    { value: 50, suffix: "+", label: "Websites Built" },
     { value: 99, suffix: "%", label: "Uptime Guaranteed" },
-    { value: 200, suffix: "+", label: "Templates" },
-    { value: 4.9, suffix: "/5", label: "Average Rating" },
+    { value: 20, suffix: "+", label: "Templates" },
+    { value: 0.4, suffix: "/5", label: "Average Rating" },
   ];
   return (
     <section
@@ -356,7 +356,7 @@ function HowItWorks() {
       icon: FiMousePointer,
       step: "01",
       title: "Pick a Template",
-      desc: "Browse 200+ professionally designed templates across every industry. Filter by style, purpose, or industry — then make it yours.",
+      desc: "Browse 20+ professionally designed templates across every industry. Filter by style, purpose, or industry — then make it yours.",
     },
     {
       icon: FiSliders,
@@ -789,7 +789,7 @@ function HowBuiltSection() {
     {
       layer: "Integration Layer",
       items: [
-        "1000+ App Integrations",
+        "10+ App Integrations",
         "Zapier & Make.com Support",
         "REST & GraphQL APIs",
         "Webhooks & Custom Code",
@@ -975,20 +975,19 @@ function CTASection() {
           waiting for you.
         </h2>
         <p className="text-purple-100 text-xl mb-10 leading-relaxed">
-          Join 50,000+ builders who launched their site without writing a single
+          Join 50+ builders who launched their site without writing a single
           line of code.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
+        <Link href="https://web.sellerslogin.com/vendor/registration">
           <button className="group flex items-center justify-center gap-3 px-10 py-4 rounded-full bg-white text-purple-600 font-bold text-lg hover:bg-purple-50 transition-all hover:-translate-y-1 shadow-lg hover:shadow-xl">
             Start Building for Free
             <FiArrowRight
               size={18}
               className="group-hover:translate-x-1 transition-transform"
             />
-          </button>
-          <button className="px-10 py-4 rounded-full border-2 border-white/50 text-white font-bold text-lg hover:bg-white/10 transition-all">
-            View All Templates
-          </button>
+          </button></Link>
+        
         </div>
         <p className="text-purple-200 text-sm mt-6">
           No credit card required. Free forever plan available.
