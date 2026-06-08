@@ -12,8 +12,8 @@ const page: FooterLinkedPageContent = {
   description:
     "Order tracking helps customers and seller teams see where an order stands from confirmation to delivery. Use the order ID, registered contact details, or seller dashboard record when asking for a tracking update.",
   details: [
-    { label: "Email", value: "info@sellerslogin.com" },
-    { label: "Address", value: "1405, Gaur City 2, Noida Extension, Ghaziabad 201009, UP, India" },
+
+
   ],
   cards: [
     {
@@ -59,7 +59,7 @@ const page: FooterLinkedPageContent = {
     "Email support if the shipment is delayed, stuck, or marked incorrectly.",
     "Receive the verified update or next action from the support team.",
   ],
-  cta: { label: "Email tracking support", href: "mailto:info@sellerslogin.com" },
+  cta: { label: "Contact Support", href: "/contact" },
 };
 
 export default function TrackOrderPage() {

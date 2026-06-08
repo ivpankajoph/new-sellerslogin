@@ -1,68 +1,160 @@
-import type { Metadata } from "next";
-import { FooterLinkedPage, type FooterLinkedPageContent } from "@/components/landing/FooterLinkedPage";
+"use client";
 
-export const metadata: Metadata = {
-  title: "Contact Us | Sellers Login",
-  description: "Contact Sellers Login for seller onboarding, platform support, order help, partnerships, and business queries.",
-};
-
-const page: FooterLinkedPageContent = {
-  eyebrow: "Support",
-  title: "Contact Us",
-  description:
-    "Reach Sellers Login for onboarding, product questions, order support, partnerships, billing, or operational help. Include your order ID, registered email, or business name so the team can route your request faster.",
-  details: [
-    { label: "Email", value: "info@sellerslogin.com" },
-    { label: "Phone", value: "Support is coordinated through email and registered account channels." },
-    { label: "Address", value: "1405, Gaur City 2, Noida Extension, 10th Avenue, Ghaziabad 201009, UP, India" },
-  ],
-  cards: [
-    {
-      title: "Seller onboarding",
-      body: "For new seller accounts, store setup, dashboard access, or registration support, share your business name and preferred contact details.",
-      items: [
-        "Marketplace and ecommerce sellers can request a guided setup.",
-        "Teams can ask about catalog, inventory, payment, and shipping workflow readiness.",
-        "Existing sellers should include their registered account email for faster verification.",
-      ],
-    },
-    {
-      title: "Order support",
-      body: "For shipping, return, refund, or delivery questions, support can check the order route after receiving basic order information.",
-      items: [
-        "Share order ID, registered phone number, and a short description of the issue.",
-        "Attach photos for damaged, wrong, or missing items where applicable.",
-        "Avoid sharing sensitive payment credentials or passwords in support messages.",
-      ],
-    },
-    {
-      title: "Business enquiries",
-      body: "Brands, distributors, agencies, and integration partners can contact Sellers Login for product demos and commercial discussions.",
-      items: [
-        "Include business category, team size, and current ecommerce stack.",
-        "Mention whether you need B2B, B2C, food, automation, or industry-specific workflows.",
-        "Partnership requests are reviewed by the business team before next steps.",
-      ],
-    },
-    {
-      title: "Response handling",
-      body: "Support responses depend on request type, account verification, and seller or logistics partner availability.",
-      items: [
-        "Operational issues are prioritized by order status and customer impact.",
-        "Legal, grievance, and billing issues may require additional verification.",
-        "For urgent delivery exceptions, include the shipment tracking ID if available.",
-      ],
-    },
-  ],
-  steps: [
-    "Send the request with account, order, or business details.",
-    "Support verifies ownership and classifies the issue.",
-    "The relevant seller, logistics, billing, or onboarding team is looped in.",
-    "You receive the next action or resolution update through the registered channel.",
-  ],
-  cta: { label: "Email Sellers Login", href: "mailto:info@sellerslogin.com" },
-};
+import { useState } from "react";
+import { Navbar } from "@/components/landing/Navbar";
+import { FooterSection } from "@/components/landing/FooterSection";
+import { GlobalBackground } from "@/components/landing/GlobalBackground";
+import { CustomCursor } from "@/components/landing/CustomCursor";
+import { ShieldCheck, ArrowRight, Loader2, CheckCircle2 } from "lucide-react";
 
 export default function ContactPage() {
-  return <FooterLinkedPage page={page} />;
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setError(null);
+    
+    const formData = new FormData(e.currentTarget);
+    const data = {
+      name: formData.get("name"),
+      email: formData.get("email"),
+      subject: formData.get("subject"),
+      message: formData.get("message"),
+    };
+
+    try {
+      const baseUrl = process.env.NEXT_PUBLIC_API_URL || "https://api.sellerslogin.com";
+      const response = await fetch(`${baseUrl}/v1/public/contact-us`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to send message. Please try again.");
+      }
+
+      setIsSuccess(true);
+      (e.target as HTMLFormElement).reset();
+    } catch (err: any) {
+      setError(err.message || "An error occurred");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  return (
+    <>
+      <CustomCursor />
+      <GlobalBackground />
+      <Navbar />
+
+      <main className="relative min-h-[78vh] overflow-hidden bg-white px-4 sm:px-6 lg:px-8 pt-32 pb-24 text-black">
+        <div className="relative z-10 mx-auto max-w-3xl text-center">
+          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-purple-200 bg-purple-50 px-4 py-2 text-xs font-bold uppercase tracking-wider text-purple-700">
+            <ShieldCheck className="h-4 w-4" />
+            Support
+          </div>
+          <h1 className="text-[clamp(40px,6vw,60px)] font-bold leading-[1.05] tracking-tight mb-6 text-gray-900">
+            Contact Us
+          </h1>
+          <p className="text-lg leading-relaxed text-gray-600 mb-12">
+            Have questions or need assistance? Fill out the form below and we will get back to you shortly.
+          </p>
+
+          <form 
+            onSubmit={handleSubmit}
+            className="bg-white border border-gray-200 rounded-[2rem] p-8 md:p-12 text-left shadow-xl"
+          >
+            {isSuccess && (
+              <div className="mb-6 p-4 rounded-xl bg-green-50 border border-green-200 flex items-center gap-3 text-green-800">
+                <CheckCircle2 className="w-5 h-5 text-green-600" />
+                <p>Thanks for reaching out! We will get back to you shortly.</p>
+              </div>
+            )}
+            
+            {error && (
+              <div className="mb-6 p-4 rounded-xl bg-red-50 border border-red-200 text-red-800">
+                <p>{error}</p>
+              </div>
+            )}
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+              <div>
+                <label htmlFor="name" className="block text-sm font-semibold text-gray-900 mb-2">Full Name</label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  required
+                  className="w-full bg-gray-50 border border-gray-300 rounded-xl px-4 py-3 text-gray-900 placeholder-gray-500 focus:outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500 transition-colors"
+                  placeholder="John Doe"
+                />
+              </div>
+              <div>
+                <label htmlFor="email" className="block text-sm font-semibold text-gray-900 mb-2">Email Address</label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  required
+                  className="w-full bg-gray-50 border border-gray-300 rounded-xl px-4 py-3 text-gray-900 placeholder-gray-500 focus:outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500 transition-colors"
+                  placeholder="john@example.com"
+                />
+              </div>
+            </div>
+
+            <div className="mb-6">
+              <label htmlFor="subject" className="block text-sm font-semibold text-gray-900 mb-2">Subject</label>
+              <input
+                type="text"
+                id="subject"
+                name="subject"
+                required
+                className="w-full bg-gray-50 border border-gray-300 rounded-xl px-4 py-3 text-gray-900 placeholder-gray-500 focus:outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500 transition-colors"
+                placeholder="How can we help you?"
+              />
+            </div>
+
+            <div className="mb-8">
+              <label htmlFor="message" className="block text-sm font-semibold text-gray-900 mb-2">Message</label>
+              <textarea
+                id="message"
+                name="message"
+                required
+                rows={5}
+                className="w-full bg-gray-50 border border-gray-300 rounded-xl px-4 py-3 text-gray-900 placeholder-gray-500 focus:outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500 transition-colors resize-none"
+                placeholder="Your message here..."
+              ></textarea>
+            </div>
+
+            <button
+              type="submit"
+              disabled={isSubmitting}
+              className="w-full inline-flex items-center justify-center gap-2 rounded-full bg-purple-600 px-8 py-4 text-sm font-semibold text-white no-underline shadow-sm transition-all hover:bg-purple-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-500 focus-visible:ring-offset-2 disabled:opacity-70 disabled:cursor-not-allowed"
+            >
+              {isSubmitting ? (
+                <>
+                  <Loader2 className="w-5 h-5 animate-spin" />
+                  Sending...
+                </>
+              ) : (
+                <>
+                  Send Message
+                  <ArrowRight className="h-4 w-4" />
+                </>
+              )}
+            </button>
+          </form>
+        </div>
+      </main>
+
+      <FooterSection />
+    </>
+  );
 }

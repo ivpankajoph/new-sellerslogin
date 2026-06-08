@@ -13,8 +13,8 @@ const page: FooterLinkedPageContent = {
     "Use the grievance route when a support request needs formal review, escalation, or documented resolution. Please include enough information for account, order, or transaction verification.",
   updated: "June 8, 2026",
   details: [
-    { label: "Email", value: "info@sellerslogin.com" },
-    { label: "Address", value: "1405, Gaur City 2, Noida Extension, 10th Avenue, Ghaziabad 201009, UP, India" },
+
+
   ],
   cards: [
     {
@@ -60,7 +60,7 @@ const page: FooterLinkedPageContent = {
     "Relevant operational, seller, legal, or technical inputs are collected.",
     "A documented response or next action is shared through the registered channel.",
   ],
-  cta: { label: "Email grievance team", href: "mailto:info@sellerslogin.com" },
+  cta: { label: "Contact Us", href: "/contact" },
 };
 
 export default function GrievancePage() {

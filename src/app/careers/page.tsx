@@ -12,8 +12,8 @@ const page: FooterLinkedPageContent = {
   description:
     "Sellers Login looks for practical builders who understand ecommerce operations, seller support, automation, design, engineering, and customer success. Open roles may change, but strong applications can be shared through the official contact email.",
   details: [
-    { label: "Email", value: "info@sellerslogin.com" },
-    { label: "Address", value: "1405, Gaur City 2, Noida Extension, 10th Avenue, Ghaziabad 201009, UP, India" },
+
+
   ],
   cards: [
     {
@@ -59,7 +59,7 @@ const page: FooterLinkedPageContent = {
     "Shortlisted candidates complete the relevant interview or work-sample step.",
     "Final selection and onboarding details are shared directly.",
   ],
-  cta: { label: "Send your profile", href: "mailto:info@sellerslogin.com" },
+  cta: { label: "Contact Us", href: "/contact" },
 };
 
 export default function CareersPage() {

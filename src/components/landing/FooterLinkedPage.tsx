@@ -82,8 +82,8 @@ export function FooterLinkedPage({ page }: { page: FooterLinkedPageContent }) {
               <h2 className="text-lg font-bold text-gray-950">Quick details</h2>
               <div className="mt-5 space-y-4">
                 {(page.details ?? [
-                  { label: "Email", value: "info@sellerslogin.com" },
-                  { label: "Address", value: "1405, Gaur City 2, Noida Extension, Ghaziabad 201009, UP, India" },
+
+
                 ]).map((detail) => {
                   const Icon = detailIcons[detail.label] ?? CheckCircle2;
                   return (

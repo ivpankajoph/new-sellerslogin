@@ -18,6 +18,8 @@ export function HeroSection() {
       timeout = setTimeout(() => setCharIndex((prev) => prev + 1), 60);
     }
     return () => clearTimeout(timeout);
+
+
   }, [charIndex, totalChars]);
 
   return (
@@ -29,6 +31,7 @@ export function HeroSection() {
           loop
           muted
           playsInline
+          preload="metadata"
           className="absolute inset-0 w-full h-full object-cover z-0"
         >
           <source src="/videos/background2.mp4" type="video/mp4" />
@@ -38,8 +41,6 @@ export function HeroSection() {
 
         {/* Black overlay to keep hero content readable over the video. */}
         <div className="absolute inset-0 bg-black/60 z-0 pointer-events-none" />
-
-        {/* Content Container */}
         <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-28 text-center flex flex-col items-center">
           <h1 className="text-[clamp(40px,6vw,72px)] font-bold text-white leading-[1.1] tracking-tight mb-6">
             {text1.slice(0, charIndex)}

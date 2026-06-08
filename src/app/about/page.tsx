@@ -3,7 +3,7 @@ import { FooterLinkedPage, type FooterLinkedPageContent } from "@/components/lan
 
 export const metadata: Metadata = {
   title: "About Sellers Login | Sellers Login",
-  description: "Learn about Sellers Login, the commerce operations platform by Life Changing Networks Pvt Ltd.",
+  description: "Learn about Sellers Login, the commerce operations.",
 };
 
 const page: FooterLinkedPageContent = {
@@ -12,8 +12,8 @@ const page: FooterLinkedPageContent = {
   description:
     "Sellers Login is a commerce operations platform built for sellers, brands, distributors, and service teams that need one workspace for storefronts, orders, inventory, payments, delivery coordination, analytics, and automation.",
   details: [
-    { label: "Email", value: "info@sellerslogin.com" },
-    { label: "Address", value: "1405, Gaur City 2, Noida Extension, 10th Avenue, Ghaziabad 201009, UP, India" },
+
+
   ],
   cards: [
     {
@@ -45,11 +45,11 @@ const page: FooterLinkedPageContent = {
     },
     {
       title: "Company details",
-      body: "Sellers Login operates under Life Changing Networks Pvt Ltd and maintains support and business communication through the listed contact channels.",
+      body: "Sellers Login operates and maintains support and business communication through the listed contact channels.",
       items: [
-        "Brand: Sellers Login under Life Changing Networks Pvt Ltd.",
-        "Office address: 1405, Gaur City 2, Noida Extension, Ghaziabad 201009, UP, India.",
-        "Primary contact: info@sellerslogin.com.",
+        "Brand: Sellers Login ",
+
+
       ],
     },
   ],

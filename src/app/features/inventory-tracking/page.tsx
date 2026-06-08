@@ -813,11 +813,9 @@ function MultiLocationSection() {
             <h2 className="text-5xl font-black text-gray-900 mb-6" >
               One dashboard.
               <br />
-              <span className="text-purple-400">Every location.</span>
+              <span className="text-purple-400">Every Inventory.</span>
             </h2>
-            <p className="text-gray-500 leading-relaxed mb-8">
-              Whether you run a single warehouse or a network of fulfillment centers and retail stores, every location's inventory is visible and manageable from one unified view.
-            </p>
+          
             <div className="space-y-3">
               {[
                 "Transfer stock between locations in seconds",

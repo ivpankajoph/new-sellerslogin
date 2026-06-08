@@ -115,9 +115,21 @@ export function FooterSection() {
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (email) {
+      try {
+        const baseUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8081/api";
+        await fetch(`${baseUrl}/v1/public/subscribe`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ email }),
+        });
+      } catch (err) {
+        console.error("Subscription error", err);
+      }
       setSubscribed(true);
       setEmail("");
       setTimeout(() => setSubscribed(false), 3000);
@@ -161,13 +173,7 @@ export function FooterSection() {
             </Link>
             <div className="mt-6 mb-5 text-sm text-gray-600 space-y-3">
              
-              <p className="flex items-start gap-2">
-                <svg className="w-5 h-5 text-gray-400 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                </svg>
-                <span>1405, Gaur city 2, Noida Extension, 10th Avenue, Ghaziabad 201009, UP, India</span>
-              </p>
+
             </div>
             
             <form onSubmit={handleSubmit} className="mt-4">
@@ -252,9 +258,7 @@ export function FooterSection() {
         <div className="flex flex-col md:flex-row items-center justify-between pt-8 border-t border-gray-200 gap-4">
           <address className="not-italic text-sm text-gray-600 text-center md:text-left">
             All Rights Reserved 2026 with Sellers Login 
-            <a href="mailto:info@sellerslogin.com" className="hover:text-gray-900 hover:transition-colors underline-offset-2 hover:underline ml-2">
-              info@sellerslogin.com
-            </a>{" "}
+
           </address>
         </div>
       </div>

@@ -39,6 +39,7 @@ export function OptionPage({ page }: Props) {
             loop
             muted
             playsInline
+            preload="metadata"
             className="absolute inset-0 h-full w-full object-cover opacity-45"
           >
             <source src="/hero-bg.mp4" type="video/mp4" />
