@@ -69,7 +69,7 @@ export const StickyScroll = ({
               </p>
               
               {/* Mobile image display */}
-              <div className="block lg:hidden mt-8 w-full max-w-md rounded-2xl overflow-hidden bg-black shadow-xl border border-black aspect-square sm:aspect-video relative">
+              <div className="block lg:hidden mt-8 w-full max-w-md rounded-2xl overflow-hidden aspect-square sm:aspect-video relative">
                  <div className="absolute inset-0">
                    {item.content ?? null}
                  </div>
@@ -81,11 +81,11 @@ export const StickyScroll = ({
       </div>
       <div
         className={cn(
-          "sticky top-32 hidden h-[380px] w-[650px] overflow-visible rounded-2xl bg-black shadow-xl lg:block border border-black",
+          "sticky top-32 hidden h-[380px] w-[650px] overflow-visible rounded-2xl lg:block",
           contentClassName,
         )}
       >
-        <div className="h-full w-full overflow-hidden rounded-[inherit] bg-black">
+        <div className="h-full w-full overflow-hidden rounded-[inherit]">
           {content[activeCard].content ?? null}
         </div>
         <div
