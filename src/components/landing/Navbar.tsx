@@ -44,7 +44,7 @@ function MobileDropdown({
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
         </svg>
       </button>
-      <div className={`overflow-hidden transition-all duration-300 ${isOpen ? "max-h-125 opacity-100" : "max-h-0 opacity-0"}`}>
+      <div className={`overflow-hidden transition-all duration-300 ${isOpen ? "max-h-[1500px] opacity-100" : "max-h-0 opacity-0"}`}>
         <div className="px-4 pb-3 space-y-1">
           {items.map((item) => (
             <Link
@@ -180,8 +180,6 @@ export function Navbar() {
                 </div>
               </div>
             </li>
-
-
           </ul>
 
           <div className="hidden lg:flex items-center gap-3">
@@ -226,8 +224,8 @@ export function Navbar() {
       </div>
 
       <div
-        className={`lg:hidden overflow-hidden transition-all duration-300 ease-in-out bg-white border-t border-gray-200 ${
-          menuOpen ? "max-h-200 opacity-100" : "max-h-0 opacity-0"
+        className={`lg:hidden overflow-y-auto transition-all duration-300 ease-in-out bg-white border-t border-gray-200 ${
+          menuOpen ? "max-h-[85vh] opacity-100" : "max-h-0 opacity-0"
         }`}
       >
         <div className="px-4 py-3 space-y-1">
@@ -267,10 +265,6 @@ export function Navbar() {
             items={industriesDropdown}
             onNavigate={() => setMenuOpen(false)}
           />
-
-
-
-
 
           <div className="pt-4 pb-2 flex flex-col gap-3">
             <Link
