@@ -3,8 +3,8 @@ import Image from "next/image";
 const integrationBrands = [
   { name: "Google", logo: "https://www.google.com/s2/favicons?domain=google.com&sz=128" },
   { name: "Delhivery", logo: "https://www.google.com/s2/favicons?domain=delhivery.com&sz=128" },
-  { name: "WhatsApp", logo: "https://cdn.simpleicons.org/whatsapp/25D366" },
-  { name: "Facebook", logo: "https://cdn.simpleicons.org/facebook/1877F2" },
+  { name: "WhatsApp", logo: "https://www.google.com/s2/favicons?domain=whatsapp.com&sz=128" },
+  { name: "Facebook", logo: "https://www.google.com/s2/favicons?domain=facebook.com&sz=128" },
   { name: "ChatGPT", logo: "https://www.google.com/s2/favicons?domain=chatgpt.com&sz=128" },
   { name: "Shadowfax", logo: "https://www.google.com/s2/favicons?domain=shadowfax.in&sz=128" },
   { name: "Razorpay", logo: "https://www.google.com/s2/favicons?domain=razorpay.com&sz=128" },
