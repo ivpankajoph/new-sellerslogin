@@ -240,10 +240,7 @@ function Hero() {
             Get Started Free
             <RiArrowRightLine className="transition-transform duration-200 group-hover:translate-x-1" />
           </button></Link>
-          <button className="group flex items-center gap-2 text-gray-700 hover:text-purple-600 font-semibold font-body px-8 py-4 rounded-full border border-gray-200 hover:border-purple-200 transition-all duration-300 bg-white/80 hover:-translate-y-0.5">
-            Watch Demo
-            <RiArrowRightUpLine />
-          </button>
+      
         </div>
 
         <div className="mt-12 flex flex-wrap items-center justify-center gap-6 text-sm text-gray-400 font-body"
@@ -462,10 +459,7 @@ function MenuBuilder() {
                 </li>
               ))}
             </ul>
-            <button className="group inline-flex items-center gap-2 bg-purple-600 hover:bg-purple-700 text-white font-semibold font-body px-7 py-3.5 rounded-full transition-all duration-300 shadow-md shadow-purple-200 hover:-translate-y-0.5">
-              Explore Menu Builder
-              <RiArrowRightLine className="transition-transform group-hover:translate-x-1" />
-            </button>
+       
           </div>
 
           {/* Right — mock menu UI */}
@@ -1104,7 +1098,7 @@ function CTA() {
             Your kitchen deserves<br />better intelligence.
           </h2>
           <p className="font-body text-purple-100 text-lg mb-10 max-w-xl mx-auto leading-relaxed">
-            Join 2,800+ restaurants using FoodNest to run leaner, faster, and
+            Join 2,800+ restaurants using Sellers Login Food Dashboard to run leaner, faster, and
             smarter kitchens. Start your 14-day free trial — no credit card required.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">

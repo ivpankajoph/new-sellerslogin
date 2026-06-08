@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { OptionPage, type OptionPageContent } from "@/components/landing/OptionPage";
 
-export const metadata: Metadata = { title: "Food | SellersLogin", description: "Food commerce tools for fresh catalogs, local delivery, and repeat orders." };
+export const metadata: Metadata = { title: "Food | Sellers Login", description: "Food commerce tools for fresh catalogs, local delivery, and repeat orders." };
 
 const page: OptionPageContent = {
   label: "Food",

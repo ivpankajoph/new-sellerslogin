@@ -18,9 +18,9 @@ export const heroChartBars = [
 ];
 
 export const heroProductThumbs = [
-  { src: images.productShoes, alt: "Footwear product" },
-  { src: images.productWatch, alt: "Accessories product" },
-  { src: images.productBag, alt: "Bags product" },
+  { src: images.productShoes, alt: "Sellers Login footwear product" },
+  { src: images.productWatch, alt: "Sellers Login accessories product" },
+  { src: images.productBag, alt: "Sellers Login bags product" },
 ];
 
 export const brandNames = [
@@ -174,7 +174,7 @@ export const testimonials = [
   {
     n: "Rohan Mehta",
     r: "Founder, StyleNova",
-    t: "SellersLogin transformed my side hustle into a thriving full-time business. The AI tools are genuinely magic — it wrote all my product descriptions and set up email flows automatically.",
+    t: "Sellers Login transformed my side hustle into a thriving full-time business. The AI tools are genuinely magic — it wrote all my product descriptions and set up email flows automatically.",
     stars: 5,
   },
   {
@@ -247,7 +247,7 @@ export const faqs = [
     a: "Yes! All plans include fully managed cloud hosting powered by AWS with global CDN. Your store is automatically optimized for speed and guaranteed 99.9% uptime.",
   },
   {
-    q: "Is SellersLogin good for SEO?",
+    q: "Is Sellers Login good for SEO?",
     a: "Absolutely. Every store comes with built-in SEO tools including meta tags, structured data markup, XML sitemaps, canonical URLs, image optimization, and page speed optimization for excellent Google rankings.",
   },
   {

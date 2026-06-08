@@ -16,7 +16,7 @@ export function AutomationSection() {
             width={500}
             height={500}
             className="h-full w-full object-contain p-2"
-            alt="AI Voice Automation"
+            alt="Sellers Login AI voice automation"
           />
         </div>
       ),
@@ -33,7 +33,7 @@ export function AutomationSection() {
             height={500}
             sizes="(max-width: 768px) 100vw, 500px"
             className="h-full w-full object-contain p-2"
-            alt="Email Marketing Automation"
+            alt="Sellers Login email marketing automation"
           />
         </div>
       ),
@@ -49,7 +49,7 @@ export function AutomationSection() {
             width={500}
             height={500}
             className="h-full w-full object-contain p-2"
-            alt="WhatsApp Marketing"
+            alt="Sellers Login WhatsApp marketing"
           />
         </div>
       ),
@@ -65,7 +65,7 @@ export function AutomationSection() {
             width={500}
             height={500}
             className="h-full w-full object-contain p-2"
-            alt="Dashboard Analytics"
+            alt="Sellers Login dashboard analytics"
           />
         </div>
       ),

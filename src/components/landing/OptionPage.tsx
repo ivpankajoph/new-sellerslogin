@@ -81,7 +81,7 @@ export function OptionPage({ page }: Props) {
               <div className="rounded-[1.5rem] bg-white p-5 text-gray-900">
                 <div className="flex items-center justify-between border-b border-gray-100 pb-4">
                   <div>
-                    <p className="text-xs font-bold uppercase tracking-wider text-gray-500">SellersLogin</p>
+                    <p className="text-xs font-bold uppercase tracking-wider text-gray-500">Sellers Login</p>
                     <h2 className="mt-1 text-xl font-bold">{page.label}</h2>
                   </div>
                   <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-purple-100 text-purple-700">
@@ -135,7 +135,7 @@ export function OptionPage({ page }: Props) {
                   </div>
                   <h3 className="text-xl font-bold text-gray-950">{item}</h3>
                   <p className="mt-3 text-sm leading-relaxed text-gray-600">
-                    Connect {page.label.toLowerCase()} with store data, customer activity, and operational workflows without leaving the SellersLogin workspace.
+                    Connect {page.label.toLowerCase()} with store data, customer activity, and operational workflows without leaving the Sellers Login workspace.
                   </p>
                 </div>
               ))}

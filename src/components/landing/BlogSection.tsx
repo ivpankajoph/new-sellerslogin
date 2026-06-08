@@ -58,7 +58,7 @@ export function BlogSection() {
               className={`reveal ${p.delay} bg-snow border border-fog rounded-[20px] overflow-hidden shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md hover:border-pebble group`.trim()}
             >
               <div className="w-full aspect-[16/10] relative overflow-hidden">
-                <Image src={p.image} alt="" fill sizes="(max-width:768px) 100vw, 33vw" className="object-cover transition-transform duration-500 group-hover:scale-105" />
+                <Image src={p.image} alt={`Sellers Login ${p.cat} article image`} fill sizes="(max-width:768px) 100vw, 33vw" className="object-cover transition-transform duration-500 group-hover:scale-105" />
               </div>
               <div className="p-6">
                 <span className="text-[12px] font-bold text-obsidian uppercase tracking-[0.05em] mb-3 block">{p.cat}</span>

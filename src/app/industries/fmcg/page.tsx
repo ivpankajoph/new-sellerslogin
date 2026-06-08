@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { OptionPage, type OptionPageContent } from "@/components/landing/OptionPage";
 
-export const metadata: Metadata = { title: "FMCG | SellersLogin", description: "FMCG distributor ordering, regional inventory, and fast replenishment workflows." };
+export const metadata: Metadata = { title: "FMCG | Sellers Login", description: "FMCG distributor ordering, regional inventory, and fast replenishment workflows." };
 
 const page: OptionPageContent = {
   label: "FMCG",

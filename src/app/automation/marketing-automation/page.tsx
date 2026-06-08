@@ -373,7 +373,7 @@ const features = [
   {
     icon: RiSecurePaymentLine,
     title: "Flexible Payments",
-    desc: "Net 30/60/90, PO-based invoicing, ACH, wire, and card — every B2B payment method supported without third-party patchwork.",
+    desc: "Net 30/60/90, PO-based invoicing, ACH, wire, and card — every  payment method supported without third-party patchwork.",
     color: "#a855f7",
   },
   {
@@ -390,7 +390,7 @@ function FeaturesSection() {
       <div className="max-w-6xl mx-auto px-6">
         <SectionHeader
           eyebrow="Platform Features"
-          title="Everything your B2B operation needs."
+          title="Everything your Dashboard needs."
           sub="No duct tape. No workarounds. Every capability your team demands, designed to work together from day one."
         />
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -489,7 +489,7 @@ function UseCases() {
       <div className="max-w-6xl mx-auto px-6">
         <SectionHeader
           eyebrow="Use Cases"
-          title="One platform. Every B2B vertical."
+          title="One platform. Every vertical."
           sub="Whether you sell widgets or software licences, the platform adapts to your model — not the other way around."
         />
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -535,8 +535,8 @@ function UseCases() {
 function StatsBand() {
   const { ref, visible } = useIntersection();
   const stats = [
-    { value: 340, suffix: "%", label: "Average ROI in year one" },
-    { value: 4200, suffix: "+", label: "Enterprise customers" },
+    { value: 100, suffix: "%", label: "Full Support and help" },
+    { value: 42, suffix: "+", label: "Enterprise customers" },
     { value: 99, suffix: ".99%", label: "Guaranteed uptime" },
     { value: 48, suffix: "hr", label: "Average onboarding time" },
   ];

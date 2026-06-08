@@ -335,11 +335,12 @@ function Hero() {
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4"
           style={{ animation: "fadeUp 0.8s cubic-bezier(.22,1,.36,1) 0.4s both" }}>
+         <Link href="https://web.sellerslogin.com/vendor/registration">
           <button className="group flex items-center gap-2 text-white font-semibold px-8 py-4 rounded-full transition-all duration-300 hover:-translate-y-0.5 shadow-lg hover:shadow-purple-200"
             style={{ background: "linear-gradient(135deg, #9333ea, #c084fc)" }}>
             Connect Your Number Free
             <RiArrowRightLine className="transition-transform group-hover:translate-x-1" />
-          </button>
+          </button></Link>
        
         </div>
 
@@ -565,7 +566,7 @@ function StatsBand() {
   const { ref, visible } = useIntersection();
   const stats = [
     { value: 98, suffix: "%", label: "Average message delivery rate" },
-    { value: 72, suffix: "%", label: "Average message open rate within 5 minutes" },
+    { value: 99, suffix: "%", label: "Full Support" },
     { value: 420, suffix: "%", label: "Average ROI on automated WhatsApp flows" },
     { value: 65, suffix: "%", label: "Reduction in support ticket volume" },
   ];
@@ -638,11 +639,11 @@ function FlowBuilderSection() {
             </p>
             <ul className="space-y-3 mb-10">
               {[
-                "60-plus trigger types — behaviour, event, time, data, webhook",
+            
                 "Conditional splits on message read, link click, reply keyword, and custom property",
                 "Loop, exit, re-entry, and opt-out rules per flow",
                 "Multi-language support with per-segment language routing",
-                "Version history and one-click rollback for every flow",
+              
                 "Live node-level analytics while the flow is running",
                 "Drag-to-connect nodes with auto-layout and collision avoidance",
               ].map((pt) => (
@@ -1835,7 +1836,7 @@ export default function WhatsAppAutomationPage() {
         <StatsBand2 />
         <VendorDashboard />
         <UseCases />
-        <Analytics />
+   
         <NumberConnectSection />
         <ComplianceSection />
         <Security />

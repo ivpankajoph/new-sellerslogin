@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { OptionPage, type OptionPageContent } from "@/components/landing/OptionPage";
 
-export const metadata: Metadata = { title: "Logistics | SellersLogin", description: "Logistics workflows for tracking, updates, and partner dashboards." };
+export const metadata: Metadata = { title: "Logistics | Sellers Login", description: "Logistics workflows for tracking, updates, and partner dashboards." };
 
 const page: OptionPageContent = {
   label: "Logistics",

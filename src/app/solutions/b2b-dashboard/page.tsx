@@ -779,7 +779,7 @@ function CTA() {
             Ready to transform your B2B commerce?
           </p>
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-5 leading-tight">
-            See the dashboard
+            See the Dashboard
             <br />
             live — in 30 minutes.
           </h2>

@@ -14,7 +14,7 @@ const ShowcaseSection = dynamic(() => import("./ShowcaseSection").then((mod) => 
 const WhySection = dynamic(() => import("./WhySection").then((mod) => mod.WhySection));
 const ProcessSection = dynamic(() => import("./ProcessSection").then((mod) => mod.ProcessSection));
 const AutomationSection = dynamic(() => import("./AutomationSection").then((mod) => mod.AutomationSection));
-const StepsSection = dynamic(() => import("./StepsSection").then((mod) => mod.StepsSection));
+const IndustriesSection = dynamic(() => import("./IndustriesSection").then((mod) => mod.IndustriesSection));
 const BrandsLoveSection = dynamic(() => import("./BrandsLoveSection").then((mod) => mod.BrandsLoveSection));
 const FaqSection = dynamic(() => import("./FaqSection").then((mod) => mod.FaqSection));
 const CtaSection = dynamic(() => import("./CtaSection").then((mod) => mod.CtaSection));
@@ -37,7 +37,7 @@ export function LandingPage() {
 
      
         <AutomationSection />
-         <StepsSection />
+         <IndustriesSection />
       <BrandsLoveSection />
     
       <FaqSection />

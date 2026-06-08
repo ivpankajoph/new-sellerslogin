@@ -4,7 +4,7 @@ import { useEffect, useRef } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
 
 const WEBSITE_ID = "sellerslogin";
-const WEBSITE_NAME = "Main Website - SellersLogin";
+const WEBSITE_NAME = "Main Website - Sellers Login";
 const STORAGE_PREFIX = "sellerslogin_analytics";
 
 const getOrCreateId = (key: string) => {

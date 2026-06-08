@@ -47,6 +47,7 @@ import {
   FiMoreVertical,
 } from "react-icons/fi";
 import Link from "next/link";
+import Image from "next/image";
 
 /* ─────────────────────────────────────────────
    TYPES
@@ -157,10 +158,7 @@ function HeroSection() {
                 Start Managing
                 <FiArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
               </button></Link>
-              <button className="flex items-center gap-3 px-8 py-4 rounded-full border-2 border-purple-200 text-purple-600 font-semibold hover:bg-purple-50 transition-all duration-300">
-                <FiEye size={16} />
-                Live Preview
-              </button>
+          
             </div>
 
             {/* Trust row */}
@@ -557,21 +555,13 @@ function FeaturesSection() {
       title: "Variant Management",
       desc: "Track each size, color, or bundle variant as its own SKU, with independent stock levels and reorder rules.",
     },
-    {
-      icon: FiBarChart2,
-      title: "Demand Forecasting",
-      desc: "AI-powered sales trend analysis predicts which products to restock, and by how much, before demand spikes.",
-    },
+ 
     {
       icon: FiDownload,
       title: "Bulk Import & Export",
       desc: "Import products via CSV or connect your supplier catalog. Export reports for accounting, audits, or analysis.",
     },
-    {
-      icon: FiTag,
-      title: "Supplier & Cost Tracking",
-      desc: "Attach supplier info, lead times, and cost prices to every product. Track margins with live profit calculations.",
-    },
+
   ];
 
   return (
@@ -586,7 +576,7 @@ function FeaturesSection() {
           </h2>
         </div>
 
-        <div ref={ref} className="grid md:grid-cols-2 lg:grid-cols-4 gap-5">
+        <div ref={ref} className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
           {features.map((f, i) => (
             <div key={i}
               className="p-6 rounded-2xl bg-white border border-purple-100 hover:border-purple-300 hover:-translate-y-2 hover:shadow-xl transition-all duration-500 cursor-default"
@@ -801,55 +791,20 @@ function AnalyticsSection() {
 ───────────────────────────────────────────── */
 function MultiLocationSection() {
   const { ref, visible } = useInView();
-  const locations = [
-    { name: "Main Warehouse", city: "New York, NY", items: 1248, value: "$84,200", usage: 78 },
-    { name: "West Coast Hub", city: "Los Angeles, CA", items: 631, value: "$41,900", usage: 54 },
-    { name: "Retail Flagship", city: "Chicago, IL", items: 204, value: "$18,600", usage: 32 },
-  ];
+
 
   return (
     <section className="py-32 px-6" style={{ background: "#faf5ff" }}>
       <div className="max-w-6xl mx-auto">
         <div className="grid md:grid-cols-2 gap-16 items-center">
-          {/* Left — location cards */}
-          <div ref={ref} className="space-y-4">
-            {locations.map((loc, i) => (
-              <div key={i}
-                className="rounded-2xl bg-white border-2 border-purple-100 p-5 hover:border-purple-300 transition-all duration-500 hover:shadow-lg"
-                style={{
-                  opacity: visible ? 1 : 0,
-                  transform: visible ? "translateX(0)" : "translateX(-30px)",
-                  transitionDelay: `${i * 120}ms`,
-                }}>
-                <div className="flex items-start justify-between mb-4">
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-xl bg-purple-50 flex items-center justify-center">
-                      <FiMapPin size={16} className="text-purple-500" />
-                    </div>
-                    <div>
-                      <p className="font-bold text-gray-900 text-sm" >{loc.name}</p>
-                      <p className="text-gray-400 text-xs">{loc.city}</p>
-                    </div>
-                  </div>
-                  <div className="text-right">
-                    <p className="font-black text-gray-900 text-sm">{loc.value}</p>
-                    <p className="text-gray-400 text-xs">stock value</p>
-                  </div>
-                </div>
-                <div className="flex items-center justify-between text-xs text-gray-500 mb-2">
-                  <span>{loc.items} SKUs</span>
-                  <span>{loc.usage}% capacity</span>
-                </div>
-                <div className="w-full h-1.5 bg-purple-100 rounded-full overflow-hidden">
-                  <div className="h-full rounded-full transition-all duration-1000"
-                    style={{
-                      width: visible ? `${loc.usage}%` : "0%",
-                      background: "linear-gradient(90deg,#9333ea,#a855f7)",
-                      transitionDelay: `${i * 120 + 300}ms`,
-                    }} />
-                </div>
-              </div>
-            ))}
+          <div ref={ref} className="relative rounded-3xl overflow-hidden drop-shadow-2xl border border-purple-100 flex items-center justify-center transition-all duration-700" style={{ opacity: visible ? 1 : 0, transform: visible ? "translateX(0)" : "translateX(-30px)" }}>
+            <Image
+              src="/images/inventory-tracking.png"
+              alt="Inventory Dashboard"
+              width={800}
+              height={600}
+              className="w-full h-auto object-contain"
+            />
           </div>
 
           {/* Right — copy */}
@@ -988,7 +943,7 @@ function CTASection() {
           </button></Link>
       
         </div>
-        <p className="text-purple-600 text-sm mt-6">No credit card required. Free forever plan available.</p>
+        <p className="text-white text-sm mt-6">No credit card required. Free forever plan available.</p>
       </div>
     </section>
   );

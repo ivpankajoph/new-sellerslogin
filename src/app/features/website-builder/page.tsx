@@ -10,6 +10,7 @@ import { GlobalBackground } from "@/components/landing/GlobalBackground";
 import { Navbar } from "@/components/landing/Navbar";
 import { ScrollRevealInit } from "@/components/landing/ScrollRevealInit";
 import Link from "next/link";
+import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import {
   FiLayers,
@@ -194,94 +195,16 @@ function HeroSection() {
        
         </div>
 
-        {/* Device mockup strip */}
-        <div className="relative flex justify-center items-end gap-4">
-          {/* Monitor */}
-          <div
-            className="hidden md:block w-80 h-52 rounded-2xl border-4 border-gray-200 bg-white shadow-2xl overflow-hidden relative"
-            style={{ boxShadow: "0 40px 80px -20px rgba(147,51,234,0.15)" }}
-          >
-            <div className="h-6 bg-gray-100 border-b border-gray-200 flex items-center px-3 gap-1.5">
-              {["#ff5f57", "#ffbd2e", "#28ca41"].map((c) => (
-                <div
-                  key={c}
-                  className="w-2.5 h-2.5 rounded-full"
-                  style={{ background: c }}
-                />
-              ))}
-            </div>
-            <div className="p-3 space-y-2">
-              <div className="h-3 bg-purple-100 rounded w-3/4" />
-              <div className="h-2 bg-gray-100 rounded w-full" />
-              <div className="h-2 bg-gray-100 rounded w-5/6" />
-              <div className="grid grid-cols-3 gap-2 mt-3">
-                {[...Array(6)].map((_, i) => (
-                  <div
-                    key={i}
-                    className="h-12 rounded-lg"
-                    style={{
-                      background:
-                        i % 3 === 0
-                          ? "#f3e8ff"
-                          : i % 3 === 1
-                            ? "#e9d5ff"
-                            : "#fafafa",
-                    }}
-                  />
-                ))}
-              </div>
-            </div>
-          </div>
-
-          {/* Tablet */}
-          <div
-            className="w-44 h-60 rounded-2xl border-4 border-gray-200 bg-white shadow-2xl overflow-hidden relative"
-            style={{ boxShadow: "0 40px 80px -20px rgba(147,51,234,0.2)" }}
-          >
-            <div className="h-5 bg-gray-100 border-b border-gray-200" />
-            <div className="p-2.5 space-y-2">
-              <div className="h-2 bg-purple-200 rounded w-2/3" />
-              <div className="h-1.5 bg-gray-100 rounded w-full" />
-              <div className="h-1.5 bg-gray-100 rounded w-4/5" />
-              <div className="h-16 bg-purple-50 rounded-xl mt-2 flex items-center justify-center">
-                <FiLayout size={20} className="text-purple-400" />
-              </div>
-              <div className="grid grid-cols-2 gap-1.5">
-                {[...Array(4)].map((_, i) => (
-                  <div
-                    key={i}
-                    className="h-8 rounded-lg bg-gray-50 border border-gray-100"
-                  />
-                ))}
-              </div>
-            </div>
-          </div>
-
-          {/* Phone */}
-          <div
-            className="w-24 h-48 rounded-2xl border-4 border-gray-200 bg-white shadow-2xl overflow-hidden"
-            style={{ boxShadow: "0 40px 80px -20px rgba(147,51,234,0.25)" }}
-          >
-            <div className="h-4 bg-gray-100 border-b border-gray-200 flex justify-center items-center">
-              <div className="w-8 h-1 bg-gray-300 rounded-full" />
-            </div>
-            <div className="p-1.5 space-y-1.5">
-              <div className="h-1.5 bg-purple-200 rounded w-4/5" />
-              <div className="h-1 bg-gray-100 rounded w-full" />
-              <div className="h-1 bg-gray-100 rounded w-3/4" />
-              <div className="h-10 bg-purple-50 rounded-lg mt-1 flex items-center justify-center">
-                <FiSmartphone size={12} className="text-purple-400" />
-              </div>
-              <div className="space-y-1">
-                {[...Array(3)].map((_, i) => (
-                  <div
-                    key={i}
-                    className="h-5 bg-gray-50 rounded border border-gray-100"
-                  />
-                ))}
-              </div>
-            </div>
-          </div>
+        {/* Device mockup image */}
+        <div className="relative flex justify-center items-center mt-12 w-full max-w-5xl mx-auto">
+          <Image
+            src="/images/hero-image.png"
+            alt="Website Builder Interface"
+            width={1200}
+            height={800}
+            className="w-full h-auto object-contain drop-shadow-2xl"
+            priority
+          />
         </div>
       </div>
     </section>
@@ -578,6 +501,7 @@ function UseCasesSection() {
     {
       icon: FiShoppingBag,
       label: "E-commerce",
+      image: "/images/e-comm.png",
       title: "Sell products online beautifully",
       desc: "Build a fully featured online store with product listings, a shopping cart, secure checkout, inventory management, and order tracking — all without a single line of code.",
       points: [
@@ -590,6 +514,7 @@ function UseCasesSection() {
     {
       icon: FiBriefcase,
       label: "Business",
+      image: "/images/business.png",
       title: "A professional web presence",
       desc: "Give your business the credibility it deserves. Create service pages, contact forms, team bios, and a blog to attract and convert clients from day one.",
       points: [
@@ -602,6 +527,7 @@ function UseCasesSection() {
     {
       icon: FiCamera,
       label: "Portfolio",
+      image: "/images/portfolio.png",
       title: "Showcase your creative work",
       desc: "Designers, photographers, and creatives deserve a portfolio as striking as their work. Display projects in cinematic galleries with custom case study layouts.",
       points: [
@@ -614,6 +540,7 @@ function UseCasesSection() {
     {
       icon: FiBook,
       label: "Blog & Media",
+      image: "/images/blog.png",
       title: "Publish and grow an audience",
       desc: "A powerful CMS for creators. Write, schedule, and categorize posts with SEO tools built in. Monetize with memberships and newsletter subscriptions.",
       points: [
@@ -694,52 +621,54 @@ function UseCasesSection() {
                 </li>
               ))}
             </ul>
-            <button className="mt-8 group flex items-center gap-2 text-purple-500 font-semibold hover:gap-3 transition-all duration-300">
-              Explore {cases[active].label} templates
-              <FiArrowRight
-                size={16}
-                className="group-hover:translate-x-1 transition-transform"
-              />
-            </button>
+        
           </div>
 
           {/* Visual card */}
           <div
             key={`card-${active}`}
-            className="relative rounded-3xl overflow-hidden h-80"
+            className={`relative rounded-3xl overflow-hidden h-80 ${cases[active].image ? 'bg-transparent flex items-center justify-center border-2 border-purple-100 shadow-2xl' : ''}`}
             style={{
-              background: "linear-gradient(135deg, #f3e8ff 0%, #faf5ff 100%)",
-              border: "2px solid #e9d5ff",
+              background: cases[active].image ? 'transparent' : "linear-gradient(135deg, #f3e8ff 0%, #faf5ff 100%)",
+              border: cases[active].image ? 'none' : "2px solid #e9d5ff",
               animation: "fadeSlideIn 0.4s ease both",
             }}
           >
-            <div className="absolute inset-0 flex items-center justify-center">
-              {(() => {
-                const Icon = cases[active].icon;
-                return (
-                  <div className="text-center">
-                    <div
-                      className="w-24 h-24 rounded-3xl bg-white shadow-lg flex items-center justify-center mx-auto mb-6"
-                      style={{ boxShadow: "0 20px 50px rgba(147,51,234,0.15)" }}
-                    >
-                      <Icon size={44} className="text-purple-400" />
-                    </div>
-                    <p
-                      className="text-purple-500 font-bold text-lg"
-                      
-                    >
-                      {cases[active].label}
-                    </p>
-                    <p className="text-gray-400 text-sm mt-1">
-                      Template Collection
-                    </p>
-                  </div>
-                );
-              })()}
-            </div>
-            {/* Decorative circles */}
-            <div className="absolute -bottom-8 -right-8 w-40 h-40 rounded-full bg-purple-100 opacity-50" />
-            <div className="absolute -top-8 -left-8 w-32 h-32 rounded-full bg-purple-200 opacity-30" />
+            {cases[active].image ? (
+              <Image
+                src={cases[active].image!}
+                alt={cases[active].label}
+                fill
+                className="object-cover rounded-3xl"
+              />
+            ) : (
+              <>
+                <div className="absolute inset-0 flex items-center justify-center z-10">
+                  {(() => {
+                    const Icon = cases[active].icon;
+                    return (
+                      <div className="text-center">
+                        <div
+                          className="w-24 h-24 rounded-3xl bg-white shadow-lg flex items-center justify-center mx-auto mb-6"
+                          style={{ boxShadow: "0 20px 50px rgba(147,51,234,0.15)" }}
+                        >
+                          <Icon size={44} className="text-purple-400" />
+                        </div>
+                        <p className="text-purple-500 font-bold text-lg">
+                          {cases[active].label}
+                        </p>
+                        <p className="text-gray-400 text-sm mt-1">
+                          Template Collection
+                        </p>
+                      </div>
+                    );
+                  })()}
+                </div>
+                {/* Decorative circles */}
+                <div className="absolute -bottom-8 -right-8 w-40 h-40 rounded-full bg-purple-100 opacity-50 z-0" />
+                <div className="absolute -top-8 -left-8 w-32 h-32 rounded-full bg-purple-200 opacity-30 z-0" />
+              </>
+            )}
           </div>
         </div>
       </div>
@@ -752,52 +681,7 @@ function UseCasesSection() {
 ───────────────────────────────────────────── */
 function HowBuiltSection() {
   const { ref, visible } = useInView();
-  const layers = [
-    {
-      layer: "Frontend Layer",
-      items: [
-        "React + Next.js Engine",
-        "Custom Visual Editor",
-        "Real-time Collaboration (WebSockets)",
-        "Component Library (200+ blocks)",
-      ],
-      color: "#f3e8ff",
-      border: "#a855f7",
-    },
-    {
-      layer: "Infrastructure Layer",
-      items: [
-        "Global CDN Edge Network",
-        "Auto SSL & Domain Management",
-        "Auto-scaling Cloud Hosting",
-        "99.99% Uptime SLA",
-      ],
-      color: "#faf5ff",
-      border: "#e9d5ff",
-    },
-    {
-      layer: "Data Layer",
-      items: [
-        "Headless CMS & Media Storage",
-        "Form Submissions & CRM Sync",
-        "Analytics & Event Tracking",
-        "E-commerce Database",
-      ],
-      color: "#f3e8ff",
-      border: "#a855f7",
-    },
-    {
-      layer: "Integration Layer",
-      items: [
-        "10+ App Integrations",
-        "Zapier & Make.com Support",
-        "REST & GraphQL APIs",
-        "Webhooks & Custom Code",
-      ],
-      color: "#faf5ff",
-      border: "#e9d5ff",
-    },
-  ];
+
 
   return (
     <section
@@ -841,35 +725,14 @@ function HowBuiltSection() {
             </div>
           </div>
 
-          <div ref={ref} className="space-y-4">
-            {layers.map((l, i) => (
-              <div
-                key={i}
-                className="rounded-2xl p-5 border-2 transition-all duration-700"
-                style={{
-                  background: l.color,
-                  borderColor: l.border,
-                  opacity: visible ? 1 : 0,
-                  transform: visible ? "translateX(0)" : "translateX(40px)",
-                  transitionDelay: `${i * 120}ms`,
-                }}
-              >
-                <p className="text-xs font-black tracking-widest uppercase text-purple-500 mb-3">
-                  {l.layer}
-                </p>
-                <div className="grid grid-cols-2 gap-2">
-                  {l.items.map((item, j) => (
-                    <div
-                      key={j}
-                      className="flex items-center gap-2 text-xs text-gray-600"
-                    >
-                      <div className="w-1.5 h-1.5 rounded-full bg-purple-400 shrink-0" />
-                      {item}
-                    </div>
-                  ))}
-                </div>
-              </div>
-            ))}
+          <div ref={ref} className="relative rounded-3xl overflow-hidden drop-shadow-2xl border border-purple-100 flex items-center justify-center transition-all duration-700" style={{ opacity: visible ? 1 : 0, transform: visible ? "translateX(0)" : "translateX(40px)" }}>
+            <Image
+              src="/images/architecture.png"
+              alt="Platform Architecture"
+              width={800}
+              height={600}
+              className="w-full h-auto object-contain"
+            />
           </div>
         </div>
       </div>
@@ -989,7 +852,7 @@ function CTASection() {
           </button></Link>
         
         </div>
-        <p className="text-purple-600 text-sm mt-6">
+        <p className="text-white text-sm mt-6">
           No credit card required. Free forever plan available.
         </p>
       </div>

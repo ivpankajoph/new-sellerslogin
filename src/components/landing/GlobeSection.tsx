@@ -58,13 +58,15 @@ export function GlobeSection() {
             At Global Level
           </h2>
           <p className="text-lg md:text-xl text-gray-600 leading-relaxed mb-8 max-w-lg">
-            Your SellersLogin store runs strong, even during your most epic
+            Your Sellers Login store runs strong, even during your most epic
             product drops. Scale globally with zero downtime.
           </p>
 
           <div className="flex items-center gap-4">
             <a
-              href="#pricing"
+              href="https://web.sellerslogin.com/vendor/registration"
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center justify-center bg-purple-200 text-black rounded-full py-3.5 px-8 text-base font-semibold transition-all duration-200 hover:bg-purple-300 hover:shadow-lg hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-400 focus-visible:ring-offset-2 whitespace-nowrap border border-purple-300"
             >
               Start your free trial

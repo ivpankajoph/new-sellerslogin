@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import { BackToTop } from "@/components/landing/BackToTop";
 import { CustomCursor } from "@/components/landing/CustomCursor";
 import { FooterSection } from "@/components/landing/FooterSection";
@@ -14,14 +15,12 @@ import {
   FiCheckCircle,
   FiAlertCircle,
   FiUser,
-  FiStar,
   FiNavigation,
   FiPackage,
   FiArrowRight,
   FiZap,
   FiBell,
   FiPhone,
-  FiTrendingUp,
   FiActivity,
   FiRepeat,
   FiShield,
@@ -123,10 +122,7 @@ function HeroSection() {
                 <FiArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
               </button>
               </Link>
-              <button className="flex items-center gap-3 px-8 py-4 rounded-full border-2 border-purple-200 text-purple-600 font-semibold hover:bg-purple-50 transition-all duration-300">
-                <FiNavigation size={16} />
-                Live Tracking Demo
-              </button>
+          
             </div>
 
             {/* Trust row */}
@@ -264,7 +260,7 @@ function StatsBand() {
   const stats = [
     { value: 99.8, suffix: "%", label: "On-Time Deliveries", prefix: "", decimals: 1 },
     { value: 30, suffix: "%", label: "Route Efficiency", prefix: "+", decimals: 0 },
-    { value: 45, suffix: "%", label: "Fuel Cost Saved", prefix: "-", decimals: 0 },
+    { value: 99, suffix: "%", label: "Full Support", prefix: "-", decimals: 0 },
     { value: 10, suffix: "+", label: "Deliveries Handled", prefix: "", decimals: 1 },
   ];
   return (
@@ -466,6 +462,124 @@ function CTASection() {
   );
 }
 
+function DispatchWorkspaceSection() {
+  const { ref, visible } = useInView();
+  const queue = [
+    { label: "High priority", value: "All Orders", icon: FiAlertCircle },
+    { label: "Instant Support", value: "All Routes", icon: FiShield },
+    { label: "Call required", value: "All time", icon: FiPhone },
+  ];
+
+  return (
+    <section className="relative overflow-hidden bg-white px-6 py-32">
+      <div className="mx-auto grid max-w-6xl items-center gap-14 lg:grid-cols-[0.95fr_1.05fr]">
+        <div
+          ref={ref}
+          className="transition-all duration-1000"
+          style={{ opacity: visible ? 1 : 0, transform: visible ? "translateY(0)" : "translateY(34px)" }}
+        >
+          <p className="mb-4 text-sm font-semibold uppercase tracking-widest text-purple-500">Dispatch workspace</p>
+          <h2 className="text-5xl font-black leading-tight text-gray-900">
+            Keep every route,
+            <br />
+            driver, and exception visible.
+          </h2>
+          <p className="mt-5 max-w-xl text-base leading-relaxed text-gray-500">
+            Your operations team can rebalance routes, flag delivery risks, and call customers before a delay becomes a failed delivery.
+          </p>
+
+          <div className="mt-8 grid gap-4 sm:grid-cols-3">
+            {queue.map((item, index) => (
+              <div
+                key={item.label}
+                className="rounded-2xl border border-purple-100 bg-purple-50/70 p-4 transition-all duration-700"
+                style={{
+                  opacity: visible ? 1 : 0,
+                  transform: visible ? "translateY(0)" : "translateY(22px)",
+                  transitionDelay: `${index * 120}ms`,
+                }}
+              >
+                <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-xl bg-white text-purple-600 shadow-sm">
+                  <item.icon size={18} />
+                </div>
+                <p className="text-xs font-bold uppercase tracking-wider text-gray-400">{item.label}</p>
+                <p className="mt-1 text-lg font-black text-gray-900">{item.value}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div
+          className="relative transition-all duration-1000"
+          style={{ opacity: visible ? 1 : 0, transform: visible ? "translateX(0)" : "translateX(36px)" }}
+        >
+          <div className="relative overflow-hidden rounded-3xl drop-shadow-2xl border border-purple-100 flex items-center justify-center">
+            <Image
+              src="/images/delivery-management.png"
+              alt="Dispatch Workspace Dashboard"
+              width={800}
+              height={600}
+              className="w-full h-auto object-contain"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function ExceptionAutomationSection() {
+  const { ref, visible } = useInView();
+  const lanes = [
+    { title: "Missed call before delivery", rule: "Trigger WhatsApp plus retry window", icon: FiBell },
+    { title: "Driver running late", rule: "Recalculate ETA and notify customer", icon: FiClock },
+    { title: "High-value package", rule: "Require OTP and photo proof", icon: FiShield },
+    { title: "Return pickup raised", rule: "Add reverse route to nearest driver", icon: FiRepeat },
+  ];
+
+  return (
+    <section className="overflow-hidden bg-purple-50 px-6 py-32">
+      <div className="mx-auto max-w-6xl">
+        <div className="mb-14 max-w-3xl">
+          <p className="mb-4 text-sm font-semibold uppercase tracking-widest text-purple-500">Automation rules</p>
+          <h2 className="text-5xl font-black leading-tight text-gray-900">Handle delivery exceptions before they slow down the floor.</h2>
+        </div>
+
+        <div ref={ref} className="grid gap-5 md:grid-cols-2">
+          {lanes.map((lane, index) => (
+            <div
+              key={lane.title}
+              className="group relative overflow-hidden rounded-3xl border border-purple-100 bg-white p-6 shadow-sm transition-all duration-700 hover:-translate-y-1 hover:shadow-xl"
+              style={{
+                opacity: visible ? 1 : 0,
+                transform: visible ? "translateY(0)" : "translateY(30px)",
+                transitionDelay: `${index * 110}ms`,
+              }}
+            >
+              <div className="absolute right-0 top-0 h-24 w-24 rounded-bl-full bg-purple-100 transition-transform duration-500 group-hover:scale-125" />
+              <div className="relative flex items-start gap-4">
+                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-purple-100 text-purple-600">
+                  <lane.icon size={22} />
+                </div>
+                <div>
+                  <h3 className="text-lg font-black text-gray-900">{lane.title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-gray-500">{lane.rule}</p>
+                  <div className="mt-5 h-2 overflow-hidden rounded-full bg-purple-50">
+                    <div
+                      className="h-full rounded-full bg-purple-500 transition-all duration-1000"
+                      style={{ width: visible ? `${70 + index * 7}%` : "0%" }}
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 const styles = `
   @keyframes fadeSlideIn { from { opacity:0; transform:translateY(16px); } to { opacity:1; transform:translateY(0); } }
 `;
@@ -483,6 +597,8 @@ export default function DeliveryManagementPage() {
         <StatsBand />
         <FeaturesSection />
         <FlowSection />
+        <DispatchWorkspaceSection />
+        <ExceptionAutomationSection />
         <CTASection />
         <FooterSection />
         <BackToTop />

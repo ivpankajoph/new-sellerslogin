@@ -324,12 +324,7 @@ function Hero() {
         style={{ backgroundImage: "radial-gradient(circle, #7e22ce 1px, transparent 1px)", backgroundSize: "36px 36px" }} />
 
       <div className="relative z-10 max-w-6xl mx-auto px-6 text-center">
-        {/* Pill */}
-        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-purple-200 bg-purple-200 text-purple-600 text-xs font-semibold uppercase tracking-widest mb-8"
-          style={{ animation: "fadeUp 0.6s cubic-bezier(.22,1,.36,1) both" }}>
-          <RiMailLine />
-          AI Email Automation Platform
-        </div>
+  
 
         <h1 className="font-sans text-6xl md:text-8xl font-bold leading-[1.04] text-gray-900 mb-6"
           style={{ fontFamily: "'Georgia', serif", animation: "fadeUp 0.8s cubic-bezier(.22,1,.36,1) 0.1s both" }}>
@@ -358,7 +353,7 @@ function Hero() {
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4"
           style={{ animation: "fadeUp 0.8s cubic-bezier(.22,1,.36,1) 0.4s both" }}>
-          <Link href="#">
+          <Link href="https://web.sellerslogin.com/vendor/registration">
             <button className="group flex items-center gap-2 text-white font-semibold px-8 py-4 rounded-full transition-all duration-300 hover:-translate-y-0.5 shadow-lg hover:shadow-purple-200"
               style={{ background: "linear-gradient(135deg, #9333ea, #c084fc)" }}>
               Start Automating Free
@@ -1366,7 +1361,7 @@ function CTA() {
             all before your next standup.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Link href="#">
+            <Link href="https://web.sellerslogin.com/vendor/registration">
               <button className="group flex items-center gap-2 bg-white text-purple-600 hover:bg-purple-200 font-bold px-8 py-4 rounded-full transition-all duration-200 shadow-lg hover:-translate-y-0.5">
                 Start Free — No Card Needed
                 <RiArrowRightLine className="transition-transform group-hover:translate-x-1" />
@@ -1399,7 +1394,7 @@ export default function EmailAutomationPage() {
         <FlowBuilderSection />
         <AICopySection />
         <UseCases />
-        <Analytics />
+      
         <DeliverabilitySection />
         <Security />
         <CTA />

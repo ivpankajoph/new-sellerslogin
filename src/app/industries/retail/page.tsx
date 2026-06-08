@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { OptionPage, type OptionPageContent } from "@/components/landing/OptionPage";
 
-export const metadata: Metadata = { title: "Retail | SellersLogin", description: "Retail commerce workflows for catalogs, local inventory, and loyalty." };
+export const metadata: Metadata = { title: "Retail | Sellers Login", description: "Retail commerce workflows for catalogs, local inventory, and loyalty." };
 
 const page: OptionPageContent = {
   label: "Retail",

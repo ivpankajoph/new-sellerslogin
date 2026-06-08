@@ -36,7 +36,7 @@ export function TrustedMarquee() {
               className="flex items-center gap-3 transition-opacity duration-300 hover:opacity-80 select-none"
             >
               <div className="relative w-10 h-10 md:w-12 md:h-12 shrink-0">
-                <Image src={brand.logo} alt={`${brand.name} logo`} fill sizes="48px" className="object-contain" />
+                <Image src={brand.logo} alt={`Sellers Login ${brand.name} integration logo`} fill sizes="48px" className="object-contain" />
               </div>
               <span className="text-xl md:text-2xl font-bold text-gray-700 whitespace-nowrap">
                 {brand.name}

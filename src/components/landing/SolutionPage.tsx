@@ -131,7 +131,7 @@ export function SolutionPage({ page }: { page: SolutionPageContent }) {
                 <div className="flex items-center justify-between border-b border-gray-100 pb-4">
                   <div>
                     <p className="text-xs font-bold uppercase tracking-wider text-gray-500">
-                      SellersLogin
+                      Sellers Login
                     </p>
                     <h2 className="mt-1 text-xl font-bold">{page.cardTitle}</h2>
                   </div>

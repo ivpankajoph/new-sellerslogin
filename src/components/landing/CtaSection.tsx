@@ -17,7 +17,7 @@ export function CtaSection() {
           </h2>
           
           <p className="reveal reveal-delay-2 text-base md:text-lg text-gray-300 max-w-2xl mx-auto mb-8 leading-relaxed">
-            Join 50,000+ businesses that trust SellersLogin to power their
+            Join 50,000+ businesses that trust Sellers Login to power their
             online stores. Start free, no credit card required.
           </p>
           

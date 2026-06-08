@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { OptionPage, type OptionPageContent } from "@/components/landing/OptionPage";
 
-export const metadata: Metadata = { title: "Saas | SellersLogin", description: "Saas growth workflows for self-serve funnels, accounts, and activation." };
+export const metadata: Metadata = { title: "Saas | Sellers Login", description: "Saas growth workflows for self-serve funnels, accounts, and activation." };
 
 const page: OptionPageContent = {
   label: "Saas",

@@ -70,8 +70,8 @@ export function ShowcaseSection() {
                 hidden={!isActive}
                 className={`tab-panel ${isActive ? "block" : "hidden"}`}
               >
-                <div className="bg-white rounded-2xl p-4 md:p-8 shadow-2xl">
-                  <div className="relative w-full aspect-[16/10] md:aspect-video rounded-xl overflow-hidden border border-gray-200 bg-gray-50 shadow-inner">
+                <div className="bg-[#0f0f0f] rounded-2xl p-4 md:p-8 shadow-2xl border border-white/10">
+                  <div className="relative w-full aspect-[16/10] md:aspect-video rounded-xl overflow-hidden border border-white/10 bg-black shadow-inner">
                     <Image
                       src={`/images/dashboard/d${tab.id}.png`}
                       alt={tab.label}

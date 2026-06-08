@@ -1,6 +1,8 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
+import Link from "next/link";
 import { BackToTop } from "@/components/landing/BackToTop";
 import { CustomCursor } from "@/components/landing/CustomCursor";
 import { FooterSection } from "@/components/landing/FooterSection";
@@ -106,11 +108,16 @@ function HeroSection() {
               Process payments in over 135 currencies. Reduce fraud with 3D Secure checkout, and increase conversions with one-click Apple Pay and Google Pay integrations.
             </p>
             <div className="flex flex-wrap gap-4">
-              <button className="group flex items-center gap-3 px-8 py-4 rounded-full text-white font-semibold transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
-                style={{ background: "linear-gradient(135deg,#9333ea,#c084fc)" }}>
+              <Link
+                href="https://web.sellerslogin.com/vendor/registration"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex items-center gap-3 px-8 py-4 rounded-full text-white font-semibold transition-all duration-300 hover:-translate-y-1 hover:shadow-xl no-underline"
+                style={{ background: "linear-gradient(135deg,#9333ea,#c084fc)" }}
+              >
                 Start Accepting Payments
                 <FiArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
-              </button>
+              </Link>
             </div>
           </div>
 
@@ -345,11 +352,164 @@ function CTASection() {
           The most reliable, developer-friendly payment gateway on the planet.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <button className="group flex items-center justify-center gap-3 px-10 py-4 rounded-full bg-white 
-text-purple-600 font-bold text-lg hover:bg-purple-50 transition-all hover:-translate-y-1 shadow-lg">
+          <Link
+            href="https://web.sellerslogin.com/vendor/registration"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group flex items-center justify-center gap-3 px-10 py-4 rounded-full bg-white text-purple-600 font-bold text-lg hover:bg-purple-50 transition-all hover:-translate-y-1 shadow-lg no-underline"
+          >
             Create Free Account
             <FiArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
-          </button>
+          </Link>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function PaymentMethodsSection() {
+  const { ref, visible } = useInView();
+  const methods = ["Cards", "UPI", "Wallets", "Net banking", "EMI", "COD sync"];
+
+  return (
+    <section className="relative overflow-hidden bg-white px-6 py-32">
+      <div className="mx-auto grid max-w-6xl items-center gap-14 lg:grid-cols-[0.95fr_1.05fr]">
+        <div
+          ref={ref}
+          className="transition-all duration-1000"
+          style={{ opacity: visible ? 1 : 0, transform: visible ? "translateY(0)" : "translateY(34px)" }}
+        >
+          <p className="mb-4 text-sm font-semibold uppercase tracking-widest text-purple-500">Payment methods</p>
+          <h2 className="text-5xl font-black leading-tight text-gray-900">
+            Give every buyer their preferred way to pay.
+          </h2>
+          <p className="mt-5 max-w-xl text-base leading-relaxed text-gray-500">
+            Show the right payment options by cart value, buyer location, business rule, currency, and risk score.
+          </p>
+          <div className="mt-8 flex flex-wrap gap-3">
+            {methods.map((method, index) => (
+              <span
+                key={method}
+                className="rounded-full border border-purple-100 bg-purple-50 px-5 py-3 text-sm font-bold text-gray-700 transition-all duration-700"
+                style={{
+                  opacity: visible ? 1 : 0,
+                  transform: visible ? "translateY(0)" : "translateY(18px)",
+                  transitionDelay: `${index * 80}ms`,
+                }}
+              >
+                {method}
+              </span>
+            ))}
+          </div>
+        </div>
+
+        <div
+          className="relative transition-all duration-1000"
+          style={{ opacity: visible ? 1 : 0, transform: visible ? "translateX(0)" : "translateX(36px)" }}
+        >
+          <div className="relative overflow-hidden rounded-3xl border border-purple-100 bg-purple-50 shadow-2xl shadow-purple-100">
+            <div className="relative h-[430px]">
+              <Image
+                src="/images/secure_payments.png"
+                alt="Sellers Login secure payment workflow"
+                fill
+                sizes="(max-width: 1024px) 100vw, 560px"
+                className="object-cover"
+              />
+              <div className="absolute inset-0 bg-linear-to-t from-gray-950/55 via-transparent to-transparent" />
+              <div className="absolute bottom-5 left-5 right-5 grid gap-3 rounded-2xl bg-white/95 p-5 shadow-xl backdrop-blur">
+                {[
+                  { label: "Risk score", value: "Low", icon: FiShield },
+                  { label: "Settlement batch", value: "Ready", icon: FiCheckCircle },
+                  { label: "Currency route", value: "INR", icon: FiGlobe },
+                ].map((item) => (
+                  <div key={item.label} className="flex items-center justify-between rounded-xl bg-purple-50 px-4 py-3">
+                    <div className="flex items-center gap-3">
+                      <item.icon className="text-purple-600" />
+                      <span className="text-sm font-bold text-gray-700">{item.label}</span>
+                    </div>
+                    <span className="text-sm font-black text-gray-900">{item.value}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+          <div className="absolute -left-5 top-10 rounded-2xl border border-purple-100 bg-white px-5 py-4 shadow-xl">
+            <p className="text-xs font-bold uppercase tracking-widest text-gray-400">Auth rate</p>
+            <p className="text-2xl font-black text-purple-600">98.4%</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function ReconciliationSection() {
+  const { ref, visible } = useInView();
+  const rows = [
+    { title: "Gateway capture", status: "Matched", icon: FiCreditCard },
+    { title: "Refund queue", status: "Synced", icon: FiRefreshCw },
+    { title: "Tax ledger", status: "Posted", icon: FiSettings },
+    { title: "Payout batch", status: "Settled", icon: FiDollarSign },
+  ];
+
+  return (
+    <section className="overflow-hidden bg-purple-50 px-6 py-32">
+      <div className="mx-auto max-w-6xl">
+        <div className="mb-14 max-w-3xl">
+          <p className="mb-4 text-sm font-semibold uppercase tracking-widest text-purple-500">Reconciliation</p>
+          <h2 className="text-5xl font-black leading-tight text-gray-900">Keep finance, refunds, and settlement records in sync.</h2>
+        </div>
+
+        <div ref={ref} className="grid gap-5 lg:grid-cols-[1fr_0.9fr]">
+          <div className="rounded-3xl border border-purple-100 bg-white p-6 shadow-sm">
+            <div className="mb-6 flex items-center justify-between">
+              <h3 className="text-xl font-black text-gray-900">Settlement timeline</h3>
+              <span className="rounded-full bg-green-50 px-3 py-1 text-xs font-bold text-green-600">Balanced</span>
+            </div>
+            <div className="space-y-4">
+              {rows.map((row, index) => (
+                <div
+                  key={row.title}
+                  className="flex items-center justify-between rounded-2xl border border-purple-50 bg-purple-50/50 p-4 transition-all duration-700"
+                  style={{
+                    opacity: visible ? 1 : 0,
+                    transform: visible ? "translateX(0)" : "translateX(-24px)",
+                    transitionDelay: `${index * 110}ms`,
+                  }}
+                >
+                  <div className="flex items-center gap-3">
+                    <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-white text-purple-600">
+                      <row.icon size={18} />
+                    </div>
+                    <p className="text-sm font-bold text-gray-700">{row.title}</p>
+                  </div>
+                  <span className="text-xs font-black uppercase tracking-wider text-purple-600">{row.status}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div
+            className="rounded-3xl border border-purple-100 bg-gray-950 p-6 text-white shadow-xl transition-all duration-1000"
+            style={{ opacity: visible ? 1 : 0, transform: visible ? "translateY(0)" : "translateY(30px)" }}
+          >
+            <div className="mb-8 flex h-12 w-12 items-center justify-center rounded-2xl bg-purple-500">
+              <FiLock size={22} />
+            </div>
+            <h3 className="text-3xl font-black">Security checks run with every transaction.</h3>
+            <div className="mt-8 space-y-4">
+              {["Velocity rules", "Device fingerprint", "Address checks", "3D Secure routing"].map((item, index) => (
+                <div key={item} className="flex items-center gap-3">
+                  <div
+                    className="h-2 rounded-full bg-purple-400 transition-all duration-1000"
+                    style={{ width: visible ? `${38 + index * 14}%` : "0%" }}
+                  />
+                  <span className="text-sm font-semibold text-purple-100">{item}</span>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -368,6 +528,8 @@ export default function PaymentIntegrationPage() {
         <StatsBand />
         <FeaturesSection />
         <FlowSection />
+        <PaymentMethodsSection />
+        <ReconciliationSection />
         <CTASection />
         <FooterSection />
         <BackToTop />

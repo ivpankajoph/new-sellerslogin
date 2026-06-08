@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { LandingIcon } from "@/components/icons/LandingIcon";
 
 export function HeroSection() {
   const [isVideoOpen, setIsVideoOpen] = useState(false);
@@ -37,8 +36,8 @@ export function HeroSection() {
           <div className="absolute inset-0" />
         </video>
 
-        {/* Light Overlay to keep text readable */}
-        <div className="absolute inset-0  z-0 pointer-events-none" />
+        {/* Black overlay to keep hero content readable over the video. */}
+        <div className="absolute inset-0 bg-black/60 z-0 pointer-events-none" />
 
         {/* Content Container */}
         <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-28 text-center flex flex-col items-center">

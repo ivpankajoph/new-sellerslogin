@@ -1,4 +1,4 @@
-
+import Link from "next/link";
 
 import {
   enterpriseFeatures,
@@ -55,12 +55,14 @@ export function PricingSection() {
                 </li>
               ))}
             </ul>
-            <button
-              type="button"
+            <Link
+              href="https://web.sellerslogin.com/vendor/registration"
+              target="_blank"
+              rel="noopener noreferrer"
               className="w-full py-3 px-4 rounded-full font-medium text-sm transition-all duration-200 bg-purple-200 text-black border border-purple-300 shadow-sm hover:bg-purple-300 hover:-translate-y-0.5 active:translate-y-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-400 focus-visible:ring-offset-2 cursor-pointer"
             >
               Start Free Trial
-            </button>
+            </Link>
           </article>
 
           {/* Growth (Popular) */}
@@ -86,12 +88,14 @@ export function PricingSection() {
                 </li>
               ))}
             </ul>
-            <button
-              type="button"
+            <Link
+              href="https://web.sellerslogin.com/vendor/registration"
+              target="_blank"
+              rel="noopener noreferrer"
               className="w-full py-3 px-4 rounded-full font-medium text-sm transition-all duration-200 bg-purple-200 text-black border border-purple-300 shadow-sm hover:bg-purple-300 hover:-translate-y-0.5 active:translate-y-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-400 focus-visible:ring-offset-2 focus-visible:ring-offset-gray-900 cursor-pointer"
             >
               Get Started
-            </button>
+            </Link>
           </article>
 
           {/* Enterprise */}
@@ -108,12 +112,14 @@ export function PricingSection() {
                 </li>
               ))}
             </ul>
-            <button
-              type="button"
+            <Link
+              href="https://web.sellerslogin.com/vendor/registration"
+              target="_blank"
+              rel="noopener noreferrer"
               className="w-full py-3 px-4 rounded-full font-medium text-sm transition-all duration-200 bg-purple-200 text-black border border-purple-300 shadow-sm hover:bg-purple-300 hover:-translate-y-0.5 active:translate-y-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-400 focus-visible:ring-offset-2 cursor-pointer"
             >
               Contact Sales
-            </button>
+            </Link>
           </article>
         </div>
       </div>

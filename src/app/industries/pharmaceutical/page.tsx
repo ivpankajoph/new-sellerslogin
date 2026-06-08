@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { OptionPage, type OptionPageContent } from "@/components/landing/OptionPage";
 
-export const metadata: Metadata = { title: "Pharmaceutical | SellersLogin", description: "Pharmaceutical commerce tools for distributor catalogs and stock visibility." };
+export const metadata: Metadata = { title: "Pharmaceutical | Sellers Login", description: "Pharmaceutical commerce tools for distributor catalogs and stock visibility." };
 
 const page: OptionPageContent = {
   label: "Pharmaceutical",

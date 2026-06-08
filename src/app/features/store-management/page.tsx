@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { LandingIcon } from "@/components/icons/LandingIcon";
 import { BackToTop } from "@/components/landing/BackToTop";
@@ -10,8 +11,8 @@ import { Navbar } from "@/components/landing/Navbar";
 import { ScrollRevealInit } from "@/components/landing/ScrollRevealInit";
 
 export const metadata: Metadata = {
-  title: "Store Management | SellersLogin",
-  description: "Manage orders, customers, and storefront operations from one SellersLogin workspace.",
+  title: "Store Management | Sellers Login",
+  description: "Manage orders, customers, and storefront operations from one Sellers Login workspace.",
 };
 
 export default function Page() {
@@ -68,10 +69,20 @@ export default function Page() {
             </div>
 
             <div className="reveal reveal-delay-2 rounded-[2rem] border border-white/12 bg-white/10 p-4 shadow-[0_30px_80px_-30px_rgba(124,58,237,0.65)] backdrop-blur-xl">
+              <div className="relative mb-4 aspect-[4/3] overflow-hidden rounded-[1.5rem] bg-white">
+                <Image
+                  src="/images/store_management.png"
+                  alt="Sellers Login store management dashboard"
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  className="object-contain p-4"
+                  priority
+                />
+              </div>
               <div className="rounded-[1.5rem] bg-white p-5 text-gray-900">
                 <div className="flex items-center justify-between border-b border-gray-100 pb-4">
                   <div>
-                    <p className="text-xs font-bold uppercase tracking-wider text-gray-500">SellersLogin</p>
+                    <p className="text-xs font-bold uppercase tracking-wider text-gray-500">Sellers Login</p>
                     <h2 className="mt-1 text-xl font-bold">Store Management</h2>
                   </div>
                   <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-purple-100 text-purple-700">
@@ -137,7 +148,7 @@ export default function Page() {
                 </div>
                 <h3 className="text-xl font-bold text-gray-950">Centralized work</h3>
                 <p className="mt-3 text-sm leading-relaxed text-gray-600">
-                  Connect store management with store data, customer activity, and operational workflows without leaving the SellersLogin workspace.
+                  Keep orders, catalog updates, customer records, and team actions in one workspace so operators do not switch between disconnected tools.
                 </p>
               </div>
               <div className="reveal reveal-delay-2 rounded-2xl border border-gray-200 bg-white p-6 shadow-[0_18px_45px_-32px_rgba(15,23,42,0.55)]">
@@ -146,7 +157,7 @@ export default function Page() {
                 </div>
                 <h3 className="text-xl font-bold text-gray-950">Cleaner order flow</h3>
                 <p className="mt-3 text-sm leading-relaxed text-gray-600">
-                  Connect store management with store data, customer activity, and operational workflows without leaving the SellersLogin workspace.
+                  Move new, packed, shipped, returned, and cancelled orders through clear statuses with fewer manual follow-ups.
                 </p>
               </div>
               <div className="reveal reveal-delay-3 rounded-2xl border border-gray-200 bg-white p-6 shadow-[0_18px_45px_-32px_rgba(15,23,42,0.55)]">
@@ -155,7 +166,7 @@ export default function Page() {
                 </div>
                 <h3 className="text-xl font-bold text-gray-950">Better customer context</h3>
                 <p className="mt-3 text-sm leading-relaxed text-gray-600">
-                  Connect store management with store data, customer activity, and operational workflows without leaving the SellersLogin workspace.
+                  See purchase history, delivery notes, and support context beside each order so the team can respond faster.
                 </p>
               </div>
             </div>

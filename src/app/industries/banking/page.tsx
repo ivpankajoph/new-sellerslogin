@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { OptionPage, type OptionPageContent } from "@/components/landing/OptionPage";
 
-export const metadata: Metadata = { title: "Banking | SellersLogin", description: "Banking campaign and lead workflows for digital customer journeys." };
+export const metadata: Metadata = { title: "Banking | Sellers Login", description: "Banking campaign and lead workflows for digital customer journeys." };
 
 const page: OptionPageContent = {
   label: "Banking",

@@ -1,7 +1,6 @@
 "use client";
-import React, { useRef, useState } from "react";
+import React, { useRef } from "react";
 import { useMotionValueEvent, useScroll } from "motion/react";
-import { motion } from "motion/react";
 import { cn } from "@/lib/utils";
 
 export const StickyScroll = ({
@@ -12,13 +11,13 @@ export const StickyScroll = ({
   content: {
     title: string;
     description: string;
-    content?: React.ReactNode | any;
+    content?: React.ReactNode;
   }[];
   contentClassName?: string;
   imagePosition?: "left" | "right";
 }) => {
   const [activeCard, setActiveCard] = React.useState(0);
-  const ref = useRef<any>(null);
+  const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start start", "end start"],
@@ -41,7 +40,7 @@ export const StickyScroll = ({
   });
 
   return (
-    <motion.div
+    <div
       className={cn(
         "relative flex w-full justify-center gap-10 lg:gap-20 py-10",
         imagePosition === "left" ? "flex-row-reverse" : "flex-row"
@@ -52,28 +51,22 @@ export const StickyScroll = ({
         <div className="max-w-2xl">
           {content.map((item, index) => (
             <div key={item.title + index} className="my-32 flex flex-col justify-center min-h-[380px]">
-              <motion.h2
-                initial={{
-                  opacity: 0,
-                }}
-                animate={{
-                  opacity: activeCard === index ? 1 : 0.2,
-                }}
-                className="text-3xl font-bold text-gray-900"
+              <h2
+                className={cn(
+                  "text-3xl font-bold text-gray-900 transition-opacity duration-300",
+                  activeCard === index ? "opacity-100" : "opacity-20"
+                )}
               >
                 {item.title}
-              </motion.h2>
-              <motion.p
-                initial={{
-                  opacity: 0,
-                }}
-                animate={{
-                  opacity: activeCard === index ? 1 : 0.2,
-                }}
-                className="text-xl mt-6 max-w-md text-gray-600 leading-relaxed"
+              </h2>
+              <p
+                className={cn(
+                  "text-xl mt-6 max-w-md text-gray-600 leading-relaxed transition-opacity duration-300",
+                  activeCard === index ? "opacity-100" : "opacity-20"
+                )}
               >
                 {item.description}
-              </motion.p>
+              </p>
             </div>
           ))}
           <div className="h-40" />
@@ -81,12 +74,33 @@ export const StickyScroll = ({
       </div>
       <div
         className={cn(
-          "sticky top-32 hidden h-[380px] w-[650px] overflow-hidden rounded-2xl bg-white shadow-xl lg:block border border-gray-100",
+          "sticky top-32 hidden h-[380px] w-[650px] overflow-visible rounded-2xl bg-black shadow-xl lg:block border border-black",
           contentClassName,
         )}
       >
-        {content[activeCard].content ?? null}
+        <div className="h-full w-full overflow-hidden rounded-[inherit] bg-black">
+          {content[activeCard].content ?? null}
+        </div>
+        <div
+          aria-hidden="true"
+          className={cn(
+            "absolute top-1/2 z-20 flex -translate-y-1/2 flex-col gap-3 rounded-full border border-black bg-white px-2.5 py-3 shadow-lg",
+            imagePosition === "left" ? "-right-5" : "-left-5"
+          )}
+        >
+          {content.map((item, index) => (
+            <span
+              key={`${item.title}-indicator`}
+              className={cn(
+                "h-2.5 w-2.5 rounded-full transition-all duration-300",
+                activeCard === index
+                  ? "scale-125 bg-black"
+                  : "bg-gray-300"
+              )}
+            />
+          ))}
+        </div>
       </div>
-    </motion.div>
+    </div>
   );
 };

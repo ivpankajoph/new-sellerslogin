@@ -72,6 +72,7 @@ import {
   RiDonutChartLine,
 } from "react-icons/ri";
 import Link from "next/link";
+import Image from "next/image";
 
 /* ─── Utility ─────────────────────────────────────────────────────────── */
 function useIntersection(threshold = 0.12) {
@@ -452,7 +453,7 @@ function StorefrontBuilder() {
                 "Custom domain, SSL, and CDN included",
                 "Section-based homepage with A/B testing",
                 "Auto-generated SEO meta tags and sitemaps",
-                "One-click PWA — works offline on mobile",
+            
               ].map((f,i)=>(
                 <li key={f}
                   className={`flex items-start gap-3 text-sm text-gray-600 font-body transition-all duration-500 ${visible?"opacity-100 translate-x-0":"opacity-0 -translate-x-4"}`}
@@ -464,61 +465,19 @@ function StorefrontBuilder() {
                 </li>
               ))}
             </ul>
-            <button className="group inline-flex items-center gap-2 bg-purple-600 hover:bg-purple-700 text-white font-semibold font-body px-7 py-3.5 rounded-full transition-all duration-300 shadow-md shadow-purple-200 hover:-translate-y-0.5">
-              Browse Themes <RiArrowRightLine className="transition-transform group-hover:translate-x-1"/>
-            </button>
+        
           </div>
 
           {/* Right — theme picker mock */}
           <div className={`transition-all duration-700 delay-200 ${visible?"opacity-100 translate-x-0":"opacity-0 translate-x-8"}`}>
-            <div className="bg-white rounded-3xl border border-purple-100 shadow-xl shadow-purple-50 overflow-hidden">
-              <div className="flex items-center gap-3 px-5 py-3.5 border-b border-purple-50 bg-purple-50/30">
-                <RiPaletteLine className="text-purple-400"/>
-                <span className="font-display font-semibold text-gray-700 text-sm">Theme Studio</span>
-                <span className="ml-auto text-[10px] bg-purple-50 text-purple-500 border border-purple-100 px-2 py-0.5 rounded-full font-body">50 themes</span>
-              </div>
-
-              {/* Theme grid */}
-              <div className="p-4 grid grid-cols-2 gap-3 mb-2">
-                {themes.map((t,i)=>(
-                  <div key={t.name}
-                    className={`relative rounded-2xl overflow-hidden cursor-pointer group ${i===0?"ring-2 ring-purple-400":""}`}
-                    style={{animation:`fadeUp 0.4s ease ${i*0.08}s both`}}>
-                    <div className={`h-28 bg-gradient-to-br ${t.color} flex items-end p-3`}>
-                      {/* Fake product cards */}
-                      <div className="w-full space-y-1">
-                        <div className="h-1.5 bg-white/30 rounded-full w-3/4"/>
-                        <div className="h-1 bg-white/20 rounded-full w-1/2"/>
-                      </div>
-                    </div>
-                    <div className="p-2.5 bg-white border-t border-purple-50">
-                      <div className="flex items-center justify-between">
-                        <span className="text-xs font-bold text-gray-700 font-body">{t.name}</span>
-                        <span className="text-[9px] bg-purple-50 text-purple-500 px-1.5 py-0.5 rounded-full font-body">{t.tag}</span>
-                      </div>
-                    </div>
-                    {i===0 && <div className="absolute top-2 right-2 w-5 h-5 rounded-full bg-purple-500 flex items-center justify-center">
-                      <RiCheckLine className="text-white text-[10px]"/>
-                    </div>}
-                  </div>
-                ))}
-              </div>
-
-              {/* Editor toolbar */}
-              <div className="mx-4 mb-4 p-3 bg-purple-50/40 rounded-2xl border border-purple-100">
-                <p className="text-[10px] font-semibold text-purple-500 uppercase tracking-widest mb-2 font-body">Quick customise</p>
-                <div className="flex items-center gap-2 flex-wrap">
-                  {["Hero Banner","Product Grid","Reviews","Newsletter","Footer"].map(s=>(
-                    <span key={s} className="text-[10px] px-2.5 py-1 rounded-full bg-white border border-purple-100 text-gray-500 font-body cursor-pointer hover:border-purple-300 hover:text-purple-600 transition-colors">{s}</span>
-                  ))}
-                </div>
-              </div>
-
-              <div className="px-4 pb-4">
-                <button className="w-full flex items-center justify-center gap-2 bg-purple-600 text-white text-xs font-semibold font-body py-3 rounded-full hover:bg-purple-700 transition-colors">
-                  <RiRocketLine/> Publish Store
-                </button>
-              </div>
+            <div className="relative overflow-hidden rounded-3xl drop-shadow-2xl border border-purple-100 flex items-center justify-center">
+              <Image
+                src="/images/b2c-dashboard.png"
+                alt="Storefront Builder Dashboard"
+                width={800}
+                height={600}
+                className="w-full h-auto object-contain"
+              />
             </div>
           </div>
         </div>
@@ -1198,7 +1157,7 @@ function MoreFeatures() {
     {icon:RiExchangeLine,title:"Returns & Exchanges",desc:"Self-serve returns portal, exchange flow with credit note, and automated refund triggers — reduce support tickets by 60%."},
     {icon:RiCustomerService2Line,title:"Live Chat & Support Desk",desc:"Built-in live chat widget on storefront. All chats, emails, and WhatsApp conversations in a unified inbox."},
     {icon:RiLayoutLine,title:"Landing Page Builder",desc:"Build sale, influencer, and campaign landing pages with a visual editor — no dev time between campaigns."},
-    {icon:RiGiftLine,title:"Gift Cards & Vouchers",desc:"Create branded digital gift cards, bulk voucher generation for corporate gifting, and balance tracking."},
+   
     {icon:RiMapPin2Line,title:"Hyperlocal Delivery",desc:"Same-day and scheduled delivery slots, dark store routing, and delivery promise on product pages."},
     {icon:RiAlertLine,title:"Price & Stock Alerts",desc:"Let customers subscribe to restock and price-drop alerts. Trigger automated campaigns when conditions are met."},
   ];
@@ -1351,7 +1310,7 @@ export default function B2CDashboardPage() {
         <ProductCatalogue/>
         <OrderManagement/>
         <CustomerIntelligence/>
-        <Promotions/>
+      
         <Analytics/>
         <Omnichannel/>
         <HowItWorks/>

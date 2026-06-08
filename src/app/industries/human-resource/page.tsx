@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { OptionPage, type OptionPageContent } from "@/components/landing/OptionPage";
 
-export const metadata: Metadata = { title: "Human Resource | SellersLogin", description: "Human resource pages and workflows for hiring and candidate communication." };
+export const metadata: Metadata = { title: "Human Resource | Sellers Login", description: "Human resource pages and workflows for hiring and candidate communication." };
 
 const page: OptionPageContent = {
   label: "Human Resource",

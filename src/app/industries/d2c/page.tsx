@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { OptionPage, type OptionPageContent } from "@/components/landing/OptionPage";
 
-export const metadata: Metadata = { title: "D2C | SellersLogin", description: "Direct-to-consumer commerce tools for owned data, retention, and growth." };
+export const metadata: Metadata = { title: "D2C | Sellers Login", description: "Direct-to-consumer commerce tools for owned data, retention, and growth." };
 
 const page: OptionPageContent = {
   label: "D2C",

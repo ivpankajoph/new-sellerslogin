@@ -3,52 +3,103 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { ShieldCheck, ShieldAlert, Truck, Info, Briefcase, LifeBuoy, FileText } from "lucide-react";
 import { navPageGroups } from "@/data/navPages";
 
-const footerLinks = {
-  Automation: [
-    "AI Voice Automation",
-    "Email Automation",
-    "E-commerce Automation",
-    "Whatsapp Automation",
-  ],
-  Solutions: [
-    "B2b Dashboard",
-    "B2c Dashboard",
-  ],
-  Industries: [
-    "Manufacturing",
-    "Real estate",
-    "Fashion",
-    "D2C",
-    "Food",
-    "Restaurants",
-    "Saas",
-    "Healthcare",
-    "Pharmaceutical",
-  ],
-  "More Industries": [
-    "Banking",
-    "Hospitality",
-    "Tourism",
-    "Ecommerce",
-    "Retail",
-    "Logistics",
-    "FMCG",
-    "Human Resource",
-    "Professional Services",
-  ],
-  Legal: [
-    "Terms and Conditions",
-    "Privacy Policy"
-  ],
+const labelIcons: Record<string, React.ReactNode> = {
+  "Privacy Policy": <ShieldCheck className="w-4.5 h-4.5 text-gray-500" strokeWidth={1.5} />,
+  "Terms and Conditions": <ShieldAlert className="w-4.5 h-4.5 text-gray-500" strokeWidth={1.5} />,
+  "Shipping and Delivery": <Truck className="w-4.5 h-4.5 text-gray-500" strokeWidth={1.5} />,
+  "Return and Refund": <ShieldAlert className="w-4.5 h-4.5 text-gray-500" strokeWidth={1.5} />,
+  "Warranty Policy": <ShieldCheck className="w-4.5 h-4.5 text-gray-500" strokeWidth={1.5} />,
+  "Contact Us": <LifeBuoy className="w-4.5 h-4.5 text-gray-500" strokeWidth={1.5} />,
+  "Track Your Order": <FileText className="w-4.5 h-4.5 text-gray-500" strokeWidth={1.5} />,
+  "FAQs": <LifeBuoy className="w-4.5 h-4.5 text-gray-500" strokeWidth={1.5} />,
+  "Grievance Officer": <ShieldAlert className="w-4.5 h-4.5 text-gray-500" strokeWidth={1.5} />,
+  "About Sellers Login": <Info className="w-4.5 h-4.5 text-gray-500" strokeWidth={1.5} />,
+  "Careers": <Briefcase className="w-4.5 h-4.5 text-gray-500" strokeWidth={1.5} />
 };
 
-
+const footerColumns = [
+  // Column 1
+  [
+    {
+      title: "Solutions & Automation",
+      links: [
+        "B2b Dashboard",
+        "B2c Dashboard",
+        "Food Dashboard",
+        "AI Voice Automation",
+        "Email Automation",
+        "Whatsapp Automation",
+      ],
+    },
+  ],
+  // Column 2
+  [
+    {
+      title: "Industries",
+      links: [
+        "Manufacturing",
+        "Real estate",
+        "Fashion",
+        "D2C",
+        "Food",
+        "Restaurants",
+        "Saas",
+        "Healthcare",
+        "Pharmaceutical",
+        "Retail",
+        "Ecommerce",
+      ],
+    },
+  ],
+  // Column 3
+  [
+    {
+      title: "Policies",
+      links: [
+        "Privacy Policy",
+        "Terms and Conditions",
+        "Shipping and Delivery",
+        "Return and Refund",
+        "Warranty Policy",
+      ],
+    },
+    {
+      title: "Company",
+      links: [
+        "About Sellers Login",
+        "Careers",
+      ],
+    },
+  ],
+  // Column 4
+  [
+    {
+      title: "Support",
+      links: [
+        "Contact Us",
+        "Track Your Order",
+        "FAQs",
+        "Grievance Officer",
+      ],
+    },
+  ],
+];
 
 const footerHrefByLabel: Record<string, string> = {
   "Terms and Conditions": "/terms",
   "Privacy Policy": "/privacy",
+  "Shipping and Delivery": "/shipping",
+  "Return and Refund": "/returns",
+  "Warranty Policy": "/warranty",
+  "Contact Us": "/contact",
+  "Track Your Order": "/track-order",
+  "FAQs": "/resources/faq",
+  "Grievance Officer": "/grievance",
+  "About Sellers Login": "/about",
+  "Careers": "/careers",
   ...Object.values(navPageGroups)
     .flat()
     .reduce<Record<string, string>>((links, item) => {
@@ -73,16 +124,14 @@ export function FooterSection() {
     }
   };
 
-  // Change this variable to update both the footer background AND the wavy divider!
-  const themeColor = "#e9d5ff"; // Tailwind purple-200
+  const themeColor = "#e9d5ff";
 
   return (
     <footer 
       className="relative pt-16 md:pt-24 px-4 sm:px-6 lg:px-8 pb-8"
       style={{ backgroundColor: themeColor }}
     >
-      {/* Wavy Divider at the top */}
-      <div className="absolute top-[1px] left-0 w-full overflow-hidden leading-none -translate-y-full">
+      <div className="absolute top-px left-0 w-full overflow-hidden leading-none -translate-y-full">
         <svg
           className="relative block w-full h-15 md:h-25"
           viewBox="0 0 1440 120"
@@ -98,10 +147,9 @@ export function FooterSection() {
       </div>
 
       <div className="max-w-7xl mx-auto relative z-10">
-        {/* Main Footer Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-8 lg:gap-6 mb-12">
-          {/* Brand Column (Spans 2 cols on large screens) */}
-          <div className="lg:col-span-2">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 mb-12">
+          
+          <div className="lg:col-span-4 xl:col-span-4">
             <Link
               href="/#hero"
               className="inline-flex items-center gap-3 no-underline focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-400 focus-visible:ring-offset-2 rounded-full relative"
@@ -112,9 +160,7 @@ export function FooterSection() {
               <span className="text-2xl font-bold text-gray-900 leading-none">SellersLogin</span>
             </Link>
             <div className="mt-6 mb-5 text-sm text-gray-600 space-y-3">
-              <p>
-                Brand : SellersLogin ( Under Life Changing Networks Pvt Ltd )
-              </p>
+             
               <p className="flex items-start gap-2">
                 <svg className="w-5 h-5 text-gray-400 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
@@ -124,9 +170,7 @@ export function FooterSection() {
               </p>
             </div>
             
-            {/* Newsletter Signup */}
             <form onSubmit={handleSubmit} className="mt-4">
-            
               <div className="flex flex-col sm:flex-row gap-2">
                 <div className="flex-1 min-w-0 relative">
                   {mounted ? (
@@ -145,7 +189,7 @@ export function FooterSection() {
                     />
                   ) : (
                     <div
-                      className="w-full h-[42px] bg-gray-50 border border-gray-200 rounded-lg"
+                      className="w-full h-10.5 bg-gray-50 border border-gray-200 rounded-lg"
                     />
                   )}
                 </div>
@@ -162,40 +206,56 @@ export function FooterSection() {
             </form>
           </div>
 
-          {/* Link Columns */}
-          {Object.entries(footerLinks).map(([title, links]) => (
-            <nav key={title} aria-label={`${title} links`}>
-              <h4 className="text-xs font-bold text-gray-900 uppercase tracking-wider mb-4">
-                {title}
-              </h4>
-              <ul className="space-y-2.5">
-                {links.map((label) => (
-                  <li key={label}>
-                    <Link
-                      href={footerHrefByLabel[label] ?? "/"}
-                      className="text-sm text-gray-600 no-underline transition-colors duration-150 hover:text-gray-900 hover:focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-400 focus-visible:ring-offset-2 rounded"
-                    >
-                      {label}
-                    </Link>
-                  </li>
+          <div className="lg:col-span-8 xl:col-span-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
+            {footerColumns.map((col, colIdx) => (
+              <div key={colIdx} className="flex flex-col gap-8">
+                {col.map((section) => (
+                  <nav key={section.title} aria-label={`${section.title} links`}>
+                    <h4 className="text-xs font-bold text-gray-900 uppercase tracking-wider mb-4">
+                      {section.title}
+                    </h4>
+                    <ul className="space-y-3">
+                      {section.links.map((label) => (
+                        <li key={label}>
+                          <Link
+                            href={footerHrefByLabel[label] ?? "/"}
+                            className="flex items-center gap-3 text-sm text-gray-600 no-underline transition-colors duration-150 hover:text-gray-900 hover:focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-400 focus-visible:ring-offset-2 rounded"
+                          >
+                            {labelIcons[label] && (
+                              <div className="w-8 h-8 flex items-center justify-center bg-gray-50 rounded-lg shrink-0 border border-gray-200 shadow-sm">
+                                {labelIcons[label]}
+                              </div>
+                            )}
+                            <span className={labelIcons[label] ? "font-medium" : ""}>{label}</span>
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                    {section.title === "Company" && (
+                      <div className="mt-6">
+                        <Link
+                          href="https://web.sellerslogin.com/vendor/registration"
+                          target="_blank" rel="noopener noreferrer"
+                          className="inline-flex items-center justify-center gap-2 bg-[#7c3aed] text-white rounded py-2.5 px-5 text-sm font-semibold hover:bg-purple-700 transition-all duration-200 shadow-md"
+                        >
+                          Start selling <span aria-hidden="true">&rarr;</span>
+                        </Link>
+                      </div>
+                    )}
+                  </nav>
                 ))}
-              </ul>
-            </nav>
-          ))}
+              </div>
+            ))}
+          </div>
         </div>
 
-        {/* Bottom Bar */}
         <div className="flex flex-col md:flex-row items-center justify-between pt-8 border-t border-gray-200 gap-4">
           <address className="not-italic text-sm text-gray-600 text-center md:text-left">
-         All Rights Reserved 2026 with SellersLogin ( Under Life Changing Networks Pvt Ltd )
-            <a href="mailto:hello@sellerslogin.com" className="hover:text-gray-900 hover:transition-colors underline-offset-2 hover:underline ml-2">
+            All Rights Reserved 2026 with Sellers Login 
+            <a href="mailto:info@sellerslogin.com" className="hover:text-gray-900 hover:transition-colors underline-offset-2 hover:underline ml-2">
               info@sellerslogin.com
             </a>{" "}
-            ·{" "}
-         
           </address>
-          
-     
         </div>
       </div>
     </footer>

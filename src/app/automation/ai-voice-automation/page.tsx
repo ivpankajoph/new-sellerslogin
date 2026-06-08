@@ -721,13 +721,13 @@ function NumberProvisioning() {
       icon: RiPhoneLine,
       label: "Local Numbers",
       desc: "Build regional trust. Numbers in 60+ countries with local area codes, available for instant purchase.",
-      detail: "From $1.15/month",
+      detail: "Affordable Prices",
     },
     {
       icon: RiGlobalLine,
       label: "Toll-Free Numbers",
       desc: "0800, 1-800, and equivalent toll-free prefixes for inbound campaigns where caller cost matters.",
-      detail: "From $2.00/month",
+      detail: "Affordable Prices",
     },
     {
       icon: RiMegaphoneLine,
@@ -775,15 +775,7 @@ function NumberProvisioning() {
                 </li>
               ))}
             </ul>
-            <Link href="https://web.sellerslogin.com/vendor/registration">
-              <button
-                className="group flex items-center gap-2 text-white font-semibold px-7 py-3.5 rounded-full transition-all hover:-translate-y-0.5 shadow-md hover:shadow-purple-200"
-                style={{ background: "linear-gradient(135deg,#9333ea,#c084fc)" }}
-              >
-                Browse Available Numbers
-                <RiArrowRightLine className="transition-transform group-hover:translate-x-1" />
-              </button>
-            </Link>
+         
           </div>
 
           {/* Right cards */}
@@ -1508,7 +1500,7 @@ function CTA() {
             before your next meeting.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Link href="#">
+            <Link href="https://web.sellerslogin/vendor/registration">
               <button className="group flex items-center gap-2 bg-white text-purple-600 hover:bg-purple-200 font-bold px-8 py-4 rounded-full transition-all duration-200 shadow-lg hover:-translate-y-0.5">
                 Get Started Free
                 <RiArrowRightLine className="transition-transform group-hover:translate-x-1" />
@@ -1541,7 +1533,7 @@ export default function AIVoiceAutomationPage() {
         <NumberProvisioning />
         <DataGrounding />
         <UseCases />
-        <Analytics />
+   
         <Security />
         <CTA />
         <FooterSection />

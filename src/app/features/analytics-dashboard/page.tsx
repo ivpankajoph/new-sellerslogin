@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import { BackToTop } from "@/components/landing/BackToTop";
 import { CustomCursor } from "@/components/landing/CustomCursor";
 import { FooterSection } from "@/components/landing/FooterSection";
@@ -376,6 +377,133 @@ function CTASection() {
   );
 }
 
+function ReportBuilderSection() {
+  const { ref, visible } = useInView();
+  const layers = [
+    { label: "Revenue", color: "bg-purple-500", width: "92%" },
+    { label: "Orders", color: "bg-purple-300", width: "76%" },
+    { label: "Returns", color: "bg-gray-300", width: "34%" },
+  ];
+
+  return (
+    <section className="relative overflow-hidden bg-white px-6 py-32">
+      <div className="mx-auto grid max-w-6xl items-center gap-14 lg:grid-cols-[1.05fr_0.95fr]">
+        <div
+          className="relative transition-all duration-1000"
+          style={{ opacity: visible ? 1 : 0, transform: visible ? "translateX(0)" : "translateX(-36px)" }}
+        >
+          <div className="relative overflow-hidden rounded-3xl border border-purple-100 bg-purple-50 shadow-2xl shadow-purple-100">
+            <div className="relative h-[430px]">
+              <Image
+                src="/images/dashboard/d1.png"
+                alt="Sellers Login analytics dashboard report preview"
+                fill
+                sizes="(max-width: 1024px) 100vw, 560px"
+                className="object-cover object-left"
+              />
+              <div className="absolute inset-0 bg-linear-to-r from-white/20 via-transparent to-purple-950/35" />
+            </div>
+          </div>
+          <div className="absolute -bottom-7 left-8 right-8 rounded-3xl border border-purple-100 bg-white p-5 shadow-xl">
+            <div className="mb-4 flex items-center justify-between">
+              <p className="text-sm font-black text-gray-900">Metric mixer</p>
+              <span className="rounded-full bg-purple-50 px-3 py-1 text-xs font-bold text-purple-600">Live</span>
+            </div>
+            <div className="space-y-3">
+              {layers.map((layer) => (
+                <div key={layer.label} className="grid grid-cols-[80px_1fr] items-center gap-3">
+                  <span className="text-xs font-bold text-gray-500">{layer.label}</span>
+                  <div className="h-2 overflow-hidden rounded-full bg-gray-100">
+                    <div className={`h-full rounded-full ${layer.color}`} style={{ width: visible ? layer.width : "0%" }} />
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <div
+          ref={ref}
+          className="transition-all duration-1000"
+          style={{ opacity: visible ? 1 : 0, transform: visible ? "translateY(0)" : "translateY(34px)" }}
+        >
+          <p className="mb-4 text-sm font-semibold uppercase tracking-widest text-purple-500">Report builder</p>
+          <h2 className="text-5xl font-black leading-tight text-gray-900">
+            Build the exact view your team needs.
+          </h2>
+          <p className="mt-5 max-w-xl text-base leading-relaxed text-gray-500">
+            Combine sales, inventory, traffic, payment, and delivery signals into role-specific dashboards without waiting on manual spreadsheet work.
+          </p>
+          <div className="mt-8 grid gap-4 sm:grid-cols-3">
+            {[
+              { icon: FiFilter, label: "Smart filters" },
+              { icon: FiEye, label: "Live visibility" },
+              { icon: FiDownload, label: "Auto exports" },
+            ].map((item, index) => (
+              <div
+                key={item.label}
+                className="rounded-2xl border border-purple-100 bg-purple-50 p-5 transition-all duration-700"
+                style={{
+                  opacity: visible ? 1 : 0,
+                  transform: visible ? "translateY(0)" : "translateY(22px)",
+                  transitionDelay: `${index * 120}ms`,
+                }}
+              >
+                <item.icon className="mb-4 text-purple-600" size={22} />
+                <p className="text-sm font-black text-gray-900">{item.label}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function InsightSegmentsSection() {
+  const { ref, visible } = useInView();
+  const cards = [
+    { title: "Customer cohorts", value: "All Group", delta: "+12%", icon: FiUsers },
+    { title: "Revenue leakage", value: "All Data", delta: "-7%", icon: FiArrowDown },
+    { title: "Conversion goals", value: "Instant live", delta: "+9%", icon: FiTarget },
+    { title: "Storefront regions", value: "All Zones", delta: "+16%", icon: FiGlobe },
+  ];
+
+  return (
+    <section className="overflow-hidden bg-purple-50 px-6 py-32">
+      <div className="mx-auto max-w-6xl">
+        <div className="mb-14 max-w-3xl">
+          <p className="mb-4 text-sm font-semibold uppercase tracking-widest text-purple-500">Insight segments</p>
+          <h2 className="text-5xl font-black leading-tight text-gray-900">Move from top-line numbers to the exact segment causing change.</h2>
+        </div>
+        <div ref={ref} className="grid gap-5 md:grid-cols-4">
+          {cards.map((card, index) => (
+            <div
+              key={card.title}
+              className="relative overflow-hidden rounded-3xl border border-purple-100 bg-white p-6 shadow-sm transition-all duration-700 hover:-translate-y-1 hover:shadow-xl"
+              style={{
+                opacity: visible ? 1 : 0,
+                transform: visible ? "translateY(0)" : "translateY(30px)",
+                transitionDelay: `${index * 110}ms`,
+              }}
+            >
+              <div className="mb-8 flex h-12 w-12 items-center justify-center rounded-2xl bg-purple-100 text-purple-600">
+                <card.icon size={22} />
+              </div>
+              <p className="text-xs font-bold uppercase tracking-wider text-gray-400">{card.title}</p>
+              <p className="mt-2 text-3xl font-black text-gray-900">{card.value}</p>
+              <div className="mt-5 flex items-center gap-2 text-sm font-bold text-purple-600">
+                <FiActivity />
+                {card.delta} this week
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 export default function AnalyticsDashboardPage() {
   return (
     <>
@@ -388,6 +516,8 @@ export default function AnalyticsDashboardPage() {
         <StatsBand />
         <FeaturesSection />
         <FlowSection />
+        <ReportBuilderSection />
+        <InsightSegmentsSection />
         <CTASection />
         <FooterSection />
         <BackToTop />

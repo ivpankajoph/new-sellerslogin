@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import { OptionPage, type OptionPageContent } from "@/components/landing/OptionPage";
 
 export const metadata: Metadata = {
-  title: "Blog | SellersLogin",
-  description: "Commerce playbooks, automation ideas, and launch guidance from SellersLogin.",
+  title: "Blog | Sellers Login",
+  description: "Commerce playbooks, automation ideas, and launch guidance from Sellers Login.",
 };
 
 const page: OptionPageContent = {
