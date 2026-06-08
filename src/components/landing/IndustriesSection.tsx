@@ -3,23 +3,44 @@
 import { 
   ShoppingCart, 
   Shirt, 
-  Coffee, 
+  Utensils, 
   Heart, 
-  Laptop, 
-  Home, 
-  Wrench, 
-  Building2 
+  Globe, 
+  Building, 
+  Factory, 
+  Box,
+  Store,
+  Cloud,
+  Activity,
+  Pill,
+  Landmark,
+  BedDouble,
+  Plane,
+  Truck,
+  Package,
+  Users,
+  Briefcase
 } from "lucide-react";
 
 const industries = [
-  { name: "Retail", icon: ShoppingCart, color: "text-blue-500", bg: "bg-blue-500/10", border: "border-blue-500/20" },
+  { name: "Manufacturing", icon: Factory, color: "text-slate-500", bg: "bg-slate-500/10", border: "border-slate-500/20" },
+  { name: "Real Estate", icon: Building, color: "text-teal-500", bg: "bg-teal-500/10", border: "border-teal-500/20" },
   { name: "Fashion", icon: Shirt, color: "text-pink-500", bg: "bg-pink-500/10", border: "border-pink-500/20" },
-  { name: "Food & Beverage", icon: Coffee, color: "text-orange-500", bg: "bg-orange-500/10", border: "border-orange-500/20" },
-  { name: "Health & Beauty", icon: Heart, color: "text-red-500", bg: "bg-red-500/10", border: "border-red-500/20" },
-  { name: "Electronics", icon: Laptop, color: "text-indigo-500", bg: "bg-indigo-500/10", border: "border-indigo-500/20" },
-  { name: "Home & Furniture", icon: Home, color: "text-emerald-500", bg: "bg-emerald-500/10", border: "border-emerald-500/20" },
-  { name: "Services", icon: Wrench, color: "text-slate-500", bg: "bg-slate-500/10", border: "border-slate-500/20" },
-  { name: "B2B & Wholesale", icon: Building2, color: "text-purple-500", bg: "bg-purple-500/10", border: "border-purple-500/20" },
+  { name: "D2C", icon: Box, color: "text-indigo-500", bg: "bg-indigo-500/10", border: "border-indigo-500/20" },
+  { name: "Food", icon: Utensils, color: "text-orange-500", bg: "bg-orange-500/10", border: "border-orange-500/20" },
+  { name: "Restaurants", icon: Store, color: "text-amber-500", bg: "bg-amber-500/10", border: "border-amber-500/20" },
+  { name: "SaaS", icon: Cloud, color: "text-sky-500", bg: "bg-sky-500/10", border: "border-sky-500/20" },
+  { name: "Healthcare", icon: Activity, color: "text-red-500", bg: "bg-red-500/10", border: "border-red-500/20" },
+  { name: "Pharmaceutical", icon: Pill, color: "text-emerald-500", bg: "bg-emerald-500/10", border: "border-emerald-500/20" },
+  { name: "Banking", icon: Landmark, color: "text-emerald-600", bg: "bg-emerald-600/10", border: "border-emerald-600/20" },
+  { name: "Hospitality", icon: BedDouble, color: "text-rose-500", bg: "bg-rose-500/10", border: "border-rose-500/20" },
+  { name: "Tourism", icon: Plane, color: "text-cyan-500", bg: "bg-cyan-500/10", border: "border-cyan-500/20" },
+  { name: "Ecommerce", icon: Globe, color: "text-purple-500", bg: "bg-purple-500/10", border: "border-purple-500/20" },
+  { name: "Retail", icon: ShoppingCart, color: "text-blue-500", bg: "bg-blue-500/10", border: "border-blue-500/20" },
+  { name: "Logistics", icon: Truck, color: "text-yellow-600", bg: "bg-yellow-600/10", border: "border-yellow-600/20" },
+  { name: "FMCG", icon: Package, color: "text-lime-600", bg: "bg-lime-600/10", border: "border-lime-600/20" },
+  { name: "Human Resource", icon: Users, color: "text-fuchsia-500", bg: "bg-fuchsia-500/10", border: "border-fuchsia-500/20" },
+  { name: "Professional Services", icon: Briefcase, color: "text-stone-500", bg: "bg-stone-500/10", border: "border-stone-500/20" },
 ];
 
 export function IndustriesSection() {
@@ -27,14 +48,8 @@ export function IndustriesSection() {
     <section id="industries" className="py-20 md:py-28 px-4 sm:px-6 lg:px-8 bg-transparent">
       <div className="max-w-7xl mx-auto">
         <header className="text-center mb-16 md:mb-24">
-          <div className="reveal inline-flex items-center bg-purple-50 border border-purple-200 text-purple-700 rounded-full py-1.5 px-4 text-xs font-bold uppercase tracking-wider mb-4 shadow-sm">
-            Industry we serve
-          </div>
-          <h2 className="reveal reveal-delay-1 text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 leading-tight tracking-tight mt-4">
-            From selling to Automation <br className="hidden md:block" />
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-blue-500">
-              and Automation to Growth
-            </span>
+          <h2 className="reveal text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight tracking-tight">
+            Industry We Serve
           </h2>
         </header>
 

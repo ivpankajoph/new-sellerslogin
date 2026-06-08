@@ -6,6 +6,15 @@ import { FooterSection } from "@/components/landing/FooterSection";
 import { GlobalBackground } from "@/components/landing/GlobalBackground";
 import { CustomCursor } from "@/components/landing/CustomCursor";
 import { ShieldCheck, ArrowRight, Loader2, CheckCircle2 } from "lucide-react";
+import { countryCodes } from "@/lib/countryCodes";
+
+const getFlagEmoji = (countryCode: string) => {
+  const codePoints = countryCode
+    .toUpperCase()
+    .split("")
+    .map((char) => 127397 + char.charCodeAt(0));
+  return String.fromCodePoint(...codePoints);
+};
 
 export default function ContactPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -21,6 +30,7 @@ export default function ContactPage() {
     const data = {
       name: formData.get("name"),
       email: formData.get("email"),
+      phone: `${formData.get("countryCode")} ${formData.get("phone")}`,
       subject: formData.get("subject"),
       message: formData.get("message"),
     };
@@ -109,16 +119,42 @@ export default function ContactPage() {
               </div>
             </div>
 
-            <div className="mb-6">
-              <label htmlFor="subject" className="block text-sm font-semibold text-gray-900 mb-2">Subject</label>
-              <input
-                type="text"
-                id="subject"
-                name="subject"
-                required
-                className="w-full bg-gray-50 border border-gray-300 rounded-xl px-4 py-3 text-gray-900 placeholder-gray-500 focus:outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500 transition-colors"
-                placeholder="How can we help you?"
-              />
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+              <div>
+                <label htmlFor="phone" className="block text-sm font-semibold text-gray-900 mb-2">Phone Number</label>
+                <div className="flex gap-2">
+                  <select
+                    name="countryCode"
+                    defaultValue="+91"
+                    className="w-[110px] bg-gray-50 border border-gray-300 rounded-xl px-3 py-3 text-gray-900 focus:outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500 transition-colors shrink-0"
+                  >
+                    {countryCodes.map((c, i) => (
+                      <option key={i} value={c.code}>
+                        {getFlagEmoji(c.country)} {c.code}
+                      </option>
+                    ))}
+                  </select>
+                  <input
+                    type="tel"
+                    id="phone"
+                    name="phone"
+                    required
+                    className="flex-1 min-w-0 bg-gray-50 border border-gray-300 rounded-xl px-4 py-3 text-gray-900 placeholder-gray-500 focus:outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500 transition-colors"
+                    placeholder="98765 43210"
+                  />
+                </div>
+              </div>
+              <div>
+                <label htmlFor="subject" className="block text-sm font-semibold text-gray-900 mb-2">Subject</label>
+                <input
+                  type="text"
+                  id="subject"
+                  name="subject"
+                  required
+                  className="w-full bg-gray-50 border border-gray-300 rounded-xl px-4 py-3 text-gray-900 placeholder-gray-500 focus:outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500 transition-colors"
+                  placeholder="How can we help you?"
+                />
+              </div>
             </div>
 
             <div className="mb-8">

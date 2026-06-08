@@ -50,11 +50,11 @@ export const StickyScroll = ({
       <div className="relative flex items-start px-4">
         <div className="max-w-2xl">
           {content.map((item, index) => (
-            <div key={item.title + index} className="my-32 flex flex-col justify-center min-h-[380px]">
+            <div key={item.title + index} className="my-16 lg:my-32 flex flex-col justify-center lg:min-h-[380px]">
               <h2
                 className={cn(
                   "text-3xl font-bold text-gray-900 transition-opacity duration-300",
-                  activeCard === index ? "opacity-100" : "opacity-20"
+                  activeCard === index ? "opacity-100" : "opacity-40 lg:opacity-20"
                 )}
               >
                 {item.title}
@@ -62,11 +62,18 @@ export const StickyScroll = ({
               <p
                 className={cn(
                   "text-xl mt-6 max-w-md text-gray-600 leading-relaxed transition-opacity duration-300",
-                  activeCard === index ? "opacity-100" : "opacity-20"
+                  activeCard === index ? "opacity-100" : "opacity-40 lg:opacity-20"
                 )}
               >
                 {item.description}
               </p>
+              
+              {/* Mobile image display */}
+              <div className="block lg:hidden mt-8 w-full max-w-md rounded-2xl overflow-hidden bg-black shadow-xl border border-black aspect-square sm:aspect-video relative">
+                 <div className="absolute inset-0">
+                   {item.content ?? null}
+                 </div>
+              </div>
             </div>
           ))}
           <div className="h-40" />
