@@ -203,6 +203,12 @@ export function PricingPageContent() {
           </div>
         </div>
       )}
+      {/* Mobile Sticky CTA */}
+      <div className="fixed bottom-0 left-0 right-0 z-[120] p-4 md:hidden bg-white/90 backdrop-blur-md border-t border-slate-200 shadow-[0_-10px_20px_-10px_rgba(0,0,0,0.1)]">
+        <button onClick={() => handleSelectPlan(plans[0])} className="flex w-full items-center justify-center rounded-full bg-violet-600 px-4 py-3.5 text-[13px] sm:text-sm font-bold text-white shadow-lg shadow-violet-200 transition-all active:scale-[0.98] border-none outline-none">
+          Signup @ ₹999/ month (50% flat discount)
+        </button>
+      </div>
     </>
   );
 }

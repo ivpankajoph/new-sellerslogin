@@ -72,10 +72,10 @@ export function DemoCardsSection() {
 
             <button
               onClick={() => setActiveVideo(card.videoUrl)}
-              className="flex w-full items-center justify-between rounded-full border-2 border-violet-950 py-2.5 pl-5 pr-2 font-semibold text-violet-950 transition-all hover:bg-violet-950 hover:text-white"
+              className="flex w-full items-center justify-between rounded-full py-2.5 pl-5 pr-2 font-semibold transition-all group bg-red-600 text-white hover:bg-red-700 shadow-md"
             >
               <span>Live demo</span>
-              <div className="flex h-8 w-8 items-center justify-center rounded-full bg-violet-950 text-white transition-transform group-hover:bg-white group-hover:text-violet-950">
+              <div className="flex h-8 w-8 items-center justify-center rounded-full bg-white text-red-600 transition-transform group-hover:scale-110">
                 <PlayCircle className="h-5 w-5" />
               </div>
             </button>
