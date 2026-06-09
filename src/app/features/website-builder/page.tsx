@@ -180,7 +180,7 @@ function HeroSection() {
 
         {/* CTAs */}
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-20">
- <Link href="https://web.sellerslogin.com/vendor/registration">
+ <Link href="https://sellerslogin.comvendor/registration">
           <button
             className="group flex items-center gap-3 px-8 py-4 rounded-full text-white font-semibold text-lg transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1"
             style={{ background: "linear-gradient(135deg, #9333ea, #c084fc)" }}
@@ -842,7 +842,7 @@ function CTASection() {
           line of code.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-        <Link href="https://web.sellerslogin.com/vendor/registration">
+        <Link href="https://sellerslogin.comvendor/registration">
           <button className="group flex items-center justify-center gap-3 px-10 py-4 rounded-full bg-white text-purple-600 font-bold text-lg hover:bg-purple-50 transition-all hover:-translate-y-1 shadow-lg hover:shadow-xl">
             Start Building for Free
             <FiArrowRight

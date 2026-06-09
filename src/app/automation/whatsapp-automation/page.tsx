@@ -335,7 +335,7 @@ function Hero() {
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4"
           style={{ animation: "fadeUp 0.8s cubic-bezier(.22,1,.36,1) 0.4s both" }}>
-         <Link href="https://web.sellerslogin.com/vendor/registration">
+         <Link href="https://sellerslogin.comvendor/registration">
           <button className="group flex items-center gap-2 text-white font-semibold px-8 py-4 rounded-full transition-all duration-300 hover:-translate-y-0.5 shadow-lg hover:shadow-purple-200"
             style={{ background: "linear-gradient(135deg, #9333ea, #c084fc)" }}>
             Connect Your Number Free
@@ -1801,7 +1801,7 @@ function CTA() {
             personalised message — all before your next meeting.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-           <Link href="https://web.sellerslogin.com/vendor/registration">
+           <Link href="https://sellerslogin.comvendor/registration">
             <button className="group flex items-center gap-2 bg-white text-purple-600 hover:bg-purple-200 font-bold px-8 py-4 rounded-full transition-all duration-200 shadow-lg hover:-translate-y-0.5">
               Connect Your Number Free
               <RiArrowRightLine className="transition-transform group-hover:translate-x-1" />

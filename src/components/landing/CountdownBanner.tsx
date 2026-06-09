@@ -61,7 +61,7 @@ export function CountdownBanner() {
             <div>
               <p className="text-[11px] font-bold text-white/90 uppercase tracking-widest mb-0.5">Limited Time Offer</p>
               <p className="text-base sm:text-lg font-bold text-white leading-tight">
-                Unlock <span className="text-yellow-300 font-extrabold">30% OFF</span> on all Growth & Enterprise plans!
+                Unlock <span className="text-yellow-300 font-extrabold">50% OFF</span> on Startup & Growth plans!
               </p>
             </div>
           </div>

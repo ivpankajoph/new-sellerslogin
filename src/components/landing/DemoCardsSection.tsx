@@ -5,7 +5,7 @@ import { PlayCircle, X, BarChart3, MessageCircle, Mic, Mail, ArrowRight } from "
 
 const DEMO_CARDS = [
   {
-    title: "Analytics",
+    title: "Analytics Marketing",
     description: "Get real-time insights into your store's performance with advanced charts and data tracking to optimize growth.",
     icon: BarChart3,
     color: "text-blue-500",
@@ -13,7 +13,7 @@ const DEMO_CARDS = [
     videoUrl: "/videos/analytics.mp4",
   },
   {
-    title: "Whatsapp",
+    title: "Whatsapp Marketing",
     description: "Automate your sales and customer support directly through the official WhatsApp Business API integration.",
     icon: MessageCircle,
     color: "text-emerald-500",
@@ -29,7 +29,7 @@ const DEMO_CARDS = [
     videoUrl: "/videos/ai-voice.mp4",
   },
   {
-    title: "Email",
+    title: "Email Marketing",
     description: "Send beautifully crafted newsletters and automated drip campaigns to keep your customers engaged and buying.",
     icon: Mail,
     color: "text-rose-500",

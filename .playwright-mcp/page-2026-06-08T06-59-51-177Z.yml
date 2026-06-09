@@ -33,7 +33,7 @@
         - link "Log In" [ref=e25] [cursor=pointer]:
           - /url: https://admin.sellerslogin.com/sign-in
         - link "Get Started Free" [ref=e26] [cursor=pointer]:
-          - /url: https://web.sellerslogin.com/vendor/registration
+          - /url: https://sellerslogin.comvendor/registration
   - main [ref=e27]:
     - generic [ref=e30]:
       - generic [ref=e31]:
@@ -43,7 +43,7 @@
           - text: visualized.
         - paragraph [ref=e35]: Turn complex data into actionable insights. Monitor live traffic, track revenue, and understand customer behavior with 100+ pre-built reports.
         - link "Start Analyzing" [ref=e37] [cursor=pointer]:
-          - /url: https://web.sellerslogin.com/vendor/registration
+          - /url: https://sellerslogin.comvendor/registration
           - button "Start Analyzing" [ref=e38]:
             - text: Start Analyzing
             - img [ref=e39]
@@ -228,7 +228,7 @@
         - text: start growing.
       - paragraph [ref=e318]: Access world-class analytics and scale your business with confidence.
       - link "View Your Dashboard" [ref=e320] [cursor=pointer]:
-        - /url: https://web.sellerslogin.com/vendor/registration
+        - /url: https://sellerslogin.comvendor/registration
         - button "View Your Dashboard" [ref=e321]:
           - text: View Your Dashboard
           - img [ref=e322]
@@ -365,7 +365,7 @@
                       - img [ref=e458]
                       - generic [ref=e461]: Careers
                 - link "Start selling" [ref=e463] [cursor=pointer]:
-                  - /url: https://web.sellerslogin.com/vendor/registration
+                  - /url: https://sellerslogin.comvendor/registration
                   - text: Start selling
                   - generic [ref=e464]: →
             - navigation "Support links" [ref=e466]:

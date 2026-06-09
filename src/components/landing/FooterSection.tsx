@@ -249,7 +249,7 @@ export function FooterSection() {
                     {section.title === "Company" && (
                       <div className="mt-6">
                         <Link
-                          href="https://web.sellerslogin.com/vendor/registration"
+                          href="https://sellerslogin.comvendor/registration"
                           target="_blank" rel="noopener noreferrer"
                           className="inline-flex items-center justify-center gap-2 bg-[#7c3aed] text-white rounded py-2.5 px-5 text-sm font-semibold hover:bg-purple-700 transition-all duration-200 shadow-md"
                         >

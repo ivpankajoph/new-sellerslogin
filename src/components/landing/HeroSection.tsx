@@ -67,7 +67,7 @@ export function HeroSection() {
 
           <div className="reveal reveal-delay-2 flex flex-col sm:flex-row items-center justify-center gap-4 w-full sm:w-auto mb-12">
             <Link
-              href="https://web.sellerslogin.com/vendor/registration"
+              href="https://sellerslogin.comvendor/registration"
               target="_blank" rel="noopener noreferrer"
               className="w-full sm:w-auto text-center inline-block bg-purple-200 text-black text-[15px] font-medium py-3.5 px-8 rounded-full border border-purple-300 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:bg-purple-300 hover:shadow-md active:translate-y-0 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-400 focus-visible:ring-offset-2 no-underline"
             >

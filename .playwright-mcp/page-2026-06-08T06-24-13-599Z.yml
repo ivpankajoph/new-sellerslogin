@@ -33,7 +33,7 @@
         - link "Log In" [ref=e25] [cursor=pointer]:
           - /url: https://admin.sellerslogin.com/sign-in
         - link "Get Started Free" [ref=e26] [cursor=pointer]:
-          - /url: https://web.sellerslogin.com/vendor/registration
+          - /url: https://sellerslogin.comvendor/registration
   - main [ref=e27]:
     - generic [ref=e28]:
       - link "Back to Home" [ref=e29] [cursor=pointer]:
@@ -61,7 +61,7 @@
                 - paragraph [ref=e57]: Address
                 - paragraph [ref=e58]: 1405, Gaur City 2, Noida Extension, 10th Avenue, Ghaziabad 201009, UP, India
           - link "Start selling" [ref=e59] [cursor=pointer]:
-            - /url: https://web.sellerslogin.com/vendor/registration
+            - /url: https://sellerslogin.comvendor/registration
             - text: Start selling
             - img [ref=e60]
     - generic [ref=e63]:
@@ -265,7 +265,7 @@
                     - img [ref=e290]
                     - generic [ref=e293]: Careers
               - link "Start selling" [ref=e295] [cursor=pointer]:
-                - /url: https://web.sellerslogin.com/vendor/registration
+                - /url: https://sellerslogin.comvendor/registration
                 - text: Start selling
                 - generic [ref=e296]: →
           - navigation "Support links" [ref=e298]:

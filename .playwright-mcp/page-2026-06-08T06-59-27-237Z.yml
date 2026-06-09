@@ -33,7 +33,7 @@
         - link "Log In" [ref=e25] [cursor=pointer]:
           - /url: https://admin.sellerslogin.com/sign-in
         - link "Get Started Free" [ref=e26] [cursor=pointer]:
-          - /url: https://web.sellerslogin.com/vendor/registration
+          - /url: https://sellerslogin.comvendor/registration
   - main [ref=e27]:
     - generic [ref=e30]:
       - generic [ref=e31]:
@@ -44,7 +44,7 @@
         - paragraph [ref=e35]: Optimize routes, auto-dispatch drivers, and delight customers with real-time tracking and instant proof of delivery. Manage your entire fleet from one powerful dashboard.
         - generic [ref=e36]:
           - link "Optimize Deliveries" [ref=e37] [cursor=pointer]:
-            - /url: https://web.sellerslogin.com/vendor/registration
+            - /url: https://sellerslogin.comvendor/registration
             - button "Optimize Deliveries" [ref=e38]:
               - text: Optimize Deliveries
               - img [ref=e39]
@@ -279,7 +279,7 @@
         - text: your deliveries?
       - paragraph [ref=e393]: Start dispatching faster and saving on fuel costs today.
       - link "Start Free" [ref=e395] [cursor=pointer]:
-        - /url: https://web.sellerslogin.com/vendor/registration
+        - /url: https://sellerslogin.comvendor/registration
         - button "Start Free" [ref=e396]:
           - text: Start Free
           - img [ref=e397]
@@ -416,7 +416,7 @@
                       - img [ref=e533]
                       - generic [ref=e536]: Careers
                 - link "Start selling" [ref=e538] [cursor=pointer]:
-                  - /url: https://web.sellerslogin.com/vendor/registration
+                  - /url: https://sellerslogin.comvendor/registration
                   - text: Start selling
                   - generic [ref=e539]: →
             - navigation "Support links" [ref=e541]:

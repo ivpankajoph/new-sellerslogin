@@ -250,7 +250,7 @@ function Hero() {
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4"
           style={{animation:"fadeUp 0.8s cubic-bezier(.22,1,.36,1) 0.4s both"}}>
-      <Link href="https://web.sellerslogin.com/vendor/registration">
+      <Link href="https://sellerslogin.comvendor/registration">
           <button className="group flex items-center gap-2 bg-purple-600 hover:bg-purple-700 text-white font-semibold font-body px-8 py-4 rounded-full transition-all duration-300 shadow-lg shadow-purple-200 hover:shadow-purple-300 hover:-translate-y-0.5">
             Start Free Trial
             <RiArrowRightLine className="transition-transform duration-200 group-hover:translate-x-1"/>
@@ -1276,7 +1276,7 @@ function CTA() {
             and run leaner operations. Start free — upgrade when you're ready.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-           <Link href="https://web.sellerslogin.com/vendor/registration">
+           <Link href="https://sellerslogin.comvendor/registration">
             <button className="group flex items-center gap-2 bg-white text-purple-600 hover:bg-purple-50 font-bold font-body px-8 py-4 rounded-full transition-all duration-200 shadow-lg hover:-translate-y-0.5">
               Start Free — No Card Needed
               <RiArrowRightLine className="transition-transform group-hover:translate-x-1"/>

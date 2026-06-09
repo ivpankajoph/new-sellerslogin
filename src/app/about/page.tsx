@@ -59,7 +59,7 @@ const page: FooterLinkedPageContent = {
     "Connect customers, staff, partners, and support teams into one process.",
     "Use reporting and automation to improve speed, accuracy, and customer experience.",
   ],
-  cta: { label: "Start selling", href: "https://web.sellerslogin.com/vendor/registration" },
+  cta: { label: "Start selling", href: "https://sellerslogin.comvendor/registration" },
 };
 
 export default function AboutPage() {

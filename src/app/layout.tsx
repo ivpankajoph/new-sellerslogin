@@ -3,6 +3,8 @@ import { Suspense } from "react";
 import { WebsiteAnalyticsTracker } from "@/components/analytics/WebsiteAnalyticsTracker";
 import "./globals.css";
 
+import { ClientProvider } from "@/components/ClientProvider";
+
 export const metadata: Metadata = {
   title: "Sellers Login | Your Business Growth Partner | E-commerce Making Platform",
   description:
@@ -29,10 +31,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="min-h-full antialiased font-sans">
-        <Suspense fallback={null}>
-          <WebsiteAnalyticsTracker />
-        </Suspense>
-        {children}
+        <ClientProvider>
+          <Suspense fallback={null}>
+            <WebsiteAnalyticsTracker />
+          </Suspense>
+          {children}
+        </ClientProvider>
       </body>
     </html>
   );

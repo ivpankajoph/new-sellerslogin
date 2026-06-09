@@ -23,7 +23,7 @@ export function CtaSection() {
           
           <div className="reveal reveal-delay-3 flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link
-              href="https://web.sellerslogin.com/vendor/registration"
+              href="https://sellerslogin.comvendor/registration"
               target="_blank" rel="noopener noreferrer"
               className="w-full sm:w-auto text-center inline-block bg-purple-200 text-black py-3 px-8 rounded-full border border-purple-300 shadow-sm font-semibold text-sm md:text-base transition-all duration-300 hover:shadow-lg hover:bg-purple-300 hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-400 focus-visible:ring-offset-2 focus-visible:ring-offset-gray-900 cursor-pointer no-underline"
             >
