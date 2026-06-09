@@ -11,6 +11,7 @@ import {
   LineChart,
   Megaphone,
   MessageCircle,
+  Mail,
   PackageCheck,
   ShieldCheck,
   Sparkles,
@@ -155,17 +156,47 @@ const capabilityGroups = [
     icon: Megaphone,
     rows: [
       ["Marketing features", "Core", "Advanced", "Custom"],
-      ["Email features", "Core", "Advanced", "Custom"],
-      ["WhatsApp Business API", "Available", "Advanced", "Custom"],
     ],
   },
   {
-    title: "Payments and Support",
+    title: "Email Features",
+    icon: Mail,
+    rows: [
+      ["Template making", "Addon", "Addon", "-"],
+      ["Promotion email campaign", "Addon Kit", "Addon", "Addon"],
+      ["Drip email campaign", "Add on Kit", "Add on Kit", "Add on Kit"],
+      ["Newsletter", "Add on Kit", "Add on Kit", "Add on Kit"],
+      ["Order notification", "Add on Kit", "Add on Kit", "Add on Kit"],
+      ["Followup notification", "Add on Kit", "Add on Kit", "Add on Kit"],
+    ],
+  },
+  {
+    title: "WhatsApp Business API",
+    icon: MessageCircle,
+    rows: [
+      ["Template making", "Add on Kit", "Add on Kit", "Add on Kit"],
+      ["Notification", "Add on Kit", "Add on Kit", "Add on Kit"],
+      ["Promotion messaging", "Add on Kit", "Add on Kit", "Add on Kit"],
+      ["Drip campaign", "Add on Kit", "Add on Kit", "Add on Kit"],
+      ["Followup messaging", "Add on Kit", "Add on Kit", "Add on Kit"],
+    ],
+  },
+  {
+    title: "Payment Gateway",
     icon: CreditCard,
     rows: [
-      ["Payment gateway", "Included", "Included", "Included"],
-      ["Support", "Standard", "Priority", "Enterprise"],
-      ["Setup guidance", "Guided", "Growth mapping", "Custom onboarding"],
+      ["Payment gateway integration", "Yes", "Yes", "-"],
+      ["Domestic / international payment option", "Yes", "Yes", "-"],
+      ["2 days settlement", "Yes", "Yes", "-"],
+    ],
+  },
+  {
+    title: "Support",
+    icon: Headphones,
+    rows: [
+      ["Ticket", "-", "-", "-"],
+      ["Mail", "-", "-", "-"],
+      ["Chat", "-", "-", "-"],
     ],
   },
 ];
@@ -218,9 +249,9 @@ export default function PricingPage() {
           </div>
         </section>
 
-        <section className="px-4 py-12 sm:px-6 lg:px-8">
+        <section className="px-4 py-12 sm:px-6 lg:px-8 relative z-20">
           <div className="mx-auto max-w-7xl">
-            <div className="grid gap-5 lg:grid-cols-3">
+            <div className="grid gap-5 lg:grid-cols-3 group">
               {plans.map((plan) => {
                 const Icon = plan.icon;
                 const isRecommended = Boolean(plan.recommended);
@@ -228,7 +259,7 @@ export default function PricingPage() {
                 return (
                   <article
                     key={plan.name}
-                    className={`flex min-h-full flex-col rounded-[2rem] border p-6 transition-all hover:-translate-y-1 ${plan.accent}`}
+                    className={`relative flex min-h-full flex-col rounded-[2rem] border p-6 transition-all duration-500 hover:-translate-y-3 hover:z-50 group-hover:scale-[0.98] group-hover:opacity-40 group-hover:blur-[4px] hover:!scale-105 hover:!opacity-100 hover:!blur-none hover:shadow-2xl ${plan.accent}`}
                   >
                     {isRecommended && (
                       <div className="mb-4 inline-flex w-fit items-center gap-2 rounded-full bg-white px-3 py-1.5 text-xs font-bold uppercase tracking-wider text-violet-700">
@@ -296,7 +327,7 @@ export default function PricingPage() {
 
             <div className="overflow-x-auto rounded-[2rem] border border-slate-200 bg-white shadow-xl shadow-slate-100">
               <div className="min-w-[760px]">
-                <div className="grid grid-cols-[1.25fr_1fr_1fr_1fr] bg-slate-950 text-white">
+                <div className="grid grid-cols-[1.25fr_1fr_1fr_1fr] bg-violet-950 text-white">
                   <div className="px-4 py-4 text-sm font-bold sm:px-6">Features</div>
                   {plans.map((plan) => (
                     <div key={plan.name} className="px-3 py-4 text-center text-sm font-bold sm:px-6">
