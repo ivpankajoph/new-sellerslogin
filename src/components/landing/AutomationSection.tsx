@@ -10,7 +10,7 @@ export function AutomationSection() {
       description:
         "Revolutionize your customer support with our AI-powered voice assistants. Handle customer inquiries, order confirmations, and support tickets 24/7 without human intervention, providing instant and accurate responses in multiple languages.",
       content: (
-        <div className="h-full w-full flex items-center justify-center text-white">
+        <div className="h-full w-full flex items-center justify-center text-white bg-black">
           <Image quality={60}
             src="/images/dashboard/d3.png"
             width={500}
@@ -26,7 +26,7 @@ export function AutomationSection() {
       description:
         "Automatically trigger personalized email campaigns based on customer behavior. Recover abandoned carts, send welcome sequences, and push promotional offers at the perfect time to maximize your conversion rates.",
       content: (
-        <div className="h-full w-full flex items-center justify-center text-white">
+        <div className="h-full w-full flex items-center justify-center text-white bg-black">
           <Image quality={60}
             src="/images/dashboard/d4.png"
             width={500}
@@ -43,7 +43,7 @@ export function AutomationSection() {
       description:
         "Reach your customers directly on their favorite messaging app. Send instant updates, order tracking links, and targeted promotions via WhatsApp. Our automation ensures high open rates and immediate engagement.",
       content: (
-        <div className="h-full w-full flex items-center justify-center text-white">
+        <div className="h-full w-full flex items-center justify-center text-white bg-black">
           <Image quality={60}
             src="/images/dashboard/d5.png"
             width={500}
@@ -59,7 +59,7 @@ export function AutomationSection() {
       description:
         "Manage your entire business from a unified command center. Real-time analytics, inventory tracking, and sales forecasting powered by AI give you the actionable insights needed to scale globally.",
       content: (
-        <div className="h-full w-full flex items-center justify-center text-white">
+        <div className="h-full w-full flex items-center justify-center text-white bg-black">
           <Image quality={60}
             src="/images/dashboard/d6.png"
             width={500}

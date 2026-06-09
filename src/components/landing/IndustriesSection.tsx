@@ -19,7 +19,9 @@ import {
   Truck,
   Package,
   Users,
-  Briefcase
+  Briefcase,
+  GraduationCap,
+  Car
 } from "lucide-react";
 
 const industries = [
@@ -41,6 +43,8 @@ const industries = [
   { name: "FMCG", icon: Package, color: "text-lime-600", bg: "bg-lime-600/10", border: "border-lime-600/20" },
   { name: "Human Resource", icon: Users, color: "text-fuchsia-500", bg: "bg-fuchsia-500/10", border: "border-fuchsia-500/20" },
   { name: "Professional Services", icon: Briefcase, color: "text-stone-500", bg: "bg-stone-500/10", border: "border-stone-500/20" },
+  { name: "Education", icon: GraduationCap, color: "text-violet-500", bg: "bg-violet-500/10", border: "border-violet-500/20" },
+  { name: "Automotive", icon: Car, color: "text-slate-800", bg: "bg-slate-800/10", border: "border-slate-800/20" },
 ];
 
 export function IndustriesSection() {

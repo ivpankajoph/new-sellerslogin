@@ -138,11 +138,6 @@ export function Navbar() {
                 Home
               </Link>
             </li>
-            <li>
-              <Link href="/pricing" className={topLinkClass}>
-                Pricing
-              </Link>
-            </li>
             <li className="relative group">
               <Link href="/#features" className={`${topLinkClass} cursor-pointer`}>
                 Features <span className="ml-1 text-[10px]">v</span>
@@ -240,13 +235,6 @@ export function Navbar() {
             className="block py-3 px-4 text-base font-medium text-gray-700 rounded-lg hover:bg-gray-50 hover:text-gray-900 no-underline transition-colors"
           >
             Home
-          </Link>
-          <Link
-            href="/pricing"
-            onClick={() => setMenuOpen(false)}
-            className="block py-3 px-4 text-base font-medium text-gray-700 rounded-lg hover:bg-gray-50 hover:text-gray-900 no-underline transition-colors"
-          >
-            Pricing
           </Link>
 
           <MobileDropdown
