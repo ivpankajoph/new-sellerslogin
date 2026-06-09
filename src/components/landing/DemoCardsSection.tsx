@@ -10,7 +10,7 @@ const DEMO_CARDS = [
     icon: BarChart3,
     color: "text-blue-500",
     bg: "bg-blue-100",
-    videoUrl: "https://www.w3schools.com/html/mov_bbb.mp4",
+    videoUrl: "/videos/analytics.mp4",
   },
   {
     title: "Whatsapp",
@@ -18,7 +18,7 @@ const DEMO_CARDS = [
     icon: MessageCircle,
     color: "text-emerald-500",
     bg: "bg-emerald-100",
-    videoUrl: "https://www.w3schools.com/html/mov_bbb.mp4",
+    videoUrl: "/videos/whatsapp.mp4",
   },
   {
     title: "AI Voice Automation",
@@ -26,7 +26,7 @@ const DEMO_CARDS = [
     icon: Mic,
     color: "text-violet-600",
     bg: "bg-violet-100",
-    videoUrl: "https://www.w3schools.com/html/mov_bbb.mp4",
+    videoUrl: "/videos/ai-voice.mp4",
   },
   {
     title: "Email",
@@ -34,7 +34,7 @@ const DEMO_CARDS = [
     icon: Mail,
     color: "text-rose-500",
     bg: "bg-rose-100",
-    videoUrl: "https://www.w3schools.com/html/mov_bbb.mp4",
+    videoUrl: "/videos/email.mp4",
   },
 ];
 

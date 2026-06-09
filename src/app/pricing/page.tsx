@@ -26,6 +26,8 @@ import { ScrollRevealInit } from "@/components/landing/ScrollRevealInit";
 import { CountdownBanner } from "@/components/landing/CountdownBanner";
 import { DiscountPopup } from "@/components/landing/DiscountPopup";
 import { DemoCardsSection } from "@/components/landing/DemoCardsSection";
+import { PricingCardsSection } from "@/components/landing/PricingCardsSection";
+import { ContactCardsSection } from "@/components/landing/ContactCardsSection";
 import { FooterSection } from "@/components/landing/FooterSection";
 import { GlobalBackground } from "@/components/landing/GlobalBackground";
 
@@ -216,7 +218,7 @@ export default function PricingPage() {
       <CountdownBanner />
       <DiscountPopup />
 
-      <main className="relative overflow-hidden bg-white text-slate-950">
+      <main className="relative overflow-clip bg-white text-slate-950">
         <section className="relative px-4 pb-14 pt-32 sm:px-6 lg:px-8 lg:pb-20">
           <div className="absolute inset-x-0 top-0 h-[620px] bg-[radial-gradient(circle_at_20%_15%,rgba(124,58,237,0.18),transparent_34%),radial-gradient(circle_at_82%_10%,rgba(14,165,233,0.12),transparent_30%),linear-gradient(180deg,#ffffff_0%,#faf7ff_100%)]" />
           <div className="relative z-10 mx-auto max-w-7xl">
@@ -283,67 +285,7 @@ export default function PricingPage() {
           </div>
         </section>
 
-        <section className="px-4 py-12 sm:px-6 lg:px-8 relative z-20">
-          <div className="mx-auto max-w-7xl">
-            <div className="grid gap-5 lg:grid-cols-3 group">
-              {plans.map((plan) => {
-                const Icon = plan.icon;
-                const isRecommended = Boolean(plan.recommended);
-
-                return (
-                  <article
-                    key={plan.name}
-                    className={`relative flex min-h-full flex-col rounded-[2rem] border p-6 transition-all duration-500 hover:-translate-y-3 hover:z-50 group-hover:scale-[0.98] group-hover:opacity-40 group-hover:blur-[4px] hover:!scale-105 hover:!opacity-100 hover:!blur-none hover:shadow-2xl ${plan.accent}`}
-                  >
-                    {isRecommended && (
-                      <div className="mb-4 inline-flex w-fit items-center gap-2 rounded-full bg-white px-3 py-1.5 text-xs font-bold uppercase tracking-wider text-violet-700">
-                        <BellRing className="h-3.5 w-3.5" />
-                        Recommended
-                      </div>
-                    )}
-                    <div className="flex items-start justify-between gap-4">
-                      <div>
-                        <p className={`text-xs font-bold uppercase tracking-wider ${isRecommended ? "text-violet-200" : "text-violet-700"}`}>
-                          {plan.label}
-                        </p>
-                        <h2 className="mt-2 text-3xl font-bold">{plan.name}</h2>
-                      </div>
-                      <div className={`flex h-12 w-12 items-center justify-center rounded-2xl ${isRecommended ? "bg-white/10 text-white" : "bg-violet-50 text-violet-700"}`}>
-                        <Icon className="h-6 w-6" />
-                      </div>
-                    </div>
-                    <p className={`mt-5 text-4xl font-bold ${isRecommended ? "text-white" : "text-slate-950"}`}>{plan.price}</p>
-                    <p className={`mt-2 text-xs font-semibold ${isRecommended ? "text-violet-200" : "text-slate-500"}`}>{plan.sourceNote}</p>
-                    <p className={`mt-4 min-h-[84px] text-sm leading-6 ${isRecommended ? "text-slate-300" : "text-slate-600"}`}>{plan.description}</p>
-
-                    <ul className="mt-6 flex-1 space-y-3">
-                      {plan.features.map((feature) => (
-                        <li key={feature} className="flex gap-3 text-sm leading-6">
-                          <CheckCircle2 className={`mt-0.5 h-5 w-5 shrink-0 ${isRecommended ? "text-violet-200" : "text-violet-600"}`} />
-                          <span className={isRecommended ? "text-slate-200" : "text-slate-700"}>{feature}</span>
-                        </li>
-                      ))}
-                    </ul>
-
-                    <Link
-                      href={plan.href}
-                      target={plan.href.startsWith("http") ? "_blank" : undefined}
-                      rel={plan.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                      className={`mt-7 inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold no-underline transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-violet-500 focus-visible:ring-offset-2 ${
-                        isRecommended
-                          ? "bg-white text-violet-700 hover:bg-violet-50"
-                          : "bg-violet-600 text-white shadow-lg shadow-violet-100 hover:bg-violet-700"
-                      }`}
-                    >
-                      {plan.cta}
-                      <ArrowRight className="h-4 w-4" />
-                    </Link>
-                  </article>
-                );
-              })}
-            </div>
-          </div>
-        </section>
+        <PricingCardsSection />
 
         <DemoCardsSection />
 
@@ -361,13 +303,33 @@ export default function PricingPage() {
               </p>
             </div>
 
-            <div className="overflow-x-auto rounded-[2rem] border border-slate-200 bg-white shadow-xl shadow-slate-100">
+            <div className="overflow-x-auto lg:overflow-clip rounded-[2rem] border border-slate-200 bg-white shadow-xl shadow-slate-100 relative">
               <div className="min-w-[760px]">
-                <div className="grid grid-cols-[1.25fr_1fr_1fr_1fr] bg-violet-950 text-white">
-                  <div className="px-4 py-4 text-sm font-bold sm:px-6">Features</div>
+                <div className="sticky top-0 z-[60] grid grid-cols-[1.25fr_1fr_1fr_1fr] items-center bg-white/80 backdrop-blur-md shadow-sm border-b-2 border-slate-200">
+                  <div className="px-4 py-8 text-lg font-extrabold text-slate-900 sm:px-6">
+                    Features & Capabilities
+                  </div>
                   {plans.map((plan) => (
-                    <div key={plan.name} className="px-3 py-4 text-center text-sm font-bold sm:px-6">
-                      {plan.name}
+                    <div 
+                      key={plan.name} 
+                      className={`flex h-full flex-col items-center justify-center px-4 py-6 sm:px-6 border-l border-slate-200 ${plan.recommended ? 'bg-violet-50/80 shadow-[inset_0_4px_0_0_rgb(124,58,237)]' : ''}`}
+                    >
+                      {plan.recommended && (
+                        <span className="mb-2 text-[10px] font-bold uppercase tracking-widest text-violet-600">
+                          Recommended
+                        </span>
+                      )}
+                      <span className="text-2xl font-black text-slate-900 tracking-tight">{plan.name}</span>
+                      <a
+                        href={plan.href}
+                        className={`mt-4 w-full max-w-[160px] inline-flex items-center justify-center rounded-full px-5 py-2.5 text-sm font-bold transition-all hover:-translate-y-0.5 ${
+                          plan.recommended
+                            ? "bg-violet-600 text-white shadow-lg shadow-violet-200 hover:bg-violet-700"
+                            : "bg-white text-slate-700 border-2 border-slate-200 hover:border-slate-300 hover:bg-slate-50"
+                        }`}
+                      >
+                        {plan.name === "Enterprise" ? "Contact sales" : "Start free trial"}
+                      </a>
                     </div>
                   ))}
                 </div>
@@ -424,6 +386,7 @@ export default function PricingPage() {
           </div>
         </section>
 
+        <ContactCardsSection />
         <PricingFaqSection />
       </main>
 
