@@ -25,6 +25,7 @@ import { CustomCursor } from "@/components/landing/CustomCursor";
 import { ScrollRevealInit } from "@/components/landing/ScrollRevealInit";
 import { CountdownBanner } from "@/components/landing/CountdownBanner";
 import { DiscountPopup } from "@/components/landing/DiscountPopup";
+import { DemoCardsSection } from "@/components/landing/DemoCardsSection";
 import { FooterSection } from "@/components/landing/FooterSection";
 import { GlobalBackground } from "@/components/landing/GlobalBackground";
 
@@ -343,6 +344,8 @@ export default function PricingPage() {
             </div>
           </div>
         </section>
+
+        <DemoCardsSection />
 
         <section id="compare" className="px-4 py-14 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-7xl">
