@@ -73,8 +73,11 @@ export default function ContactPage() {
           <h1 className="text-[clamp(40px,6vw,60px)] font-bold leading-[1.05] tracking-tight mb-6 text-gray-900">
             Contact Us
           </h1>
-          <p className="text-lg leading-relaxed text-gray-600 mb-12">
+          <p className="text-lg leading-relaxed text-gray-600 mb-4">
             Have questions or need assistance? Fill out the form below and we will get back to you shortly.
+          </p>
+          <p className="text-md leading-relaxed text-gray-600 mb-12">
+            <strong>Address:</strong> 1405, Gaur city 2, Noida Extension, 10th avenue, Ghaziabad 201009, UP, India
           </p>
 
           <form 

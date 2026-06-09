@@ -21,7 +21,7 @@ export function ProcessSection() {
             </p>
           </div>
           <div className="flex-1 w-full relative aspect-4/3 rounded-2xl overflow-hidden shadow-lg border border-white/10 bg-black">
-             <Image src="/images/create_account.png" alt="Sellers Login create account" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-contain p-4" />
+             <Image quality={60} src="/images/create_account.png" alt="Sellers Login create account" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-contain p-4" />
           </div>
         </div>
       ),
@@ -41,7 +41,7 @@ export function ProcessSection() {
             </p>
           </div>
           <div className="flex-1 w-full relative aspect-4/3 rounded-2xl overflow-hidden shadow-lg border border-white/10 bg-black">
-             <Image src="/images/build_store.jpg" alt="Sellers Login build store" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-contain p-4" />
+             <Image quality={60} src="/images/build_store.jpg" alt="Sellers Login build store" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-contain p-4" />
           </div>
         </div>
       ),
@@ -61,7 +61,7 @@ export function ProcessSection() {
             </p>
           </div>
           <div className="flex-1 w-full relative aspect-4/3 rounded-2xl overflow-hidden shadow-lg border border-white/10 bg-black">
-             <Image src="/images/add_products.png" alt="Sellers Login add products" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-contain p-4" />
+             <Image quality={60} src="/images/add_products.png" alt="Sellers Login add products" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-contain p-4" />
           </div>
         </div>
       ),
@@ -81,7 +81,7 @@ export function ProcessSection() {
             </p>
           </div>
           <div className="flex-1 w-full relative aspect-4/3 rounded-2xl overflow-hidden shadow-lg border border-white/10 bg-black">
-             <Image src="/images/start_selling.jpg" alt="Sellers Login start selling" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-contain p-4" />
+             <Image quality={60} src="/images/start_selling.jpg" alt="Sellers Login start selling" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-contain p-4" />
           </div>
         </div>
       ),

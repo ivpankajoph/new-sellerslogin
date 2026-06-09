@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { ShieldCheck, ShieldAlert, Truck, Info, Briefcase, LifeBuoy, FileText } from "lucide-react";
+import { ShieldCheck, ShieldAlert, Truck, Info, Briefcase, LifeBuoy, FileText, MapPin, Building2 } from "lucide-react";
 import { navPageGroups } from "@/data/navPages";
 
 const labelIcons: Record<string, React.ReactNode> = {
@@ -178,7 +178,7 @@ export function FooterSection() {
             
             <form onSubmit={handleSubmit} className="mt-4">
               <div className="flex flex-col sm:flex-row gap-2">
-                <div className="flex-1 min-w-0 relative">
+                <div className="flex-1 min-w-0 relative" suppressHydrationWarning>
                   {mounted ? (
                     <input
                       id="newsletter-input"
@@ -210,6 +210,15 @@ export function FooterSection() {
                 </button>
               </div>
             </form>
+            
+            <div className="mt-8">
+              <div className="flex items-start gap-3">
+                <MapPin className="w-5 h-5 text-purple-500 shrink-0 mt-0.5" />
+                <address className="not-italic text-sm text-gray-600 leading-relaxed">
+                  1405, Gaur city 2, Noida Extension, 10th avenue, Ghaziabad 201009, UP, India
+                </address>
+              </div>
+            </div>
           </div>
 
           <div className="lg:col-span-8 xl:col-span-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
@@ -255,11 +264,13 @@ export function FooterSection() {
           </div>
         </div>
 
-        <div className="flex flex-col md:flex-row items-center justify-between pt-8 border-t border-gray-200 gap-4">
-          <address className="not-italic text-sm text-gray-600 text-center md:text-left">
-            All Rights Reserved 2026 with Sellers Login 
-
-          </address>
+        <div className="flex flex-col items-center justify-center pt-8 border-t border-purple-200/60 mt-4 gap-2">
+          <p className="text-sm font-medium text-gray-700 text-center">
+            Seller Login: Brand under Life Changing Networks Pvt Ltd
+          </p>
+          <p className="text-sm text-gray-500 text-center">
+            &copy; All Rights Reserved {new Date().getFullYear()} with SellersLogin ( Under Life Changing Networks Pvt Ltd )
+          </p>
         </div>
       </div>
     </footer>

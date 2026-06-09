@@ -3,8 +3,14 @@
 import { useState } from "react";
 import { faqs } from "@/data/landing";
 
-export function FaqSection() {
+interface FaqSectionProps {
+  faqsData?: { q: string; a: React.ReactNode | string }[];
+}
+
+export function FaqSection({ faqsData }: FaqSectionProps = {}) {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
+  
+  const displayFaqs = faqsData || faqs;
 
   const toggleFAQ = (index: number) => {
     setOpenIndex((prev) => (prev === index ? null : index));
@@ -25,7 +31,7 @@ export function FaqSection() {
 
         {/* FAQ Accordion List */}
         <div className="max-w-3xl mx-auto space-y-3 md:space-y-4" role="region" aria-label="Frequently asked questions">
-          {faqs.map((f, i) => {
+          {displayFaqs.map((f, i) => {
             const isOpen = openIndex === i;
             return (
               <div key={i} className="reveal">
@@ -65,7 +71,7 @@ export function FaqSection() {
                   }`}
                 >
                   <div className="px-5 md:px-6 pb-5 md:pb-6">
-                    <p className="text-sm md:text-base text-gray-500 leading-relaxed">{f.a}</p>
+                    <div className="text-sm md:text-base text-gray-500 leading-relaxed">{f.a}</div>
                   </div>
                 </div>
                 </div>

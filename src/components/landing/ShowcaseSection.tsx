@@ -72,7 +72,7 @@ export function ShowcaseSection() {
               >
                 <div className="md:bg-[#0f0f0f] rounded-2xl md:p-8 md:shadow-2xl border-none md:border md:border-white/10">
                   <div className="relative w-full aspect-[16/10] md:aspect-video rounded-xl overflow-hidden border-none md:border md:border-white/10 bg-transparent md:bg-black md:shadow-inner">
-                    <Image
+                    <Image quality={60}
                       src={`/images/dashboard/d${tab.id}.png`}
                       alt={tab.label}
                       fill

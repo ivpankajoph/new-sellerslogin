@@ -4,11 +4,11 @@ import { WebsiteAnalyticsTracker } from "@/components/analytics/WebsiteAnalytics
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Sellers Login | The Ultimate AI-Powered eCommerce Platform",
+  title: "Sellers Login | Your Business Growth Partner | E-commerce Making Platform",
   description:
     "Sellers Login is the all-in-one e-commerce platform that helps businesses create, manage, and scale their online stores with professional websites, automation, marketing tools, and inventory management.",
   openGraph: {
-    title: "Sellers Login | The Ultimate AI-Powered eCommerce Platform",
+    title: "Sellers Login | Your Business Growth Partner | E-commerce Making Platform",
     description:
       "The all-in-one e-commerce platform for ambitious businesses. A professional store, advanced dashboard, and inbuilt global payments in one place.",
     type: "website",

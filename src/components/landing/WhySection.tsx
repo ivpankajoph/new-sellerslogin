@@ -9,7 +9,7 @@ const content = [
     description: "Our AI onboarding creates your entire store — products, pages, and payment gateway — before you finish your coffee.",
     content: (
         <div className="h-full w-full flex items-center justify-center text-white bg-black">
-          <Image
+          <Image quality={60}
             src="/images/setup_5_minutes.png"
             width={800}
             height={800}
@@ -24,7 +24,7 @@ const content = [
     description: "Optimized checkout flows built from analyzing multiple transactions.",
       content: (
         <div className="h-full w-full flex items-center justify-center text-white bg-black">
-          <Image
+          <Image quality={60}
             src="/images/higher_conversion.png"
             width={800}
             height={800}
@@ -39,7 +39,7 @@ const content = [
     description: "Blazing fast stores rank higher and convert better.",
       content: (
         <div className="h-full w-full flex items-center justify-center text-white bg-black">
-          <Image
+          <Image quality={60}
             src="/images/pagespeed.png"
             width={800}
             height={800}
@@ -55,7 +55,7 @@ const content = [
     description: "Every Sellers Login store is pixel-perfect on every screen.",
       content: (
         <div className="h-full w-full flex items-center justify-center text-white bg-black">
-          <Image
+          <Image quality={60}
             src="/images/mobile_first.jpg"
             width={800}
             height={800}
@@ -70,7 +70,7 @@ const content = [
     description: "PCI DSS Level 1 certified. SSL, fraud detection, and chargeback protection built-in.",
       content: (
         <div className="h-full w-full flex items-center justify-center text-white bg-black">
-          <Image
+          <Image quality={60}
             src="/images/secure_payments.png"
             width={800}
             height={800}
@@ -85,7 +85,7 @@ const content = [
     description: "From product descriptions to ad copy, email campaigns to support — AI handles the repetitive work so you can focus on growth.",
       content: (
         <div className="h-full w-full flex items-center justify-center text-white bg-black">
-          <Image
+          <Image quality={60}
             src="/images/ai_automation.jpg"
             width={800}
             height={800}
@@ -100,7 +100,7 @@ const content = [
     description: "Multi-currency, multi-language, 150+ countries, and CDN-powered delivery worldwide.",
       content: (
         <div className="h-full w-full flex items-center justify-center text-white bg-black">
-          <Image
+          <Image quality={60}
             src="/images/global_scale.jpg"
             width={800}
             height={800}
@@ -115,7 +115,7 @@ const content = [
     description: "Live chat, phone, and email support with a dedicated success manager on Growth+ plans.",
       content: (
         <div className="h-full w-full flex items-center justify-center text-white bg-black">
-          <Image
+          <Image quality={60}
             src="/images/support_24_7.png"
             width={800}
             height={800}
