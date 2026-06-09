@@ -20,6 +20,7 @@ import {
 } from "lucide-react";
 import { CustomCursor } from "@/components/landing/CustomCursor";
 import { ScrollRevealInit } from "@/components/landing/ScrollRevealInit";
+import { CountdownBanner } from "@/components/landing/CountdownBanner";
 import { FooterSection } from "@/components/landing/FooterSection";
 import { GlobalBackground } from "@/components/landing/GlobalBackground";
 
@@ -177,6 +178,7 @@ export default function PricingPage() {
       <CustomCursor />
       <GlobalBackground />
       <ScrollRevealInit />
+      <CountdownBanner />
 
       <main className="relative overflow-hidden bg-white text-slate-950">
         <section className="relative px-4 pb-14 pt-32 sm:px-6 lg:px-8 lg:pb-20">
@@ -195,20 +197,8 @@ export default function PricingPage() {
               </div>
             </div>
 
-            <div className="reveal reveal-delay-4 mt-12 relative overflow-hidden rounded-[2rem] p-8 sm:p-12 text-center shadow-2xl">
-              <style>{`
-                @keyframes pan-gradient {
-                  0% { background-position: 0% 50%; }
-                  50% { background-position: 100% 50%; }
-                  100% { background-position: 0% 50%; }
-                }
-                .animate-pan-gradient {
-                  background-size: 300% 300%;
-                  animation: pan-gradient 8s ease infinite;
-                }
-              `}</style>
-              <div className="absolute inset-0 bg-[linear-gradient(45deg,#4c1d95,#7c3aed,#2563eb,#9333ea)] animate-pan-gradient" />
-              <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,255,255,0.2),transparent_50%)]" />
+            <div className="reveal reveal-delay-4 mt-12 relative overflow-hidden rounded-[2rem] p-8 sm:p-12 text-center shadow-2xl bg-violet-950">
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,255,255,0.15),transparent_50%)]" />
               <div className="relative z-10 flex flex-col items-center justify-center">
                 <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white mb-4">
                   Need help choosing the right plan?
@@ -260,15 +250,6 @@ export default function PricingPage() {
                     <p className={`mt-5 text-4xl font-bold ${isRecommended ? "text-white" : "text-slate-950"}`}>{plan.price}</p>
                     <p className={`mt-2 text-xs font-semibold ${isRecommended ? "text-violet-200" : "text-slate-500"}`}>{plan.sourceNote}</p>
                     <p className={`mt-4 min-h-[84px] text-sm leading-6 ${isRecommended ? "text-slate-300" : "text-slate-600"}`}>{plan.description}</p>
-
-                    <div className="mt-5 grid grid-cols-2 gap-2">
-                      {plan.stats.map(([label, value]) => (
-                        <div key={label} className={`rounded-2xl border p-3 ${isRecommended ? "border-white/10 bg-white/10" : "border-slate-200 bg-slate-50"}`}>
-                          <p className={`text-[11px] font-semibold uppercase tracking-wider ${isRecommended ? "text-slate-300" : "text-slate-500"}`}>{label}</p>
-                          <p className="mt-1 text-lg font-bold">{value}</p>
-                        </div>
-                      ))}
-                    </div>
 
                     <ul className="mt-6 flex-1 space-y-3">
                       {plan.features.map((feature) => (
