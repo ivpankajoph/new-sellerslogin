@@ -684,7 +684,7 @@ export default function VendorRegistrationPage() {
               </div>
               <div>
                 <p className="text-[10px] font-bold uppercase tracking-wider text-slate-500">Selected Plan</p>
-                <p className="text-base font-bold text-slate-900 leading-none">{selectedPlanName} <span className="text-slate-500 font-medium text-sm ml-1">at {selectedPlanPrice}</span></p>
+                <p className="text-base font-bold text-slate-900 leading-none">{selectedPlanName} <span className="text-slate-500 font-medium text-sm ml-1">at {selectedPlanPrice} + GST</span></p>
               </div>
             </div>
             <Link href="/pricing" className="text-xs font-bold text-slate-700 hover:text-slate-900 border border-slate-300 px-4 py-1.5 rounded-none shadow-sm hover:shadow transition-all bg-white">
@@ -1065,72 +1065,7 @@ export default function VendorRegistrationPage() {
         </section>
       </main>
 
-      <footer className="border-t border-slate-200 bg-slate-50">
-        <div className="mx-auto max-w-6xl px-6 py-12">
-          <div className="grid gap-10 border border-slate-200 bg-white p-8 lg:grid-cols-[1.2fr_0.8fr_0.8fr]">
-            <div>
-              <div className="flex items-center gap-3">
-                <Image
-                  src="/sellerslogin-logo.svg"
-                  alt="SellersLogin logo"
-                  width={48}
-                  height={48}
-                  className="h-12 w-12 shrink-0"
-                />
-                <div>
-                  <p className="text-2xl font-bold tracking-tight text-slate-950">SellersLogin</p>
-                  <p className="text-xs font-semibold uppercase tracking-[0.24em] text-slate-400">
-                    Build for your all e-commerce needs
-                  </p>
-                </div>
-              </div>
-
-              <p className="mt-6 max-w-md text-sm leading-7 text-slate-600">
-                Seller registration now keeps WhatsApp verification and email verification
-                inside one page before opening business details.
-              </p>
-            </div>
-
-            <div>
-              <p className="text-xs font-semibold uppercase tracking-[0.22em] text-violet-700">
-                Quick Links
-              </p>
-              <div className="mt-5 space-y-3 text-sm font-semibold text-slate-700">
-                <Link href={vendorOverviewUrl} className="block hover:text-violet-700" {...newTabProps}>
-                  Vendor Access
-                </Link>
-                <Link href={mainSiteUrl} className="block hover:text-violet-700" {...newTabProps}>
-                  Main Site
-                </Link>
-                <a href={adminLoginUrl} className="block hover:text-violet-700" {...newTabProps}>
-                  Login to dashboard
-                </a>
-              </div>
-            </div>
-
-            <div>
-              <p className="text-xs font-semibold uppercase tracking-[0.22em] text-violet-700">
-                Contact
-              </p>
-              <div className="mt-5 space-y-3 text-sm text-slate-600">
-                <a
-                  href={`mailto:${supportEmail}`}
-                  className="block font-semibold text-slate-950 hover:text-violet-700"
-                  {...newTabProps}
-                >
-                  {supportEmail}
-                </a>
-                <p>Office No 834, Gaur City Mall, Greater Noida</p>
-                <p>Uttar Pradesh 201312, India</p>
-              </div>
-            </div>
-          </div>
-
-          <div className="border-x border-b border-slate-200 bg-white px-8 py-4 text-sm text-slate-500">
-            Copyright {new Date().getFullYear()} SellersLogin. All rights reserved.
-          </div>
-        </div>
-      </footer>
+      
     </div>
   );
 }

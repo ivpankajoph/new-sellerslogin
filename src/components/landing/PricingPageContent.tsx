@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { ArrowRight, Check, X } from "lucide-react";
@@ -14,17 +14,49 @@ import { IntegrationsSection } from "./IntegrationsSection";
 export function PricingPageContent() {
   const [showRegularPrice, setShowRegularPrice] = useState(false);
   const [selectedPlan, setSelectedPlan] = useState<any>(null);
+  const [currency, setCurrency] = useState<"INR" | "USD">("INR");
+  const [billingCycle, setBillingCycle] = useState<"monthly" | "quarterly">("monthly");
   const router = useRouter();
 
+  useEffect(() => {
+    // Detect country from IP
+    fetch('https://ipapi.co/json/')
+      .then(res => res.json())
+      .then(data => {
+        if (data.country_code && data.country_code !== 'IN') {
+          setCurrency("USD");
+        } else {
+          setCurrency("INR");
+        }
+      })
+      .catch(err => {
+        console.error("Failed to fetch IP location, defaulting to INR", err);
+      });
+  }, []);
+
   const handleSelectPlan = (plan: any) => {
-    setSelectedPlan(plan);
+    setSelectedPlan({ ...plan, currency, billingCycle });
   };
 
   const handleContinue = () => {
     if (selectedPlan) {
-      const price = showRegularPrice ? selectedPlan.priceAnnually : selectedPlan.priceMonthly;
+      const isUSD = selectedPlan.currency === "USD";
+      const isQuarterly = selectedPlan.billingCycle === "quarterly";
+      
+      const price = isUSD 
+        ? (isQuarterly ? selectedPlan.billingQuarterlyTotalUSD : selectedPlan.billingMonthlyTotalUSD)
+        : (isQuarterly ? selectedPlan.billingQuarterlyTotal : selectedPlan.billingMonthlyTotal);
+
+      const displayedPrice = isUSD
+        ? (isQuarterly ? selectedPlan.priceQuarterlyUSD : selectedPlan.priceMonthlyUSD)
+        : (isQuarterly ? selectedPlan.priceQuarterly : selectedPlan.priceMonthly);
+
       localStorage.setItem("selectedPlanName", selectedPlan.name);
-      localStorage.setItem("selectedPlanPrice", price);
+      localStorage.setItem("selectedPlanPrice", String(price));
+      localStorage.setItem("selectedPlanCurrency", selectedPlan.currency || "INR");
+      localStorage.setItem("selectedPlanBillingCycle", selectedPlan.billingCycle || "monthly");
+      localStorage.setItem("selectedPlanDisplayedPrice", displayedPrice || selectedPlan.priceMonthly);
+      
       router.push("/vendor/registration");
     }
   };
@@ -34,33 +66,13 @@ export function PricingPageContent() {
   return (
     <>
       <div className="relative">
-        {/* Sticky Toggle Switch */}
-        <div className="sticky top-20 z-[70] flex justify-center pt-8 pb-4 transition-all pointer-events-none">
-          <div className="flex items-center gap-2 rounded-full border border-slate-200 bg-white/90 backdrop-blur-md p-1.5 shadow-xl shadow-violet-900/10 pointer-events-auto">
-            <button
-              onClick={() => setShowRegularPrice(false)}
-              className={`rounded-full px-6 py-2.5 text-sm font-bold transition-all duration-300 ${
-                !showRegularPrice
-                  ? "bg-violet-950 text-white shadow-md transform scale-105"
-                  : "text-slate-600 hover:text-slate-900 bg-transparent hover:bg-slate-50"
-              }`}
-            >
-              Offer price
-            </button>
-            <button
-              onClick={() => setShowRegularPrice(true)}
-              className={`rounded-full px-6 py-2.5 text-sm font-bold transition-all duration-300 ${
-                showRegularPrice
-                  ? "bg-violet-950 text-white shadow-md transform scale-105"
-                  : "text-slate-600 hover:text-slate-900 bg-transparent hover:bg-slate-50"
-              }`}
-            >
-              Regular price <span className={`ml-1 ${showRegularPrice ? "text-violet-200" : "text-emerald-500"}`}>(before 50% off)</span>
-            </button>
-          </div>
-        </div>
-
-        <PricingCardsSection showRegularPrice={showRegularPrice} onSelectPlan={handleSelectPlan} />
+        <PricingCardsSection 
+          showRegularPrice={showRegularPrice} 
+          onSelectPlan={handleSelectPlan} 
+          currency={currency}
+          billingCycle={billingCycle}
+          setBillingCycle={setBillingCycle}
+        />
       </div>
 
       <DemoCardsSection />
@@ -77,6 +89,31 @@ export function PricingPageContent() {
             <p className="text-base leading-7 text-slate-600">
               The source pricing matrix categories are organized into readable groups so buyers can compare store features, customer and sales tools, courier pricing, shipment dispatch, product controls, marketing, email, voice, WhatsApp Business, payments, shipping, support, and integrations without confusion.
             </p>
+          </div>
+
+          <div className="flex justify-center mb-10">
+            <div className="inline-flex items-center rounded-full bg-slate-100 p-1">
+              <button
+                onClick={() => setBillingCycle("monthly")}
+                className={`rounded-full px-6 py-2.5 text-sm font-semibold transition-all ${
+                  billingCycle === "monthly"
+                    ? "bg-white text-violet-900 shadow-sm"
+                    : "text-slate-600 hover:text-slate-900"
+                }`}
+              >
+                Monthly
+              </button>
+              <button
+                onClick={() => setBillingCycle("quarterly")}
+                className={`rounded-full px-6 py-2.5 text-sm font-semibold transition-all ${
+                  billingCycle === "quarterly"
+                    ? "bg-white text-violet-900 shadow-sm"
+                    : "text-slate-600 hover:text-slate-900"
+                }`}
+              >
+                Quarterly
+              </button>
+            </div>
           </div>
 
           <div className="overflow-x-auto lg:overflow-clip rounded-[2rem] border border-slate-200 bg-white shadow-xl shadow-slate-100 relative">
@@ -96,9 +133,14 @@ export function PricingPageContent() {
                       </span>
                     )}
                     <span className="text-2xl font-black text-slate-900 tracking-tight">{plan.name}</span>
-                    <span className={`text-xl font-bold mt-2 transition-all duration-300 ${plan.recommended ? 'text-violet-700' : 'text-slate-600'}`}>
-                      {showRegularPrice ? plan.priceAnnually : plan.priceMonthly}
-                    </span>
+                    <div className="mt-2 flex flex-col items-center justify-center">
+
+                      <span className={`text-xl font-bold transition-all duration-300 ${plan.recommended ? 'text-violet-700' : 'text-slate-600'}`}>
+                        {currency === "USD" 
+                          ? (billingCycle === "quarterly" ? (plan as any).priceQuarterlyUSD : (plan as any).priceMonthlyUSD) 
+                          : (billingCycle === "quarterly" ? (plan as any).priceQuarterly : plan.priceMonthly) || plan.priceMonthly}
+                      </span>
+                    </div>
                     {plan.cta === "Select" ? (
                       <button
                         onClick={() => handleSelectPlan(plan)}
@@ -190,7 +232,7 @@ export function PricingPageContent() {
             </button>
             <h3 className="text-2xl font-black text-slate-900 mb-3 tracking-tight">Confirm your plan</h3>
             <p className="text-slate-600 mb-8 leading-relaxed">
-              You have selected the <strong className="text-violet-700">{selectedPlan.name}</strong> plan at <strong>{showRegularPrice ? selectedPlan.priceAnnually : selectedPlan.priceMonthly}</strong>.
+              You have selected the <strong className="text-violet-700">{selectedPlan.name}</strong> plan at <strong>{selectedPlan.currency === "USD" ? (selectedPlan.billingCycle === "quarterly" ? selectedPlan.priceQuarterlyUSD : selectedPlan.priceMonthlyUSD) : (selectedPlan.billingCycle === "quarterly" ? selectedPlan.priceQuarterly : selectedPlan.priceMonthly) || selectedPlan.priceMonthly}</strong>.
             </p>
             <div className="flex gap-3">
               <button onClick={handleCloseModal} className="flex-1 py-3 px-4 rounded-none font-bold border-2 border-slate-200 text-slate-600 hover:bg-slate-50 hover:border-slate-300 transition-all">
@@ -205,8 +247,8 @@ export function PricingPageContent() {
       )}
       {/* Mobile Sticky CTA */}
       <div className="fixed bottom-0 left-0 right-0 z-[120] p-4 md:hidden bg-white/90 backdrop-blur-md border-t border-slate-200 shadow-[0_-10px_20px_-10px_rgba(0,0,0,0.1)]">
-        <button onClick={() => handleSelectPlan(plans[0])} className="flex w-full items-center justify-center rounded-full bg-violet-600 px-4 py-3.5 text-[13px] sm:text-sm font-bold text-white shadow-lg shadow-violet-200 transition-all active:scale-[0.98] border-none outline-none">
-          Signup @ ₹999/ month (50% flat discount)
+        <button onClick={() => handleSelectPlan({ ...plans[0], currency: "INR", billingCycle: "monthly" })} className="flex w-full items-center justify-center rounded-full bg-violet-600 px-4 py-3.5 text-[13px] sm:text-sm font-bold text-white shadow-lg shadow-violet-200 transition-all active:scale-[0.98] border-none outline-none">
+          Signup @ ₹1,199/ month
         </button>
       </div>
     </>

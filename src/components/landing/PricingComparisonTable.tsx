@@ -64,11 +64,19 @@ export function PricingComparisonTable() {
                   <th className="w-1/3 p-6 border-b border-slate-200 bg-slate-50/50"></th>
                   <th className="w-[22%] p-6 border-b border-slate-200 text-center">
                     <div className="text-sm font-bold uppercase tracking-wider text-slate-500 mb-1">Startup</div>
+                    <div className="flex items-center justify-center gap-1.5 mb-1">
+                      <span className="text-sm font-semibold text-red-500 line-through">₹1,999/mo</span>
+                      <span className="rounded-full bg-emerald-100 px-2 py-0.5 text-[10px] font-bold text-emerald-700 uppercase tracking-wide">50% off</span>
+                    </div>
                     <div className="text-xl font-bold text-slate-900">₹999/mo</div>
                   </th>
                   <th className="w-[22%] p-6 border-b border-slate-200 text-center bg-violet-50/50 relative">
                     <div className="absolute inset-x-0 top-0 h-1 bg-violet-600"></div>
                     <div className="text-sm font-bold uppercase tracking-wider text-violet-700 mb-1">Growth</div>
+                    <div className="flex items-center justify-center gap-1.5 mb-1">
+                      <span className="text-sm font-semibold text-red-500 line-through">₹4,999/mo</span>
+                      <span className="rounded-full bg-emerald-100 px-2 py-0.5 text-[10px] font-bold text-emerald-700 uppercase tracking-wide">50% off</span>
+                    </div>
                     <div className="text-xl font-bold text-slate-900">₹2,499/mo</div>
                   </th>
                   <th className="w-[22%] p-6 border-b border-slate-200 text-center">

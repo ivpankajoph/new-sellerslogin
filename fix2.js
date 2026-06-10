@@ -15,15 +15,13 @@ const match = businessContent.match(gstRegex);
 if (match) {
   const fields = match[1];
   
-  // Insert fields right after Category
   const insertRegex = /(<SearchableMultiSelectField\s*label="Category[\s\S]*?\/>\s*<\/div>\s*)(<\/div>\s*<\/div>\s*\) : null})/;
   businessContent = businessContent.replace(insertRegex, `$1\n\n                ${fields}\n\n              $2`);
   
-  // Remove the old commented block
   businessContent = businessContent.replace(/{\/\* {currentStep === "other" \? \([\s\S]*?\) : null} \*\//, '');
 } else {
   console.log("Could not match GST regex.");
 }
 
 fs.writeFileSync(businessFile, businessContent);
-console.log("Done.");
+console.log("Done fix2.");

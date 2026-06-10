@@ -5,27 +5,47 @@ import { useState, useEffect } from "react";
 import { ArrowRight, BellRing, CheckCircle2 } from "lucide-react";
 import { plans } from "@/lib/pricingData";
 
-export function PricingCardsSection({ showRegularPrice, onSelectPlan }: { showRegularPrice: boolean, onSelectPlan: (plan: any) => void }) {
-  const [currency, setCurrency] = useState<"INR" | "USD">("INR");
-
-  useEffect(() => {
-    // Detect country from IP
-    fetch('https://ipapi.co/json/')
-      .then(res => res.json())
-      .then(data => {
-        if (data.country_code && data.country_code !== 'IN') {
-          setCurrency("USD");
-        } else {
-          setCurrency("INR");
-        }
-      })
-      .catch(err => {
-        console.error("Failed to fetch IP location, defaulting to INR", err);
-      });
-  }, []);
+export function PricingCardsSection({ 
+  showRegularPrice, 
+  onSelectPlan,
+  currency,
+  billingCycle,
+  setBillingCycle
+}: { 
+  showRegularPrice: boolean, 
+  onSelectPlan: (plan: any) => void,
+  currency: "INR" | "USD",
+  billingCycle: "monthly" | "quarterly",
+  setBillingCycle: (cycle: "monthly" | "quarterly") => void
+}) {
   return (
     <section className="px-4 py-12 sm:px-6 lg:px-8 relative z-20">
       <div className="mx-auto max-w-7xl">
+
+        <div className="flex justify-center mb-10">
+          <div className="inline-flex items-center rounded-full bg-slate-100 p-1">
+            <button
+              onClick={() => setBillingCycle("monthly")}
+              className={`rounded-full px-6 py-2.5 text-sm font-semibold transition-all ${
+                billingCycle === "monthly"
+                  ? "bg-white text-violet-900 shadow-sm"
+                  : "text-slate-600 hover:text-slate-900"
+              }`}
+            >
+              Monthly
+            </button>
+            <button
+              onClick={() => setBillingCycle("quarterly")}
+              className={`rounded-full px-6 py-2.5 text-sm font-semibold transition-all ${
+                billingCycle === "quarterly"
+                  ? "bg-white text-violet-900 shadow-sm"
+                  : "text-slate-600 hover:text-slate-900"
+              }`}
+            >
+              Quarterly
+            </button>
+          </div>
+        </div>
 
         <div className="grid gap-5 lg:grid-cols-3 group">
           {plans.map((plan) => {
@@ -55,16 +75,18 @@ export function PricingCardsSection({ showRegularPrice, onSelectPlan }: { showRe
                   </div>
                 </div>
                 
-                <div className="mt-5 relative h-12">
-                  <p className={`absolute text-4xl font-bold transition-all duration-300 ${isRecommended ? "text-white" : "text-slate-950"} ${!showRegularPrice ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4 pointer-events-none"}`}>
-                    {currency === "USD" ? (plan as any).priceMonthlyUSD : plan.priceMonthly}
-                  </p>
-                  <p className={`absolute text-4xl font-bold transition-all duration-300 ${isRecommended ? "text-white" : "text-slate-950"} ${showRegularPrice ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4 pointer-events-none"}`}>
-                    {currency === "USD" ? (plan as any).priceAnnuallyUSD : plan.priceAnnually}
+                <div className="mt-5 flex flex-col justify-start">
+
+                  <p className={`text-4xl font-bold ${isRecommended ? "text-white" : "text-slate-950"}`}>
+                    {currency === "USD" 
+                      ? (billingCycle === "quarterly" ? (plan as any).priceQuarterlyUSD : (plan as any).priceMonthlyUSD) 
+                      : (billingCycle === "quarterly" ? (plan as any).priceQuarterly : plan.priceMonthly) || plan.priceMonthly}
                   </p>
                 </div>
                 
-                <p className={`mt-2 text-xs font-semibold ${isRecommended ? "text-violet-200" : "text-slate-500"}`}>{currency === "USD" ? (plan as any).sourceNoteUSD : plan.sourceNote}</p>
+                {plan.name === "Enterprise" && (
+                  <p className={`mt-2 text-xs font-semibold ${isRecommended ? "text-violet-200" : "text-slate-500"}`}>{currency === "USD" ? (plan as any).sourceNoteUSD : plan.sourceNote}</p>
+                )}
                 <p className={`mt-4 min-h-[84px] text-sm leading-6 ${isRecommended ? "text-slate-300" : "text-slate-600"}`}>{plan.description}</p>
 
                 <ul className="mt-6 flex-1 space-y-3">
@@ -78,7 +100,7 @@ export function PricingCardsSection({ showRegularPrice, onSelectPlan }: { showRe
 
                 {plan.cta === "Select" ? (
                   <button
-                    onClick={() => onSelectPlan({ ...plan, currency })}
+                    onClick={() => onSelectPlan(plan)}
                     className={`mt-7 inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-violet-500 focus-visible:ring-offset-2 ${
                       isRecommended
                         ? "bg-white text-violet-700 hover:bg-violet-50"

@@ -4,7 +4,7 @@ import { ChangeEvent, useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { ChevronDown, Search } from "lucide-react";
+import { ChevronDown, Search, Check } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
 import { Input } from "@/components/ui/input";
@@ -738,6 +738,16 @@ export default function VendorBusinessDetailsPage() {
   const [countryOptions, setCountryOptions] = useState<CountryOption[]>([]);
   const [countriesLoading, setCountriesLoading] = useState(true);
   const [countriesError, setCountriesError] = useState<string | null>(null);
+
+  const [selectedPlanNameState, setSelectedPlanNameState] = useState<string | null>(null);
+  const [selectedPlanPriceState, setSelectedPlanPriceState] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      setSelectedPlanNameState(localStorage.getItem("selectedPlanName"));
+      setSelectedPlanPriceState(localStorage.getItem("selectedPlanPrice"));
+    }
+  }, []);
   const [countryRequestNonce, setCountryRequestNonce] = useState(0);
   const [stateOptions, setStateOptions] = useState<string[]>([]);
   const [statesLoading, setStatesLoading] = useState(false);
@@ -1961,120 +1971,7 @@ export default function VendorBusinessDetailsPage() {
           vendor: vendorData,
         });
 
-        // RAZORPAY INTEGRATION START
-        const selectedPlanName = localStorage.getItem("selectedPlanName");
-        let selectedPlanPrice = localStorage.getItem("selectedPlanPrice");
-        const selectedPlanCurrency = localStorage.getItem("selectedPlanCurrency") || "INR";
-
-        if (selectedPlanName && selectedPlanName !== "null" && selectedPlanPrice && selectedPlanPrice !== "null") {
-           // Parse price to integer, stripping non-numeric characters
-           const numericPrice = parseInt(selectedPlanPrice.replace(/\D/g, ''), 10);
-           
-           try {
-             const orderRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api/v1'}/vendor/billing/create-order`, {
-               method: "POST",
-               headers: {
-                 "Content-Type": "application/json",
-                 "Authorization": `Bearer ${token}`
-               },
-               body: JSON.stringify({
-                 plan: selectedPlanName,
-                 amount: numericPrice,
-                 currency: selectedPlanCurrency
-               })
-             });
-             const orderData = await orderRes.json();
-             
-             if (orderData.success && orderData.data) {
-                const loadRazorpay = () => new Promise((resolve) => {
-                  if (document.querySelector('script[src="https://checkout.razorpay.com/v1/checkout.js"]')) {
-                      resolve(true);
-                      return;
-                  }
-                  const script = document.createElement('script');
-                  script.src = 'https://checkout.razorpay.com/v1/checkout.js';
-                  script.onload = () => resolve(true);
-                  script.onerror = () => resolve(false);
-                  document.body.appendChild(script);
-                });
-                
-                await loadRazorpay();
-                
-                const options = {
-                  key: orderData.data.key_id,
-                  amount: orderData.data.amount,
-                  currency: orderData.data.currency,
-                  name: "Ophmate Sellers",
-                  description: `Subscription for ${selectedPlanName} Plan`,
-                  order_id: orderData.data.id,
-                  handler: async function (response: any) {
-                     try {
-                        const verifyRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api/v1'}/vendor/billing/verify`, {
-                          method: "POST",
-                          headers: {
-                            "Content-Type": "application/json",
-                            "Authorization": `Bearer ${token}`
-                          },
-                          body: JSON.stringify({
-                            razorpay_order_id: response.razorpay_order_id,
-                            razorpay_payment_id: response.razorpay_payment_id,
-                            razorpay_signature: response.razorpay_signature
-                          })
-                        });
-                        const verifyData = await verifyRes.json();
-                        if (verifyData.success) {
-                           Swal.fire("Success", "Payment successful!", "success").then(() => {
-                              if (adminRedirectUrl) {
-                                window.location.replace(adminRedirectUrl);
-                              } else {
-                                router.push("/sign-in");
-                              }
-                           });
-                        } else {
-                           Swal.fire("Error", "Payment verification failed. Please contact support.", "error");
-                           setIsSubmitting(false); // Let them retry
-                        }
-                     } catch (err) {
-                        Swal.fire("Error", "Failed to verify payment.", "error");
-                        setIsSubmitting(false);
-                     }
-                  },
-                  prefill: {
-                    name: form.name,
-                    email: form.email,
-                    contact: form.phone_no
-                  },
-                  theme: {
-                    color: "#7c3aed"
-                  },
-                  modal: {
-                    ondismiss: function() {
-                       Swal.fire("Pending", "Payment is pending. Please click 'Submit' again to retry payment.", "info");
-                       setIsSubmitting(false);
-                    }
-                  }
-                };
-                
-                const rzp = new (window as any).Razorpay(options);
-                rzp.on('payment.failed', function (response: any){
-                   Swal.fire("Error", response.error.description || "Payment failed", "error");
-                   setIsSubmitting(false);
-                });
-                rzp.open();
-                return; // Return early, don't redirect yet
-             } else {
-                Swal.fire("Error", "Failed to initialize payment gateway.", "error");
-                setIsSubmitting(false);
-                return;
-             }
-           } catch(err) {
-             console.error(err);
-             Swal.fire("Error", "Payment system error. Please try again.", "error");
-             setIsSubmitting(false);
-             return;
-           }
-        }
-        // RAZORPAY INTEGRATION END
+        
 
         if (typeof window !== "undefined") {
           localStorage.removeItem(VENDOR_BUSINESS_DRAFT_KEY);
@@ -2097,7 +1994,7 @@ export default function VendorBusinessDetailsPage() {
 
           window.scrollTo({ top: 0, behavior: "auto" });
           setRedirectMessage(successMessage);
-          setRedirectTargetUrl(adminRedirectUrl);
+          setRedirectTargetUrl("/vendor/registration/payment");
           setRedirectProgress(0);
           setShowRedirectPopup(true);
 
@@ -2208,13 +2105,7 @@ export default function VendorBusinessDetailsPage() {
           </Link>
 
           <div className="flex items-center gap-3">
-            <Link
-              href={vendorOverviewUrl}
-              className="inline-flex min-h-12 items-center justify-center border border-slate-300 px-5 text-sm font-semibold text-slate-700 transition hover:bg-slate-950 hover:text-white"
-              {...newTabProps}
-            >
-              Vendor Access
-            </Link>
+            
             <a
               href={adminLoginUrl}
               className="inline-flex min-h-12 items-center justify-center border border-violet-700 bg-violet-700 px-5 text-sm font-semibold text-white transition hover:bg-violet-800"
@@ -2556,73 +2447,7 @@ export default function VendorBusinessDetailsPage() {
                   placeholder="Select employee range"
                 />
 
-                <div className="md:col-span-2">
-                  <FieldLabel label="Company Profile Photo" />
-                  <input
-                    ref={avatarInputRef}
-                    type="file"
-                    accept="image/*,.jpg,.jpeg,.png,.gif,.webp,.avif"
-                    onChange={(event) => updateAvatarFile(event.target.files?.[0] ?? null)}
-                    className="hidden"
-                  />
-
-                  {form.avatar && avatarPreviewUrl ? (
-                    <div className="mt-3 border border-slate-300 bg-slate-50 p-5">
-                      <div className="grid gap-5 sm:grid-cols-[112px_minmax(0,1fr)] sm:items-start">
-                        <img
-                          src={avatarPreviewUrl}
-                          alt="Profile preview"
-                          className="h-28 w-28 border border-slate-300 object-cover"
-                        />
-                        <div className="min-w-0 flex-1">
-                          <p
-                            className="truncate text-base font-semibold text-slate-950"
-                            title={form.avatar.name}
-                          >
-                            {form.avatar.name}
-                          </p>
-                          <p className="mt-2 max-w-lg text-sm leading-6 text-slate-500">
-                            Only image files from your computer are allowed for profile photo.
-                          </p>
-                        </div>
-                      </div>
-                      <div className="mt-5 flex flex-col gap-3 sm:flex-row">
-                        <button
-                          type="button"
-                          onClick={openAvatarPicker}
-                          className="inline-flex min-h-12 w-full items-center justify-center border border-violet-700 bg-violet-700 px-5 text-sm font-semibold text-white transition hover:bg-violet-800 sm:flex-1"
-                        >
-                          Change image
-                        </button>
-                        <button
-                          type="button"
-                          onClick={() => updateAvatarFile(null)}
-                          className="inline-flex min-h-12 w-full items-center justify-center border border-slate-300 bg-white px-5 text-sm font-semibold text-slate-700 transition hover:border-red-300 hover:bg-red-50 hover:text-red-600 sm:flex-1"
-                        >
-                          Remove image
-                        </button>
-                      </div>
-                    </div>
-                  ) : (
-                    <div className="mt-3 border border-slate-300 bg-slate-50 p-5">
-                      <p className="max-w-lg text-sm leading-6 text-slate-600">
-                        Optional. Upload a profile or business image.
-                      </p>
-                      <button
-                        type="button"
-                        onClick={openAvatarPicker}
-                        className="mt-4 inline-flex min-h-12 w-full items-center justify-center border border-violet-700 bg-violet-700 px-5 text-sm font-semibold text-white transition hover:bg-violet-800 sm:w-auto"
-                      >
-                        Choose image
-                      </button>
-                      <p className="mt-3 text-sm text-slate-500">
-                        Allowed from PC: JPG, PNG, GIF, WEBP, AVIF.
-                      </p>
-                    </div>
-                  )}
-
-                  {errors.avatar ? <p className="mt-2 text-sm text-red-600">{errors.avatar}</p> : null}
-                </div>
+                
 
                 <div className="md:col-span-2">
                   <SearchableMultiSelectField
@@ -2643,305 +2468,19 @@ export default function VendorBusinessDetailsPage() {
                   />
                 </div>
 
-              </div>
-            </div>
-          ) : null}
-
-          {/* {currentStep === "other" ? (
-            <div className="space-y-10">
-              <div className="grid gap-6 md:grid-cols-2">
-                <TextField
-                  label="Alternate contact name"
-                  value={form.alternate_contact_name}
-                  onChange={(value) => updateTextField("alternate_contact_name", value)}
-                  placeholder="Optional alternate contact"
-                />
-
-                <div>
-                  <FieldLabel label="Alternate number" />
-                  <div className="mt-3 grid grid-cols-1 gap-3">
-                    <CountrySelectField
-                      label="Country code"
-                      value={selectedAlternateCountry}
-                      options={availableCountries}
-                      onChange={updateAlternateCountry}
-                      error={errors.alternate_contact_country_code}
-                      disabled={countriesLoading}
-                    />
-                    <div>
-                      <Input
-                        type="tel"
-                        value={form.alternate_contact_phone}
-                        onChange={(event) =>
-                          updateTextField(
-                            "alternate_contact_phone",
-                            normalizeDigits(event.target.value).slice(0, 15),
-                          )
-                        }
-                        placeholder="Optional alternate mobile number"
-                        className="h-12 rounded-none border-slate-300 px-4 text-base shadow-none"
-                      />
-                      {errors.alternate_contact_phone ? (
-                        <p className="mt-2 text-sm text-red-600">{errors.alternate_contact_phone}</p>
-                      ) : null}
-                    </div>
-                  </div>
-                </div>
-
-                <TextField
-                  label="UPI ID"
-                  value={form.upi_id}
-                  onChange={(value) => updateTextField("upi_id", value)}
-                  error={errors.upi_id}
-                  placeholder="Optional. Example: name@upi"
-                />
-
-                <SelectField
-                  label="Return policy"
-                  required
-                  value={form.return_policy}
-                  onChange={(value) => updateTextField("return_policy", value)}
-                  options={RETURN_POLICY}
-                  error={errors.return_policy}
-                  placeholder="Select return policy"
-                />
-
                 <div className="md:col-span-2">
-                  <SearchableMultiSelectField
-                    label="Dealing Country"
-                    required
-                    values={form.dealing_area}
-                    onChange={(values) => updateArrayField("dealing_area", values)}
-                    options={dealingAreaSelectableOptions}
-                    error={errors.dealing_area}
-                    placeholder="Select countries where you deal"
-                    note="(If you deal with multiple countries, you can select more than one.)"
+                  <TextField
+                    label="Have a GST number? Please enter"
+                    value={form.gst_number}
+                    onChange={(value) => updateTextField("gst_number", value.toUpperCase())}
+                    error={errors.gst_number}
+                    placeholder="Example: 22AAAAA0000A1Z5"
                   />
                 </div>
 
-                {form.dealing_area.includes("Other") ? (
-                  <div className="md:col-span-2">
-                    <FieldLabel label="Other dealing country" required />
-                    <div className="mt-3 flex flex-col gap-3 sm:flex-row">
-                      <Input
-                        value={dealingAreaOtherInput}
-                        onChange={(event) => setDealingAreaOtherInput(event.target.value)}
-                        onKeyDown={(event) => {
-                          if (event.key === "Enter") {
-                            event.preventDefault();
-                            addCustomDealingArea();
-                          }
-                        }}
-                        placeholder="Enter country name"
-                        className="h-12 rounded-none border-slate-300 px-4 text-base shadow-none"
-                      />
-                      <button
-                        type="button"
-                        onClick={addCustomDealingArea}
-                        className="inline-flex min-h-12 items-center justify-center border border-violet-700 bg-violet-700 px-5 text-sm font-semibold text-white transition hover:bg-violet-800 disabled:cursor-not-allowed disabled:border-slate-200 disabled:bg-slate-100 disabled:text-slate-400"
-                        disabled={!dealingAreaOtherInput.trim()}
-                      >
-                        Add
-                      </button>
-                    </div>
-                    <p className="mt-2 text-sm text-slate-500">
-                      Type your custom dealing country and click Add.
-                    </p>
-                  </div>
-                ) : null}
-
-                <div className="md:col-span-2 border border-slate-200 bg-slate-50 p-6">
-                  <FieldLabel label="Operating hours" required />
-                  <div className="mt-4 border border-slate-200 bg-white p-4">
-                    <label className="flex items-center gap-3 text-sm font-semibold text-slate-700">
-                      <input
-                        type="checkbox"
-                        checked={applyAllDays}
-                        onChange={(event) => setApplyAllDays(event.target.checked)}
-                        className="h-4 w-4"
-                      />
-                      Select all days
-                    </label>
-
-                    {applyAllDays ? (
-                      <div className="mt-4 space-y-3">
-                        <div className="grid gap-3 sm:grid-cols-2">
-                          <div>
-                            <p className="mb-2 text-xs font-semibold uppercase tracking-[0.16em] text-slate-500">
-                              Open time
-                            </p>
-                            <Input
-                              type="time"
-                              value={bulkOpenTime}
-                              onChange={(event) => setBulkOpenTime(event.target.value)}
-                              className="h-12 rounded-none border-slate-300 px-4 text-base shadow-none"
-                            />
-                          </div>
-                          <div>
-                            <p className="mb-2 text-xs font-semibold uppercase tracking-[0.16em] text-slate-500">
-                              Close time
-                            </p>
-                            <Input
-                              type="time"
-                              value={bulkCloseTime}
-                              onChange={(event) => setBulkCloseTime(event.target.value)}
-                              className="h-12 rounded-none border-slate-300 px-4 text-base shadow-none"
-                            />
-                          </div>
-                        </div>
-
-                        <div className="flex flex-col gap-3 sm:flex-row">
-                          <button
-                            type="button"
-                            onClick={applyOperatingHoursToAllDays}
-                            className="inline-flex min-h-11 items-center justify-center border border-violet-700 bg-violet-700 px-4 text-sm font-semibold text-white transition hover:bg-violet-800"
-                          >
-                            Apply to all days
-                          </button>
-                          <button
-                            type="button"
-                            onClick={setAllDaysTwentyFourHours}
-                            className="inline-flex min-h-11 items-center justify-center border border-slate-300 bg-white px-4 text-sm font-semibold text-slate-700 transition hover:border-slate-950 hover:text-slate-950"
-                          >
-                            Set all 24 hours
-                          </button>
-                        </div>
-                      </div>
-                    ) : null}
-                  </div>
-
-                  <div className="mt-4 space-y-4">
-                    {form.operating_hours.map((row, index) => (
-                      <div
-                        key={row.day}
-                        className="grid gap-3 border border-slate-200 bg-white p-4 sm:grid-cols-2 lg:grid-cols-[140px_minmax(0,1fr)_minmax(0,1fr)_auto] lg:items-center"
-                      >
-                        <p className="text-sm font-semibold text-slate-950 sm:col-span-2 lg:col-span-1">
-                          {row.day}
-                        </p>
-
-                        <div className="min-w-0">
-                          <p className="mb-2 text-xs font-semibold uppercase tracking-[0.16em] text-slate-500">
-                            Open time
-                          </p>
-                          <Input
-                            type="time"
-                            value={row.open}
-                            disabled={row.closed}
-                            onChange={(event) =>
-                              updateOperatingHours(index, "open", event.target.value)
-                            }
-                            className="h-12 w-full min-w-0 rounded-none border-slate-300 px-3 text-base shadow-none disabled:bg-slate-100"
-                          />
-                        </div>
-
-                        <div className="min-w-0">
-                          <p className="mb-2 text-xs font-semibold uppercase tracking-[0.16em] text-slate-500">
-                            Close time
-                          </p>
-                          <Input
-                            type="time"
-                            value={row.close}
-                            disabled={row.closed}
-                            onChange={(event) =>
-                              updateOperatingHours(index, "close", event.target.value)
-                            }
-                            className="h-12 w-full min-w-0 rounded-none border-slate-300 px-3 text-base shadow-none disabled:bg-slate-100"
-                          />
-                        </div>
-
-                        <label className="flex min-h-12 items-center gap-3 border border-slate-300 px-4 py-3 text-sm text-slate-700 lg:w-fit">
-                          <input
-                            type="checkbox"
-                            checked={row.closed}
-                            onChange={(event) =>
-                              updateOperatingHours(index, "closed", event.target.checked)
-                            }
-                            className="h-4 w-4"
-                          />
-                          Closed
-                        </label>
-                      </div>
-                    ))}
-                  </div>
-                  {errors.operating_hours ? (
-                    <p className="mt-3 text-sm text-red-600">{errors.operating_hours}</p>
-                  ) : null}
-                </div>
-
-                {isIndianBusiness ? (
-                  <>
-                    <TextField
-                      label="GST number"
-                      required
-                      value={form.gst_number}
-                      onChange={(value) => updateTextField("gst_number", value.toUpperCase())}
-                      error={errors.gst_number}
-                      placeholder="Example: 22AAAAA0000A1Z5"
-                    />
-
-                    <TextField
-                      label="PAN number"
-                      required
-                      value={form.pan_number}
-                      onChange={(value) => updateTextField("pan_number", value.toUpperCase())}
-                      error={errors.pan_number}
-                      placeholder="Example: ABCDE1234F"
-                    />
-
-                    <FileField
-                      label="GST certificate"
-                      onChange={(event) => updateFileField("gst_cert", event.target.files?.[0] ?? null)}
-                      fileName={form.gst_cert?.name}
-                      helperText="Optional. Upload GST certificate in PDF or image format."
-                      error={errors.gst_cert}
-                    />
-
-                    <FileField
-                      label="PAN card document"
-                      onChange={(event) => updateFileField("pan_card", event.target.files?.[0] ?? null)}
-                      fileName={form.pan_card?.name}
-                      helperText="Optional. Upload PAN card in PDF or image format."
-                      error={errors.pan_card}
-                    />
-                  </>
-                ) : (
-                  <>
-                    <TextField
-                      label="Business license number"
-                      required
-                      value={form.business_license_number}
-                      onChange={(value) => updateTextField("business_license_number", value)}
-                      error={errors.business_license_number}
-                      placeholder="Enter registration or business license number"
-                    />
-
-                    <FileField
-                      label="Business proof document 1"
-                      required
-                      onChange={(event) =>
-                        updateFileField("business_proof_document_1", event.target.files?.[0] ?? null)
-                      }
-                      fileName={form.business_proof_document_1?.name}
-                      helperText="Required for businesses outside India."
-                      error={errors.business_proof_document_1}
-                    />
-
-                    <FileField
-                      label="Business proof document 2"
-                      required
-                      onChange={(event) =>
-                        updateFileField("business_proof_document_2", event.target.files?.[0] ?? null)
-                      }
-                      fileName={form.business_proof_document_2?.name}
-                      helperText="Upload a second business proof document."
-                      error={errors.business_proof_document_2}
-                    />
-                  </>
-                )}
               </div>
             </div>
-          ) : null} */}
+          ) : null}
 
           <div className="mt-10 flex flex-col gap-4 border-t border-slate-200 pt-6 sm:flex-row sm:items-center sm:justify-between">
             <div className="text-sm text-slate-500">
