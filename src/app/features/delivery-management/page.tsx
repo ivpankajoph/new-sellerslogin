@@ -115,7 +115,7 @@ function HeroSection() {
               Optimize routes, auto-dispatch drivers, and delight customers with real-time tracking and instant proof of delivery. Manage your entire fleet from one powerful dashboard.
             </p>
             <div className="flex flex-wrap gap-4">
-             <Link href="https://sellerslogin.comvendor/registration">
+             <Link href="/vendor/registration">
               <button className="group flex items-center gap-3 px-8 py-4 rounded-full text-white font-semibold transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
                 style={{ background: "linear-gradient(135deg,#9333ea,#c084fc)" }}>
                 Optimize Deliveries
@@ -451,7 +451,7 @@ function CTASection() {
           Start dispatching faster and saving on fuel costs today.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-       <Link href="https://sellerslogin.comvendor/registration">
+       <Link href="/vendor/registration">
           <button className="group flex items-center justify-center gap-3 px-10 py-4 rounded-full bg-white text-purple-600 font-bold text-lg hover:bg-purple-50 transition-all hover:-translate-y-1 shadow-lg">
             Start Free
             <FiArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />

@@ -33,7 +33,7 @@
         - link "Log In" [ref=e25] [cursor=pointer]:
           - /url: https://admin.sellerslogin.com/sign-in
         - link "Get Started Free" [ref=e26] [cursor=pointer]:
-          - /url: https://sellerslogin.comvendor/registration
+          - /url: /vendor/registration
   - main [ref=e27]:
     - generic [ref=e30]:
       - generic [ref=e31]:
@@ -43,7 +43,7 @@
           - text: securely.
         - paragraph [ref=e35]: Process payments in over 135 currencies. Reduce fraud with 3D Secure checkout, and increase conversions with one-click Apple Pay and Google Pay integrations.
         - link "Start Accepting Payments" [ref=e37] [cursor=pointer]:
-          - /url: https://sellerslogin.comvendor/registration
+          - /url: /vendor/registration
           - text: Start Accepting Payments
           - img [ref=e38]
       - generic [ref=e40]:
@@ -243,7 +243,7 @@
         - text: payments globally.
       - paragraph [ref=e307]: The most reliable, developer-friendly payment gateway on the planet.
       - link "Create Free Account" [ref=e309] [cursor=pointer]:
-        - /url: https://sellerslogin.comvendor/registration
+        - /url: /vendor/registration
         - text: Create Free Account
         - img [ref=e310]
     - generic [ref=e312]:
@@ -379,7 +379,7 @@
                       - img [ref=e446]
                       - generic [ref=e449]: Careers
                 - link "Start selling" [ref=e451] [cursor=pointer]:
-                  - /url: https://sellerslogin.comvendor/registration
+                  - /url: /vendor/registration
                   - text: Start selling
                   - generic [ref=e452]: →
             - navigation "Support links" [ref=e454]:

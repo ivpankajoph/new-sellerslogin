@@ -109,7 +109,7 @@ function HeroSection() {
             </p>
             <div className="flex flex-wrap gap-4">
               <Link
-                href="https://sellerslogin.comvendor/registration"
+                href="/vendor/registration"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group flex items-center gap-3 px-8 py-4 rounded-full text-white font-semibold transition-all duration-300 hover:-translate-y-1 hover:shadow-xl no-underline"
@@ -353,7 +353,7 @@ function CTASection() {
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Link
-            href="https://sellerslogin.comvendor/registration"
+            href="/vendor/registration"
             target="_blank"
             rel="noopener noreferrer"
             className="group flex items-center justify-center gap-3 px-10 py-4 rounded-full bg-white text-purple-600 font-bold text-lg hover:bg-purple-50 transition-all hover:-translate-y-1 shadow-lg no-underline"

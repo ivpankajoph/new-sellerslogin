@@ -64,7 +64,7 @@ export function GlobeSection() {
 
           <div className="flex items-center gap-4">
             <a
-              href="https://sellerslogin.comvendor/registration"
+              href="/vendor/registration"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center bg-purple-200 text-black rounded-full py-3.5 px-8 text-base font-semibold transition-all duration-200 hover:bg-purple-300 hover:shadow-lg hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-400 focus-visible:ring-offset-2 whitespace-nowrap border border-purple-300"

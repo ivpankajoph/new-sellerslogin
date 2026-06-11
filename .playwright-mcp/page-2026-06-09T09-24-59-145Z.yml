@@ -82,7 +82,7 @@
             - img [ref=e108]
             - generic [ref=e111]: Ticket, mail, and chat support
         - link "Start with Startup" [ref=e112] [cursor=pointer]:
-          - /url: https://sellerslogin.com/vendor/registration
+          - /url: /vendor/registration
           - text: Start with Startup
           - img [ref=e113]
       - article [ref=e115]:
@@ -119,7 +119,7 @@
             - img [ref=e161]
             - generic [ref=e164]: Dedicated account manager and 2 hours expert onboarding
         - link "Choose Growth" [ref=e165] [cursor=pointer]:
-          - /url: https://sellerslogin.com/vendor/registration
+          - /url: /vendor/registration
           - text: Choose Growth
           - img [ref=e166]
       - article [ref=e168]:
@@ -206,13 +206,13 @@
             - generic [ref=e286]: Startup
             - generic [ref=e287]: INR 1,999/mo
             - link "Start free trial" [ref=e288] [cursor=pointer]:
-              - /url: https://sellerslogin.com/vendor/registration
+              - /url: /vendor/registration
           - generic [ref=e289]:
             - generic [ref=e290]: Recommended
             - generic [ref=e291]: Growth
             - generic [ref=e292]: INR 4,999/mo
             - link "Start free trial" [ref=e293] [cursor=pointer]:
-              - /url: https://sellerslogin.com/vendor/registration
+              - /url: /vendor/registration
           - generic [ref=e294]:
             - generic [ref=e295]: Enterprise
             - generic [ref=e296]: Custom Quote
@@ -1120,7 +1120,7 @@
                     - img [ref=e1805]
                     - generic [ref=e1808]: Careers
               - link "Start selling" [ref=e1810] [cursor=pointer]:
-                - /url: https://sellerslogin.comvendor/registration
+                - /url: /vendor/registration
                 - text: Start selling
                 - generic [ref=e1811]: →
           - navigation "Support links" [ref=e1813]:

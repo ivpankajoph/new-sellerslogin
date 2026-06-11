@@ -564,17 +564,20 @@ export default function VendorRegistrationPage() {
 
     setIsSendingEmailOtp(true);
 
-    try {
-      await dispatch(sendEmailOtp({ email: normalizedEmail })).unwrap();
-      setEmail(normalizedEmail);
-      localStorage.setItem("vendor_email", normalizedEmail);
-      sessionStorage.setItem("vendor_email", normalizedEmail);
-      localStorage.setItem("vendor_registration_step", "email-otp");
-      sessionStorage.setItem("vendor_registration_step", "email-otp");
-      setStage("email-otp");
-      resetEmailOtpState();
+    // Instant state transition and success popup
+    setEmail(normalizedEmail);
+    localStorage.setItem("vendor_email", normalizedEmail);
+    sessionStorage.setItem("vendor_email", normalizedEmail);
+    localStorage.setItem("vendor_registration_step", "email-otp");
+    sessionStorage.setItem("vendor_registration_step", "email-otp");
+    setStage("email-otp");
+    resetEmailOtpState();
 
-      Swal.fire("Success", "OTP sent to your email.", "success");
+    Swal.fire("Success", "OTP sent to your email.", "success");
+
+    try {
+      // Fire API call
+      await dispatch(sendEmailOtp({ email: normalizedEmail })).unwrap();
       return true;
     } catch (error) {
       const message =

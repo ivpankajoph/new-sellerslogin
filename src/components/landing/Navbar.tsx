@@ -195,7 +195,7 @@ export function Navbar() {
               Log In
             </Link>
             <Link
-              href="https://sellerslogin.comvendor/registration"
+              href="/vendor/registration"
               target="_blank" rel="noopener noreferrer"
               className="text-sm font-medium py-2 px-5 rounded-full border border-purple-300 shadow-sm transition-all duration-200 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-400 focus-visible:ring-offset-2 bg-purple-200 text-black hover:bg-purple-300 hover:-translate-y-0.5 active:translate-y-0"
             >
@@ -275,7 +275,7 @@ export function Navbar() {
               Log In
             </Link>
             <Link
-              href="https://sellerslogin.comvendor/registration"
+              href="/vendor/registration"
               target="_blank" rel="noopener noreferrer"
               className="block text-center w-full bg-purple-200 text-black text-base font-medium py-2.5 px-5 rounded-full border border-purple-300 shadow-sm transition-transform duration-200 hover:-translate-y-0.5 hover:bg-purple-300 active:translate-y-0 cursor-pointer no-underline"
             >

@@ -202,7 +202,7 @@ function Hero() {
             animation: "fadeUp 0.8s cubic-bezier(.22,1,.36,1) 0.4s both",
           }}
         >
-          <Link href="https://sellerslogin.comvendor/registration">
+          <Link href="/vendor/registration">
             <button className="flex items-center gap-2 text-gray-700 hover:text-purple-600 font-semibold px-8 py-4 rounded-full border border-gray-200 hover:border-purple-200 transition-all duration-300 hover:-translate-y-0.5 bg-white/80">
               View Live Dashboard
               <RiArrowRightUpLine />
@@ -789,7 +789,7 @@ function CTA() {
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Link href="https://sellerslogin.comvendor/registration">
+              <Link href="/vendor/registration">
                 <button className="group flex items-center gap-2 bg-white text-purple-600 hover:bg-purple-50 font-bold font-body px-8 py-4 rounded-full transition-all duration-200 shadow-lg hover:-translate-y-0.5">
                   Start Free
                   <RiArrowRightLine className="transition-transform group-hover:translate-x-1" />

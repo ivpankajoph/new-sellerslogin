@@ -29,6 +29,7 @@ export default function PaymentPendingPage() {
   const [appliedReferral, setAppliedReferral] = useState("");
   const [isApplyingReferral, setIsApplyingReferral] = useState(false);
   const [referralError, setReferralError] = useState("");
+  const [vendorPhone, setVendorPhone] = useState("");
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -40,6 +41,7 @@ export default function PaymentPendingPage() {
       const planDisplayedPrice = localStorage.getItem("selectedPlanDisplayedPrice") || "INR 1,199/mo";
       const redirectUrl =
         sessionStorage.getItem("vendor_post_payment_redirect") || "";
+      const savedPhone = localStorage.getItem("vendor_phone") || sessionStorage.getItem("vendor_phone") || "";
 
       setSelectedPlanName(planName);
       const parsedPrice = parseInt(planPrice.replace(/\D/g, ""), 10) || 1199;
@@ -49,6 +51,7 @@ export default function PaymentPendingPage() {
       setBillingCycle(planBillingCycle);
       setDisplayedPrice(planDisplayedPrice);
       setAdminRedirectUrl(redirectUrl);
+      setVendorPhone(savedPhone);
     }
   }, []);
 
@@ -213,7 +216,7 @@ export default function PaymentPendingPage() {
           prefill: {
             name: authUser?.name || authUser?.business_name || "",
             email: authUser?.email || "",
-            contact: authUser?.phone_no || authUser?.phone || "",
+            contact: vendorPhone || authUser?.phone_no || authUser?.phone || "",
           },
           theme: {
             color: "#7c3aed",
@@ -249,6 +252,42 @@ export default function PaymentPendingPage() {
       Swal.fire("Error", "Payment system error. Please try again.", "error");
       setIsSubmitting(false);
     }
+  };
+
+  const showPlanDetails = () => {
+    let featuresHtml = "";
+    if (selectedPlanName.toLowerCase().includes("startup")) {
+      featuresHtml = `<ul style="text-align: left; margin-left: 20px; line-height: 1.6;">
+        <li>Up to 5 websites on the free plan</li>
+        <li>1 connected app at a time</li>
+        <li>Basic storefront management</li>
+        <li>Standard support</li>
+      </ul>`;
+    } else {
+      featuresHtml = `<ul style="text-align: left; margin-left: 20px; line-height: 1.6;">
+        <li>Create unlimited websites for your business</li>
+        <li>Connect multiple apps without free-plan limits</li>
+        <li>Advanced growth and storefront scaling tools</li>
+        <li>Priority support and faster setup help</li>
+      </ul>`;
+    }
+
+    Swal.fire({
+      title: `${selectedPlanName} Plan`,
+      html: `
+        <div style="font-size: 14px; color: #475569; text-align: left; padding: 10px;">
+          <div style="background: #f1f5f9; padding: 12px; border-radius: 8px; margin-bottom: 16px;">
+            <p style="margin-bottom: 4px; font-size: 16px;"><strong>Price:</strong> <span style="color: #e11d48;">${displayedPrice}</span> <span style="font-size: 12px;">(Inc. 18% GST)</span></p>
+            <p style="margin: 0;"><strong>Billing Cycle:</strong> ${billingCycle.charAt(0).toUpperCase() + billingCycle.slice(1)}</p>
+          </div>
+          <p style="margin-bottom: 8px; font-weight: bold; color: #0f172a;">Key Features:</p>
+          ${featuresHtml}
+        </div>
+      `,
+      icon: "info",
+      confirmButtonText: "Close",
+      confirmButtonColor: "#7c3aed"
+    });
   };
 
   return (
@@ -288,7 +327,7 @@ export default function PaymentPendingPage() {
             </h1>
             <p className="mx-auto mt-5 max-w-xl text-base leading-8 text-slate-600">
               Your registration has been successfully verified! Please complete
-              your payment for the <strong>{selectedPlanName}</strong> plan ({billingCycle}) to activate your
+              your payment for the <strong onClick={showPlanDetails} className="text-red-600 underline cursor-pointer hover:text-red-700 underline-offset-4 decoration-dashed decoration-red-600/50 transition-colors" title="View Plan Details">{selectedPlanName}</strong> plan ({billingCycle}) to activate your
               dashboard.
             </p>
 
@@ -345,6 +384,7 @@ export default function PaymentPendingPage() {
                 {isSubmitting ? "Processing..." : "Pay Now"}
                 <ArrowRight className="h-5 w-5" />
               </button>
+              <p className="text-sm font-medium text-slate-500">Cancel at any time. No hidden fees.</p>
             </div>
 
             <div className="mt-8 flex items-center justify-center gap-2 text-sm text-slate-500">

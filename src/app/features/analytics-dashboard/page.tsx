@@ -113,7 +113,7 @@ function HeroSection() {
               Turn complex data into actionable insights. Monitor live traffic, track revenue, and understand customer behavior with 100+ pre-built reports.
             </p>
             <div className="flex flex-wrap gap-4">
-              <Link href="https://sellerslogin.comvendor/registration">
+              <Link href="/vendor/registration">
               <button className="group flex items-center gap-3 px-8 py-4 rounded-full text-white font-semibold transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
                 style={{ background: "linear-gradient(135deg,#9333ea,#c084fc)" }}>
                 Start Analyzing
@@ -366,7 +366,7 @@ function CTASection() {
           Access world-class analytics and scale your business with confidence.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Link href="https://sellerslogin.comvendor/registration">
+          <Link href="/vendor/registration">
           <button className="group flex items-center justify-center gap-3 px-10 py-4 rounded-full bg-white text-purple-600 font-bold text-lg hover:bg-purple-50 transition-all hover:-translate-y-1 shadow-lg">
             View Your Dashboard
             <FiArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
