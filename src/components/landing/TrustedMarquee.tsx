@@ -11,6 +11,10 @@ const integrationBrands = [
   { name: "AWS", logo: "https://www.google.com/s2/favicons?domain=aws.amazon.com&sz=128" },
   { name: "Cashfree", logo: "https://www.google.com/s2/favicons?domain=cashfree.com&sz=128" },
   { name: "Google Cloud", logo: "https://www.google.com/s2/favicons?domain=cloud.google.com&sz=128" },
+  { name: "Stripe", logo: "https://www.google.com/s2/favicons?domain=stripe.com&sz=128" },
+  { name: "DHL", logo: "https://www.google.com/s2/favicons?domain=dhl.com&sz=128" },
+  { name: "Google Ads", logo: "https://www.google.com/s2/favicons?domain=ads.google.com&sz=128" },
+  { name: "Meta", logo: "https://www.google.com/s2/favicons?domain=meta.com&sz=128" },
 ];
 
 export function TrustedMarquee() {
@@ -19,9 +23,6 @@ export function TrustedMarquee() {
 
   return (
     <section id="trusted" className="py-6 md:py-8 border-y border-gray-200 bg-gray-50/50 overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-5 text-center reveal">
-        <h2 className="text-sm font-semibold text-purple-600 tracking-wide uppercase">Seamlessly integrate with top industry tools</h2>
-      </div>
       
       <div className="reveal relative w-full overflow-hidden">
         {/* Left & Right Fade Edges */}
