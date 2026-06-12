@@ -167,7 +167,7 @@ export default function PaymentPendingPage() {
           key: orderData.data.key_id,
           amount: orderData.data.amount,
           currency: orderData.data.currency,
-          name: "Ophmate Sellers",
+          name: "Sellers Login",
           description: `Subscription for ${selectedPlanName} Plan`,
           order_id: orderData.data.order_id,
           handler: async function (response: any) {
@@ -189,6 +189,16 @@ export default function PaymentPendingPage() {
               );
               const verifyData = await verifyRes.json();
               if (verifyData.success) {
+                if (typeof window !== "undefined") {
+                  localStorage.removeItem("vendor_phone");
+                  localStorage.removeItem("vendor_country_code");
+                  localStorage.removeItem("vendor_email");
+                  localStorage.removeItem("vendor_registration_step");
+                  sessionStorage.removeItem("vendor_phone");
+                  sessionStorage.removeItem("vendor_country_code");
+                  sessionStorage.removeItem("vendor_email");
+                  sessionStorage.removeItem("vendor_registration_step");
+                }
                 Swal.fire("Success", "Payment successful!", "success").then(
                   () => {
                     if (adminRedirectUrl) {
@@ -199,7 +209,7 @@ export default function PaymentPendingPage() {
                   },
                 );
               } else {
-                console.error("Verification failed:", verifyData);
+                console.error("Verification failed:", JSON.stringify(verifyData));
                 Swal.fire(
                   "Error",
                   verifyData.message || "Payment verification failed. Please contact support.",

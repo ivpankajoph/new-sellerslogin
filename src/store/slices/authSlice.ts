@@ -9,12 +9,19 @@ interface AuthState {
   data: any | null
   token: string | null
 }
+const getInitialToken = () => {
+  if (typeof window !== 'undefined') {
+    return sessionStorage.getItem('vendor_auth_token') || localStorage.getItem('vendor_auth_token');
+  }
+  return null;
+}
+
 const initialState: AuthState = {
   loading: false,
   success: false,
   error: null,
   data: null,
-  token: null,
+  token: getInitialToken(),
 }
 
 
@@ -113,6 +120,10 @@ const authSlice = createSlice({
       state.error = null
       state.data = null
       state.token = null
+      if (typeof window !== 'undefined') {
+          sessionStorage.removeItem('vendor_auth_token');
+          localStorage.removeItem('vendor_auth_token');
+      }
     },
   },
   extraReducers: (builder) => {
@@ -141,6 +152,10 @@ const authSlice = createSlice({
       state.loading = false
       state.success = true
       state.token = action.payload
+      if (typeof window !== 'undefined') {
+          sessionStorage.setItem('vendor_auth_token', action.payload);
+          localStorage.setItem('vendor_auth_token', action.payload);
+      }
     })
     builder.addCase(verifyOtp.rejected, (state, action) => {
       state.loading = false

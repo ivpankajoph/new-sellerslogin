@@ -4,11 +4,12 @@ import { ChangeEvent, useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { ChevronDown, Search, Check } from "lucide-react";
+import { ChevronDown, Search, Check, X } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
 import { Input } from "@/components/ui/input";
 import StepTransitionLoader from "@/components/vendor/StepTransitionLoader";
+import { PricingCardsSection } from "@/components/landing/PricingCardsSection";
 import type { AppDispatch, RootState } from "@/store";
 import { updateVendorBusiness } from "@/store/slices/vendorSlice";
 import { uploadFileToCloudinary } from "@/lib/cloudinary-upload";
@@ -742,11 +743,31 @@ export default function VendorBusinessDetailsPage() {
   const [selectedPlanNameState, setSelectedPlanNameState] = useState<string | null>(null);
   const [selectedPlanPriceState, setSelectedPlanPriceState] = useState<string | null>(null);
 
+  const [showPricingModal, setShowPricingModal] = useState(false);
+  const [currency, setCurrency] = useState<"INR" | "USD">("INR");
+  const [billingCycle, setBillingCycle] = useState<"monthly" | "quarterly">("monthly");
+
   useEffect(() => {
     if (typeof window !== "undefined") {
       setSelectedPlanNameState(localStorage.getItem("selectedPlanName"));
       setSelectedPlanPriceState(localStorage.getItem("selectedPlanPrice"));
     }
+  }, []);
+
+  useEffect(() => {
+    // Detect country from IP
+    fetch('https://ipapi.co/json/')
+      .then(res => res.json())
+      .then(data => {
+        if (data.country_code && data.country_code !== 'IN') {
+          setCurrency("USD");
+        } else {
+          setCurrency("INR");
+        }
+      })
+      .catch(err => {
+        console.error("Failed to fetch IP location, defaulting to INR", err);
+      });
   }, []);
   const [countryRequestNonce, setCountryRequestNonce] = useState(0);
   const [stateOptions, setStateOptions] = useState<string[]>([]);
@@ -785,6 +806,16 @@ export default function VendorBusinessDetailsPage() {
       }
     };
   }, []);
+
+  useEffect(() => {
+    if (redirectProgress >= 100 && showRedirectPopup && redirectTargetUrl) {
+      if (redirectTimerRef.current) {
+        clearInterval(redirectTimerRef.current);
+        redirectTimerRef.current = null;
+      }
+      router.push(redirectTargetUrl);
+    }
+  }, [redirectProgress, showRedirectPopup, redirectTargetUrl, router]);
 
   const urlFieldByFileField: Record<
     "avatar" | "gst_cert" | "pan_card" | "business_proof_document_1" | "business_proof_document_2",
@@ -1844,6 +1875,43 @@ export default function VendorBusinessDetailsPage() {
     }
   };
 
+  const handleSelectPlan = (plan: any) => {
+    const isUSD = currency === "USD";
+    const isQuarterly = billingCycle === "quarterly";
+    
+    const price = isUSD 
+      ? (isQuarterly ? plan.billingQuarterlyTotalUSD : plan.billingMonthlyTotalUSD)
+      : (isQuarterly ? plan.billingQuarterlyTotal : plan.billingMonthlyTotal);
+
+    const displayedPrice = isUSD
+      ? (isQuarterly ? plan.priceQuarterlyUSD : plan.priceMonthlyUSD)
+      : (isQuarterly ? plan.priceQuarterly : plan.priceMonthly);
+
+    localStorage.setItem("selectedPlanName", plan.name);
+    localStorage.setItem("selectedPlanPrice", String(price));
+    localStorage.setItem("selectedPlanCurrency", currency);
+    localStorage.setItem("selectedPlanBillingCycle", billingCycle);
+    localStorage.setItem("selectedPlanDisplayedPrice", displayedPrice || plan.priceMonthly);
+    
+    setSelectedPlanNameState(plan.name);
+    setSelectedPlanPriceState(String(price));
+    setShowPricingModal(false);
+
+    window.scrollTo({ top: 0, behavior: "auto" });
+    setRedirectMessage("Redirecting to payment...");
+    setRedirectTargetUrl("/vendor/registration/payment");
+    setRedirectProgress(0);
+    setShowRedirectPopup(true);
+
+    if (redirectTimerRef.current) {
+      clearInterval(redirectTimerRef.current);
+    }
+    
+    redirectTimerRef.current = setInterval(() => {
+      setRedirectProgress((previous) => Math.min(previous + 4, 100));
+    }, 120);
+  };
+
   const handleSubmit = async () => {
     const addressErrors = getStepErrors("address");
     const profileErrors = getStepErrors("profile");
@@ -1971,22 +2039,22 @@ export default function VendorBusinessDetailsPage() {
           vendor: vendorData,
         });
 
-        
-
         if (typeof window !== "undefined") {
           localStorage.removeItem(VENDOR_BUSINESS_DRAFT_KEY);
           localStorage.removeItem(VENDOR_REG_META_KEY);
-          localStorage.removeItem("vendor_phone");
-          localStorage.removeItem("vendor_country_code");
-          localStorage.removeItem("vendor_email");
-          localStorage.removeItem("vendor_registration_step");
-          sessionStorage.removeItem("vendor_phone");
-          sessionStorage.removeItem("vendor_country_code");
-          sessionStorage.removeItem("vendor_email");
-          sessionStorage.removeItem("vendor_registration_step");
         }
 
         if (typeof window !== "undefined") {
+          sessionStorage.setItem("vendor_post_payment_redirect", adminRedirectUrl);
+
+          // Check if a plan is selected
+          const currentPlanName = localStorage.getItem("selectedPlanName");
+          if (!currentPlanName || currentPlanName === "null" || currentPlanName === "undefined") {
+            setIsSubmitting(false); // Stop loader so they can interact with the modal
+            setShowPricingModal(true);
+            return;
+          }
+
           if (redirectTimerRef.current) {
             clearInterval(redirectTimerRef.current);
             redirectTimerRef.current = null;
@@ -1999,20 +2067,10 @@ export default function VendorBusinessDetailsPage() {
           setShowRedirectPopup(true);
 
           redirectTimerRef.current = setInterval(() => {
-            setRedirectProgress((previous) => {
-              const next = Math.min(previous + 4, 100);
-              if (next >= 100) {
-                if (redirectTimerRef.current) {
-                  clearInterval(redirectTimerRef.current);
-                  redirectTimerRef.current = null;
-                }
-                window.location.replace(adminRedirectUrl);
-              }
-              return next;
-            });
+            setRedirectProgress((previous) => Math.min(previous + 4, 100));
           }, 120);
         } else {
-          router.push("/sign-in");
+          router.push("/vendor/registration/payment");
         }
       } else {
         Swal.fire({
@@ -2056,7 +2114,7 @@ export default function VendorBusinessDetailsPage() {
 
             <div className="mt-5">
               <p className="text-xs font-semibold uppercase tracking-[0.14em] text-slate-500">
-                Redirecting to dashboard...
+                Redirecting to payment...
               </p>
               <div className="mt-2 h-2 w-full overflow-hidden rounded bg-slate-200">
                 <div
@@ -2080,7 +2138,7 @@ export default function VendorBusinessDetailsPage() {
               }}
               className="mt-6 inline-flex min-h-11 w-full items-center justify-center border border-violet-700 bg-violet-700 px-4 text-sm font-semibold text-white transition hover:bg-violet-800"
             >
-              Go to dashboard now
+              Go to payment now
             </button>
           </div>
         </div>
@@ -2098,22 +2156,8 @@ export default function VendorBusinessDetailsPage() {
             />
             <div className="min-w-0">
               <p className="text-2xl font-bold tracking-tight text-slate-950">SellersLogin</p>
-              <p className="text-xs font-semibold uppercase tracking-[0.24em] text-slate-400">
-                Build your Dreams
-              </p>
             </div>
           </Link>
-
-          <div className="flex items-center gap-3">
-            
-            <a
-              href={adminLoginUrl}
-              className="inline-flex min-h-12 items-center justify-center border border-violet-700 bg-violet-700 px-5 text-sm font-semibold text-white transition hover:bg-violet-800"
-              {...newTabProps}
-            >
-              Login
-            </a>
-          </div>
         </div>
       </header>
 
@@ -2652,72 +2696,32 @@ export default function VendorBusinessDetailsPage() {
         </section>
       </main>
 
-      <footer className="border-t border-slate-200 bg-slate-50">
-        <div className="mx-auto max-w-6xl px-6 py-12">
-          <div className="grid gap-10 border border-slate-200 bg-white p-8 lg:grid-cols-[1.2fr_0.8fr_0.8fr]">
-            <div>
-              <div className="flex items-center gap-3">
-                <Image
-                  src="/sellerslogin-logo.svg"
-                  alt="SellersLogin logo"
-                  width={48}
-                  height={48}
-                  className="h-12 w-12 shrink-0"
-                />
-                <div>
-                  <p className="text-2xl font-bold tracking-tight text-slate-950">SellersLogin</p>
-                  <p className="text-xs font-semibold uppercase tracking-[0.24em] text-slate-400">
-                    Build your Dreams
-                  </p>
-                </div>
-              </div>
-
-              <p className="mt-6 max-w-md text-sm leading-7 text-slate-600">
-                Business registration now stays inside one flat step flow that matches the
-                phone and email verification screens.
-              </p>
+      {showPricingModal && (
+        <div className="fixed inset-0 z-[200] flex items-center justify-center bg-slate-900/80 backdrop-blur-sm p-4 sm:p-6 overflow-y-auto overflow-x-hidden">
+          <div className="bg-white rounded-[2rem] w-full max-w-[1200px] shadow-2xl relative animate-in fade-in zoom-in-95 duration-300 my-auto">
+            <div className="sticky top-0 z-10 flex items-center justify-between bg-white/90 backdrop-blur-md px-6 py-4 border-b border-slate-200 rounded-t-[2rem]">
+              <h3 className="text-2xl font-black text-slate-900 tracking-tight">Select a Plan to Continue</h3>
+              <button 
+                onClick={() => setShowPricingModal(false)} 
+                className="text-slate-400 hover:text-slate-600 hover:bg-slate-100 p-2 rounded-full transition-colors"
+                title="Close"
+              >
+                <X className="h-6 w-6" />
+              </button>
             </div>
-
-            <div>
-              <p className="text-xs font-semibold uppercase tracking-[0.22em] text-violet-700">
-                Quick links
-              </p>
-              <div className="mt-5 space-y-3 text-sm font-semibold text-slate-700">
-                <Link href={vendorOverviewUrl} className="block hover:text-violet-700" {...newTabProps}>
-                  Vendor Access
-                </Link>
-                <Link href={mainSiteUrl} className="block hover:text-violet-700" {...newTabProps}>
-                  Main Site
-                </Link>
-                <a href={adminLoginUrl} className="block hover:text-violet-700" {...newTabProps}>
-                  Login to dashboard
-                </a>
-              </div>
+            
+            <div className="p-2 sm:p-4 max-h-[80vh] overflow-y-auto">
+              <PricingCardsSection 
+                showRegularPrice={false} 
+                onSelectPlan={handleSelectPlan} 
+                currency={currency}
+                billingCycle={billingCycle}
+                setBillingCycle={setBillingCycle}
+              />
             </div>
-
-            <div>
-              <p className="text-xs font-semibold uppercase tracking-[0.22em] text-violet-700">
-                Contact
-              </p>
-              <div className="mt-5 space-y-3 text-sm text-slate-600">
-                <a
-                  href={`mailto:${supportEmail}`}
-                  className="block font-semibold text-slate-950 hover:text-violet-700"
-                  {...newTabProps}
-                >
-                  {supportEmail}
-                </a>
-                {/* <p>Office No 834, Gaur City Mall, Greater Noida</p>
-                <p>Uttar Pradesh 201312, India</p> */}
-              </div>
-            </div>
-          </div>
-
-          <div className="border-x border-b border-slate-200 bg-white px-8 py-4 text-sm text-slate-500">
-            Copyright {new Date().getFullYear()} SellersLogin. All rights reserved.
           </div>
         </div>
-      </footer>
+      )}
     </div>
   );
 }

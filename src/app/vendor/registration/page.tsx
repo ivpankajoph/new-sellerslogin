@@ -653,28 +653,8 @@ export default function VendorRegistrationPage() {
             />
             <div className="min-w-0">
               <p className="text-2xl font-bold tracking-tight text-slate-950">SellersLogin</p>
-              <p className="text-xs font-semibold uppercase tracking-[0.24em] text-slate-400">
-                Build for your all e-commerce needs
-              </p>
             </div>
           </Link>
-
-          <div className="flex items-center gap-3">
-            <Link
-              href={vendorOverviewUrl}
-              className="inline-flex min-h-12 items-center justify-center border border-slate-300 px-5 text-sm font-semibold text-slate-700 transition hover:bg-slate-950 hover:text-white"
-              {...newTabProps}
-            >
-              All Features
-            </Link>
-            <a
-              href={adminLoginUrl}
-              className="inline-flex min-h-12 items-center justify-center border border-violet-700 bg-violet-700 px-5 text-sm font-semibold text-white transition hover:bg-violet-800"
-              {...newTabProps}
-            >
-              Login
-            </a>
-          </div>
         </div>
       </header>
 
