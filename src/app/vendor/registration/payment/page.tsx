@@ -2,11 +2,14 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
 import Image from "next/image";
 import { CreditCard, ArrowRight } from "lucide-react";
-import type { RootState } from "@/store";
+import type { RootState, AppDispatch } from "@/store";
+import { updateVendorBusiness } from "@/store/slices/vendorSlice";
+import { INDIAN_STATES } from "@/lib/constants";
+import { buildAdminAutoLoginUrl } from "@/lib/utils";
 
 export default function PaymentPendingPage() {
   const router = useRouter();
@@ -16,6 +19,8 @@ export default function PaymentPendingPage() {
   const authUser = useSelector(
     (state: RootState) => (state as any).auth?.data ?? null,
   );
+
+  const dispatch = useDispatch<AppDispatch>();
 
   const [selectedPlanName, setSelectedPlanName] = useState("");
   const [numericPrice, setNumericPrice] = useState(0);
@@ -31,8 +36,40 @@ export default function PaymentPendingPage() {
   const [referralError, setReferralError] = useState("");
   const [vendorPhone, setVendorPhone] = useState("");
 
+  const [addressLine1, setAddressLine1] = useState("");
+  const [addressLine2, setAddressLine2] = useState("");
+  const [city, setCity] = useState("");
+  const [state, setState] = useState("");
+  const [country, setCountry] = useState("India");
+  const [pincode, setPincode] = useState("");
+
+  const isAddressFilled = addressLine1.trim() !== "" && city.trim() !== "" && state.trim() !== "" && pincode.trim() !== "";
+  const finalMultiplier = isAddressFilled ? 1.18 : 1;
+  const finalPrice = Math.round(numericPrice * finalMultiplier);
+  const finalOriginalPrice = Math.round(originalPrice * finalMultiplier);
+
   useEffect(() => {
     if (typeof window !== "undefined") {
+      const urlParams = new URLSearchParams(window.location.search);
+      const tokenParam = urlParams.get("token");
+      const planNameParam = urlParams.get("planName");
+      const redirectBackParam = urlParams.get("redirectBack");
+
+      if (tokenParam && planNameParam) {
+        sessionStorage.setItem("vendor_auth_token", tokenParam);
+        localStorage.setItem("selectedPlanName", planNameParam);
+        localStorage.setItem("selectedPlanPrice", urlParams.get("planPrice") || "1199");
+        localStorage.setItem("selectedPlanCurrency", urlParams.get("currency") || "INR");
+        localStorage.setItem("selectedPlanBillingCycle", urlParams.get("billingCycle") || "monthly");
+        
+        if (redirectBackParam) {
+          sessionStorage.setItem("vendor_post_payment_redirect", redirectBackParam);
+        }
+
+        window.location.href = window.location.pathname;
+        return;
+      }
+
       const planName = localStorage.getItem("selectedPlanName") || "Startup";
       const planPrice = localStorage.getItem("selectedPlanPrice") || "1199";
       const planCurrency =
@@ -111,6 +148,30 @@ export default function PaymentPendingPage() {
     setReferralError("");
   };
 
+  const handleBypass = async () => {
+    setIsSubmitting(true);
+    if (addressLine1 || city || state || pincode) {
+      const formData = new FormData();
+      formData.append("address_line_1", addressLine1.trim() || "NA");
+      formData.append("address_line_2", addressLine2.trim());
+      formData.append("city", city.trim() || "NA");
+      formData.append("state", state.trim() || "NA");
+      formData.append("country", country.trim() || "India");
+      formData.append("pincode", pincode.trim() || "000000");
+      try {
+        await dispatch(updateVendorBusiness({ formData })).unwrap();
+      } catch (err) {
+        console.error("Bypass address save error", err);
+      }
+    }
+    
+    if (adminRedirectUrl) {
+      window.location.replace(adminRedirectUrl);
+    } else {
+      window.location.replace(buildAdminAutoLoginUrl({ token, vendor: authUser }));
+    }
+  };
+
   const handlePayNow = async () => {
     if (!token) {
       Swal.fire(
@@ -121,9 +182,36 @@ export default function PaymentPendingPage() {
       return;
     }
 
+    if (!isAddressFilled) {
+      const missingFields = [];
+      if (addressLine1.trim() === "") missingFields.push("Address Line 1");
+      if (city.trim() === "") missingFields.push("City");
+      if (state.trim() === "") missingFields.push("State");
+      if (pincode.trim() === "") missingFields.push("Pincode");
+      
+      Swal.fire("Incomplete Address", `Please fill the required fields: ${missingFields.join(", ")}`, "warning");
+      return;
+    }
+
     setIsSubmitting(true);
 
     try {
+      const formData = new FormData();
+      formData.append("address_line_1", addressLine1.trim());
+      formData.append("address_line_2", addressLine2.trim());
+      formData.append("city", city.trim());
+      formData.append("state", state.trim());
+      formData.append("country", country.trim());
+      formData.append("pincode", pincode.trim());
+      
+      try {
+        await dispatch(updateVendorBusiness({ formData })).unwrap();
+      } catch (err: any) {
+        Swal.fire("Error", "Failed to save address details.", "error");
+        setIsSubmitting(false);
+        return;
+      }
+
       const orderRes = await fetch(
         `${process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000/api/v1"}/vendor/billing/create-order`,
         {
@@ -134,7 +222,7 @@ export default function PaymentPendingPage() {
           },
           body: JSON.stringify({
             plan: selectedPlanName,
-            amount: Math.round(numericPrice * 1.18),
+            amount: finalPrice,
             currency: currency,
             billing_cycle: billingCycle,
             ...(appliedReferral ? { referral_code: appliedReferral } : {}),
@@ -204,7 +292,7 @@ export default function PaymentPendingPage() {
                     if (adminRedirectUrl) {
                       window.location.replace(adminRedirectUrl);
                     } else {
-                      router.push("/sign-in");
+                      window.location.replace(buildAdminAutoLoginUrl({ token, vendor: authUser }));
                     }
                   },
                 );
@@ -315,20 +403,20 @@ export default function PaymentPendingPage() {
                 {appliedReferral ? (
                   <>
                     <span className="text-3xl font-bold text-slate-400 line-through">
-                      {currency} {Math.round(originalPrice * 1.18)}
+                      {currency} {finalOriginalPrice}
                     </span>
                     <span className="text-5xl font-extrabold text-red-600">
-                      {currency} {Math.round(numericPrice * 1.18)}
+                      {currency} {finalPrice}
                     </span>
                   </>
                 ) : (
                   <span className="text-5xl font-extrabold text-red-600">
-                    {currency} {Math.round(numericPrice * 1.18)}
+                    {currency} {finalPrice}
                   </span>
                 )}
               </div>
               <p className="text-sm font-semibold text-slate-500 bg-slate-100 px-3 py-1 rounded-full">
-                {displayedPrice} {billingCycle === "quarterly" ? "× 3 Months" : ""} (Inc. 18% GST)
+                {displayedPrice} {billingCycle === "quarterly" ? "× 3 Months" : ""} {isAddressFilled ? "(Inc. 18% GST)" : "(Excl. GST)"}
               </p>
             </div>
 
@@ -341,6 +429,43 @@ export default function PaymentPendingPage() {
               dashboard.
             </p>
 
+            <div className="mt-8 text-left border border-slate-200 bg-slate-50/50 p-6 rounded-xl shadow-sm mb-8">
+              <p className="text-sm font-bold text-slate-800 mb-5 flex items-center gap-2">
+                <span className="flex h-6 w-6 items-center justify-center rounded-full bg-violet-100 text-violet-700 text-xs">i</span>
+                For tax calculation, please enter your address details
+              </p>
+              <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+                <div className="sm:col-span-2">
+                  <label className="mb-1.5 block text-xs font-bold tracking-widest text-slate-500">ADDRESS LINE 1 <span className="text-red-500">*</span></label>
+                  <input type="text" value={addressLine1} onChange={e => setAddressLine1(e.target.value)} className="w-full rounded-md border border-slate-300 px-4 py-3 text-sm focus:border-violet-700 focus:outline-none focus:ring-1 focus:ring-violet-700 transition-all shadow-sm" placeholder="Flat, House no., Building" />
+                </div>
+                <div className="sm:col-span-2">
+                  <label className="mb-1.5 block text-xs font-bold tracking-widest text-slate-500">ADDRESS LINE 2</label>
+                  <input type="text" value={addressLine2} onChange={e => setAddressLine2(e.target.value)} className="w-full rounded-md border border-slate-300 px-4 py-3 text-sm focus:border-violet-700 focus:outline-none focus:ring-1 focus:ring-violet-700 transition-all shadow-sm" placeholder="Area, Street, Sector, Village" />
+                </div>
+                <div>
+                  <label className="mb-1.5 block text-xs font-bold tracking-widest text-slate-500">CITY <span className="text-red-500">*</span></label>
+                  <input type="text" value={city} onChange={e => setCity(e.target.value)} className="w-full rounded-md border border-slate-300 px-4 py-3 text-sm focus:border-violet-700 focus:outline-none focus:ring-1 focus:ring-violet-700 transition-all shadow-sm" placeholder="Town/City" />
+                </div>
+                <div>
+                  <label className="mb-1.5 block text-xs font-bold tracking-widest text-slate-500">STATE <span className="text-red-500">*</span></label>
+                  <select value={state} onChange={e => setState(e.target.value)} className="w-full rounded-md border border-slate-300 px-4 py-3 text-sm focus:border-violet-700 focus:outline-none focus:ring-1 focus:ring-violet-700 transition-all shadow-sm bg-white">
+                    <option value="" disabled>Select State</option>
+                    {[...INDIAN_STATES].sort().map((s) => (
+                      <option key={s} value={s}>{s}</option>
+                    ))}
+                  </select>
+                </div>
+                <div>
+                  <label className="mb-1.5 block text-xs font-bold tracking-widest text-slate-500">COUNTRY <span className="text-red-500">*</span></label>
+                  <input type="text" value={country} disabled className="w-full rounded-md border border-slate-300 px-4 py-3 text-sm bg-slate-50 text-slate-500 shadow-sm" placeholder="Country" />
+                </div>
+                <div>
+                  <label className="mb-1.5 block text-xs font-bold tracking-widest text-slate-500">PINCODE <span className="text-red-500">*</span></label>
+                  <input type="text" value={pincode} onChange={e => setPincode(e.target.value)} className="w-full rounded-md border border-slate-300 px-4 py-3 text-sm focus:border-violet-700 focus:outline-none focus:ring-1 focus:ring-violet-700 transition-all shadow-sm" placeholder="6-digit Pincode" />
+                </div>
+              </div>
+            </div>
 
             {!appliedReferral && (
               <div className="mx-auto max-w-md">
@@ -405,6 +530,12 @@ export default function PaymentPendingPage() {
                 height={20}
               />
               <span>Secured by Razorpay</span>
+            </div>
+
+            <div className="mt-10 pt-6 border-t border-slate-200/60">
+              <button onClick={handleBypass} disabled={isSubmitting} className="text-sm font-semibold text-slate-400 hover:text-slate-600 underline underline-offset-4 transition-colors">
+                Go to dashboard (Continue with Free Plan)
+              </button>
             </div>
           </div>
         </div>

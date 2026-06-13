@@ -96,7 +96,6 @@ const newTabProps = {
 };
 
 const STEP_ORDER: BusinessStep[] = [
-  "address",
   "profile",
   // "other",
 ];
@@ -735,7 +734,7 @@ export default function VendorBusinessDetailsPage() {
   const token = useSelector((state: RootState) => (state as any).auth?.token ?? "");
   const avatarInputRef = useRef<HTMLInputElement | null>(null);
 
-  const [currentStep, setCurrentStep] = useState<BusinessStep>("address");
+  const [currentStep, setCurrentStep] = useState<BusinessStep>("profile");
   const [countryOptions, setCountryOptions] = useState<CountryOption[]>([]);
   const [countriesLoading, setCountriesLoading] = useState(true);
   const [countriesError, setCountriesError] = useState<string | null>(null);
@@ -813,7 +812,8 @@ export default function VendorBusinessDetailsPage() {
         clearInterval(redirectTimerRef.current);
         redirectTimerRef.current = null;
       }
-      router.push(redirectTargetUrl);
+      window.open(redirectTargetUrl, "_blank");
+      setShowRedirectPopup(false);
     }
   }, [redirectProgress, showRedirectPopup, redirectTargetUrl, router]);
 
@@ -930,8 +930,8 @@ export default function VendorBusinessDetailsPage() {
     setForm((previous) => ({
       ...previous,
       ...draft,
-      email: draft?.email ?? storedEmail,
-      phone_no: draft?.phone_no ?? storedPhone,
+      email: draft?.email || storedEmail,
+      phone_no: draft?.phone_no || storedPhone,
       alternate_contact_country_code:
         draft?.alternate_contact_country_code || storedCountryCode || FALLBACK_COUNTRY.dialCode,
       avatar: null,
@@ -1233,13 +1233,8 @@ export default function VendorBusinessDetailsPage() {
 
   const stepItems = [
     {
-      id: "address" as BusinessStep,
-      label: "Step 1",
-      title: "Business address",
-    },
-    {
       id: "profile" as BusinessStep,
-      label: "Step 2",
+      label: "Step 1",
       title: "Information and profile",
     },
     // {
@@ -1913,24 +1908,21 @@ export default function VendorBusinessDetailsPage() {
   };
 
   const handleSubmit = async () => {
-    const addressErrors = getStepErrors("address");
     const profileErrors = getStepErrors("profile");
     const mergedErrors = {
-      ...addressErrors,
       ...profileErrors,
       // ...otherErrors,
     };
 
-    setErrors(mergedErrors);
+    // setErrors(mergedErrors);
 
-    if (Object.keys(mergedErrors).length) {
-      if (Object.keys(addressErrors).length) {
-        void moveToStep("address", "Opening address step...");
-      } else if (Object.keys(profileErrors).length) {
-        void moveToStep("profile", "Opening profile step...");
-      }
-      return;
-    }
+    // Validation bypassed as per user request
+    // if (Object.keys(mergedErrors).length) {
+    //   if (Object.keys(profileErrors).length) {
+    //     void moveToStep("profile", "Opening profile step...");
+    //   }
+    //   return;
+    // }
 
     if (!token) {
       Swal.fire({
@@ -1945,21 +1937,21 @@ export default function VendorBusinessDetailsPage() {
 
     try {
       const formData = new FormData();
-      formData.append("registrar_name", form.registrar_name.trim());
-      formData.append("designation", form.designation.trim());
-      formData.append("email", form.email.trim());
-      formData.append("phone_no", form.phone_no.trim());
-      formData.append("name", form.name.trim());
-      formData.append("business_type", form.business_type);
-      formData.append("country", form.country);
-      formData.append("address_line_1", form.address_line_1.trim());
+      formData.append("registrar_name", form.registrar_name.trim() || "NA");
+      formData.append("designation", form.designation.trim() || "NA");
+      formData.append("email", form.email.trim() || "NA");
+      formData.append("phone_no", form.phone_no.trim() || "NA");
+      formData.append("name", form.name.trim() || "NA");
+      formData.append("business_type", form.business_type || "NA");
+      formData.append("country", form.country || "India");
+      formData.append("address_line_1", form.address_line_1.trim() || "NA");
       if (form.address_line_2.trim()) {
         formData.append("address_line_2", form.address_line_2.trim());
       }
-      formData.append("street", form.street.trim());
-      formData.append("city", form.city.trim());
-      formData.append("state", form.state.trim());
-      formData.append("pincode", form.pincode.trim());
+      formData.append("street", form.street.trim() || "NA");
+      formData.append("city", form.city.trim() || "NA");
+      formData.append("state", form.state.trim() || "NA");
+      formData.append("pincode", form.pincode.trim() || "000000");
       formData.append("established_year", form.established_year);
       formData.append("business_nature", JSON.stringify(form.business_nature));
       formData.append("annual_turnover", form.annual_turnover);
@@ -2047,28 +2039,10 @@ export default function VendorBusinessDetailsPage() {
         if (typeof window !== "undefined") {
           sessionStorage.setItem("vendor_post_payment_redirect", adminRedirectUrl);
 
-          // Check if a plan is selected
-          const currentPlanName = localStorage.getItem("selectedPlanName");
-          if (!currentPlanName || currentPlanName === "null" || currentPlanName === "undefined") {
-            setIsSubmitting(false); // Stop loader so they can interact with the modal
-            setShowPricingModal(true);
-            return;
-          }
-
-          if (redirectTimerRef.current) {
-            clearInterval(redirectTimerRef.current);
-            redirectTimerRef.current = null;
-          }
-
-          window.scrollTo({ top: 0, behavior: "auto" });
-          setRedirectMessage(successMessage);
-          setRedirectTargetUrl("/vendor/registration/payment");
-          setRedirectProgress(0);
-          setShowRedirectPopup(true);
-
-          redirectTimerRef.current = setInterval(() => {
-            setRedirectProgress((previous) => Math.min(previous + 4, 100));
-          }, 120);
+          // Always show pricing modal
+          setIsSubmitting(false);
+          setShowPricingModal(true);
+          return;
         } else {
           router.push("/vendor/registration/payment");
         }
@@ -2162,7 +2136,14 @@ export default function VendorBusinessDetailsPage() {
       </header>
 
       <main className="mx-auto grid max-w-6xl gap-12 px-6 py-16 lg:grid-cols-[1.1fr_0.9fr] lg:items-start">
-        <section className="border border-slate-200 bg-white p-8 sm:p-10">
+        <section className="relative border border-slate-200 bg-white p-8 sm:p-10">
+          <button
+            type="button"
+            onClick={() => setShowPricingModal(true)}
+            className="absolute top-8 right-8 sm:top-10 sm:right-10 inline-flex items-center justify-center border border-slate-300 bg-white px-5 py-2 text-sm font-semibold text-slate-700 shadow-sm transition hover:border-slate-400 hover:bg-slate-50 hover:text-slate-950 rounded-md"
+          >
+            Skip
+          </button>
           <p className="text-sm font-semibold uppercase tracking-[0.22em] text-violet-700">
             {currentStepLabel}
           </p>
@@ -2550,18 +2531,18 @@ export default function VendorBusinessDetailsPage() {
               ) : null}
 
               {currentStep === "profile" ? (
-                <button
-                  type="button"
-                  onClick={handleSubmit}
-                  disabled={loading || isSubmitting || isAnyAssetUploading}
-                  className="inline-flex min-h-12 items-center justify-center border border-violet-700 bg-violet-700 px-6 text-sm font-semibold text-white transition hover:bg-violet-800 disabled:cursor-not-allowed disabled:border-slate-200 disabled:bg-slate-100 disabled:text-slate-400"
-                >
-                  {loading || isSubmitting
-                    ? "Submitting..."
-                    : isAnyAssetUploading
-                      ? "Uploading files..."
-                      : "Complete registration"}
-                </button>
+                  <button
+                    type="button"
+                    onClick={handleSubmit}
+                    disabled={loading || isSubmitting || isAnyAssetUploading}
+                    className="inline-flex min-h-12 items-center justify-center border border-violet-700 bg-violet-700 px-6 text-sm font-semibold text-white transition hover:bg-violet-800 disabled:cursor-not-allowed disabled:border-slate-200 disabled:bg-slate-100 disabled:text-slate-400"
+                  >
+                    {loading || isSubmitting
+                      ? "Submitting..."
+                      : isAnyAssetUploading
+                        ? "Uploading files..."
+                        : "Complete registration"}
+                  </button>
               ) : (
                 <button
                   type="button"
@@ -2711,6 +2692,18 @@ export default function VendorBusinessDetailsPage() {
             </div>
             
             <div className="p-2 sm:p-4 max-h-[80vh] overflow-y-auto">
+              <div className="mb-4 text-center">
+                <p className="text-sm font-medium text-slate-600">
+                  Don't want to pay now?{" "}
+                  <button onClick={() => {
+                    const url = sessionStorage.getItem("vendor_post_payment_redirect");
+                    if (url) window.location.replace(url);
+                    else router.push("/sign-in");
+                  }} className="text-violet-700 hover:text-violet-800 underline underline-offset-4 font-bold transition-colors">
+                    Go to dashboard
+                  </button>
+                </p>
+              </div>
               <PricingCardsSection 
                 showRegularPrice={false} 
                 onSelectPlan={handleSelectPlan} 
@@ -2718,6 +2711,11 @@ export default function VendorBusinessDetailsPage() {
                 billingCycle={billingCycle}
                 setBillingCycle={setBillingCycle}
               />
+              <div className="mt-4 text-center pb-4">
+                <p className="text-sm text-slate-600 font-medium">
+                  For more pricing details go to <a href="https://sellerslogin.com/pricing" target="_blank" rel="noopener noreferrer" className="text-violet-700 hover:text-violet-800 underline underline-offset-4">sellerslogin.com/pricing</a>
+                </p>
+              </div>
             </div>
           </div>
         </div>
