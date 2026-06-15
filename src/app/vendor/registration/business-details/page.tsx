@@ -10,6 +10,12 @@ import Swal from "sweetalert2";
 import { Input } from "@/components/ui/input";
 import StepTransitionLoader from "@/components/vendor/StepTransitionLoader";
 import { PricingCardsSection } from "@/components/landing/PricingCardsSection";
+import {
+  defaultBillingCycle,
+  getPlanBillingTotal,
+  getPlanDisplayPrice,
+  type PricingPlan,
+} from "@/lib/pricingData";
 import type { AppDispatch, RootState } from "@/store";
 import { updateVendorBusiness } from "@/store/slices/vendorSlice";
 import { uploadFileToCloudinary } from "@/lib/cloudinary-upload";
@@ -744,7 +750,7 @@ export default function VendorBusinessDetailsPage() {
 
   const [showPricingModal, setShowPricingModal] = useState(false);
   const [currency, setCurrency] = useState<"INR" | "USD">("INR");
-  const [billingCycle, setBillingCycle] = useState<"monthly" | "quarterly">("monthly");
+  const [billingCycle] = useState(defaultBillingCycle);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -1870,17 +1876,9 @@ export default function VendorBusinessDetailsPage() {
     }
   };
 
-  const handleSelectPlan = (plan: any) => {
-    const isUSD = currency === "USD";
-    const isQuarterly = billingCycle === "quarterly";
-    
-    const price = isUSD 
-      ? (isQuarterly ? plan.billingQuarterlyTotalUSD : plan.billingMonthlyTotalUSD)
-      : (isQuarterly ? plan.billingQuarterlyTotal : plan.billingMonthlyTotal);
-
-    const displayedPrice = isUSD
-      ? (isQuarterly ? plan.priceQuarterlyUSD : plan.priceMonthlyUSD)
-      : (isQuarterly ? plan.priceQuarterly : plan.priceMonthly);
+  const handleSelectPlan = (plan: PricingPlan) => {
+    const price = getPlanBillingTotal(plan, billingCycle, currency);
+    const displayedPrice = getPlanDisplayPrice(plan, billingCycle, currency);
 
     localStorage.setItem("selectedPlanName", plan.name);
     localStorage.setItem("selectedPlanPrice", String(price));
@@ -2708,12 +2706,10 @@ export default function VendorBusinessDetailsPage() {
                 showRegularPrice={false} 
                 onSelectPlan={handleSelectPlan} 
                 currency={currency}
-                billingCycle={billingCycle}
-                setBillingCycle={setBillingCycle}
               />
               <div className="mt-4 text-center pb-4">
                 <p className="text-sm text-slate-600 font-medium">
-                  For more pricing details go to <a href="https://sellerslogin.com/pricing" target="_blank" rel="noopener noreferrer" className="text-violet-700 hover:text-violet-800 underline underline-offset-4">sellerslogin.com/pricing</a>
+                  For more Feature details, Go To <a href="https://sellerslogin.com/complete-features" target="_blank" rel="noopener noreferrer" className="text-violet-700 hover:text-violet-800 underline underline-offset-4">sellerslogin.com/complete-features</a>
                 </p>
               </div>
             </div>

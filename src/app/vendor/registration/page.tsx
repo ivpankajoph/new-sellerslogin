@@ -4,7 +4,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { ChevronDown, Search, Check } from "lucide-react";
+import { ChevronDown, Search, Check, X } from "lucide-react";
 import { useDispatch } from "react-redux";
 import Swal from "sweetalert2";
 import { Input } from "@/components/ui/input";
@@ -111,6 +111,18 @@ export default function VendorRegistrationPage() {
       setSelectedPlanPrice(localStorage.getItem("selectedPlanPrice"));
     }
   }, []);
+
+  const handleRemovePlan = () => {
+    if (typeof window !== "undefined") {
+      localStorage.removeItem("selectedPlanName");
+      localStorage.removeItem("selectedPlanPrice");
+      localStorage.removeItem("selectedPlanCurrency");
+      localStorage.removeItem("selectedPlanBillingCycle");
+      localStorage.removeItem("selectedPlanDisplayedPrice");
+      setSelectedPlanName(null);
+      setSelectedPlanPrice(null);
+    }
+  };
 
   useEffect(() => {
     let isMounted = true;
@@ -670,9 +682,18 @@ export default function VendorRegistrationPage() {
                 <p className="text-base font-bold text-slate-900 leading-none">{selectedPlanName} <span className="text-slate-500 font-medium text-sm ml-1">at {selectedPlanPrice} + GST</span></p>
               </div>
             </div>
-            <Link href="/pricing" className="text-xs font-bold text-slate-700 hover:text-slate-900 border border-slate-300 px-4 py-1.5 rounded-none shadow-sm hover:shadow transition-all bg-white">
-              Change Plan
-            </Link>
+            <div className="flex items-center gap-2">
+              <Link href="/pricing" className="text-xs font-bold text-slate-700 hover:text-slate-900 border border-slate-300 px-4 py-1.5 rounded-none shadow-sm hover:shadow transition-all bg-white">
+                Change Plan
+              </Link>
+              <button 
+                onClick={handleRemovePlan}
+                className="text-slate-400 hover:text-slate-700 border border-transparent hover:border-slate-200 hover:bg-slate-50 p-1.5 rounded transition-all"
+                title="Remove plan"
+              >
+                <X className="h-4 w-4" />
+              </button>
+            </div>
           </div>
         )}
         

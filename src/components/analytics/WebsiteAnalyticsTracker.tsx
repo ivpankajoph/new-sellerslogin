@@ -38,7 +38,9 @@ const getApiBaseUrl = () =>
     process.env.NEXT_PUBLIC_API_URL ||
     process.env.NEXT_PUBLIC_PUBLIC_API_URL ||
     "http://localhost:8081/api"
-  ).replace(/\/+$/, "");
+  )
+    .replace(/\/+$/, "")
+    .replace(/\/v1$/, "");
 
 const readUtmParams = (searchParams: { get: (key: string) => string | null }) => ({
   utmSource: searchParams.get("utm_source") || "",

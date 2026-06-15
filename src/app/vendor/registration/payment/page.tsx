@@ -10,6 +10,7 @@ import type { RootState, AppDispatch } from "@/store";
 import { updateVendorBusiness } from "@/store/slices/vendorSlice";
 import { INDIAN_STATES } from "@/lib/constants";
 import { buildAdminAutoLoginUrl } from "@/lib/utils";
+import { billingCycleLabels, defaultBillingCycle } from "@/lib/pricingData";
 
 export default function PaymentPendingPage() {
   const router = useRouter();
@@ -25,7 +26,7 @@ export default function PaymentPendingPage() {
   const [selectedPlanName, setSelectedPlanName] = useState("");
   const [numericPrice, setNumericPrice] = useState(0);
   const [currency, setCurrency] = useState("INR");
-  const [billingCycle, setBillingCycle] = useState("monthly");
+  const [billingCycle, setBillingCycle] = useState(defaultBillingCycle);
   const [displayedPrice, setDisplayedPrice] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [adminRedirectUrl, setAdminRedirectUrl] = useState("");
@@ -44,6 +45,7 @@ export default function PaymentPendingPage() {
   const [pincode, setPincode] = useState("");
 
   const isAddressFilled = addressLine1.trim() !== "" && city.trim() !== "" && state.trim() !== "" && pincode.trim() !== "";
+  const billingCycleLabel = billingCycleLabels[billingCycle] || billingCycle;
   const finalMultiplier = isAddressFilled ? 1.18 : 1;
   const finalPrice = Math.round(numericPrice * finalMultiplier);
   const finalOriginalPrice = Math.round(originalPrice * finalMultiplier);
@@ -58,9 +60,10 @@ export default function PaymentPendingPage() {
       if (tokenParam && planNameParam) {
         sessionStorage.setItem("vendor_auth_token", tokenParam);
         localStorage.setItem("selectedPlanName", planNameParam);
-        localStorage.setItem("selectedPlanPrice", urlParams.get("planPrice") || "1199");
+        localStorage.setItem("selectedPlanPrice", urlParams.get("planPrice") || "14364");
         localStorage.setItem("selectedPlanCurrency", urlParams.get("currency") || "INR");
-        localStorage.setItem("selectedPlanBillingCycle", urlParams.get("billingCycle") || "monthly");
+        localStorage.setItem("selectedPlanBillingCycle", urlParams.get("billingCycle") || defaultBillingCycle);
+        localStorage.setItem("selectedPlanDisplayedPrice", urlParams.get("planDisplayedPrice") || "INR 399/mo");
         
         if (redirectBackParam) {
           sessionStorage.setItem("vendor_post_payment_redirect", redirectBackParam);
@@ -71,17 +74,17 @@ export default function PaymentPendingPage() {
       }
 
       const planName = localStorage.getItem("selectedPlanName") || "Startup";
-      const planPrice = localStorage.getItem("selectedPlanPrice") || "1199";
+      const planPrice = localStorage.getItem("selectedPlanPrice") || "14364";
       const planCurrency =
         localStorage.getItem("selectedPlanCurrency") || "INR";
-      const planBillingCycle = localStorage.getItem("selectedPlanBillingCycle") || "monthly";
-      const planDisplayedPrice = localStorage.getItem("selectedPlanDisplayedPrice") || "INR 1,199/mo";
+      const planBillingCycle = localStorage.getItem("selectedPlanBillingCycle") || defaultBillingCycle;
+      const planDisplayedPrice = localStorage.getItem("selectedPlanDisplayedPrice") || "INR 399/mo";
       const redirectUrl =
         sessionStorage.getItem("vendor_post_payment_redirect") || "";
       const savedPhone = localStorage.getItem("vendor_phone") || sessionStorage.getItem("vendor_phone") || "";
 
       setSelectedPlanName(planName);
-      const parsedPrice = parseInt(planPrice.replace(/\D/g, ""), 10) || 1199;
+      const parsedPrice = parseInt(planPrice.replace(/\D/g, ""), 10) || 14364;
       setNumericPrice(parsedPrice);
       setOriginalPrice(parsedPrice);
       setCurrency(planCurrency);
@@ -225,6 +228,7 @@ export default function PaymentPendingPage() {
             amount: finalPrice,
             currency: currency,
             billing_cycle: billingCycle,
+            displayed_price: displayedPrice,
             ...(appliedReferral ? { referral_code: appliedReferral } : {}),
           }),
         },
@@ -376,7 +380,7 @@ export default function PaymentPendingPage() {
         <div style="font-size: 14px; color: #475569; text-align: left; padding: 10px;">
           <div style="background: #f1f5f9; padding: 12px; border-radius: 8px; margin-bottom: 16px;">
             <p style="margin-bottom: 4px; font-size: 16px;"><strong>Price:</strong> <span style="color: #e11d48;">${displayedPrice}</span> <span style="font-size: 12px;">(Inc. 18% GST)</span></p>
-            <p style="margin: 0;"><strong>Billing Cycle:</strong> ${billingCycle.charAt(0).toUpperCase() + billingCycle.slice(1)}</p>
+            <p style="margin: 0;"><strong>Billing Cycle:</strong> ${billingCycleLabel}</p>
           </div>
           <p style="margin-bottom: 8px; font-weight: bold; color: #0f172a;">Key Features:</p>
           ${featuresHtml}
@@ -416,7 +420,7 @@ export default function PaymentPendingPage() {
                 )}
               </div>
               <p className="text-sm font-semibold text-slate-500 bg-slate-100 px-3 py-1 rounded-full">
-                {displayedPrice} {billingCycle === "quarterly" ? "× 3 Months" : ""} {isAddressFilled ? "(Inc. 18% GST)" : "(Excl. GST)"}
+                {displayedPrice} ({billingCycleLabel}) {isAddressFilled ? "(Inc. 18% GST)" : "(Excl. GST)"}
               </p>
             </div>
 
@@ -425,7 +429,7 @@ export default function PaymentPendingPage() {
             </h1>
             <p className="mx-auto mt-5 max-w-xl text-base leading-8 text-slate-600">
               Your registration has been successfully verified! Please complete
-              your payment for the <strong onClick={showPlanDetails} className="text-red-600 underline cursor-pointer hover:text-red-700 underline-offset-4 decoration-dashed decoration-red-600/50 transition-colors" title="View Plan Details">{selectedPlanName}</strong> plan ({billingCycle}) to activate your
+              your payment for the <strong onClick={showPlanDetails} className="text-red-600 underline cursor-pointer hover:text-red-700 underline-offset-4 decoration-dashed decoration-red-600/50 transition-colors" title="View Plan Details">{selectedPlanName}</strong> plan ({billingCycleLabel}) to activate your
               dashboard.
             </p>
 
@@ -543,3 +547,4 @@ export default function PaymentPendingPage() {
     </div>
   );
 }
+

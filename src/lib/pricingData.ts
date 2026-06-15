@@ -11,27 +11,123 @@ import {
   Truck,
   Users,
   Zap,
+  type LucideIcon,
 } from "lucide-react";
 
 export const registrationHref = "/vendor/registration";
 export const contactHref = "/contact";
 
-export const plans = [
+export const defaultBillingCycle = "3_years";
+
+export type BillingCurrency = "INR" | "USD";
+
+export type BillingOption = {
+  cycle: string;
+  label: string;
+  months: number;
+  monthlyPrice: number;
+  total: number;
+  price: string;
+};
+
+export type PricingPlan = {
+  name: string;
+  label: string;
+  priceMonthly: string;
+  priceQuarterly: string;
+  sourceNote: string;
+  billingMonthlyTotal?: number;
+  billingQuarterlyTotal?: number;
+  priceMonthlyUSD: string;
+  priceQuarterlyUSD: string;
+  billingMonthlyTotalUSD?: number;
+  billingQuarterlyTotalUSD?: number;
+  sourceNoteUSD: string;
+  billingOptions?: BillingOption[];
+  billingOptionsUSD?: BillingOption[];
+  description: string;
+  cta: string;
+  href: string;
+  accent: string;
+  icon: LucideIcon;
+  features: string[];
+  recommended?: boolean;
+};
+
+export const billingCycleLabels: Record<string, string> = {
+  "3_years": "3 Years",
+  "2_years": "2 Years",
+  "1_year": "1 Year",
+  "6_months": "6 Months",
+  "1_month": "1 Month",
+  monthly: "Monthly",
+  quarterly: "Quarterly",
+};
+
+export const getPlanBillingOptions = (plan: PricingPlan, currency: BillingCurrency = "INR") =>
+  currency === "USD" && plan.billingOptionsUSD?.length
+    ? plan.billingOptionsUSD
+    : plan.billingOptions || [];
+
+export const getPlanBillingOption = (
+  plan: PricingPlan,
+  billingCycle = defaultBillingCycle,
+  currency: BillingCurrency = "INR",
+) => {
+  const options = getPlanBillingOptions(plan, currency);
+  return (
+    options.find((option) => option.cycle === billingCycle) ||
+    options.find((option) => option.cycle === defaultBillingCycle) ||
+    options[0] ||
+    null
+  );
+};
+
+export const getPlanDisplayPrice = (
+  plan: PricingPlan,
+  billingCycle = defaultBillingCycle,
+  currency: BillingCurrency = "INR",
+) => {
+  const option = getPlanBillingOption(plan, billingCycle, currency);
+  if (option) return option.price;
+  if (currency === "USD") return plan.priceMonthlyUSD;
+  return plan.priceMonthly;
+};
+
+export const getPlanBillingTotal = (
+  plan: PricingPlan,
+  billingCycle = defaultBillingCycle,
+  currency: BillingCurrency = "INR",
+) => {
+  const option = getPlanBillingOption(plan, billingCycle, currency);
+  if (option) return option.total;
+  if (currency === "USD") return plan.billingMonthlyTotalUSD;
+  return plan.billingMonthlyTotal;
+};
+
+export const plans: PricingPlan[] = [
   {
     name: "Startup",
     label: "Best for new sellers",
     priceMonthly: "INR 1,199/mo",
-    priceQuarterly: "INR 699/mo",
-    sourceNote: "Billed quarterly or monthly based on your selection.",
+    priceQuarterly: "INR 399/mo",
+    sourceNote: "Billed based on your selected duration.",
     billingMonthlyTotal: 1199,
-    billingQuarterlyTotal: 2097,
+    billingQuarterlyTotal: 14364,
     priceMonthlyUSD: "USD 15/mo",
     priceQuarterlyUSD: "USD 9/mo",
     billingMonthlyTotalUSD: 15,
     billingQuarterlyTotalUSD: 27,
-    sourceNoteUSD: "Billed quarterly or monthly based on your selection.",
+    sourceNoteUSD: "Billed based on your selected duration.",
+    billingOptions: [
+      { cycle: "3_years", label: "3 Years", months: 36, monthlyPrice: 399, total: 14364, price: "INR 399/mo" },
+      { cycle: "2_years", label: "2 Years", months: 24, monthlyPrice: 549, total: 13176, price: "INR 549/mo" },
+      { cycle: "1_year", label: "1 Year", months: 12, monthlyPrice: 699, total: 8388, price: "INR 699/mo" },
+      { cycle: "6_months", label: "6 Months", months: 6, monthlyPrice: 999, total: 5994, price: "INR 999/mo" },
+      { cycle: "1_month", label: "1 Month", months: 1, monthlyPrice: 1199, total: 1199, price: "INR 1,199/mo" },
+    ],
     description:
-      "For first-time sellers that need a live store, domain mapping, analytics, payments, shipping basics, and essential automation.",
+      "",
     cta: "Select",
     href: registrationHref,
     accent: "border-violet-200 bg-white",
@@ -48,18 +144,25 @@ export const plans = [
   {
     name: "Growth",
     label: "Most popular",
-    priceMonthly: "INR 2,499/mo",
-    priceQuarterly: "INR 1,999/mo",
-    sourceNote: "Billed quarterly or monthly based on your selection.",
-    billingMonthlyTotal: 2499,
-    billingQuarterlyTotal: 5997,
+    priceMonthly: "INR 1,999/mo",
+    priceQuarterly: "INR 899/mo",
+    sourceNote: "Billed based on your selected duration.",
+    billingMonthlyTotal: 1999,
+    billingQuarterlyTotal: 32364,
     priceMonthlyUSD: "USD 30/mo",
     priceQuarterlyUSD: "USD 25/mo",
     billingMonthlyTotalUSD: 30,
     billingQuarterlyTotalUSD: 75,
-    sourceNoteUSD: "Billed quarterly or monthly based on your selection.",
+    sourceNoteUSD: "Billed based on your selected duration.",
+    billingOptions: [
+      { cycle: "3_years", label: "3 Years", months: 36, monthlyPrice: 899, total: 32364, price: "INR 899/mo" },
+      { cycle: "2_years", label: "2 Years", months: 24, monthlyPrice: 1199, total: 28776, price: "INR 1,199/mo" },
+      { cycle: "1_year", label: "1 Year", months: 12, monthlyPrice: 1499, total: 17988, price: "INR 1,499/mo" },
+      { cycle: "6_months", label: "6 Months", months: 6, monthlyPrice: 1799, total: 10794, price: "INR 1,799/mo" },
+      { cycle: "1_month", label: "1 Month", months: 1, monthlyPrice: 1999, total: 1999, price: "INR 1,999/mo" },
+    ],
     description:
-      "For growing brands running multiple stores, larger catalogs, advanced marketing, delivery workflows, and richer buyer automation.",
+      "",
     cta: "Select",
     href: registrationHref,
     accent: "relative border-violet-500 bg-violet-950 text-white shadow-2xl shadow-violet-200",
@@ -84,7 +187,7 @@ export const plans = [
     priceQuarterlyUSD: "Custom Quote",
     sourceNoteUSD: "Custom quote with enterprise rollout and commercial terms.",
     description:
-      "For businesses that need custom store counts, custom controls, full integrations, advanced support, and tailored workflows.",
+      "",
     cta: "Talk to sales",
     href: contactHref,
     accent: "border-slate-200 bg-white",

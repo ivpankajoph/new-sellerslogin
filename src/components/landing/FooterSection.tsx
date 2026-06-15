@@ -265,11 +265,8 @@ export function FooterSection() {
         </div>
 
         <div className="flex flex-col items-center justify-center pt-8 border-t border-purple-200/60 mt-4 gap-2">
-          <p className="text-sm font-medium text-gray-700 text-center">
-            Seller Login: Brand under Life Changing Networks Pvt Ltd
-          </p>
           <p className="text-sm text-gray-500 text-center">
-            &copy; All Rights Reserved {new Date().getFullYear()} with SellersLogin ( Under Life Changing Networks Pvt Ltd )
+            &copy; All Rights Reserved {new Date().getFullYear()} with SellersLogin
           </p>
         </div>
       </div>

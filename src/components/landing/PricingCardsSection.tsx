@@ -1,52 +1,25 @@
 "use client";
 
 import Link from "next/link";
-import { useState, useEffect } from "react";
 import { ArrowRight, BellRing, CheckCircle2 } from "lucide-react";
-import { plans } from "@/lib/pricingData";
+import {
+  defaultBillingCycle,
+  getPlanDisplayPrice,
+  plans,
+  type PricingPlan,
+} from "@/lib/pricingData";
 
 export function PricingCardsSection({ 
-  showRegularPrice, 
   onSelectPlan,
   currency,
-  billingCycle,
-  setBillingCycle
 }: { 
   showRegularPrice: boolean, 
-  onSelectPlan: (plan: any) => void,
+  onSelectPlan: (plan: PricingPlan) => void,
   currency: "INR" | "USD",
-  billingCycle: "monthly" | "quarterly",
-  setBillingCycle: (cycle: "monthly" | "quarterly") => void
 }) {
   return (
     <section className="px-4 py-12 sm:px-6 lg:px-8 relative z-20">
       <div className="mx-auto max-w-7xl">
-
-        <div className="flex justify-center mb-10">
-          <div className="inline-flex items-center rounded-full bg-slate-100 p-1">
-            <button
-              onClick={() => setBillingCycle("monthly")}
-              className={`rounded-full px-6 py-2.5 text-sm font-semibold transition-all ${
-                billingCycle === "monthly"
-                  ? "bg-white text-violet-900 shadow-sm"
-                  : "text-slate-600 hover:text-slate-900"
-              }`}
-            >
-              Monthly
-            </button>
-            <button
-              onClick={() => setBillingCycle("quarterly")}
-              className={`rounded-full px-6 py-2.5 text-sm font-semibold transition-all ${
-                billingCycle === "quarterly"
-                  ? "bg-white text-violet-900 shadow-sm"
-                  : "text-slate-600 hover:text-slate-900"
-              }`}
-            >
-              Quarterly
-            </button>
-          </div>
-        </div>
-
         <div className="grid gap-5 lg:grid-cols-3 group">
           {plans.map((plan) => {
             const Icon = plan.icon;
@@ -78,14 +51,17 @@ export function PricingCardsSection({
                 <div className="mt-5 flex flex-col justify-start">
 
                   <p className={`text-4xl font-bold ${isRecommended ? "text-white" : "text-slate-950"}`}>
-                    {currency === "USD" 
-                      ? (billingCycle === "quarterly" ? (plan as any).priceQuarterlyUSD : (plan as any).priceMonthlyUSD) 
-                      : (billingCycle === "quarterly" ? (plan as any).priceQuarterly : plan.priceMonthly) || plan.priceMonthly}
+                    {getPlanDisplayPrice(plan, defaultBillingCycle, currency)}
                   </p>
+                  {plan.cta === "Select" && (
+                    <p className={`mt-2 text-xs font-bold uppercase tracking-wider ${isRecommended ? "text-violet-200" : "text-violet-700"}`}>
+                      3 year plan
+                    </p>
+                  )}
                 </div>
                 
                 {plan.name === "Enterprise" && (
-                  <p className={`mt-2 text-xs font-semibold ${isRecommended ? "text-violet-200" : "text-slate-500"}`}>{currency === "USD" ? (plan as any).sourceNoteUSD : plan.sourceNote}</p>
+                  <p className={`mt-2 text-xs font-semibold ${isRecommended ? "text-violet-200" : "text-slate-500"}`}>{currency === "USD" ? plan.sourceNoteUSD : plan.sourceNote}</p>
                 )}
                 <p className={`mt-4 min-h-[84px] text-sm leading-6 ${isRecommended ? "text-slate-300" : "text-slate-600"}`}>{plan.description}</p>
 

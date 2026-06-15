@@ -4,7 +4,17 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { ArrowRight, Check, X } from "lucide-react";
-import { plans, capabilityGroups } from "@/lib/pricingData";
+import {
+  defaultBillingCycle,
+  getPlanBillingOption,
+  getPlanBillingOptions,
+  getPlanBillingTotal,
+  getPlanDisplayPrice,
+  plans,
+  capabilityGroups,
+  type BillingOption,
+  type PricingPlan,
+} from "@/lib/pricingData";
 import { PricingCardsSection } from "./PricingCardsSection";
 import { DemoCardsSection } from "./DemoCardsSection";
 import { PricingFaqSection } from "./PricingFaqSection";
@@ -12,10 +22,10 @@ import { IntegrationsSection } from "./IntegrationsSection";
 
 
 export function PricingPageContent() {
-  const [showRegularPrice, setShowRegularPrice] = useState(false);
-  const [selectedPlan, setSelectedPlan] = useState<any>(null);
+  const [showRegularPrice] = useState(false);
+  const [selectedPlan, setSelectedPlan] = useState<(PricingPlan & { currency?: "INR" | "USD"; billingCycle?: string }) | null>(null);
+  const [selectedBillingCycle, setSelectedBillingCycle] = useState(defaultBillingCycle);
   const [currency, setCurrency] = useState<"INR" | "USD">("INR");
-  const [billingCycle, setBillingCycle] = useState<"monthly" | "quarterly">("monthly");
   const router = useRouter();
 
   useEffect(() => {
@@ -34,27 +44,21 @@ export function PricingPageContent() {
       });
   }, []);
 
-  const handleSelectPlan = (plan: any) => {
-    setSelectedPlan({ ...plan, currency, billingCycle });
+  const handleSelectPlan = (plan: PricingPlan) => {
+    setSelectedBillingCycle(defaultBillingCycle);
+    setSelectedPlan({ ...plan, currency, billingCycle: defaultBillingCycle });
   };
 
-  const handleContinue = () => {
+  const handleContinue = (billingCycle = selectedPlan?.billingCycle || defaultBillingCycle) => {
     if (selectedPlan) {
-      const isUSD = selectedPlan.currency === "USD";
-      const isQuarterly = selectedPlan.billingCycle === "quarterly";
-      
-      const price = isUSD 
-        ? (isQuarterly ? selectedPlan.billingQuarterlyTotalUSD : selectedPlan.billingMonthlyTotalUSD)
-        : (isQuarterly ? selectedPlan.billingQuarterlyTotal : selectedPlan.billingMonthlyTotal);
-
-      const displayedPrice = isUSD
-        ? (isQuarterly ? selectedPlan.priceQuarterlyUSD : selectedPlan.priceMonthlyUSD)
-        : (isQuarterly ? selectedPlan.priceQuarterly : selectedPlan.priceMonthly);
+      const selectedCurrency = selectedPlan.currency || currency;
+      const price = getPlanBillingTotal(selectedPlan, billingCycle, selectedCurrency);
+      const displayedPrice = getPlanDisplayPrice(selectedPlan, billingCycle, selectedCurrency);
 
       localStorage.setItem("selectedPlanName", selectedPlan.name);
       localStorage.setItem("selectedPlanPrice", String(price));
-      localStorage.setItem("selectedPlanCurrency", selectedPlan.currency || "INR");
-      localStorage.setItem("selectedPlanBillingCycle", selectedPlan.billingCycle || "monthly");
+      localStorage.setItem("selectedPlanCurrency", selectedCurrency);
+      localStorage.setItem("selectedPlanBillingCycle", billingCycle);
       localStorage.setItem("selectedPlanDisplayedPrice", displayedPrice || selectedPlan.priceMonthly);
       
       router.push("/vendor/registration");
@@ -62,6 +66,9 @@ export function PricingPageContent() {
   };
 
   const handleCloseModal = () => setSelectedPlan(null);
+  const selectedBillingOption = selectedPlan
+    ? getPlanBillingOption(selectedPlan, selectedBillingCycle, selectedPlan.currency || currency)
+    : null;
 
   return (
     <>
@@ -70,8 +77,6 @@ export function PricingPageContent() {
           showRegularPrice={showRegularPrice} 
           onSelectPlan={handleSelectPlan} 
           currency={currency}
-          billingCycle={billingCycle}
-          setBillingCycle={setBillingCycle}
         />
       </div>
 
@@ -89,31 +94,6 @@ export function PricingPageContent() {
             <p className="text-base leading-7 text-slate-600">
               The source pricing matrix categories are organized into readable groups so buyers can compare store features, customer and sales tools, courier pricing, shipment dispatch, product controls, marketing, email, voice, WhatsApp Business, payments, shipping, support, and integrations without confusion.
             </p>
-          </div>
-
-          <div className="flex justify-center mb-10">
-            <div className="inline-flex items-center rounded-full bg-slate-100 p-1">
-              <button
-                onClick={() => setBillingCycle("monthly")}
-                className={`rounded-full px-6 py-2.5 text-sm font-semibold transition-all ${
-                  billingCycle === "monthly"
-                    ? "bg-white text-violet-900 shadow-sm"
-                    : "text-slate-600 hover:text-slate-900"
-                }`}
-              >
-                Monthly
-              </button>
-              <button
-                onClick={() => setBillingCycle("quarterly")}
-                className={`rounded-full px-6 py-2.5 text-sm font-semibold transition-all ${
-                  billingCycle === "quarterly"
-                    ? "bg-white text-violet-900 shadow-sm"
-                    : "text-slate-600 hover:text-slate-900"
-                }`}
-              >
-                Quarterly
-              </button>
-            </div>
           </div>
 
           <div className="overflow-x-auto lg:overflow-clip rounded-[2rem] border border-slate-200 bg-white shadow-xl shadow-slate-100 relative">
@@ -136,9 +116,7 @@ export function PricingPageContent() {
                     <div className="mt-2 flex flex-col items-center justify-center">
 
                       <span className={`text-xl font-bold transition-all duration-300 ${plan.recommended ? 'text-violet-700' : 'text-slate-600'}`}>
-                        {currency === "USD" 
-                          ? (billingCycle === "quarterly" ? (plan as any).priceQuarterlyUSD : (plan as any).priceMonthlyUSD) 
-                          : (billingCycle === "quarterly" ? (plan as any).priceQuarterly : plan.priceMonthly) || plan.priceMonthly}
+                        {getPlanDisplayPrice(plan, defaultBillingCycle, currency)}
                       </span>
                     </div>
                     {plan.cta === "Select" ? (
@@ -225,21 +203,47 @@ export function PricingPageContent() {
       <PricingFaqSection />
 
       {selectedPlan && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-slate-900/40 backdrop-blur-sm px-4 transition-all">
-          <div className="bg-white rounded-none p-8 max-w-md w-full shadow-2xl relative animate-in fade-in zoom-in-95 duration-200">
+        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-slate-900/45 backdrop-blur-sm px-4 py-6 transition-all">
+          <div className="bg-white rounded-2xl max-h-[calc(100svh-3rem)] max-w-xl w-full overflow-hidden shadow-2xl relative animate-in fade-in zoom-in-95 duration-200">
             <button onClick={handleCloseModal} className="absolute top-5 right-5 text-slate-400 hover:text-slate-600 transition-colors">
               <X className="h-5 w-5" />
             </button>
-            <h3 className="text-2xl font-black text-slate-900 mb-3 tracking-tight">Confirm your plan</h3>
-            <p className="text-slate-600 mb-8 leading-relaxed">
-              You have selected the <strong className="text-violet-700">{selectedPlan.name}</strong> plan at <strong>{selectedPlan.currency === "USD" ? (selectedPlan.billingCycle === "quarterly" ? selectedPlan.priceQuarterlyUSD : selectedPlan.priceMonthlyUSD) : (selectedPlan.billingCycle === "quarterly" ? selectedPlan.priceQuarterly : selectedPlan.priceMonthly) || selectedPlan.priceMonthly}</strong>.
-            </p>
-            <div className="flex gap-3">
-              <button onClick={handleCloseModal} className="flex-1 py-3 px-4 rounded-none font-bold border-2 border-slate-200 text-slate-600 hover:bg-slate-50 hover:border-slate-300 transition-all">
+            <div className="p-6 pb-4">
+              <h3 className="text-2xl font-black text-slate-900 pr-8 tracking-tight">Choose billing period</h3>
+              <p className="mt-2 text-slate-600 leading-relaxed">
+                Select a duration for the <strong className="text-violet-700">{selectedPlan.name}</strong> plan.
+              </p>
+            </div>
+            <div className="max-h-[52svh] space-y-3 overflow-y-auto px-6 pb-4">
+              {getPlanBillingOptions(selectedPlan, selectedPlan.currency || currency).map((option: BillingOption) => {
+                const isActive = option.cycle === selectedBillingCycle;
+                return (
+                  <button
+                    key={option.cycle}
+                    type="button"
+                    onClick={() => setSelectedBillingCycle(option.cycle)}
+                    className={`flex w-full items-center justify-between gap-4 rounded-xl border-2 px-5 py-4 text-left transition-all hover:border-violet-500 hover:bg-violet-50 ${
+                      isActive ? "border-violet-500 bg-violet-50 ring-2 ring-violet-100" : "border-slate-200"
+                    }`}
+                  >
+                    <span>
+                      <span className="block text-base font-black text-slate-900">{option.label}</span>
+                      <span className="block text-xs font-semibold text-slate-500">Billed {selectedPlan.currency || currency} {option.total.toLocaleString("en-IN")}</span>
+                    </span>
+                    <span className="text-lg font-black text-violet-700">{option.price}</span>
+                  </button>
+                );
+              })}
+            </div>
+            <div className="grid grid-cols-2 gap-3 border-t border-slate-200 bg-white p-6">
+              <button onClick={handleCloseModal} className="py-3 px-4 rounded-xl font-bold border-2 border-slate-200 text-slate-600 hover:bg-slate-50 hover:border-slate-300 transition-all">
                 Cancel
               </button>
-              <button onClick={handleContinue} className="flex-1 py-3 px-4 rounded-none font-bold bg-violet-600 text-white shadow-lg shadow-violet-200 hover:bg-violet-700 hover:-translate-y-0.5 transition-all">
-                Continue
+              <button
+                onClick={() => handleContinue(selectedBillingCycle)}
+                className="py-3 px-4 rounded-xl font-bold bg-violet-600 text-white shadow-lg shadow-violet-200 hover:bg-violet-700 hover:-translate-y-0.5 transition-all"
+              >
+                Select {selectedBillingOption?.price || ""}
               </button>
             </div>
           </div>
@@ -247,10 +251,11 @@ export function PricingPageContent() {
       )}
       {/* Mobile Sticky CTA */}
       <div className="fixed bottom-0 left-0 right-0 z-[120] p-4 md:hidden bg-white/90 backdrop-blur-md border-t border-slate-200 shadow-[0_-10px_20px_-10px_rgba(0,0,0,0.1)]">
-        <button onClick={() => handleSelectPlan({ ...plans[0], currency: "INR", billingCycle: "monthly" })} className="flex w-full items-center justify-center rounded-full bg-violet-600 px-4 py-3.5 text-[13px] sm:text-sm font-bold text-white shadow-lg shadow-violet-200 transition-all active:scale-[0.98] border-none outline-none">
-          Signup @ ₹1,199/ month
+        <button onClick={() => handleSelectPlan(plans[0])} className="flex w-full items-center justify-center rounded-full bg-violet-600 px-4 py-3.5 text-[13px] sm:text-sm font-bold text-white shadow-lg shadow-violet-200 transition-all active:scale-[0.98] border-none outline-none">
+          Signup @ INR 399/month
         </button>
       </div>
     </>
   );
 }
+
