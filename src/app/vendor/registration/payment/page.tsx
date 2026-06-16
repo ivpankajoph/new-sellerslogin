@@ -83,6 +83,7 @@ export default function PaymentPendingPage() {
   const [displayedPrice] = useState(() => getSessionValue("selectedPlanDisplayedPrice", "INR 399/mo", "planDisplayedPrice"));
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [adminRedirectUrl] = useState(() => getSessionValue("vendor_post_payment_redirect", "", "redirectBack"));
+  const [launchToken, setLaunchToken] = useState(() => getSessionValue("vendor_auth_token", "", "token"));
   const [originalPrice] = useState(getSessionPlanPrice);
   const [referralCodeInput, setReferralCodeInput] = useState("");
   const [appliedReferral, setAppliedReferral] = useState("");
@@ -107,6 +108,13 @@ export default function PaymentPendingPage() {
   const [pincode, setPincode] = useState("");
 
   const isAddressFilled = addressLine1.trim() !== "" && city.trim() !== "" && state.trim() !== "" && pincode.trim() !== "";
+  const effectiveToken = launchToken || token || "";
+  const effectiveVendorEmail = vendorEmail || authUser?.email || "";
+  const effectiveAuthVendor = {
+    ...(authUser || {}),
+    email: effectiveVendorEmail,
+    role: authUser?.role || "vendor",
+  };
   const billingCycleLabel = billingCycleLabels[billingCycle] || billingCycle;
   const finalMultiplier = isAddressFilled ? 1.18 : 1;
   const finalPrice = Math.round(numericPrice * finalMultiplier);
@@ -121,6 +129,7 @@ export default function PaymentPendingPage() {
       const vendorEmailParam = urlParams.get("vendorEmail");
 
       if (tokenParam && planNameParam) {
+        setLaunchToken(tokenParam);
         sessionStorage.setItem("vendor_auth_token", tokenParam);
         sessionStorage.setItem("selectedPlanName", planNameParam);
         sessionStorage.setItem("selectedPlanPrice", urlParams.get("planPrice") || "14364");
@@ -156,7 +165,7 @@ export default function PaymentPendingPage() {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${effectiveToken}`,
           },
           body: JSON.stringify({ referral_code: referralCodeInput.trim() }),
         },
@@ -208,7 +217,7 @@ export default function PaymentPendingPage() {
       formData.append("country", country.trim() || "India");
       formData.append("pincode", pincode.trim() || "000000");
       try {
-        await dispatch(updateVendorBusiness({ formData })).unwrap();
+        await dispatch(updateVendorBusiness({ formData, tokenOverride: effectiveToken })).unwrap();
       } catch (err) {
         console.error("Bypass address save error", err);
       }
@@ -217,15 +226,15 @@ export default function PaymentPendingPage() {
     if (adminRedirectUrl) {
       window.location.replace(adminRedirectUrl);
     } else {
-      window.location.replace(buildAdminAutoLoginUrl({ token, vendor: authUser }));
+      window.location.replace(buildAdminAutoLoginUrl({ token: effectiveToken, vendor: effectiveAuthVendor }));
     }
   };
 
   const getDashboardUrl = () =>
-    adminRedirectUrl || buildAdminAutoLoginUrl({ token, vendor: authUser });
+    adminRedirectUrl || buildAdminAutoLoginUrl({ token: effectiveToken, vendor: effectiveAuthVendor });
 
   const handlePayNow = async () => {
-    if (!token) {
+    if (!effectiveToken) {
       Swal.fire(
         "Error",
         "Authentication required. Please log in again.",
@@ -257,7 +266,7 @@ export default function PaymentPendingPage() {
       formData.append("pincode", pincode.trim());
       
       try {
-        await dispatch(updateVendorBusiness({ formData })).unwrap();
+        await dispatch(updateVendorBusiness({ formData, tokenOverride: effectiveToken })).unwrap();
       } catch {
         Swal.fire("Error", "Failed to save address details.", "error");
         setIsSubmitting(false);
@@ -270,7 +279,7 @@ export default function PaymentPendingPage() {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${effectiveToken}`,
           },
           body: JSON.stringify({
             plan: selectedPlanName,
@@ -322,7 +331,7 @@ export default function PaymentPendingPage() {
                   method: "POST",
                   headers: {
                     "Content-Type": "application/json",
-                    Authorization: `Bearer ${token}`,
+                    Authorization: `Bearer ${effectiveToken}`,
                   },
                   body: JSON.stringify({
                     razorpay_order_id: response.razorpay_order_id,
@@ -377,7 +386,7 @@ export default function PaymentPendingPage() {
           },
           prefill: {
             name: authUser?.name || authUser?.business_name || "",
-            email: authUser?.email || "",
+            email: effectiveVendorEmail,
             contact: vendorPhone || authUser?.phone_no || authUser?.phone || "",
           },
           theme: {
@@ -550,7 +559,7 @@ export default function PaymentPendingPage() {
             </p>
             <div className="mx-auto mt-5 max-w-xl rounded-xl border border-violet-200 bg-violet-50 px-4 py-3 text-sm text-violet-900">
               <span className="font-semibold">Activating account for:</span>{" "}
-              <span className="font-bold">{vendorEmail || authUser?.email || "Email not available"}</span>
+              <span className="font-bold">{effectiveVendorEmail || "Email not available"}</span>
             </div>
 
             <div className="mt-8 text-left border border-slate-200 bg-slate-50/50 p-6 rounded-xl shadow-sm mb-8">

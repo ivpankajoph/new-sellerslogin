@@ -15,15 +15,17 @@ export const updateVendorBusiness = createAsyncThunk(
     {
 
       formData,
+      tokenOverride,
     }: {
 
       formData: FormData;
+      tokenOverride?: string;
     },
     { rejectWithValue, getState }
   ) => {
     try {
       const state: any = getState();
-      const token = state?.auth?.token;
+      const token = tokenOverride || state?.auth?.token;
     const response = await axios.put(
       `${BASE_URL}/vendors/business`,
       formData,
