@@ -2,8 +2,8 @@ const fs = require('fs');
 const file = 'c:\\\\oph work\\\\new-sellerslogin\\\\src\\\\app\\\\vendor\\\\registration\\\\business-details\\\\page.tsx';
 let content = fs.readFileSync(file, 'utf8');
 
-const targetStr = `        const selectedPlanName = localStorage.getItem("selectedPlanName");
-        let selectedPlanPrice = localStorage.getItem("selectedPlanPrice");
+const targetStr = `        const selectedPlanName = sessionStorage.getItem("selectedPlanName");
+        let selectedPlanPrice = sessionStorage.getItem("selectedPlanPrice");
 
         if (selectedPlanName && selectedPlanName !== "null" && selectedPlanPrice && selectedPlanPrice !== "null") {
            // Parse price to integer, stripping non-numeric characters
@@ -22,9 +22,9 @@ const targetStr = `        const selectedPlanName = localStorage.getItem("select
                })
              });`;
 
-const replacementStr = `        const selectedPlanName = localStorage.getItem("selectedPlanName");
-        let selectedPlanPrice = localStorage.getItem("selectedPlanPrice");
-        const selectedPlanCurrency = localStorage.getItem("selectedPlanCurrency") || "INR";
+const replacementStr = `        const selectedPlanName = sessionStorage.getItem("selectedPlanName");
+        let selectedPlanPrice = sessionStorage.getItem("selectedPlanPrice");
+        const selectedPlanCurrency = sessionStorage.getItem("selectedPlanCurrency") || "INR";
 
         if (selectedPlanName && selectedPlanName !== "null" && selectedPlanPrice && selectedPlanPrice !== "null") {
            // Parse price to integer, stripping non-numeric characters

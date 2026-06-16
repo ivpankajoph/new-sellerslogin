@@ -442,14 +442,14 @@ function VendorRegistrationPage() {
                         }
                         if (!isMounted) return;
                         const nextCountries = Array.isArray(payload) ? payload : [];
-                        const metaRaw = ("TURBOPACK compile-time truthy", 1) ? localStorage.getItem(VENDOR_REG_META_KEY) : "TURBOPACK unreachable";
+                        const metaRaw = ("TURBOPACK compile-time truthy", 1) ? sessionStorage.getItem(VENDOR_REG_META_KEY) : "TURBOPACK unreachable";
                         const meta = metaRaw ? JSON.parse(metaRaw) : null;
-                        const draftRaw = ("TURBOPACK compile-time truthy", 1) ? localStorage.getItem(VENDOR_REG_DRAFT_KEY) : "TURBOPACK unreachable";
+                        const draftRaw = ("TURBOPACK compile-time truthy", 1) ? sessionStorage.getItem(VENDOR_REG_DRAFT_KEY) : "TURBOPACK unreachable";
                         const draft = draftRaw ? JSON.parse(draftRaw) : null;
-                        const storedCountryCode = draft?.countryCode ?? meta?.countryCode ?? localStorage.getItem("vendor_country_code") ?? sessionStorage.getItem("vendor_country_code") ?? "";
-                        const storedPhone = draft?.phone ?? meta?.phone ?? localStorage.getItem("vendor_phone") ?? sessionStorage.getItem("vendor_phone") ?? "";
-                        const storedEmail = draft?.email ?? meta?.email ?? localStorage.getItem("vendor_email") ?? sessionStorage.getItem("vendor_email") ?? "";
-                        const storedStep = draft?.stage ?? localStorage.getItem("vendor_registration_step") ?? sessionStorage.getItem("vendor_registration_step");
+                        const storedCountryCode = draft?.countryCode ?? meta?.countryCode ?? sessionStorage.getItem("vendor_country_code") ?? sessionStorage.getItem("vendor_country_code") ?? "";
+                        const storedPhone = draft?.phone ?? meta?.phone ?? sessionStorage.getItem("vendor_phone") ?? sessionStorage.getItem("vendor_phone") ?? "";
+                        const storedEmail = draft?.email ?? meta?.email ?? sessionStorage.getItem("vendor_email") ?? sessionStorage.getItem("vendor_email") ?? "";
+                        const storedStep = draft?.stage ?? sessionStorage.getItem("vendor_registration_step") ?? sessionStorage.getItem("vendor_registration_step");
                         const initialCountry = nextCountries.find({
                             "VendorRegistrationPage.useEffect.loadCountries": (country_0)=>country_0.dialCode === storedCountryCode
                         }["VendorRegistrationPage.useEffect.loadCountries"]) ?? nextCountries.find({
@@ -517,21 +517,21 @@ function VendorRegistrationPage() {
                 phoneTimer,
                 canResendPhoneOtp
             };
-            localStorage.setItem(VENDOR_REG_META_KEY, JSON.stringify(metaPayload));
-            localStorage.setItem(VENDOR_REG_DRAFT_KEY, JSON.stringify(draftPayload));
+            sessionStorage.setItem(VENDOR_REG_META_KEY, JSON.stringify(metaPayload));
+            sessionStorage.setItem(VENDOR_REG_DRAFT_KEY, JSON.stringify(draftPayload));
             if (dialCode) {
-                localStorage.setItem("vendor_country_code", dialCode);
+                sessionStorage.setItem("vendor_country_code", dialCode);
                 sessionStorage.setItem("vendor_country_code", dialCode);
             }
             if (fullPhone.trim()) {
-                localStorage.setItem("vendor_phone", fullPhone);
+                sessionStorage.setItem("vendor_phone", fullPhone);
                 sessionStorage.setItem("vendor_phone", fullPhone);
             }
             if (email.trim()) {
-                localStorage.setItem("vendor_email", email.trim());
+                sessionStorage.setItem("vendor_email", email.trim());
                 sessionStorage.setItem("vendor_email", email.trim());
             }
-            localStorage.setItem("vendor_registration_step", stage);
+            sessionStorage.setItem("vendor_registration_step", stage);
             sessionStorage.setItem("vendor_registration_step", stage);
         }
     }["VendorRegistrationPage.useEffect"], [
@@ -754,11 +754,11 @@ function VendorRegistrationPage() {
                 phone: phoneDigits,
                 countryCode: selectedCountry.dialCode
             })).unwrap();
-            localStorage.setItem("vendor_phone", displayPhone);
             sessionStorage.setItem("vendor_phone", displayPhone);
-            localStorage.setItem("vendor_country_code", selectedCountry.dialCode);
+            sessionStorage.setItem("vendor_phone", displayPhone);
             sessionStorage.setItem("vendor_country_code", selectedCountry.dialCode);
-            localStorage.setItem("vendor_registration_step", "phone-otp");
+            sessionStorage.setItem("vendor_country_code", selectedCountry.dialCode);
+            sessionStorage.setItem("vendor_registration_step", "phone-otp");
             sessionStorage.setItem("vendor_registration_step", "phone-otp");
             __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sweetalert2$2f$dist$2f$sweetalert2$2e$all$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].fire("Success", "OTP sent successfully to your whatsapp Number", "success");
             return true;
@@ -802,7 +802,7 @@ function VendorRegistrationPage() {
                 otp: phoneOtpValue
             })).unwrap();
             await runStepTransition("Opening email step...", async ()=>{
-                localStorage.setItem("vendor_registration_step", "email-entry");
+                sessionStorage.setItem("vendor_registration_step", "email-entry");
                 sessionStorage.setItem("vendor_registration_step", "email-entry");
                 setStage("email-entry");
                 resetPhoneOtpState();
@@ -828,9 +828,9 @@ function VendorRegistrationPage() {
                 email: normalizedEmail
             })).unwrap();
             setEmail(normalizedEmail);
-            localStorage.setItem("vendor_email", normalizedEmail);
             sessionStorage.setItem("vendor_email", normalizedEmail);
-            localStorage.setItem("vendor_registration_step", "email-otp");
+            sessionStorage.setItem("vendor_email", normalizedEmail);
+            sessionStorage.setItem("vendor_registration_step", "email-otp");
             sessionStorage.setItem("vendor_registration_step", "email-otp");
             await runStepTransition("Opening email OTP step...", async ()=>{
                 setStage("email-otp");
@@ -874,11 +874,11 @@ function VendorRegistrationPage() {
                 vendor: verifiedUser,
                 redirectPath: "/profile"
             }) : adminLoginUrl;
-            localStorage.setItem("vendor_email", normalizedEmail_0);
             sessionStorage.setItem("vendor_email", normalizedEmail_0);
-            localStorage.removeItem("vendor_registration_step");
+            sessionStorage.setItem("vendor_email", normalizedEmail_0);
             sessionStorage.removeItem("vendor_registration_step");
-            localStorage.removeItem(VENDOR_REG_DRAFT_KEY);
+            sessionStorage.removeItem("vendor_registration_step");
+            sessionStorage.removeItem(VENDOR_REG_DRAFT_KEY);
             __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sweetalert2$2f$dist$2f$sweetalert2$2e$all$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].fire("Success", "Email verified successfully.", "success");
             await runStepTransition("Redirecting to your sellers dashboard...", async ()=>{
                 if ("TURBOPACK compile-time truthy", 1) {

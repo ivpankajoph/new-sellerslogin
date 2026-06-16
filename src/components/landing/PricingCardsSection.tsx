@@ -55,7 +55,7 @@ export function PricingCardsSection({
                   </p>
                   {plan.cta === "Select" && (
                     <p className={`mt-2 text-xs font-bold uppercase tracking-wider ${isRecommended ? "text-violet-200" : "text-violet-700"}`}>
-                      3 year plan
+                      48 month plan (+ gst)
                     </p>
                   )}
                 </div>

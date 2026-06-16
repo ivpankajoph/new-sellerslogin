@@ -754,8 +754,8 @@ export default function VendorBusinessDetailsPage() {
 
   useEffect(() => {
     if (typeof window !== "undefined") {
-      setSelectedPlanNameState(localStorage.getItem("selectedPlanName"));
-      setSelectedPlanPriceState(localStorage.getItem("selectedPlanPrice"));
+      setSelectedPlanNameState(sessionStorage.getItem("selectedPlanName"));
+      setSelectedPlanPriceState(sessionStorage.getItem("selectedPlanPrice"));
     }
   }, []);
 
@@ -886,28 +886,28 @@ export default function VendorBusinessDetailsPage() {
   useEffect(() => {
     if (typeof window === "undefined") return;
 
-    const registrationMetaRaw = localStorage.getItem(VENDOR_REG_META_KEY);
+    const registrationMetaRaw = sessionStorage.getItem(VENDOR_REG_META_KEY);
     const registrationMeta = registrationMetaRaw
       ? (JSON.parse(registrationMetaRaw) as { email?: string; phone?: string; countryCode?: string })
       : null;
 
     const storedEmail =
       registrationMeta?.email ??
-      localStorage.getItem("vendor_email") ??
+      sessionStorage.getItem("vendor_email") ??
       sessionStorage.getItem("vendor_email") ??
       "";
     const storedPhone =
       registrationMeta?.phone ??
-      localStorage.getItem("vendor_phone") ??
+      sessionStorage.getItem("vendor_phone") ??
       sessionStorage.getItem("vendor_phone") ??
       "";
     const storedCountryCode =
       registrationMeta?.countryCode ??
-      localStorage.getItem("vendor_country_code") ??
+      sessionStorage.getItem("vendor_country_code") ??
       sessionStorage.getItem("vendor_country_code") ??
       FALLBACK_COUNTRY.dialCode;
 
-    const draftRaw = localStorage.getItem(VENDOR_BUSINESS_DRAFT_KEY);
+    const draftRaw = sessionStorage.getItem(VENDOR_BUSINESS_DRAFT_KEY);
     const draft = draftRaw
       ? (JSON.parse(draftRaw) as Partial<BusinessForm> & {
           currentStep?: BusinessStep;
@@ -992,14 +992,14 @@ export default function VendorBusinessDetailsPage() {
         const nextCountries =
           Array.isArray(payload) && payload.length ? payload : [FALLBACK_COUNTRY];
         const registrationMetaRaw =
-          typeof window !== "undefined" ? localStorage.getItem(VENDOR_REG_META_KEY) : null;
+          typeof window !== "undefined" ? sessionStorage.getItem(VENDOR_REG_META_KEY) : null;
         const registrationMeta = registrationMetaRaw
           ? (JSON.parse(registrationMetaRaw) as { countryCode?: string })
           : null;
         const storedCountryCode =
           registrationMeta?.countryCode ??
           (typeof window !== "undefined"
-            ? localStorage.getItem("vendor_country_code")
+            ? sessionStorage.getItem("vendor_country_code")
             : null) ??
           sessionStorage.getItem("vendor_country_code") ??
           "";
@@ -1478,7 +1478,7 @@ export default function VendorBusinessDetailsPage() {
       bulkCloseTime,
     };
 
-    localStorage.setItem(VENDOR_BUSINESS_DRAFT_KEY, JSON.stringify(draftPayload));
+    sessionStorage.setItem(VENDOR_BUSINESS_DRAFT_KEY, JSON.stringify(draftPayload));
   }, [
     currentStep,
     form,
@@ -1880,11 +1880,11 @@ export default function VendorBusinessDetailsPage() {
     const price = getPlanBillingTotal(plan, billingCycle, currency);
     const displayedPrice = getPlanDisplayPrice(plan, billingCycle, currency);
 
-    localStorage.setItem("selectedPlanName", plan.name);
-    localStorage.setItem("selectedPlanPrice", String(price));
-    localStorage.setItem("selectedPlanCurrency", currency);
-    localStorage.setItem("selectedPlanBillingCycle", billingCycle);
-    localStorage.setItem("selectedPlanDisplayedPrice", displayedPrice || plan.priceMonthly);
+    sessionStorage.setItem("selectedPlanName", plan.name);
+    sessionStorage.setItem("selectedPlanPrice", String(price));
+    sessionStorage.setItem("selectedPlanCurrency", currency);
+    sessionStorage.setItem("selectedPlanBillingCycle", billingCycle);
+    sessionStorage.setItem("selectedPlanDisplayedPrice", displayedPrice || plan.priceMonthly);
     
     setSelectedPlanNameState(plan.name);
     setSelectedPlanPriceState(String(price));
@@ -2030,8 +2030,8 @@ export default function VendorBusinessDetailsPage() {
         });
 
         if (typeof window !== "undefined") {
-          localStorage.removeItem(VENDOR_BUSINESS_DRAFT_KEY);
-          localStorage.removeItem(VENDOR_REG_META_KEY);
+          sessionStorage.removeItem(VENDOR_BUSINESS_DRAFT_KEY);
+          sessionStorage.removeItem(VENDOR_REG_META_KEY);
         }
 
         if (typeof window !== "undefined") {

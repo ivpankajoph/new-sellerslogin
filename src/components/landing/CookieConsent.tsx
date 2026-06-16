@@ -10,7 +10,7 @@ export function CookieConsent() {
   useEffect(() => {
     setMounted(true);
     // Prevent showing if user already made a choice
-    if (typeof window !== "undefined" && localStorage.getItem("cookie_consent_status")) {
+    if (typeof window !== "undefined" && sessionStorage.getItem("cookie_consent_status")) {
       setDismissed(true);
     } else {
       // Delay appearance for less intrusive UX
@@ -23,7 +23,7 @@ export function CookieConsent() {
     setShow(false);
     // Wait for exit animation to complete before unmounting & saving
     setTimeout(() => {
-      localStorage.setItem("cookie_consent_status", accepted ? "accepted" : "declined");
+      sessionStorage.setItem("cookie_consent_status", accepted ? "accepted" : "declined");
       setDismissed(true);
     }, 300);
   }, []);

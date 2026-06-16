@@ -10,7 +10,7 @@ content = content.replace(
 
 // 2. Add state and effect before the first useEffect
 const targetState = '  const emailOtpRefs = useRef<(HTMLInputElement | null)[]>([]);\n\n  useEffect(() => {\n    let isMounted = true;';
-const replacementState = '  const emailOtpRefs = useRef<(HTMLInputElement | null)[]>([]);\n\n  const [selectedPlanName, setSelectedPlanName] = useState<string | null>(null);\n  const [selectedPlanPrice, setSelectedPlanPrice] = useState<string | null>(null);\n\n  useEffect(() => {\n    if (typeof window !== "undefined") {\n      setSelectedPlanName(localStorage.getItem("selectedPlanName"));\n      setSelectedPlanPrice(localStorage.getItem("selectedPlanPrice"));\n    }\n  }, []);\n\n  useEffect(() => {\n    let isMounted = true;';
+const replacementState = '  const emailOtpRefs = useRef<(HTMLInputElement | null)[]>([]);\n\n  const [selectedPlanName, setSelectedPlanName] = useState<string | null>(null);\n  const [selectedPlanPrice, setSelectedPlanPrice] = useState<string | null>(null);\n\n  useEffect(() => {\n    if (typeof window !== "undefined") {\n      setSelectedPlanName(sessionStorage.getItem("selectedPlanName"));\n      setSelectedPlanPrice(sessionStorage.getItem("selectedPlanPrice"));\n    }\n  }, []);\n\n  useEffect(() => {\n    let isMounted = true;';
 
 if (!content.includes(targetState)) {
     console.log("Could not find targetState!");

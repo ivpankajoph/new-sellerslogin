@@ -124,12 +124,12 @@ export default function VendorRegistrationPage() {
 
         const nextCountries = Array.isArray(payload) ? (payload as CountryOption[]) : [];
         const metaRaw =
-          typeof window !== "undefined" ? localStorage.getItem(VENDOR_REG_META_KEY) : null;
+          typeof window !== "undefined" ? sessionStorage.getItem(VENDOR_REG_META_KEY) : null;
         const meta = metaRaw
           ? (JSON.parse(metaRaw) as { countryCode?: string; phone?: string; email?: string })
           : null;
         const draftRaw =
-          typeof window !== "undefined" ? localStorage.getItem(VENDOR_REG_DRAFT_KEY) : null;
+          typeof window !== "undefined" ? sessionStorage.getItem(VENDOR_REG_DRAFT_KEY) : null;
         const draft = draftRaw
           ? (JSON.parse(draftRaw) as {
               stage?: RegistrationStage;
@@ -146,24 +146,24 @@ export default function VendorRegistrationPage() {
         const storedCountryCode =
           draft?.countryCode ??
           meta?.countryCode ??
-          localStorage.getItem("vendor_country_code") ??
+          sessionStorage.getItem("vendor_country_code") ??
           sessionStorage.getItem("vendor_country_code") ??
           "";
         const storedPhone =
           draft?.phone ??
           meta?.phone ??
-          localStorage.getItem("vendor_phone") ??
+          sessionStorage.getItem("vendor_phone") ??
           sessionStorage.getItem("vendor_phone") ??
           "";
         const storedEmail =
           draft?.email ??
           meta?.email ??
-          localStorage.getItem("vendor_email") ??
+          sessionStorage.getItem("vendor_email") ??
           sessionStorage.getItem("vendor_email") ??
           "";
         const storedStep =
           draft?.stage ??
-          (localStorage.getItem("vendor_registration_step") as RegistrationStage | null) ??
+          (sessionStorage.getItem("vendor_registration_step") as RegistrationStage | null) ??
           (sessionStorage.getItem("vendor_registration_step") as RegistrationStage | null);
 
         const initialCountry =
@@ -243,22 +243,22 @@ export default function VendorRegistrationPage() {
       canResendPhoneOtp,
     };
 
-    localStorage.setItem(VENDOR_REG_META_KEY, JSON.stringify(metaPayload));
-    localStorage.setItem(VENDOR_REG_DRAFT_KEY, JSON.stringify(draftPayload));
+    sessionStorage.setItem(VENDOR_REG_META_KEY, JSON.stringify(metaPayload));
+    sessionStorage.setItem(VENDOR_REG_DRAFT_KEY, JSON.stringify(draftPayload));
 
     if (dialCode) {
-      localStorage.setItem("vendor_country_code", dialCode);
+      sessionStorage.setItem("vendor_country_code", dialCode);
       sessionStorage.setItem("vendor_country_code", dialCode);
     }
     if (fullPhone.trim()) {
-      localStorage.setItem("vendor_phone", fullPhone);
+      sessionStorage.setItem("vendor_phone", fullPhone);
       sessionStorage.setItem("vendor_phone", fullPhone);
     }
     if (email.trim()) {
-      localStorage.setItem("vendor_email", email.trim());
+      sessionStorage.setItem("vendor_email", email.trim());
       sessionStorage.setItem("vendor_email", email.trim());
     }
-    localStorage.setItem("vendor_registration_step", stage);
+    sessionStorage.setItem("vendor_registration_step", stage);
 
     sessionStorage.setItem("vendor_registration_step", stage);
   }, [selectedCountry, phone, email, stage, phoneOtp, emailOtp, phoneTimer, canResendPhoneOtp]);
@@ -466,11 +466,11 @@ export default function VendorRegistrationPage() {
       const displayPhone = `${selectedCountry.dialCode}${phoneDigits}`;
       await dispatch(sendOtp({ phone: phoneDigits, countryCode: selectedCountry.dialCode })).unwrap();
 
-      localStorage.setItem("vendor_phone", displayPhone);
       sessionStorage.setItem("vendor_phone", displayPhone);
-      localStorage.setItem("vendor_country_code", selectedCountry.dialCode);
+      sessionStorage.setItem("vendor_phone", displayPhone);
       sessionStorage.setItem("vendor_country_code", selectedCountry.dialCode);
-      localStorage.setItem("vendor_registration_step", "phone-otp");
+      sessionStorage.setItem("vendor_country_code", selectedCountry.dialCode);
+      sessionStorage.setItem("vendor_registration_step", "phone-otp");
       sessionStorage.setItem("vendor_registration_step", "phone-otp");
 
       Swal.fire("Success", "OTP sent successfully to your whatsapp Number", "success");
@@ -521,7 +521,7 @@ export default function VendorRegistrationPage() {
         }),
       ).unwrap();
 
-      localStorage.setItem("vendor_registration_step", "email-entry");
+      sessionStorage.setItem("vendor_registration_step", "email-entry");
       sessionStorage.setItem("vendor_registration_step", "email-entry");
       setStage("email-entry");
       resetPhoneOtpState();
@@ -557,9 +557,9 @@ export default function VendorRegistrationPage() {
     try {
       await dispatch(sendEmailOtp({ email: normalizedEmail })).unwrap();
       setEmail(normalizedEmail);
-      localStorage.setItem("vendor_email", normalizedEmail);
       sessionStorage.setItem("vendor_email", normalizedEmail);
-      localStorage.setItem("vendor_registration_step", "email-otp");
+      sessionStorage.setItem("vendor_email", normalizedEmail);
+      sessionStorage.setItem("vendor_registration_step", "email-otp");
       sessionStorage.setItem("vendor_registration_step", "email-otp");
       setStage("email-otp");
       resetEmailOtpState();
@@ -604,11 +604,11 @@ export default function VendorRegistrationPage() {
         }),
       ).unwrap();
 
-      localStorage.setItem("vendor_email", normalizedEmail);
       sessionStorage.setItem("vendor_email", normalizedEmail);
-      localStorage.removeItem("vendor_registration_step");
+      sessionStorage.setItem("vendor_email", normalizedEmail);
       sessionStorage.removeItem("vendor_registration_step");
-      localStorage.removeItem(VENDOR_REG_DRAFT_KEY);
+      sessionStorage.removeItem("vendor_registration_step");
+      sessionStorage.removeItem(VENDOR_REG_DRAFT_KEY);
 
       Swal.fire("Success", "Email verified successfully.", "success");
       router.push("/vendor/registration/business-details");

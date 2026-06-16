@@ -11,7 +11,7 @@ interface AuthState {
 }
 const getInitialToken = () => {
   if (typeof window !== 'undefined') {
-    return sessionStorage.getItem('vendor_auth_token') || localStorage.getItem('vendor_auth_token');
+    return sessionStorage.getItem('vendor_auth_token') || sessionStorage.getItem('vendor_auth_token');
   }
   return null;
 }
@@ -122,7 +122,7 @@ const authSlice = createSlice({
       state.token = null
       if (typeof window !== 'undefined') {
           sessionStorage.removeItem('vendor_auth_token');
-          localStorage.removeItem('vendor_auth_token');
+          sessionStorage.removeItem('vendor_auth_token');
       }
     },
   },
@@ -154,7 +154,7 @@ const authSlice = createSlice({
       state.token = action.payload
       if (typeof window !== 'undefined') {
           sessionStorage.setItem('vendor_auth_token', action.payload);
-          localStorage.setItem('vendor_auth_token', action.payload);
+          sessionStorage.setItem('vendor_auth_token', action.payload);
       }
     })
     builder.addCase(verifyOtp.rejected, (state, action) => {

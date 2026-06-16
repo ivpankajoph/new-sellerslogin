@@ -19,8 +19,8 @@ const targetHandleSelect = `  const handleSelectPlan = (plan: any) => {
   const handleConfirmPlan = () => {
     if (selectedPlan) {
       const price = showRegularPrice ? selectedPlan.priceAnnually : selectedPlan.priceMonthly;
-      localStorage.setItem("selectedPlanName", selectedPlan.name);
-      localStorage.setItem("selectedPlanPrice", price);
+      sessionStorage.setItem("selectedPlanName", selectedPlan.name);
+      sessionStorage.setItem("selectedPlanPrice", price);
       router.push("/vendor/registration");
     }
   };`;
@@ -34,9 +34,9 @@ const replacementHandleSelect = `  const handleSelectPlan = (plan: any) => {
       const price = showRegularPrice 
         ? (selectedPlan.currency === "USD" ? (selectedPlan as any).priceAnnuallyUSD : selectedPlan.priceAnnually)
         : (selectedPlan.currency === "USD" ? (selectedPlan as any).priceMonthlyUSD : selectedPlan.priceMonthly);
-      localStorage.setItem("selectedPlanName", selectedPlan.name);
-      localStorage.setItem("selectedPlanPrice", price);
-      localStorage.setItem("selectedPlanCurrency", selectedPlan.currency || "INR");
+      sessionStorage.setItem("selectedPlanName", selectedPlan.name);
+      sessionStorage.setItem("selectedPlanPrice", price);
+      sessionStorage.setItem("selectedPlanCurrency", selectedPlan.currency || "INR");
       router.push("/vendor/registration");
     }
   };`;

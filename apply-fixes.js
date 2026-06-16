@@ -19,8 +19,8 @@ if (!content.includes('selectedPlanNameState')) {
 
   useEffect(() => {
     if (typeof window !== "undefined") {
-      setSelectedPlanNameState(localStorage.getItem("selectedPlanName"));
-      setSelectedPlanPriceState(localStorage.getItem("selectedPlanPrice"));
+      setSelectedPlanNameState(sessionStorage.getItem("selectedPlanName"));
+      setSelectedPlanPriceState(sessionStorage.getItem("selectedPlanPrice"));
     }
   }, []);`
   );

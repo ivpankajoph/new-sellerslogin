@@ -49,11 +49,11 @@ const Page = () => {
       const price = getPlanBillingTotal(selectedPlan, billingCycle, selectedCurrency);
       const displayedPrice = getPlanDisplayPrice(selectedPlan, billingCycle, selectedCurrency);
 
-      localStorage.setItem("selectedPlanName", selectedPlan.name);
-      localStorage.setItem("selectedPlanPrice", String(price));
-      localStorage.setItem("selectedPlanCurrency", selectedCurrency);
-      localStorage.setItem("selectedPlanBillingCycle", billingCycle);
-      localStorage.setItem("selectedPlanDisplayedPrice", displayedPrice || selectedPlan.priceMonthly);
+      sessionStorage.setItem("selectedPlanName", selectedPlan.name);
+      sessionStorage.setItem("selectedPlanPrice", String(price));
+      sessionStorage.setItem("selectedPlanCurrency", selectedCurrency);
+      sessionStorage.setItem("selectedPlanBillingCycle", billingCycle);
+      sessionStorage.setItem("selectedPlanDisplayedPrice", displayedPrice || selectedPlan.priceMonthly);
       
       router.push("/vendor/registration");
     }

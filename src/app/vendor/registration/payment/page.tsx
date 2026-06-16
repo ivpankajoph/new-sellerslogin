@@ -1,47 +1,109 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+import { useEffect, useState, useSyncExternalStore } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
 import Image from "next/image";
-import { CreditCard, ArrowRight } from "lucide-react";
+import { CreditCard, ArrowRight, CheckCircle2 } from "lucide-react";
 import type { RootState, AppDispatch } from "@/store";
 import { updateVendorBusiness } from "@/store/slices/vendorSlice";
 import { INDIAN_STATES } from "@/lib/constants";
 import { buildAdminAutoLoginUrl } from "@/lib/utils";
 import { billingCycleLabels, defaultBillingCycle } from "@/lib/pricingData";
 
+type AuthVendor = {
+  name?: string;
+  business_name?: string;
+  email?: string;
+  phone_no?: string;
+  phone?: string;
+  role?: string;
+};
+
+type RazorpayPaymentResponse = {
+  razorpay_order_id: string;
+  razorpay_payment_id: string;
+  razorpay_signature: string;
+};
+
+type RazorpayFailedResponse = {
+  error?: {
+    description?: string;
+  };
+};
+
+type RazorpayInstance = {
+  open: () => void;
+  on: (event: "payment.failed", callback: (response: RazorpayFailedResponse) => void) => void;
+};
+
+type RazorpayConstructor = new (options: Record<string, unknown>) => RazorpayInstance;
+
+const subscribeToHydration = () => () => {};
+const getClientHydrationSnapshot = () => true;
+const getServerHydrationSnapshot = () => false;
+
+const getUrlParam = (key: string) => {
+  if (typeof window === "undefined") return "";
+  return new URLSearchParams(window.location.search).get(key) || "";
+};
+
+const getSessionValue = (key: string, fallback = "", urlKey = key) => {
+  if (typeof window === "undefined") return fallback;
+  return getUrlParam(urlKey) || sessionStorage.getItem(key) || fallback;
+};
+
+const getSessionPlanPrice = () => {
+  const planPrice = getSessionValue("selectedPlanPrice", "14364", "planPrice");
+  return parseInt(planPrice.replace(/\D/g, ""), 10) || 14364;
+};
+
+const getErrorMessage = (error: unknown, fallback: string) =>
+  error instanceof Error ? error.message : fallback;
+
 export default function PaymentPendingPage() {
-  const router = useRouter();
+  const hasMounted = useSyncExternalStore(
+    subscribeToHydration,
+    getClientHydrationSnapshot,
+    getServerHydrationSnapshot,
+  );
   const token = useSelector(
-    (state: RootState) => (state as any).auth?.token ?? "",
+    (state: RootState) => state.auth?.token ?? "",
   );
   const authUser = useSelector(
-    (state: RootState) => (state as any).auth?.data ?? null,
-  );
+    (state: RootState) => state.auth?.data ?? null,
+  ) as AuthVendor | null;
 
   const dispatch = useDispatch<AppDispatch>();
 
-  const [selectedPlanName, setSelectedPlanName] = useState("");
-  const [numericPrice, setNumericPrice] = useState(0);
-  const [currency, setCurrency] = useState("INR");
-  const [billingCycle, setBillingCycle] = useState(defaultBillingCycle);
-  const [displayedPrice, setDisplayedPrice] = useState("");
+  const [selectedPlanName] = useState(() => getSessionValue("selectedPlanName", "Startup", "planName"));
+  const [numericPrice, setNumericPrice] = useState(getSessionPlanPrice);
+  const [currency] = useState(() => getSessionValue("selectedPlanCurrency", "INR", "currency"));
+  const [billingCycle] = useState(() => getSessionValue("selectedPlanBillingCycle", defaultBillingCycle, "billingCycle"));
+  const [displayedPrice] = useState(() => getSessionValue("selectedPlanDisplayedPrice", "INR 399/mo", "planDisplayedPrice"));
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [adminRedirectUrl, setAdminRedirectUrl] = useState("");
-  const [originalPrice, setOriginalPrice] = useState(0);
+  const [adminRedirectUrl] = useState(() => getSessionValue("vendor_post_payment_redirect", "", "redirectBack"));
+  const [originalPrice] = useState(getSessionPlanPrice);
   const [referralCodeInput, setReferralCodeInput] = useState("");
   const [appliedReferral, setAppliedReferral] = useState("");
   const [isApplyingReferral, setIsApplyingReferral] = useState(false);
   const [referralError, setReferralError] = useState("");
-  const [vendorPhone, setVendorPhone] = useState("");
+  const [vendorPhone] = useState(() => getSessionValue("vendor_phone", ""));
+  const [vendorEmail, setVendorEmail] = useState(() => getSessionValue("vendor_email", "", "vendorEmail"));
+  const [paymentSuccess, setPaymentSuccess] = useState<{
+    email: string;
+    planName: string;
+    billingCycleLabel: string;
+    amount: number;
+    paymentId: string;
+    dashboardUrl: string;
+  } | null>(null);
 
   const [addressLine1, setAddressLine1] = useState("");
   const [addressLine2, setAddressLine2] = useState("");
   const [city, setCity] = useState("");
   const [state, setState] = useState("");
-  const [country, setCountry] = useState("India");
+  const [country] = useState("India");
   const [pincode, setPincode] = useState("");
 
   const isAddressFilled = addressLine1.trim() !== "" && city.trim() !== "" && state.trim() !== "" && pincode.trim() !== "";
@@ -56,42 +118,26 @@ export default function PaymentPendingPage() {
       const tokenParam = urlParams.get("token");
       const planNameParam = urlParams.get("planName");
       const redirectBackParam = urlParams.get("redirectBack");
+      const vendorEmailParam = urlParams.get("vendorEmail");
 
       if (tokenParam && planNameParam) {
         sessionStorage.setItem("vendor_auth_token", tokenParam);
-        localStorage.setItem("selectedPlanName", planNameParam);
-        localStorage.setItem("selectedPlanPrice", urlParams.get("planPrice") || "14364");
-        localStorage.setItem("selectedPlanCurrency", urlParams.get("currency") || "INR");
-        localStorage.setItem("selectedPlanBillingCycle", urlParams.get("billingCycle") || defaultBillingCycle);
-        localStorage.setItem("selectedPlanDisplayedPrice", urlParams.get("planDisplayedPrice") || "INR 399/mo");
+        sessionStorage.setItem("selectedPlanName", planNameParam);
+        sessionStorage.setItem("selectedPlanPrice", urlParams.get("planPrice") || "14364");
+        sessionStorage.setItem("selectedPlanCurrency", urlParams.get("currency") || "INR");
+        sessionStorage.setItem("selectedPlanBillingCycle", urlParams.get("billingCycle") || defaultBillingCycle);
+        sessionStorage.setItem("selectedPlanDisplayedPrice", urlParams.get("planDisplayedPrice") || "INR 399/mo");
+        if (vendorEmailParam) {
+          sessionStorage.setItem("vendor_email", vendorEmailParam);
+        }
         
         if (redirectBackParam) {
           sessionStorage.setItem("vendor_post_payment_redirect", redirectBackParam);
         }
 
-        window.location.href = window.location.pathname;
-        return;
+        window.history.replaceState(null, "", window.location.pathname);
       }
 
-      const planName = localStorage.getItem("selectedPlanName") || "Startup";
-      const planPrice = localStorage.getItem("selectedPlanPrice") || "14364";
-      const planCurrency =
-        localStorage.getItem("selectedPlanCurrency") || "INR";
-      const planBillingCycle = localStorage.getItem("selectedPlanBillingCycle") || defaultBillingCycle;
-      const planDisplayedPrice = localStorage.getItem("selectedPlanDisplayedPrice") || "INR 399/mo";
-      const redirectUrl =
-        sessionStorage.getItem("vendor_post_payment_redirect") || "";
-      const savedPhone = localStorage.getItem("vendor_phone") || sessionStorage.getItem("vendor_phone") || "";
-
-      setSelectedPlanName(planName);
-      const parsedPrice = parseInt(planPrice.replace(/\D/g, ""), 10) || 14364;
-      setNumericPrice(parsedPrice);
-      setOriginalPrice(parsedPrice);
-      setCurrency(planCurrency);
-      setBillingCycle(planBillingCycle);
-      setDisplayedPrice(planDisplayedPrice);
-      setAdminRedirectUrl(redirectUrl);
-      setVendorPhone(savedPhone);
     }
   }, []);
 
@@ -137,7 +183,7 @@ export default function PaymentPendingPage() {
       } else {
         setReferralError(data.message || "Invalid referral code.");
       }
-    } catch (err) {
+    } catch {
       setReferralError("Something went wrong. Please try again.");
     } finally {
       setIsApplyingReferral(false);
@@ -175,6 +221,9 @@ export default function PaymentPendingPage() {
     }
   };
 
+  const getDashboardUrl = () =>
+    adminRedirectUrl || buildAdminAutoLoginUrl({ token, vendor: authUser });
+
   const handlePayNow = async () => {
     if (!token) {
       Swal.fire(
@@ -209,7 +258,7 @@ export default function PaymentPendingPage() {
       
       try {
         await dispatch(updateVendorBusiness({ formData })).unwrap();
-      } catch (err: any) {
+      } catch {
         Swal.fire("Error", "Failed to save address details.", "error");
         setIsSubmitting(false);
         return;
@@ -236,6 +285,9 @@ export default function PaymentPendingPage() {
       const orderData = await orderRes.json();
 
       if (orderData.success && orderData.data) {
+        if (!vendorEmail && orderData.data.customer?.email) {
+          setVendorEmail(orderData.data.customer.email);
+        }
         const loadRazorpay = () =>
           new Promise((resolve) => {
             if (
@@ -262,7 +314,7 @@ export default function PaymentPendingPage() {
           name: "Sellers Login",
           description: `Subscription for ${selectedPlanName} Plan`,
           order_id: orderData.data.order_id,
-          handler: async function (response: any) {
+          handler: async function (response: RazorpayPaymentResponse) {
             try {
               const verifyRes = await fetch(
                 `${process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000/api/v1"}/vendor/billing/verify`,
@@ -280,38 +332,46 @@ export default function PaymentPendingPage() {
                 },
               );
               const verifyData = await verifyRes.json();
-              if (verifyData.success) {
+              const planIsActive = Boolean(verifyData.data?.plan?.is_premium_active);
+              if (verifyData.success && planIsActive) {
+                const enabledEmail =
+                  verifyData.data?.vendor?.email ||
+                  orderData.data.customer?.email ||
+                  vendorEmail ||
+                  authUser?.email ||
+                  "";
+                const dashboardUrl = getDashboardUrl();
                 if (typeof window !== "undefined") {
-                  localStorage.removeItem("vendor_phone");
-                  localStorage.removeItem("vendor_country_code");
-                  localStorage.removeItem("vendor_email");
-                  localStorage.removeItem("vendor_registration_step");
                   sessionStorage.removeItem("vendor_phone");
                   sessionStorage.removeItem("vendor_country_code");
-                  sessionStorage.removeItem("vendor_email");
                   sessionStorage.removeItem("vendor_registration_step");
+                  sessionStorage.removeItem("selectedPlanName");
+                  sessionStorage.removeItem("selectedPlanPrice");
+                  sessionStorage.removeItem("selectedPlanCurrency");
+                  sessionStorage.removeItem("selectedPlanBillingCycle");
+                  sessionStorage.removeItem("selectedPlanDisplayedPrice");
                 }
-                Swal.fire("Success", "Payment successful!", "success").then(
-                  () => {
-                    if (adminRedirectUrl) {
-                      window.location.replace(adminRedirectUrl);
-                    } else {
-                      window.location.replace(buildAdminAutoLoginUrl({ token, vendor: authUser }));
-                    }
-                  },
-                );
+                setPaymentSuccess({
+                  email: enabledEmail || "this vendor account",
+                  planName: selectedPlanName,
+                  billingCycleLabel,
+                  amount: finalPrice,
+                  paymentId: response.razorpay_payment_id,
+                  dashboardUrl,
+                });
+                setIsSubmitting(false);
               } else {
                 console.error("Verification failed:", JSON.stringify(verifyData));
                 Swal.fire(
                   "Error",
-                  verifyData.message || "Payment verification failed. Please contact support.",
+                  verifyData.message || "Payment verification failed or plan activation was not confirmed. Please contact support.",
                   "error",
                 );
                 setIsSubmitting(false);
               }
-            } catch (err: any) {
+            } catch (err: unknown) {
               console.error("Error calling verify endpoint:", err);
-              Swal.fire("Error", err.message || "Failed to verify payment.", "error");
+              Swal.fire("Error", getErrorMessage(err, "Failed to verify payment."), "error");
               setIsSubmitting(false);
             }
           },
@@ -335,11 +395,18 @@ export default function PaymentPendingPage() {
           },
         };
 
-        const rzp = new (window as any).Razorpay(options);
-        rzp.on("payment.failed", function (response: any) {
+        const Razorpay = (window as Window & { Razorpay?: RazorpayConstructor }).Razorpay;
+        if (!Razorpay) {
+          Swal.fire("Error", "Failed to load payment gateway.", "error");
+          setIsSubmitting(false);
+          return;
+        }
+
+        const rzp = new Razorpay(options);
+        rzp.on("payment.failed", function (response: RazorpayFailedResponse) {
           Swal.fire(
             "Error",
-            response.error.description || "Payment failed",
+            response.error?.description || "Payment failed",
             "error",
           );
           setIsSubmitting(false);
@@ -355,6 +422,55 @@ export default function PaymentPendingPage() {
       setIsSubmitting(false);
     }
   };
+
+  if (!hasMounted) {
+    return (
+      <div className="flex min-h-screen items-center justify-center bg-slate-50 px-4">
+        <div className="vendor-surface-card px-8 py-6 text-center text-sm font-semibold text-slate-600 shadow-xl shadow-slate-200/50">
+          Loading payment details...
+        </div>
+      </div>
+    );
+  }
+
+  if (paymentSuccess) {
+    return (
+      <div className="flex min-h-screen items-center justify-center bg-slate-50 px-4 py-12">
+        <main className="w-full max-w-2xl">
+          <div className="vendor-surface-card p-8 text-center shadow-xl shadow-slate-200/50 sm:p-12">
+            <span className="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-emerald-100 text-emerald-700 ring-1 ring-emerald-200">
+              <CheckCircle2 className="h-10 w-10" />
+            </span>
+            <p className="vendor-step-pill mt-8 bg-emerald-50 text-emerald-700">
+              Payment Done
+            </p>
+            <h1 className="vendor-display mt-4 text-3xl font-bold tracking-[-0.04em] text-slate-950 sm:text-4xl">
+              Plan enabled successfully
+            </h1>
+            <p className="mx-auto mt-5 max-w-xl text-base leading-8 text-slate-600">
+              Your <strong className="text-slate-950">{paymentSuccess.planName}</strong> plan ({paymentSuccess.billingCycleLabel}) is now active for{" "}
+              <strong className="text-violet-700">{paymentSuccess.email}</strong>.
+            </p>
+            <div className="mt-6 rounded-xl border border-emerald-200 bg-emerald-50 p-4 text-left text-sm text-emerald-900">
+              <p><strong>Amount paid:</strong> {currency} {paymentSuccess.amount}</p>
+              <p className="mt-1"><strong>Payment ID:</strong> {paymentSuccess.paymentId}</p>
+            </div>
+            <button
+              type="button"
+              onClick={() => window.location.replace(paymentSuccess.dashboardUrl)}
+              className="mt-8 inline-flex min-h-14 w-full items-center justify-center gap-2 border border-violet-700 bg-violet-700 px-10 text-base font-semibold text-white transition hover:bg-violet-800 sm:w-auto"
+            >
+              Go to dashboard
+              <ArrowRight className="h-5 w-5" />
+            </button>
+            <p className="mt-4 text-sm text-slate-500">
+              You can confirm activation from the dashboard billing section.
+            </p>
+          </div>
+        </main>
+      </div>
+    );
+  }
 
   const showPlanDetails = () => {
     let featuresHtml = "";
@@ -432,6 +548,10 @@ export default function PaymentPendingPage() {
               your payment for the <strong onClick={showPlanDetails} className="text-red-600 underline cursor-pointer hover:text-red-700 underline-offset-4 decoration-dashed decoration-red-600/50 transition-colors" title="View Plan Details">{selectedPlanName}</strong> plan ({billingCycleLabel}) to activate your
               dashboard.
             </p>
+            <div className="mx-auto mt-5 max-w-xl rounded-xl border border-violet-200 bg-violet-50 px-4 py-3 text-sm text-violet-900">
+              <span className="font-semibold">Activating account for:</span>{" "}
+              <span className="font-bold">{vendorEmail || authUser?.email || "Email not available"}</span>
+            </div>
 
             <div className="mt-8 text-left border border-slate-200 bg-slate-50/50 p-6 rounded-xl shadow-sm mb-8">
               <p className="text-sm font-bold text-slate-800 mb-5 flex items-center gap-2">
@@ -547,4 +667,3 @@ export default function PaymentPendingPage() {
     </div>
   );
 }
-

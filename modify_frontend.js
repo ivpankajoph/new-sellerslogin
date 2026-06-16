@@ -18,8 +18,8 @@ const replacementStr = `const result = await dispatch(updateVendorBusiness({ for
         });
 
         // RAZORPAY INTEGRATION START
-        const selectedPlanName = localStorage.getItem("selectedPlanName");
-        let selectedPlanPrice = localStorage.getItem("selectedPlanPrice");
+        const selectedPlanName = sessionStorage.getItem("selectedPlanName");
+        let selectedPlanPrice = sessionStorage.getItem("selectedPlanPrice");
 
         if (selectedPlanName && selectedPlanName !== "null" && selectedPlanPrice && selectedPlanPrice !== "null") {
            // Parse price to integer, stripping non-numeric characters
