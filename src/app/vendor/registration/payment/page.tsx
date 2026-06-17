@@ -657,7 +657,7 @@ export default function PaymentPendingPage() {
                   />
                   <button
                     type="button"
-                    onClick={handleApplyReferral}
+                    onClick={() => handleApplyReferral()}
                     disabled={isApplyingReferral}
                     className="inline-flex h-[46px] items-center justify-center rounded-md bg-slate-900 px-6 text-sm font-semibold text-white transition hover:bg-slate-800 disabled:opacity-70"
                   >

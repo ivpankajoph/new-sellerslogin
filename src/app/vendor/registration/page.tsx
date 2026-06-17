@@ -683,7 +683,7 @@ export default function VendorRegistrationPage() {
               </div>
             </div>
             <div className="flex items-center gap-2">
-              <Link href="/pricing" className="text-xs font-bold text-slate-700 hover:text-slate-900 border border-slate-300 px-4 py-1.5 rounded-none shadow-sm hover:shadow transition-all bg-white">
+              <Link href="/pricing/b2c" className="text-xs font-bold text-slate-700 hover:text-slate-900 border border-slate-300 px-4 py-1.5 rounded-none shadow-sm hover:shadow transition-all bg-white">
                 Change Plan
               </Link>
               <button 
