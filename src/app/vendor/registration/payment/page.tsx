@@ -7,7 +7,7 @@ import Image from "next/image";
 import { CreditCard, ArrowRight, CheckCircle2 } from "lucide-react";
 import type { RootState, AppDispatch } from "@/store";
 import { updateVendorBusiness } from "@/store/slices/vendorSlice";
-import { INDIAN_STATES } from "@/lib/constants";
+import { INDIAN_STATES, validateGST } from "@/lib/constants";
 import { buildAdminAutoLoginUrl } from "@/lib/utils";
 import { billingCycleLabels, defaultBillingCycle } from "@/lib/pricingData";
 
@@ -61,6 +61,8 @@ const getSessionPlanPrice = () => {
 const getErrorMessage = (error: unknown, fallback: string) =>
   error instanceof Error ? error.message : fallback;
 
+const AUTO_APPLY_REFERRAL_CODE = "SBAGGPANK";
+
 export default function PaymentPendingPage() {
   const hasMounted = useSyncExternalStore(
     subscribeToHydration,
@@ -106,6 +108,7 @@ export default function PaymentPendingPage() {
   const [state, setState] = useState("");
   const [country] = useState("India");
   const [pincode, setPincode] = useState("");
+  const [gstNumber, setGstNumber] = useState("");
 
   const isAddressFilled = addressLine1.trim() !== "" && city.trim() !== "" && state.trim() !== "" && pincode.trim() !== "";
   const effectiveToken = launchToken || token || "";
@@ -150,8 +153,10 @@ export default function PaymentPendingPage() {
     }
   }, []);
 
-  const handleApplyReferral = async () => {
-    if (!referralCodeInput.trim()) {
+  const handleApplyReferral = async (codeOverride?: string) => {
+    const referralCode = (codeOverride ?? referralCodeInput).trim().toUpperCase();
+
+    if (!referralCode) {
       setReferralError("Please enter a referral code.");
       return;
     }
@@ -167,7 +172,7 @@ export default function PaymentPendingPage() {
             "Content-Type": "application/json",
             Authorization: `Bearer ${effectiveToken}`,
           },
-          body: JSON.stringify({ referral_code: referralCodeInput.trim() }),
+          body: JSON.stringify({ referral_code: referralCode }),
         },
       );
       const data = await res.json();
@@ -186,7 +191,7 @@ export default function PaymentPendingPage() {
             no-repeat
           `, // Animated way
         });
-        setAppliedReferral(referralCodeInput.trim());
+        setAppliedReferral(referralCode);
         setNumericPrice(data.amount || 1);
         setReferralCodeInput("");
       } else {
@@ -208,7 +213,14 @@ export default function PaymentPendingPage() {
 
   const handleBypass = async () => {
     setIsSubmitting(true);
-    if (addressLine1 || city || state || pincode) {
+    const normalizedGstNumber = gstNumber.trim().toUpperCase();
+    if (normalizedGstNumber && !validateGST(normalizedGstNumber)) {
+      Swal.fire("Invalid GSTIN", "Please enter a valid GST number for GST bill.", "warning");
+      setIsSubmitting(false);
+      return;
+    }
+
+    if (addressLine1 || city || state || pincode || normalizedGstNumber) {
       const formData = new FormData();
       formData.append("address_line_1", addressLine1.trim() || "NA");
       formData.append("address_line_2", addressLine2.trim());
@@ -216,6 +228,9 @@ export default function PaymentPendingPage() {
       formData.append("state", state.trim() || "NA");
       formData.append("country", country.trim() || "India");
       formData.append("pincode", pincode.trim() || "000000");
+      if (normalizedGstNumber) {
+        formData.append("gst_number", normalizedGstNumber);
+      }
       try {
         await dispatch(updateVendorBusiness({ formData, tokenOverride: effectiveToken })).unwrap();
       } catch (err) {
@@ -254,6 +269,12 @@ export default function PaymentPendingPage() {
       return;
     }
 
+    const normalizedGstNumber = gstNumber.trim().toUpperCase();
+    if (normalizedGstNumber && !validateGST(normalizedGstNumber)) {
+      Swal.fire("Invalid GSTIN", "Please enter a valid GST number for GST bill.", "warning");
+      return;
+    }
+
     setIsSubmitting(true);
 
     try {
@@ -264,6 +285,9 @@ export default function PaymentPendingPage() {
       formData.append("state", state.trim());
       formData.append("country", country.trim());
       formData.append("pincode", pincode.trim());
+      if (normalizedGstNumber) {
+        formData.append("gst_number", normalizedGstNumber);
+      }
       
       try {
         await dispatch(updateVendorBusiness({ formData, tokenOverride: effectiveToken })).unwrap();
@@ -597,6 +621,17 @@ export default function PaymentPendingPage() {
                   <label className="mb-1.5 block text-xs font-bold tracking-widest text-slate-500">PINCODE <span className="text-red-500">*</span></label>
                   <input type="text" value={pincode} onChange={e => setPincode(e.target.value)} className="w-full rounded-md border border-slate-300 px-4 py-3 text-sm focus:border-violet-700 focus:outline-none focus:ring-1 focus:ring-violet-700 transition-all shadow-sm" placeholder="6-digit Pincode" />
                 </div>
+                <div className="sm:col-span-2">
+                  <label className="mb-1.5 block text-xs font-bold tracking-widest text-slate-500">GST BILL GSTIN <span className="font-semibold tracking-normal text-slate-400">(OPTIONAL)</span></label>
+                  <input
+                    type="text"
+                    value={gstNumber}
+                    onChange={(e) => setGstNumber(e.target.value.toUpperCase())}
+                    className="w-full rounded-md border border-slate-300 px-4 py-3 text-sm focus:border-violet-700 focus:outline-none focus:ring-1 focus:ring-violet-700 transition-all shadow-sm"
+                    placeholder="Enter GSTIN for GST bill"
+                    maxLength={15}
+                  />
+                </div>
               </div>
             </div>
 
@@ -607,9 +642,17 @@ export default function PaymentPendingPage() {
                     type="text"
                     placeholder="Have a referral code?"
                     value={referralCodeInput}
-                    onChange={(e) =>
-                      setReferralCodeInput(e.target.value.toUpperCase())
-                    }
+                    onChange={(e) => {
+                      const nextValue = e.target.value.toUpperCase();
+                      setReferralCodeInput(nextValue);
+                      if (
+                        nextValue === AUTO_APPLY_REFERRAL_CODE &&
+                        appliedReferral !== AUTO_APPLY_REFERRAL_CODE &&
+                        !isApplyingReferral
+                      ) {
+                        void handleApplyReferral(nextValue);
+                      }
+                    }}
                     className="flex-1 rounded-md border border-slate-300 px-4 py-3 text-sm focus:border-violet-500 focus:outline-none focus:ring-1 focus:ring-violet-500"
                   />
                   <button
