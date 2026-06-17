@@ -16,6 +16,7 @@ const labelIcons: Record<string, React.ReactNode> = {
   "Track Your Order": <FileText className="w-4.5 h-4.5 text-gray-500" strokeWidth={1.5} />,
   "FAQs": <LifeBuoy className="w-4.5 h-4.5 text-gray-500" strokeWidth={1.5} />,
   "Grievance Officer": <ShieldAlert className="w-4.5 h-4.5 text-gray-500" strokeWidth={1.5} />,
+  "User Data Deletion": <ShieldAlert className="w-4.5 h-4.5 text-gray-500" strokeWidth={1.5} />,
   "About Sellers Login": <Info className="w-4.5 h-4.5 text-gray-500" strokeWidth={1.5} />,
   "Careers": <Briefcase className="w-4.5 h-4.5 text-gray-500" strokeWidth={1.5} />
 };
@@ -64,6 +65,7 @@ const footerColumns = [
         "Shipping and Delivery",
         "Return and Refund",
         "Warranty Policy",
+        "User Data Deletion",
       ],
     },
     {
@@ -98,6 +100,7 @@ const footerHrefByLabel: Record<string, string> = {
   "Track Your Order": "/track-order",
   "FAQs": "/resources/faq",
   "Grievance Officer": "/grievance",
+  "User Data Deletion": "/data-deletion",
   "About Sellers Login": "/about",
   "Careers": "/careers",
   ...Object.values(navPageGroups)
