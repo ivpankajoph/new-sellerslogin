@@ -5,6 +5,7 @@ import "./globals.css";
 
 import { ClientProvider } from "@/components/ClientProvider";
 
+
 export const metadata: Metadata = {
   title: "Sellers Login | Your Business Growth Partner | E-commerce Making Platform",
   description:
