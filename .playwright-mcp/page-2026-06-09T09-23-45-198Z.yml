@@ -869,7 +869,7 @@
             - generic [ref=e1536]:
               - paragraph [ref=e1537]: No, there is no separate dashboard fee.
               - paragraph [ref=e1538]: Many companies charge a monthly fee like ₹899 or ₹999 just for providing a dashboard, and then they also charge separately for messages.
-              - paragraph [ref=e1539]: But in SellersLogin.com, there is no extra charge for the dashboard.
+              - paragraph [ref=e1539]: But in Sellers Login.com, there is no extra charge for the dashboard.
               - paragraph [ref=e1540]: You only pay for the messages you send, nothing else. The dashboard is completely free to use.
         - generic [ref=e1542]:
           - button "Do we need to pay separately for email marketing automation?" [ref=e1543] [cursor=pointer]:
@@ -983,10 +983,10 @@
     - generic [ref=e1676]:
       - generic [ref=e1677]:
         - generic [ref=e1678]:
-          - link "SellersLogin Logo SellersLogin" [ref=e1679] [cursor=pointer]:
+          - link "Sellers Login Logo Sellers Login" [ref=e1679] [cursor=pointer]:
             - /url: /#hero
-            - img "SellersLogin Logo" [ref=e1681]
-            - generic [ref=e1682]: SellersLogin
+            - img "Sellers Login Logo" [ref=e1681]
+            - generic [ref=e1682]: Sellers Login
           - button "Subscribe" [ref=e1687] [cursor=pointer]
           - generic [ref=e1689]:
             - img [ref=e1690]
@@ -1137,6 +1137,6 @@
                   - generic [ref=e1850]: Grievance Officer
       - generic [ref=e1851]:
         - paragraph [ref=e1852]: "Seller Login: Brand under Life Changing Networks Pvt Ltd"
-        - paragraph [ref=e1853]: © All Rights Reserved 2026 with SellersLogin ( Under Life Changing Networks Pvt Ltd )
+        - paragraph [ref=e1853]: © All Rights Reserved 2026 with Sellers Login ( Under Life Changing Networks Pvt Ltd )
   - button "Open Next.js Dev Tools" [ref=e1859] [cursor=pointer]:
     - img [ref=e1860]

@@ -2073,7 +2073,7 @@ export default function VendorBusinessDetailsPage() {
             <div className="flex items-center gap-3">
               <Image
                 src="/sellerslogin-logo.svg"
-                alt="SellersLogin"
+                alt="Sellers Login"
                 width={44}
                 height={44}
                 className="h-11 w-11"
@@ -2120,14 +2120,14 @@ export default function VendorBusinessDetailsPage() {
           <Link href={mainSiteUrl} className="flex min-w-0 items-center gap-3" {...newTabProps}>
             <Image
               src="/sellerslogin-logo.svg"
-              alt="SellersLogin logo"
+              alt="Sellers Login logo"
               width={48}
               height={48}
               priority
               className="h-12 w-12 shrink-0"
             />
             <div className="min-w-0">
-              <p className="text-2xl font-bold tracking-tight text-slate-950">SellersLogin</p>
+              <p className="text-2xl font-bold tracking-tight text-slate-950">Sellers Login</p>
             </div>
           </Link>
         </div>

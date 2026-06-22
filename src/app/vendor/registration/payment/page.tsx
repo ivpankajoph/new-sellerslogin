@@ -701,7 +701,7 @@ export default function PaymentPendingPage() {
             <div className="mt-8 flex items-center justify-center gap-2 text-sm text-slate-500">
               <Image
                 src="/sellerslogin-logo.svg"
-                alt="SellersLogin"
+                alt="Sellers Login"
                 width={20}
                 height={20}
               />

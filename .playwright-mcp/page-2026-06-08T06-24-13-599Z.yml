@@ -45,8 +45,8 @@
           - generic [ref=e34]:
             - img [ref=e35]
             - text: Company
-          - heading "About SellersLogin" [level=1] [ref=e38]
-          - paragraph [ref=e39]: SellersLogin is a commerce operations platform built for sellers, brands, distributors, and service teams that need one workspace for storefronts, orders, inventory, payments, delivery coordination, analytics, and automation.
+          - heading "About Sellers Login" [level=1] [ref=e38]
+          - paragraph [ref=e39]: Sellers Login is a commerce operations platform built for sellers, brands, distributors, and service teams that need one workspace for storefronts, orders, inventory, payments, delivery coordination, analytics, and automation.
         - complementary [ref=e40]:
           - heading "Quick details" [level=2] [ref=e41]
           - generic [ref=e42]:
@@ -80,7 +80,7 @@
             - generic [ref=e82]: Operational visibility across catalog, inventory, payments, customer activity, and fulfillment.
       - article [ref=e83]:
         - heading "Who we serve" [level=2] [ref=e84]
-        - paragraph [ref=e85]: SellersLogin is designed for Indian and global businesses that want structured ecommerce operations without stitching together disconnected tools.
+        - paragraph [ref=e85]: Sellers Login is designed for Indian and global businesses that want structured ecommerce operations without stitching together disconnected tools.
         - list [ref=e86]:
           - listitem [ref=e87]:
             - img [ref=e88]
@@ -106,11 +106,11 @@
             - generic [ref=e120]: Make seller onboarding, tracking, and support easier to manage at scale.
       - article [ref=e121]:
         - heading "Company details" [level=2] [ref=e122]
-        - paragraph [ref=e123]: SellersLogin operates under Life Changing Networks Pvt Ltd and maintains support and business communication through the listed contact channels.
+        - paragraph [ref=e123]: Sellers Login operates under Life Changing Networks Pvt Ltd and maintains support and business communication through the listed contact channels.
         - list [ref=e124]:
           - listitem [ref=e125]:
             - img [ref=e126]
-            - generic [ref=e129]: "Brand: SellersLogin under Life Changing Networks Pvt Ltd."
+            - generic [ref=e129]: "Brand: Sellers Login under Life Changing Networks Pvt Ltd."
           - listitem [ref=e130]:
             - img [ref=e131]
             - generic [ref=e134]: "Office address: 1405, Gaur City 2, Noida Extension, Ghaziabad 201009, UP, India."
@@ -137,12 +137,12 @@
     - generic [ref=e160]:
       - generic [ref=e161]:
         - generic [ref=e162]:
-          - link "SellersLogin Logo SellersLogin" [ref=e163] [cursor=pointer]:
+          - link "Sellers Login Logo Sellers Login" [ref=e163] [cursor=pointer]:
             - /url: /#hero
-            - img "SellersLogin Logo" [ref=e165]
-            - generic [ref=e166]: SellersLogin
+            - img "Sellers Login Logo" [ref=e165]
+            - generic [ref=e166]: Sellers Login
           - generic [ref=e167]:
-            - paragraph [ref=e168]: "Brand : SellersLogin ( Under Life Changing Networks Pvt Ltd )"
+            - paragraph [ref=e168]: "Brand : Sellers Login ( Under Life Changing Networks Pvt Ltd )"
             - paragraph [ref=e169]:
               - img [ref=e170]
               - generic [ref=e173]: 1405, Gaur city 2, Noida Extension, 10th Avenue, Ghaziabad 201009, UP, India
@@ -255,10 +255,10 @@
               - heading "Company" [level=4] [ref=e279]
               - list [ref=e280]:
                 - listitem [ref=e281]:
-                  - link "About SellersLogin" [ref=e282] [cursor=pointer]:
+                  - link "About Sellers Login" [ref=e282] [cursor=pointer]:
                     - /url: /about
                     - img [ref=e284]
-                    - generic [ref=e286]: About SellersLogin
+                    - generic [ref=e286]: About Sellers Login
                 - listitem [ref=e287]:
                   - link "Careers" [ref=e288] [cursor=pointer]:
                     - /url: /careers
@@ -292,7 +292,7 @@
                   - img [ref=e333]
                   - generic [ref=e335]: Grievance Officer
       - generic [ref=e337]:
-        - text: All Rights Reserved 2026 with SellersLogin
+        - text: All Rights Reserved 2026 with Sellers Login
         - link "info@sellerslogin.com" [ref=e338] [cursor=pointer]:
           - /url: mailto:info@sellerslogin.com
   - button "Open Next.js Dev Tools" [ref=e344] [cursor=pointer]:

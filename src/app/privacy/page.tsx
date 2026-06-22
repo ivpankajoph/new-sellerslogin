@@ -24,7 +24,7 @@ export default function PrivacyPage() {
           
           <h2 className="text-2xl font-bold text-gray-900 mt-10 mb-4">1. Information We Collect</h2>
           <p className="mb-4">
-            Sellers Login (&quot;we,&quot; &quot;us,&quot; or &quot;our&quot;) collects information that you provide directly to us when you register for an account, use our e-commerce platform, subscribe to our newsletter, or communicate with us. This may include your name, email address, billing address, and payment information.
+            Sellers Login (owned and operated by Life Changing Networks Private Limited) (&quot;we,&quot; &quot;us,&quot; or &quot;our&quot;) collects information that you provide directly to us when you register for an account, use our e-commerce platform, subscribe to our newsletter, or communicate with us. This may include your name, email address, billing address, and payment information.
           </p>
 
           <h2 className="text-2xl font-bold text-gray-900 mt-10 mb-4">2. How We Use Your Information</h2>

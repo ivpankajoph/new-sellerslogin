@@ -93,7 +93,7 @@ export default function VendorBannerVideo() {
       <div className="relative mx-auto flex min-h-[calc(100vh-89px)] max-w-7xl items-end px-6 pb-16 pt-24 sm:pb-20 sm:pt-28 lg:px-10 lg:pb-24">
         <div className="max-w-3xl text-white">
           <p className="text-sm font-medium uppercase tracking-[0.34em] text-white/70 sm:text-base">
-            SellersLogin
+            Sellers Login
           </p>
           <h1 className="mt-5 text-5xl font-light tracking-[-0.06em] text-white sm:text-6xl lg:text-8xl lg:leading-[0.92]">
             Become a Vendor

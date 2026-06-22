@@ -170,9 +170,9 @@ export function FooterSection() {
               className="inline-flex items-center gap-3 no-underline focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-400 focus-visible:ring-offset-2 rounded-full relative"
             >
               <div className="relative w-12 h-12 bg-white rounded-xl shadow-sm overflow-hidden p-1.5 shrink-0">
-                <Image src="/sellerslogin-logo (1).svg" alt="SellersLogin Logo" fill sizes="48px" className="object-contain" />
+                <Image src="/sellerslogin-logo (1).svg" alt="Sellers Login Logo" fill sizes="48px" className="object-contain" />
               </div>
-              <span className="text-2xl font-bold text-gray-900 leading-none">SellersLogin</span>
+              <span className="text-2xl font-bold text-gray-900 leading-none">Sellers Login</span>
             </Link>
             <div className="mt-6 mb-5 text-sm text-gray-600 space-y-3">
              
@@ -214,11 +214,17 @@ export function FooterSection() {
               </div>
             </form>
             
-            <div className="mt-8">
+            <div className="mt-8 space-y-4">
+              <p className="text-sm text-gray-600 leading-relaxed">
+                Sellers Login is owned and operated by Life Changing Networks Private Limited.
+              </p>
               <div className="flex items-start gap-3">
                 <MapPin className="w-5 h-5 text-purple-500 shrink-0 mt-0.5" />
                 <address className="not-italic text-sm text-gray-600 leading-relaxed">
-                  1405, Gaur city 2, Noida Extension, 10th avenue, Ghaziabad 201009, UP, India
+                  KH NO- 190/3 Near Tigri Gol Chakkar<br />
+                  Akbarpur, Bherampur<br />
+                  Ghaziabad, Uttar Pradesh 201001<br />
+                  India
                 </address>
               </div>
             </div>
@@ -269,7 +275,10 @@ export function FooterSection() {
 
         <div className="flex flex-col items-center justify-center pt-8 border-t border-purple-200/60 mt-4 gap-2">
           <p className="text-sm text-gray-500 text-center">
-            &copy; All Rights Reserved {new Date().getFullYear()} with SellersLogin
+            Sellers Login is owned and operated by Life Changing Networks Private Limited.
+          </p>
+          <p className="text-sm text-gray-500 text-center">
+            &copy; All Rights Reserved {new Date().getFullYear()} with Sellers Login | A brand by Life Changing Network Pvt Ltd
           </p>
         </div>
       </div>

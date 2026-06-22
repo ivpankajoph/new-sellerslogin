@@ -237,12 +237,12 @@
       - generic [ref=e328]:
         - generic [ref=e329]:
           - generic [ref=e330]:
-            - link "SellersLogin Logo SellersLogin" [ref=e331] [cursor=pointer]:
+            - link "Sellers Login Logo Sellers Login" [ref=e331] [cursor=pointer]:
               - /url: /#hero
-              - img "SellersLogin Logo" [ref=e333]
-              - generic [ref=e334]: SellersLogin
+              - img "Sellers Login Logo" [ref=e333]
+              - generic [ref=e334]: Sellers Login
             - generic [ref=e335]:
-              - paragraph [ref=e336]: "Brand : SellersLogin ( Under Life Changing Networks Pvt Ltd )"
+              - paragraph [ref=e336]: "Brand : Sellers Login ( Under Life Changing Networks Pvt Ltd )"
               - paragraph [ref=e337]:
                 - img [ref=e338]
                 - generic [ref=e341]: 1405, Gaur city 2, Noida Extension, 10th Avenue, Ghaziabad 201009, UP, India
@@ -355,10 +355,10 @@
                 - heading "Company" [level=4] [ref=e447]
                 - list [ref=e448]:
                   - listitem [ref=e449]:
-                    - link "About SellersLogin" [ref=e450] [cursor=pointer]:
+                    - link "About Sellers Login" [ref=e450] [cursor=pointer]:
                       - /url: /about
                       - img [ref=e452]
-                      - generic [ref=e454]: About SellersLogin
+                      - generic [ref=e454]: About Sellers Login
                   - listitem [ref=e455]:
                     - link "Careers" [ref=e456] [cursor=pointer]:
                       - /url: /careers
@@ -392,7 +392,7 @@
                     - img [ref=e501]
                     - generic [ref=e503]: Grievance Officer
         - generic [ref=e505]:
-          - text: All Rights Reserved 2026 with SellersLogin
+          - text: All Rights Reserved 2026 with Sellers Login
           - link "info@sellerslogin.com" [ref=e506] [cursor=pointer]:
             - /url: mailto:info@sellerslogin.com
   - button "Open Next.js Dev Tools" [ref=e512] [cursor=pointer]:
