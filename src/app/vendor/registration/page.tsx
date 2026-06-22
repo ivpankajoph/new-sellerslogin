@@ -327,7 +327,7 @@ export default function VendorRegistrationPage() {
   const phoneOtpValue = phoneOtp.join("");
   const emailOtpValue = emailOtp.join("");
   const phoneDialCode = selectedCountry?.dialCode ?? "";
-  const isPhoneValid = Boolean(selectedCountry) && phoneDigits.length >= 6 && phoneDigits.length <= 15;
+  const isPhoneValid = Boolean(selectedCountry) && phoneDigits.length >= 8 && phoneDigits.length <= 15;
   const isEmailValid = emailPattern.test(email.trim());
   const currentEmailStep = isEmailStep(stage);
 
@@ -367,12 +367,6 @@ export default function VendorRegistrationPage() {
         currentEmailStep && stage === "email-otp"
           ? "Confirm email OTP"
           : "Verify email address",
-    },
-    {
-      label: "Step 3",
-      note: "Next",
-      status: "pending" as StepStatus,
-      title: "Submit business and banking details",
     },
   ];
 
@@ -576,20 +570,19 @@ export default function VendorRegistrationPage() {
 
     setIsSendingEmailOtp(true);
 
-    // Instant state transition and success popup
-    setEmail(normalizedEmail);
-    sessionStorage.setItem("vendor_email", normalizedEmail);
-    sessionStorage.setItem("vendor_email", normalizedEmail);
-    sessionStorage.setItem("vendor_registration_step", "email-otp");
-    sessionStorage.setItem("vendor_registration_step", "email-otp");
-    setStage("email-otp");
-    resetEmailOtpState();
-
-    Swal.fire("Success", "OTP sent to your email.", "success");
-
     try {
       // Fire API call
       await dispatch(sendEmailOtp({ email: normalizedEmail })).unwrap();
+
+      // State transition and success popup after successful API call
+      setEmail(normalizedEmail);
+      sessionStorage.setItem("vendor_email", normalizedEmail);
+      sessionStorage.setItem("vendor_registration_step", "email-otp");
+      setStage("email-otp");
+      resetEmailOtpState();
+
+      Swal.fire("Success", "OTP sent to your email.", "success");
+
       return true;
     } catch (error) {
       const message =
@@ -779,7 +772,7 @@ export default function VendorRegistrationPage() {
 
                   <button
                     type="button"
-                    className="inline-flex min-h-12 items-center justify-center border border-violet-700 bg-violet-700 px-6 text-sm font-semibold text-white transition hover:bg-violet-800 disabled:cursor-not-allowed disabled:border-slate-200 disabled:bg-slate-100 disabled:text-slate-400"
+                    className="inline-flex min-h-12 items-center justify-center border border-violet-700 bg-violet-700 px-6 text-sm font-semibold text-white transition hover:bg-violet-800 cursor-pointer disabled:border-slate-200 disabled:bg-slate-100 disabled:text-slate-400"
                     disabled={phoneOtpValue.length !== 6 || isVerifyingPhoneOtp}
                     onClick={handleVerifyPhoneOtp}
                   >
@@ -812,7 +805,7 @@ export default function VendorRegistrationPage() {
                     <div className="relative" ref={countryMenuRef}>
                       <button
                         type="button"
-                        className="flex h-12 w-full items-center justify-between border border-slate-300 bg-white px-3 text-left text-sm font-semibold text-slate-950 disabled:cursor-not-allowed disabled:bg-slate-50 disabled:text-slate-400"
+                        className="flex h-12 w-full items-center justify-between border border-slate-300 bg-white px-3 text-left text-sm font-semibold text-slate-950 cursor-pointer disabled:bg-slate-50 disabled:text-slate-400"
                         onClick={() => setIsCountryMenuOpen((open) => !open)}
                         disabled={countriesLoading || !countries.length}
                       >
@@ -917,7 +910,7 @@ export default function VendorRegistrationPage() {
 
                   <button
                     type="button"
-                    className="inline-flex min-h-12 items-center justify-center border border-violet-700 bg-violet-700 px-6 text-sm font-semibold text-white transition hover:bg-violet-800 disabled:cursor-not-allowed disabled:border-slate-200 disabled:bg-slate-100 disabled:text-slate-400"
+                    className="inline-flex min-h-12 items-center justify-center border border-violet-700 bg-violet-700 px-6 text-sm font-semibold text-white transition hover:bg-violet-800 cursor-pointer disabled:border-slate-200 disabled:bg-slate-100 disabled:text-slate-400"
                     onClick={handleContinueToPhoneOtp}
                     disabled={!isPhoneValid || countriesLoading || isSendingPhoneOtp}
                   >
@@ -987,7 +980,7 @@ export default function VendorRegistrationPage() {
 
                 <button
                   type="button"
-                  className="inline-flex min-h-12 items-center justify-center border border-violet-700 bg-violet-700 px-6 text-sm font-semibold text-white transition hover:bg-violet-800 disabled:cursor-not-allowed disabled:border-slate-200 disabled:bg-slate-100 disabled:text-slate-400"
+                  className="inline-flex min-h-12 items-center justify-center border border-violet-700 bg-violet-700 px-6 text-sm font-semibold text-white transition hover:bg-violet-800 cursor-pointer disabled:border-slate-200 disabled:bg-slate-100 disabled:text-slate-400"
                   onClick={handleVerifyEmailOtp}
                   disabled={emailOtpValue.length !== 6 || isVerifyingEmailOtp}
                 >
@@ -1018,7 +1011,7 @@ export default function VendorRegistrationPage() {
 
                 <button
                   type="button"
-                  className="inline-flex min-h-12 items-center justify-center border border-violet-700 bg-violet-700 px-6 text-sm font-semibold text-white transition hover:bg-violet-800 disabled:cursor-not-allowed disabled:border-slate-200 disabled:bg-slate-100 disabled:text-slate-400"
+                  className="inline-flex min-h-12 items-center justify-center border border-violet-700 bg-violet-700 px-6 text-sm font-semibold text-white transition hover:bg-violet-800 cursor-pointer disabled:border-slate-200 disabled:bg-slate-100 disabled:text-slate-400"
                   onClick={sendEmailOtpRequest}
                   disabled={!isEmailValid || isSendingEmailOtp}
                 >

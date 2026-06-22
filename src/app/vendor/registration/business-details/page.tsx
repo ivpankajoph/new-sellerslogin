@@ -2696,7 +2696,7 @@ export default function VendorBusinessDetailsPage() {
                   <button onClick={() => {
                     const url = sessionStorage.getItem("vendor_post_payment_redirect");
                     if (url) window.location.replace(url);
-                    else router.push("/sign-in");
+                    else router.push(`${adminLoginUrl}/sign-in`);
                   }} className="text-violet-700 hover:text-violet-800 underline underline-offset-4 font-bold transition-colors">
                     Go to dashboard
                   </button>
