@@ -24,7 +24,7 @@ export default function TermsPage() {
           
           <h2 className="text-2xl font-bold text-gray-900 mt-10 mb-4">1. Agreement to Terms</h2>
           <p className="mb-4">
-            These Terms and Conditions constitute a legally binding agreement made between you, whether personally or on behalf of an entity (&quot;you&quot;) and Sellers Login (&quot;we,&quot; &quot;us&quot; or &quot;our&quot;), concerning your access to and use of our website as well as any other media form, media channel, mobile website or mobile application related, linked, or otherwise connected thereto.
+            These Terms and Conditions constitute a legally binding agreement made between you, whether personally or on behalf of an entity (&quot;you&quot;) and Sellers Login (owned and operated by Life Changing Networks Private Limited) (&quot;we,&quot; &quot;us&quot; or &quot;our&quot;), concerning your access to and use of our website as well as any other media form, media channel, mobile website or mobile application related, linked, or otherwise connected thereto.
           </p>
 
           <h2 className="text-2xl font-bold text-gray-900 mt-10 mb-4">2. Intellectual Property Rights</h2>

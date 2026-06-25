@@ -1,27 +1,20 @@
-import type { Metadata } from "next";
 import Link from "next/link";
-import { CustomCursor } from "@/components/landing/CustomCursor";
-import { ScrollRevealInit } from "@/components/landing/ScrollRevealInit";
-import { CountdownBanner } from "@/components/landing/CountdownBanner";
-import { DiscountPopup } from "@/components/landing/DiscountPopup";
-import { FooterSection } from "@/components/landing/FooterSection";
-import { GlobalBackground } from "@/components/landing/GlobalBackground";
-import { PricingPageContent } from "@/components/landing/PricingPageContent";
+import { CustomCursor } from "./CustomCursor";
+import { ScrollRevealInit } from "./ScrollRevealInit";
+import { CountdownBanner } from "./CountdownBanner";
+import { FooterSection } from "./FooterSection";
+import { GlobalBackground } from "./GlobalBackground";
+import { PricingPageContent } from "./PricingPageContent";
 
-export const metadata: Metadata = {
-  title: "Pricing | Sellers Login",
-  description:
-    "Compare Sellers Login Startup, Growth, and Enterprise pricing with storefront, courier, product, marketing, email, voice, WhatsApp, payment, shipping, support, and integration features.",
-};
+type PricingRouteVariant = "b2c" | "b2b";
 
-export default function PricingPage() {
+export function PricingRoutePage({ variant = "b2c" }: { variant?: PricingRouteVariant }) {
   return (
     <>
       <CustomCursor />
       <GlobalBackground />
       <ScrollRevealInit />
       <CountdownBanner />
-      <DiscountPopup />
 
       <main className="relative overflow-clip bg-white text-slate-950">
         <section className="relative px-4 pb-14 pt-32 sm:px-6 lg:px-8 lg:pb-20">
@@ -89,7 +82,7 @@ export default function PricingPage() {
           </div>
         </section>
 
-        <PricingPageContent />
+        <PricingPageContent variant={variant} />
 
       </main>
 

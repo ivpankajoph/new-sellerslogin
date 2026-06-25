@@ -18,7 +18,7 @@ export default function StepTransitionLoader({
       <div className="flex flex-col items-center gap-4">
         <Image
           src="/sellerslogin-logo.svg"
-          alt="SellersLogin"
+          alt="Sellers Login"
           width={72}
           height={72}
           priority

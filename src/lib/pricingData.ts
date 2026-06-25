@@ -18,6 +18,7 @@ export const registrationHref = "/vendor/registration";
 export const contactHref = "/contact";
 
 export const defaultBillingCycle = "3_years";
+export const b2bDefaultBillingCycle = "4_years";
 
 export type BillingCurrency = "INR" | "USD";
 
@@ -56,6 +57,7 @@ export type PricingPlan = {
 
 export const billingCycleLabels: Record<string, string> = {
   "3_years": "3 Years",
+  "4_years": "4 Years",
   "2_years": "2 Years",
   "1_year": "1 Year",
   "6_months": "6 Months",
@@ -203,7 +205,13 @@ export const plans: PricingPlan[] = [
   },
 ];
 
-export const capabilityGroups = [
+export type CapabilityGroup = {
+  title: string;
+  icon: LucideIcon;
+  rows: string[][];
+};
+
+export const capabilityGroups: CapabilityGroup[] = [
   {
     title: "Store Features",
     icon: Store,
@@ -411,6 +419,300 @@ export const capabilityGroups = [
       ["App Marketplace & Integrations", "Basic", "Advanced", "Full"],
       ["API Access", "No", "Yes", "Full"],
       ["Workflow Automation (Custom)", "No", "No", "Custom"],
+    ],
+  },
+];
+
+export const b2bPlans: PricingPlan[] = [
+  {
+    name: "Basic B2B",
+    label: "Basic level B2B",
+    priceMonthly: "INR 2,999/mo",
+    priceQuarterly: "INR 1,499/mo",
+    sourceNote: "Billed based on your selected duration.",
+    billingMonthlyTotal: 2999,
+    billingQuarterlyTotal: 71952,
+    priceMonthlyUSD: "INR 2,999/mo",
+    priceQuarterlyUSD: "INR 1,499/mo",
+    billingMonthlyTotalUSD: 2999,
+    billingQuarterlyTotalUSD: 71952,
+    sourceNoteUSD: "Billed based on your selected duration.",
+    billingOptions: [
+      { cycle: "4_years", label: "4 Years", months: 48, monthlyPrice: 1499, total: 71952, price: "INR 1,499/mo" },
+      { cycle: "3_years", label: "3 Years", months: 36, monthlyPrice: 1899, total: 68364, price: "INR 1,899/mo" },
+      { cycle: "2_years", label: "2 Years", months: 24, monthlyPrice: 2199, total: 52776, price: "INR 2,199/mo" },
+      { cycle: "1_year", label: "1 Year", months: 12, monthlyPrice: 2499, total: 29988, price: "INR 2,499/mo" },
+      { cycle: "1_month", label: "1 Month", months: 1, monthlyPrice: 2999, total: 2999, price: "INR 2,999/mo" },
+    ],
+    description: "",
+    cta: "Select",
+    href: registrationHref,
+    accent: "border-violet-200 bg-white",
+    icon: Store,
+    features: [
+      "1 B2B website with custom domain mapping",
+      "3 staff accounts with SSL, hosting, and unlimited bandwidth",
+      "30 GB NVME storage with managed cloud hosting",
+      "15 SEO cities and 2 SEO countries",
+      "Core B2B marketing, shopping SEO, and SEO sitemap",
+      "Courier pricing setup, shipment labels, and GST invoice print",
+    ],
+  },
+  {
+    name: "Growth B2B",
+    label: "Growth level B2B",
+    priceMonthly: "INR 5,999/mo",
+    priceQuarterly: "INR 3,999/mo",
+    sourceNote: "Billed based on your selected duration.",
+    billingMonthlyTotal: 5999,
+    billingQuarterlyTotal: 191952,
+    priceMonthlyUSD: "INR 5,999/mo",
+    priceQuarterlyUSD: "INR 3,999/mo",
+    billingMonthlyTotalUSD: 5999,
+    billingQuarterlyTotalUSD: 191952,
+    sourceNoteUSD: "Billed based on your selected duration.",
+    billingOptions: [
+      { cycle: "4_years", label: "4 Years", months: 48, monthlyPrice: 3999, total: 191952, price: "INR 3,999/mo" },
+      { cycle: "3_years", label: "3 Years", months: 36, monthlyPrice: 4499, total: 161964, price: "INR 4,499/mo" },
+      { cycle: "2_years", label: "2 Years", months: 24, monthlyPrice: 4999, total: 119976, price: "INR 4,999/mo" },
+      { cycle: "1_year", label: "1 Year", months: 12, monthlyPrice: 5499, total: 65988, price: "INR 5,499/mo" },
+      { cycle: "1_month", label: "1 Month", months: 1, monthlyPrice: 5999, total: 5999, price: "INR 5,999/mo" },
+    ],
+    description: "",
+    cta: "Select",
+    href: registrationHref,
+    accent: "relative border-violet-500 bg-violet-950 text-white shadow-2xl shadow-violet-200",
+    icon: LineChart,
+    features: [
+      "2 B2B stores with 10 staff accounts",
+      "50 GB NVME storage and 50,000 monthly traffic",
+      "30 SEO cities and 5 SEO countries",
+      "Advanced storefront controls and customer segmentation",
+      "B2B bulk dispatch, scheduled delivery days, and multi-warehouse dispatch",
+      "2 hours expert onboarding with dedicated account manager",
+    ],
+    recommended: true,
+  },
+  {
+    name: "Enterprise B2B",
+    label: "Enterprise level B2B",
+    priceMonthly: "Custom Quote",
+    priceQuarterly: "Custom Quote",
+    sourceNote: "Custom quote with enterprise rollout and commercial terms.",
+    priceMonthlyUSD: "Custom Quote",
+    priceQuarterlyUSD: "Custom Quote",
+    sourceNoteUSD: "Custom quote with enterprise rollout and commercial terms.",
+    description: "",
+    cta: "Talk to sales",
+    href: contactHref,
+    accent: "border-slate-200 bg-white",
+    icon: ShieldCheck,
+    features: [
+      "Custom B2B stores, account structure, and logo controls",
+      "Custom hosting, traffic, SEO cities, and SEO countries",
+      "Full B2B freight, LTL shipping, route delivery, and GRN workflows",
+      "Custom automation, integrations, API access, and business logic",
+      "Custom marketing, WhatsApp, email, voice, and payment workflows",
+      "4 hours expert onboarding with dedicated account manager",
+    ],
+  },
+];
+
+export const b2bCapabilityGroups: CapabilityGroup[] = [
+  {
+    title: "Store & Hosting Features",
+    icon: Store,
+    rows: [
+      ["New Website", "1", "2 Stores", "Custom"],
+      ["Free Domain Name", "Yes, 1 year", "Yes, 1 year", "Yes, 1 year"],
+      ["Custom Domain Mapping", "Yes", "Yes", "Custom"],
+      ["Live Analytics", "Yes", "Yes", "Custom"],
+      ["SL Transaction Fees", "2%", "1.5%", "0.75%"],
+      ["Sellers Login Logo", "No Logo", "No Logo", "Custom"],
+      ["Virus-Free Web", "Yes", "Yes", "Custom"],
+      ["Staff Accounts", "3 accounts", "10 accounts", "Custom"],
+      ["Free SSL Certificate", "Yes", "Yes", "Yes"],
+      ["Free Hosting & Unlimited Bandwidth", "Yes", "Yes", "Yes"],
+      ["NVME Storage", "30 GB", "50 GB", "Custom"],
+      ["Monthly Traffic", "25,000", "50,000", "Custom"],
+      ["Managed Cloud Hosting", "Yes", "Yes", "Yes"],
+    ],
+  },
+  {
+    title: "Marketing & SEO",
+    icon: Megaphone,
+    rows: [
+      ["Marketing Features", "Core", "Advanced", "Custom"],
+      ["Open City for SEO", "15", "30", "Custom"],
+      ["Shopping SEO feature", "Yes", "Yes", "Yes"],
+      ["Marketing Automation (SmartPush)", "No", "No", "Custom"],
+      ["SEO Sitemap", "Yes", "Yes", "Yes"],
+      ["Open Countries for SEO", "2", "5", "Custom"],
+      ["Replace City into Country", "Yes, 3 Cities is equal to 1 Country", "Yes, 3 Cities is equal to 1 Country", "Custom"],
+      ["Replace Country into Cities", "Yes, 1 Country is equal to 3 Cities", "Yes, 1 Country is equal to 3 Cities", "Custom"],
+    ],
+  },
+  {
+    title: "Customer & Sales",
+    icon: Users,
+    rows: [
+      ["Customer Queries Records", "Yes", "Yes", "Custom"],
+      ["Order and Sales Visibility", "Yes", "Yes", "Advanced"],
+      ["Customer Accounts Limit", "Unlimited", "Unlimited", "Unlimited"],
+      ["Abandoned Cart Recovery", "Yes", "Yes", "Yes"],
+      ["Customer Segmentation", "Basic", "Advanced", "Custom"],
+    ],
+  },
+  {
+    title: "Courier/Transport Pricing Management",
+    icon: Truck,
+    rows: [
+      ["Courier Rate Card Setup", "Basic (1 courier)", "Multi-courier", "Full control"],
+      ["Weight-Based Pricing Slabs", "Yes", "Yes", "Yes"],
+      ["Volumetric Weight Calculation", "Yes", "Yes", "Yes"],
+      ["Pincode Wise Delivery Pricing", "Yes", "Yes", "Yes"],
+      ["Free Shipping Threshold", "Yes", "Yes", "Yes"],
+      ["Courier Rate Comparison Tool", "Yes", "Yes", "Yes"],
+    ],
+  },
+  {
+    title: "Shipment Dispatch & Label Generation",
+    icon: PackageCheck,
+    rows: [
+      ["One-Click Shipment Creation", "Yes", "Yes", "Yes"],
+      ["Shipping Label Generation", "Yes", "Yes", "Yes"],
+      ["Pickup Scheduling", "Yes", "Yes", "Yes"],
+      ["Packing Slip & GST Invoice Print", "Yes", "Yes", "Yes"],
+      ["Multi-Warehouse Dispatch/Pickup Management", "No", "Yes", "Yes"],
+    ],
+  },
+  {
+    title: "B2B Heavy Duty & Large Item",
+    icon: PackageCheck,
+    rows: [
+      ["B2B Bulk Order Dispatch", "No", "Yes", "Yes"],
+      ["Scheduled B2B Delivery Days", "No", "Yes", "Yes"],
+      ["Multi-Drop Route Delivery", "No", "No", "Yes"],
+      ["GRN / Digital Delivery Confirmation", "No", "No", "Yes"],
+      ["B2B Freight / LTL Shipping", "No", "No", "Yes"],
+    ],
+  },
+  {
+    title: "Heavy Duty & Large Item Delivery",
+    icon: PackageCheck,
+    rows: [
+      ["Heavy-Weight Courier Partner Integration", "No", "Yes", "Yes"],
+      ["Oversized / Special Handling Flag", "No", "Yes", "Yes"],
+      ["Freight Charges Calculator", "Yes", "Yes", "Yes"],
+      ["Multiple Truck Option", "Yes", "Yes", "Yes"],
+    ],
+  },
+  {
+    title: "Local & Hyperlocal Delivery",
+    icon: Truck,
+    rows: [
+      ["Same-Day / Express Delivery", "No", "Yes", "Yes"],
+      ["Hyperlocal Courier Integration", "No", "Yes", "Yes"],
+      ["Delivery Time Slot Selection", "No", "Yes", "Yes"],
+      ["In-House Delivery Fleet Management", "No", "Yes", "Yes"],
+      ["OTP-Based Delivery Confirmation", "No", "Yes", "Yes"],
+    ],
+  },
+  {
+    title: "Products & Storefront",
+    icon: Store,
+    rows: [
+      ["Product Capacity", "Unlimited", "Unlimited", "Unlimited"],
+      ["Storefront Feature Controls", "Included", "Advanced", "Custom"],
+      ["SEO and Page Controls", "Yes", "Yes", "Advanced"],
+      ["Product Reviews", "Yes", "Yes", "Yes"],
+    ],
+  },
+  {
+    title: "Email Features (Add-on)",
+    icon: Mail,
+    rows: [
+      ["Free Emails Credit", "12,000 (400 per day)", "12,000 (400 per day)", "12,000 (400 per day)"],
+      ["Email Automation with Ecommerce Website", "Yes", "Yes", "Yes"],
+      ["Email Template Making", "Unlimited", "Unlimited", "Unlimited"],
+      ["Promotion Email Campaign", "No", "Yes", "Yes"],
+      ["Drip Email Campaign", "Yes", "Yes", "Yes"],
+      ["Newsletter", "No", "Yes", "Yes"],
+      ["Order Notification", "Yes", "Yes", "Yes"],
+      ["Bounce Tracking", "Yes", "Yes", "Yes"],
+      ["Advance Reporting System", "Yes", "Yes", "Yes"],
+      ["Track Buyer Activity", "Yes", "Yes", "Yes"],
+      ["Follow-up Notification", "Yes", "Yes", "Yes"],
+    ],
+  },
+  {
+    title: "Voice Marketing (Add-on)",
+    icon: MessageCircle,
+    rows: [
+      ["Voice Call Pricing", "Applicable", "Applicable", "Applicable"],
+      ["Voice AI Automation", "Yes", "Yes", "Yes"],
+      ["Voice Cloning", "Yes", "Yes", "Yes"],
+      ["Voice Agent Integration", "Yes", "Yes", "Yes"],
+      ["Notification to Buyers on Call", "Yes", "Yes", "Yes"],
+      ["Promotional Marketing", "Yes", "Yes", "Yes"],
+      ["Drip Campaign", "Yes", "Yes", "Yes"],
+      ["Bulk AI Voice Marketing", "Yes", "Yes", "Yes"],
+    ],
+  },
+  {
+    title: "WhatsApp Business (Add-on)",
+    icon: MessageCircle,
+    rows: [
+      ["WhatsApp Messages Price", "Applicable", "Applicable", "Applicable"],
+      ["Template Making", "Unlimited", "Unlimited", "Unlimited"],
+      ["WhatsApp & Website Automation", "Yes", "Yes", "Yes"],
+      ["Notification to Buyers", "Yes", "Yes", "Yes"],
+      ["Promotion Messaging", "Yes", "Yes", "Yes"],
+      ["Drip Campaign", "Yes", "Yes", "Yes"],
+      ["Follow-up Messaging", "Yes", "Yes", "Yes"],
+      ["Bulk Messaging", "Yes", "Yes", "Yes"],
+    ],
+  },
+  {
+    title: "Payment Gateway",
+    icon: CreditCard,
+    rows: [
+      ["Payment Gateway Integration", "Yes", "Yes", "-"],
+      ["Domestic / International Payment", "Yes", "Yes", "-"],
+      ["2-Day Settlement", "Yes", "Yes", "-"],
+      ["Multi-Currency Checkout", "Yes", "Yes", "Yes"],
+    ],
+  },
+  {
+    title: "Shipping & Fulfillment",
+    icon: PackageCheck,
+    rows: [
+      ["Live Shipping Rates", "No", "Yes", "Yes"],
+      ["Pickup Locations", "Yes", "Yes", "Yes"],
+      ["Returns Management", "Yes", "Yes", "Yes"],
+      ["Third-Party Marketplace Integration", "No", "Yes", "Yes"],
+    ],
+  },
+  {
+    title: "Support",
+    icon: Headphones,
+    rows: [
+      ["Ticket Support", "Yes", "Yes", "Yes"],
+      ["Mail Support", "Yes", "Yes", "Yes"],
+      ["Chat Support", "Yes", "Yes", "Yes"],
+      ["Expert Onboarding Assistance", "No", "2 hours", "4 hours"],
+      ["Dedicated Account Manager", "No", "Yes", "Yes"],
+    ],
+  },
+  {
+    title: "Custom Fields & Integrations",
+    icon: Store,
+    rows: [
+      ["Custom Fields on Orders/Products", "No", "Yes", "Yes"],
+      ["Custom Modules / Business Logic", "No", "No", "Yes"],
+      ["API Access", "No", "Partial", "Full"],
+      ["Custom Automation", "No", "No", "Possible"],
+      ["Custom Integrations", "No", "No", "Yes"],
     ],
   },
 ];

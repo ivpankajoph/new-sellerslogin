@@ -70,7 +70,7 @@ export default function VendorPage() {
           <div className="flex min-w-0 items-center gap-3">
             <Image
               src="/sellerslogin-logo.svg"
-              alt="SellersLogin logo"
+              alt="Sellers Login logo"
               width={48}
               height={48}
               priority
@@ -78,7 +78,7 @@ export default function VendorPage() {
             />
             <div className="min-w-0">
               <p className="text-2xl font-bold tracking-tight text-slate-950">
-                SellersLogin
+                Sellers Login
               </p>
               <p className="text-xs font-semibold uppercase tracking-[0.24em] text-slate-400">
                 Build your Dreams
@@ -256,14 +256,14 @@ export default function VendorPage() {
               <div className="flex items-center gap-3">
                 <Image
                   src="/sellerslogin-logo.svg"
-                  alt="SellersLogin logo"
+                  alt="Sellers Login logo"
                   width={48}
                   height={48}
                   className="h-12 w-12 shrink-0"
                 />
                 <div>
                   <p className="text-2xl font-bold tracking-tight text-slate-950">
-                    SellersLogin
+                    Sellers Login
                   </p>
                   <p className="text-xs font-semibold uppercase tracking-[0.24em] text-slate-400">
                     Build your Dreams
@@ -316,7 +316,7 @@ export default function VendorPage() {
           </div>
 
           <div className="border-x border-b border-slate-200 bg-white px-8 py-4 text-sm text-slate-500">
-            Copyright {new Date().getFullYear()} SellersLogin. All rights
+            Copyright {new Date().getFullYear()} Sellers Login. All rights
             reserved.
           </div>
         </div>

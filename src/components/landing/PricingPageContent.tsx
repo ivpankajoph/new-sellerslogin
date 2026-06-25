@@ -5,13 +5,16 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { ArrowRight, Check, X } from "lucide-react";
 import {
+  b2bCapabilityGroups,
+  b2bDefaultBillingCycle,
+  b2bPlans,
+  capabilityGroups,
   defaultBillingCycle,
   getPlanBillingOption,
   getPlanBillingOptions,
   getPlanBillingTotal,
   getPlanDisplayPrice,
   plans,
-  capabilityGroups,
   type BillingOption,
   type PricingPlan,
 } from "@/lib/pricingData";
@@ -21,10 +24,16 @@ import { PricingFaqSection } from "./PricingFaqSection";
 import { IntegrationsSection } from "./IntegrationsSection";
 
 
-export function PricingPageContent() {
+type PricingVariant = "b2c" | "b2b";
+
+export function PricingPageContent({ variant = "b2c" }: { variant?: PricingVariant }) {
+  const activePlans = variant === "b2b" ? b2bPlans : plans;
+  const activeCapabilityGroups = variant === "b2b" ? b2bCapabilityGroups : capabilityGroups;
+  const activeDefaultBillingCycle = variant === "b2b" ? b2bDefaultBillingCycle : defaultBillingCycle;
+  const isB2B = variant === "b2b";
   const [showRegularPrice] = useState(false);
   const [selectedPlan, setSelectedPlan] = useState<(PricingPlan & { currency?: "INR" | "USD"; billingCycle?: string }) | null>(null);
-  const [selectedBillingCycle, setSelectedBillingCycle] = useState(defaultBillingCycle);
+  const [selectedBillingCycle, setSelectedBillingCycle] = useState(activeDefaultBillingCycle);
   const [currency, setCurrency] = useState<"INR" | "USD">("INR");
   const router = useRouter();
 
@@ -45,11 +54,11 @@ export function PricingPageContent() {
   }, []);
 
   const handleSelectPlan = (plan: PricingPlan) => {
-    setSelectedBillingCycle(defaultBillingCycle);
-    setSelectedPlan({ ...plan, currency, billingCycle: defaultBillingCycle });
+    setSelectedBillingCycle(activeDefaultBillingCycle);
+    setSelectedPlan({ ...plan, currency, billingCycle: activeDefaultBillingCycle });
   };
 
-  const handleContinue = (billingCycle = selectedPlan?.billingCycle || defaultBillingCycle) => {
+  const handleContinue = (billingCycle = selectedPlan?.billingCycle || activeDefaultBillingCycle) => {
     if (selectedPlan) {
       const selectedCurrency = selectedPlan.currency || currency;
       const price = getPlanBillingTotal(selectedPlan, billingCycle, selectedCurrency);
@@ -69,6 +78,7 @@ export function PricingPageContent() {
   const selectedBillingOption = selectedPlan
     ? getPlanBillingOption(selectedPlan, selectedBillingCycle, selectedPlan.currency || currency)
     : null;
+  const stickyPlan = activePlans.find((plan) => plan.cta === "Select") || activePlans[0];
 
   return (
     <>
@@ -77,6 +87,8 @@ export function PricingPageContent() {
           showRegularPrice={showRegularPrice} 
           onSelectPlan={handleSelectPlan} 
           currency={currency}
+          plans={activePlans}
+          defaultBillingCycle={activeDefaultBillingCycle}
         />
       </div>
 
@@ -92,7 +104,9 @@ export function PricingPageContent() {
               </h2>
             </div>
             <p className="text-base leading-7 text-slate-600">
-              The source pricing matrix categories are organized into readable groups so buyers can compare store features, customer and sales tools, courier pricing, shipment dispatch, product controls, marketing, email, voice, WhatsApp Business, payments, shipping, support, and integrations without confusion.
+              {isB2B
+                ? "The B2B pricing matrix is organized into readable groups so manufacturers, wholesalers, suppliers, and exporters can compare hosting, SEO, sales, transport, dispatch, automation, support, and integration capabilities without confusion."
+                : "The source pricing matrix categories are organized into readable groups so buyers can compare store features, customer and sales tools, courier pricing, shipment dispatch, product controls, marketing, email, voice, WhatsApp Business, payments, shipping, support, and integrations without confusion."}
             </p>
           </div>
 
@@ -102,7 +116,7 @@ export function PricingPageContent() {
                 <div className="px-4 py-8 text-lg font-extrabold text-slate-900 sm:px-6">
                   Features & Capabilities
                 </div>
-                {plans.map((plan) => (
+                {activePlans.map((plan) => (
                   <div 
                     key={plan.name} 
                     className={`flex h-full flex-col items-center justify-center px-4 py-6 sm:px-6 border-l border-slate-200 transition-colors ${plan.recommended ? 'bg-violet-50/80 shadow-[inset_0_4px_0_0_rgb(124,58,237)]' : ''}`}
@@ -116,7 +130,7 @@ export function PricingPageContent() {
                     <div className="mt-2 flex flex-col items-center justify-center">
 
                       <span className={`text-xl font-bold transition-all duration-300 ${plan.recommended ? 'text-violet-700' : 'text-slate-600'}`}>
-                        {getPlanDisplayPrice(plan, defaultBillingCycle, currency)}
+                        {getPlanDisplayPrice(plan, activeDefaultBillingCycle, currency)}
                       </span>
                     </div>
                     {plan.cta === "Select" ? (
@@ -146,7 +160,7 @@ export function PricingPageContent() {
                 ))}
               </div>
 
-              {capabilityGroups.map(({ title, icon: Icon, rows }) => (
+              {activeCapabilityGroups.map(({ title, icon: Icon, rows }) => (
                 <div key={title} className="border-t border-slate-200">
                   <div className="flex items-center gap-2 bg-violet-50 px-4 py-4 text-base font-bold text-violet-900 sm:px-6 uppercase tracking-wider">
                     <Icon className="h-5 w-5" />
@@ -184,7 +198,9 @@ export function PricingPageContent() {
                 Map your catalog size, team access, and automation needs to the right plan.
               </h2>
               <p className="mt-4 max-w-2xl text-sm leading-6 text-violet-100 sm:text-base">
-                The fastest path is simple: choose Startup for first scale, Growth for multi-store operations, and Enterprise when store count, user count, integrations, or onboarding needs are custom.
+                {isB2B
+                  ? "The fastest path is simple: choose Basic B2B for a focused wholesale portal, Growth B2B for multi-store B2B operations, and Enterprise B2B when freight, automation, integrations, or onboarding need custom rollout."
+                  : "The fastest path is simple: choose Startup for first scale, Growth for multi-store operations, and Enterprise when store count, user count, integrations, or onboarding needs are custom."}
               </p>
             </div>
             <Link
@@ -251,11 +267,10 @@ export function PricingPageContent() {
       )}
       {/* Mobile Sticky CTA */}
       <div className="fixed bottom-0 left-0 right-0 z-[120] p-4 md:hidden bg-white/90 backdrop-blur-md border-t border-slate-200 shadow-[0_-10px_20px_-10px_rgba(0,0,0,0.1)]">
-        <button onClick={() => handleSelectPlan(plans[0])} className="flex w-full items-center justify-center rounded-full bg-violet-600 px-4 py-3.5 text-[13px] sm:text-sm font-bold text-white shadow-lg shadow-violet-200 transition-all active:scale-[0.98] border-none outline-none">
-          Signup @ INR 399/month
+        <button onClick={() => handleSelectPlan(stickyPlan)} className="flex w-full items-center justify-center rounded-full bg-violet-600 px-4 py-3.5 text-[13px] sm:text-sm font-bold text-white shadow-lg shadow-violet-200 transition-all active:scale-[0.98] border-none outline-none">
+          Signup @ {getPlanDisplayPrice(stickyPlan, activeDefaultBillingCycle, currency)}
         </button>
       </div>
     </>
   );
 }
-

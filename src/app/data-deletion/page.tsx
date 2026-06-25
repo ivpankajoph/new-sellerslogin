@@ -24,7 +24,7 @@ export default function DataDeletionPage() {
           
           <h2 className="text-2xl font-bold text-gray-900 mt-10 mb-4">1. Requesting Data Deletion</h2>
           <p className="mb-4">
-            If you wish to have your account and personal data deleted from Sellers Login, you can submit a data deletion request. We take your privacy seriously and will process your request in accordance with applicable data protection laws.
+            If you wish to have your account and personal data deleted from Sellers Login (owned and operated by Life Changing Networks Private Limited), you can submit a data deletion request. We take your privacy seriously and will process your request in accordance with applicable data protection laws.
           </p>
 
           <h2 className="text-2xl font-bold text-gray-900 mt-10 mb-4">2. How to Submit a Request</h2>
