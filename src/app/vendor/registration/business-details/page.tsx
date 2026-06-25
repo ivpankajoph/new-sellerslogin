@@ -2073,7 +2073,7 @@ export default function VendorBusinessDetailsPage() {
             <div className="flex items-center gap-3">
               <Image
                 src="/sellerslogin-logo.svg"
-                alt="Sellers Login"
+                alt="SellersLogin"
                 width={44}
                 height={44}
                 className="h-11 w-11"
@@ -2120,14 +2120,14 @@ export default function VendorBusinessDetailsPage() {
           <Link href={mainSiteUrl} className="flex min-w-0 items-center gap-3" {...newTabProps}>
             <Image
               src="/sellerslogin-logo.svg"
-              alt="Sellers Login logo"
+              alt="SellersLogin logo"
               width={48}
               height={48}
               priority
               className="h-12 w-12 shrink-0"
             />
             <div className="min-w-0">
-              <p className="text-2xl font-bold tracking-tight text-slate-950">Sellers Login</p>
+              <p className="text-2xl font-bold tracking-tight text-slate-950">SellersLogin</p>
             </div>
           </Link>
         </div>
@@ -2696,7 +2696,7 @@ export default function VendorBusinessDetailsPage() {
                   <button onClick={() => {
                     const url = sessionStorage.getItem("vendor_post_payment_redirect");
                     if (url) window.location.replace(url);
-                    else router.push(`${adminLoginUrl}/sign-in`);
+                    else router.push("/sign-in");
                   }} className="text-violet-700 hover:text-violet-800 underline underline-offset-4 font-bold transition-colors">
                     Go to dashboard
                   </button>

@@ -20,7 +20,7 @@ export default function ThankYouPage() {
             <p className="mx-auto mt-5 max-w-2xl text-lg leading-8 text-slate-600">
               Verification and account updates will be sent to your registered email.
               You can return to the vendor overview now or continue exploring the main
-              Sellers Login site.
+              SellersLogin site.
             </p>
 
             <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">

@@ -3,23 +3,19 @@
 import Link from "next/link";
 import { ArrowRight, BellRing, CheckCircle2 } from "lucide-react";
 import {
-  defaultBillingCycle as b2cDefaultBillingCycle,
+  defaultBillingCycle,
   getPlanDisplayPrice,
-  plans as b2cPlans,
+  plans,
   type PricingPlan,
 } from "@/lib/pricingData";
 
 export function PricingCardsSection({ 
   onSelectPlan,
   currency,
-  plans = b2cPlans,
-  defaultBillingCycle = b2cDefaultBillingCycle,
 }: { 
   showRegularPrice: boolean, 
   onSelectPlan: (plan: PricingPlan) => void,
   currency: "INR" | "USD",
-  plans?: PricingPlan[],
-  defaultBillingCycle?: string,
 }) {
   return (
     <section className="px-4 py-12 sm:px-6 lg:px-8 relative z-20">

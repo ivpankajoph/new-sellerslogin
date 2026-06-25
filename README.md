@@ -1,4 +1,4 @@
-# Sellers Login — Next.js Landing Page
+# SellersLogin — Next.js Landing Page
 
 Converted from `test2.html` to **Next.js 16** (App Router), **TypeScript**, and **Tailwind CSS v4**.
 
