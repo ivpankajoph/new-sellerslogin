@@ -55,6 +55,7 @@ export type PricingPlan = {
 };
 
 export const billingCycleLabels: Record<string, string> = {
+  "4_years": "4 Years",
   "3_years": "3 Years",
   "2_years": "2 Years",
   "1_year": "1 Year",

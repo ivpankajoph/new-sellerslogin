@@ -4,7 +4,22 @@ import { useEffect, useState, useSyncExternalStore } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
 import Image from "next/image";
-import { CreditCard, ArrowRight, CheckCircle2 } from "lucide-react";
+import { CreditCard, ArrowRight, CheckCircle2, Smartphone } from "lucide-react";
+
+const getBillingCycleMonths = (cycle: string): number => {
+  const c = String(cycle || "").trim().toLowerCase();
+  const staticMap: Record<string, number> = {
+    "1_month": 1, "6_months": 6, "1_year": 12,
+    "2_years": 24, "3_years": 36, "4_years": 48,
+    monthly: 1, quarterly: 3,
+  };
+  if (staticMap[c]) return staticMap[c];
+  const yearsMatch = c.match(/^(\d+)_years?$/);
+  if (yearsMatch) return parseInt(yearsMatch[1]) * 12;
+  const monthsMatch = c.match(/^(\d+)_months?$/);
+  if (monthsMatch) return parseInt(monthsMatch[1]);
+  return 1;
+};
 import type { RootState, AppDispatch } from "@/store";
 import { updateVendorBusiness } from "@/store/slices/vendorSlice";
 import { INDIAN_STATES } from "@/lib/constants";
@@ -30,6 +45,12 @@ type RazorpayFailedResponse = {
   error?: {
     description?: string;
   };
+};
+
+type RazorpaySubscriptionResponse = {
+  razorpay_subscription_id: string;
+  razorpay_payment_id: string;
+  razorpay_signature: string;
 };
 
 type RazorpayInstance = {
@@ -98,7 +119,10 @@ export default function PaymentPendingPage() {
     amount: number;
     paymentId: string;
     dashboardUrl: string;
+    isUpiAutopay?: boolean;
   } | null>(null);
+
+  const [selectedMethod, setSelectedMethod] = useState<"one_time" | "upi_autopay">("one_time");
 
   const [addressLine1, setAddressLine1] = useState("");
   const [addressLine2, setAddressLine2] = useState("");
@@ -160,7 +184,7 @@ export default function PaymentPendingPage() {
 
     try {
       const res = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000/api/v1"}/vendor/billing/apply-referral`,
+        `${process.env.NEXT_PUBLIC_API_URL || "http://localhost:8081/api/v1"}/vendor/billing/apply-referral`,
         {
           method: "POST",
           headers: {
@@ -234,6 +258,11 @@ export default function PaymentPendingPage() {
     adminRedirectUrl || buildAdminAutoLoginUrl({ token: effectiveToken, vendor: effectiveAuthVendor });
 
   const handlePayNow = async () => {
+    if (selectedMethod === "upi_autopay") {
+      return handleSubscribeWithUPI();
+    }
+
+    // existing one-time flow
     if (!effectiveToken) {
       Swal.fire(
         "Error",
@@ -274,7 +303,7 @@ export default function PaymentPendingPage() {
       }
 
       const orderRes = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000/api/v1"}/vendor/billing/create-order`,
+        `${process.env.NEXT_PUBLIC_API_URL || "http://localhost:8081/api/v1"}/vendor/billing/create-order`,
         {
           method: "POST",
           headers: {
@@ -326,7 +355,7 @@ export default function PaymentPendingPage() {
           handler: async function (response: RazorpayPaymentResponse) {
             try {
               const verifyRes = await fetch(
-                `${process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000/api/v1"}/vendor/billing/verify`,
+                `${process.env.NEXT_PUBLIC_API_URL || "http://localhost:8081/api/v1"}/vendor/billing/verify`,
                 {
                   method: "POST",
                   headers: {
@@ -432,6 +461,152 @@ export default function PaymentPendingPage() {
     }
   };
 
+  const handleSubscribeWithUPI = async () => {
+    if (!effectiveToken) {
+      Swal.fire("Error", "Authentication required. Please log in again.", "error");
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    try {
+      const subRes = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL || "http://localhost:8081/api/v1"}/vendor/billing/subscription/create`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${effectiveToken}`,
+          },
+          body: JSON.stringify({
+            plan: selectedPlanName,
+            amount: Math.round(finalPrice / getBillingCycleMonths(billingCycle)),
+            billing_cycle: billingCycle,
+          }),
+        },
+      );
+      const subData = await subRes.json();
+
+      if (!subData.success || !subData.data) {
+        Swal.fire("Error", subData.message || "Failed to create UPI subscription", "error");
+        setIsSubmitting(false);
+        return;
+      }
+
+      const loadRazorpay = () =>
+        new Promise((resolve) => {
+          if (document.querySelector('script[src="https://checkout.razorpay.com/v1/checkout.js"]')) {
+            resolve(true);
+            return;
+          }
+          const script = document.createElement("script");
+          script.src = "https://checkout.razorpay.com/v1/checkout.js";
+          script.onload = () => resolve(true);
+          script.onerror = () => resolve(false);
+          document.body.appendChild(script);
+        });
+
+      await loadRazorpay();
+
+      const options = {
+        key: subData.data.key_id,
+        subscription_id: subData.data.subscription_id,
+        customer_id: subData.data.customer_id,
+        name: "Sellers Login",
+        description: `UPI Autopay for ${selectedPlanName} Plan`,
+        handler: async function (response: RazorpaySubscriptionResponse) {
+          try {
+            const verifyRes = await fetch(
+              `${process.env.NEXT_PUBLIC_API_URL || "http://localhost:8081/api/v1"}/vendor/billing/subscription/verify`,
+              {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                  Authorization: `Bearer ${effectiveToken}`,
+                },
+                body: JSON.stringify({
+                  razorpay_subscription_id: response.razorpay_subscription_id,
+                  razorpay_payment_id: response.razorpay_payment_id,
+                  razorpay_signature: response.razorpay_signature,
+                }),
+              },
+            );
+            const verifyData = await verifyRes.json();
+            const planIsActive = Boolean(verifyData.data?.plan?.is_premium_active);
+            if (verifyData.success && planIsActive) {
+              const enabledEmail =
+                verifyData.data?.vendor?.email ||
+                vendorEmail ||
+                authUser?.email ||
+                "";
+              const dashboardUrl = getDashboardUrl();
+              if (typeof window !== "undefined") {
+                sessionStorage.removeItem("vendor_phone");
+                sessionStorage.removeItem("vendor_country_code");
+                sessionStorage.removeItem("vendor_registration_step");
+                sessionStorage.removeItem("selectedPlanName");
+                sessionStorage.removeItem("selectedPlanPrice");
+                sessionStorage.removeItem("selectedPlanCurrency");
+                sessionStorage.removeItem("selectedPlanBillingCycle");
+                sessionStorage.removeItem("selectedPlanDisplayedPrice");
+              }
+              setPaymentSuccess({
+                email: enabledEmail || "this vendor account",
+                planName: selectedPlanName,
+                billingCycleLabel,
+                amount: subData.data?.monthly_price || Math.round(finalPrice / getBillingCycleMonths(billingCycle)),
+                paymentId: response.razorpay_payment_id,
+                dashboardUrl,
+                isUpiAutopay: true,
+              });
+              setIsSubmitting(false);
+            } else {
+              console.error("UPI subscription verification failed:", JSON.stringify(verifyData));
+              Swal.fire("Error", verifyData.message || "UPI subscription verification failed.", "error");
+              setIsSubmitting(false);
+            }
+          } catch (err: unknown) {
+            console.error("Error verifying UPI subscription:", err);
+            Swal.fire("Error", getErrorMessage(err, "Failed to verify UPI subscription."), "error");
+            setIsSubmitting(false);
+          }
+        },
+        prefill: {
+          name: authUser?.name || authUser?.business_name || "",
+          email: effectiveVendorEmail,
+          contact: vendorPhone || authUser?.phone_no || authUser?.phone || "",
+        },
+        theme: {
+          color: "#7c3aed",
+        },
+        modal: {
+          ondismiss: function () {
+            Swal.fire("Pending", "UPI subscription setup is pending. Please try again.", "info");
+            setIsSubmitting(false);
+          },
+        },
+      };
+
+      const Razorpay = (window as Window & { Razorpay?: RazorpayConstructor }).Razorpay;
+      if (!Razorpay) {
+        Swal.fire("Error", "Failed to load payment gateway.", "error");
+        setIsSubmitting(false);
+        return;
+      }
+
+      const rzp = new Razorpay(options);
+      rzp.on("payment.failed", function (response: RazorpayFailedResponse) {
+        Swal.fire("Error", response.error?.description || "UPI subscription payment failed", "error");
+        setIsSubmitting(false);
+      });
+      rzp.open();
+    } catch (err) {
+      console.error(err);
+      Swal.fire("Error", "UPI subscription system error. Please try again.", "error");
+      setIsSubmitting(false);
+    }
+  };
+
   if (!hasMounted) {
     return (
       <div className="flex min-h-screen items-center justify-center bg-slate-50 px-4">
@@ -451,10 +626,10 @@ export default function PaymentPendingPage() {
               <CheckCircle2 className="h-10 w-10" />
             </span>
             <p className="vendor-step-pill mt-8 bg-emerald-50 text-emerald-700">
-              Payment Done
+              {paymentSuccess.isUpiAutopay ? "UPI Autopay Enabled" : "Payment Done"}
             </p>
             <h1 className="vendor-display mt-4 text-3xl font-bold tracking-[-0.04em] text-slate-950 sm:text-4xl">
-              Plan enabled successfully
+              {paymentSuccess.isUpiAutopay ? "Plan activated with UPI Autopay" : "Plan enabled successfully"}
             </h1>
             <p className="mx-auto mt-5 max-w-xl text-base leading-8 text-slate-600">
               Your <strong className="text-slate-950">{paymentSuccess.planName}</strong> plan ({paymentSuccess.billingCycleLabel}) is now active for{" "}
@@ -463,6 +638,11 @@ export default function PaymentPendingPage() {
             <div className="mt-6 rounded-xl border border-emerald-200 bg-emerald-50 p-4 text-left text-sm text-emerald-900">
               <p><strong>Amount paid:</strong> {currency} {paymentSuccess.amount}</p>
               <p className="mt-1"><strong>Payment ID:</strong> {paymentSuccess.paymentId}</p>
+              {paymentSuccess.isUpiAutopay ? (
+                <p className="mt-2 text-violet-700 font-semibold flex items-center gap-1">
+                  <Smartphone className="h-4 w-4" /> UPI Autopay active — future renewals are automatic
+                </p>
+              ) : null}
             </div>
             <button
               type="button"
@@ -534,28 +714,30 @@ export default function PaymentPendingPage() {
                     <span className="text-3xl font-bold text-slate-400 line-through">
                       {currency} {finalOriginalPrice}
                     </span>
-                    <span className="text-5xl font-extrabold text-red-600">
-                      {currency} {finalPrice}
+                    <span className={`text-5xl font-extrabold ${selectedMethod === "upi_autopay" ? "text-violet-600" : "text-red-600"}`}>
+                      {currency} {selectedMethod === "upi_autopay" ? Math.round(finalPrice / getBillingCycleMonths(billingCycle)) : finalPrice}
                     </span>
                   </>
                 ) : (
-                  <span className="text-5xl font-extrabold text-red-600">
-                    {currency} {finalPrice}
+                  <span className={`text-5xl font-extrabold ${selectedMethod === "upi_autopay" ? "text-violet-600" : "text-red-600"}`}>
+                    {currency} {selectedMethod === "upi_autopay" ? Math.round(finalPrice / getBillingCycleMonths(billingCycle)) : finalPrice}
                   </span>
                 )}
               </div>
               <p className="text-sm font-semibold text-slate-500 bg-slate-100 px-3 py-1 rounded-full">
-                {displayedPrice} ({billingCycleLabel}) {isAddressFilled ? "(Inc. 18% GST)" : "(Excl. GST)"}
+                {selectedMethod === "upi_autopay" ? `/mo` : `${displayedPrice} (${billingCycleLabel})`} {isAddressFilled ? "(Inc. 18% GST)" : "(Excl. GST)"}
               </p>
             </div>
 
             <h1 className="vendor-display mt-4 text-3xl font-bold tracking-[-0.04em] text-slate-950 sm:text-4xl">
-              Complete Your Subscription
+              {selectedMethod === "upi_autopay" ? "Set Up UPI Autopay" : "Complete Your Subscription"}
             </h1>
             <p className="mx-auto mt-5 max-w-xl text-base leading-8 text-slate-600">
-              Your registration has been successfully verified! Please complete
-              your payment for the <strong onClick={showPlanDetails} className="text-red-600 underline cursor-pointer hover:text-red-700 underline-offset-4 decoration-dashed decoration-red-600/50 transition-colors" title="View Plan Details">{selectedPlanName}</strong> plan ({billingCycleLabel}) to activate your
-              dashboard.
+              {selectedMethod === "upi_autopay" ? (
+                <>Authorise a monthly recurring payment for <strong className="text-violet-700">{selectedPlanName}</strong> plan via UPI. Your subscription renews automatically each month.</>
+              ) : (
+                <>Your registration has been successfully verified! Please complete your payment for the <strong onClick={showPlanDetails} className="text-red-600 underline cursor-pointer hover:text-red-700 underline-offset-4 decoration-dashed decoration-red-600/50 transition-colors" title="View Plan Details">{selectedPlanName}</strong> plan ({billingCycleLabel}) to activate your dashboard.</>
+              )}
             </p>
             <div className="mx-auto mt-5 max-w-xl rounded-xl border border-violet-200 bg-violet-50 px-4 py-3 text-sm text-violet-900">
               <span className="font-semibold">Activating account for:</span>{" "}
@@ -642,14 +824,52 @@ export default function PaymentPendingPage() {
               </div>
             )}
 
-            <div className="mt-8 flex flex-col items-center justify-center gap-4">
+            <div className="mt-6 flex items-center justify-center gap-1 rounded-xl border border-slate-200 bg-slate-50 p-1 text-sm font-semibold w-full sm:w-auto mx-auto">
+              <button
+                type="button"
+                onClick={() => setSelectedMethod("one_time")}
+                className={`flex items-center gap-1.5 rounded-lg px-4 py-2 transition ${
+                  selectedMethod === "one_time"
+                    ? "bg-white text-violet-700 shadow-sm shadow-slate-200/50"
+                    : "text-slate-500 hover:text-slate-700"
+                }`}
+              >
+                <CreditCard className="h-4 w-4" />
+                Pay Now (One-time)
+              </button>
+              <button
+                type="button"
+                onClick={() => setSelectedMethod("upi_autopay")}
+                className={`flex items-center gap-1.5 rounded-lg px-4 py-2 transition ${
+                  selectedMethod === "upi_autopay"
+                    ? "bg-white text-violet-700 shadow-sm shadow-slate-200/50"
+                    : "text-slate-500 hover:text-slate-700"
+                }`}
+              >
+                <Smartphone className="h-4 w-4" />
+                UPI Autopay (Monthly)
+              </button>
+            </div>
+
+            {selectedMethod === "upi_autopay" && (
+              <div className="mt-4 rounded-xl border border-violet-200 bg-violet-50 p-4 text-sm text-violet-800 w-full sm:max-w-md mx-auto">
+                <p className="flex items-center gap-1.5 font-semibold">
+                  <Smartphone className="h-4 w-4" /> UPI Autopay
+                </p>
+                <p className="mt-1 text-violet-600">
+                  Pay the monthly amount now. Razorpay will auto-deduct the same amount each month for the plan duration.
+                </p>
+              </div>
+            )}
+
+            <div className="mt-4 flex flex-col items-center justify-center gap-4">
               <button
                 type="button"
                 onClick={handlePayNow}
                 disabled={isSubmitting}
                 className="inline-flex min-h-14 w-full sm:w-auto items-center justify-center gap-2 border border-violet-700 bg-violet-700 px-10 text-base font-semibold text-white transition hover:bg-violet-800 disabled:opacity-70"
               >
-                {isSubmitting ? "Processing..." : "Pay Now"}
+                {isSubmitting ? "Processing..." : selectedMethod === "upi_autopay" ? "Enable UPI Autopay" : "Pay Now"}
                 <ArrowRight className="h-5 w-5" />
               </button>
               <p className="text-sm font-medium text-slate-500">Cancel at any time. No hidden fees.</p>
