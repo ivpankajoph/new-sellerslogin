@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { ShieldCheck, ShieldAlert, Truck, Info, Briefcase, LifeBuoy, FileText, MapPin, Building2 } from "lucide-react";
+import { ShieldCheck, ShieldAlert, Truck, Info, Briefcase, LifeBuoy, FileText, Building2 } from "lucide-react";
 import { navPageGroups } from "@/data/navPages";
 
 const labelIcons: Record<string, React.ReactNode> = {
@@ -214,14 +214,7 @@ export function FooterSection() {
               </div>
             </form>
             
-            <div className="mt-8">
-              <div className="flex items-start gap-3">
-                <MapPin className="w-5 h-5 text-purple-500 shrink-0 mt-0.5" />
-                <address className="not-italic text-sm text-gray-600 leading-relaxed">
-                  1405, Gaur city 2, Noida Extension, 10th avenue, Ghaziabad 201009, UP, India
-                </address>
-              </div>
-            </div>
+
           </div>
 
           <div className="lg:col-span-8 xl:col-span-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
