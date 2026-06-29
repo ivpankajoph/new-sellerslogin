@@ -20,7 +20,7 @@ export function ShowcaseSection() {
   }, []);
 
   return (
-    <section id="showcase" className="relative py-10 md:py-16 px-4 sm:px-6 lg:px-8 overflow-hidden bg-transparent">
+    <section id="features" className="relative py-10 md:py-16 px-4 sm:px-6 lg:px-8 overflow-hidden bg-transparent">
       <div className="max-w-7xl mx-auto relative z-10">
         {/* Section Header */}
         <header className="text-center mb-6 md:mb-8">

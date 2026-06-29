@@ -73,7 +73,7 @@ export function AutomationSection() {
   ];
 
   return (
-    <section className="py-20 bg-gray-50 relative">
+    <section id="automation" className="py-20 bg-gray-50 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <header className="text-center mb-16">
           <div className="inline-flex items-center bg-white border border-gray-200 rounded-full py-1.5 px-4 text-xs font-bold text-gray-700 uppercase tracking-wider mb-4 shadow-sm">

@@ -26,6 +26,9 @@ function animCounter(
 
 export function ScrollRevealInit() {
   useEffect(() => {
+    const observedRevealElements = new WeakSet<Element>();
+    const observedCounterElements = new WeakSet<Element>();
+
     const revealObserver = new IntersectionObserver(
       (entries) => {
         entries.forEach((e) => {
@@ -34,7 +37,6 @@ export function ScrollRevealInit() {
       },
       { threshold: 0.1, rootMargin: "0px 0px -40px 0px" }
     );
-    document.querySelectorAll(".reveal").forEach((el) => revealObserver.observe(el));
 
     const counterObserver = new IntersectionObserver(
       (entries) => {
@@ -51,9 +53,47 @@ export function ScrollRevealInit() {
       },
       { threshold: 0.5 }
     );
-    document.querySelectorAll("[data-target]").forEach((el) =>
-      counterObserver.observe(el)
-    );
+
+    const observeRevealElement = (el: Element) => {
+      if (observedRevealElements.has(el)) return;
+      observedRevealElements.add(el);
+      revealObserver.observe(el);
+
+      const rect = el.getBoundingClientRect();
+      if (rect.top < window.innerHeight && rect.bottom > 0) {
+        el.classList.add("visible");
+      }
+    };
+
+    const observeCounterElement = (el: Element) => {
+      if (observedCounterElements.has(el)) return;
+      observedCounterElements.add(el);
+      counterObserver.observe(el);
+    };
+
+    const observeMountedContent = (root: ParentNode = document) => {
+      root.querySelectorAll(".reveal").forEach(observeRevealElement);
+      root.querySelectorAll("[data-target]").forEach(observeCounterElement);
+    };
+
+    observeMountedContent();
+
+    const mutationObserver = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        mutation.addedNodes.forEach((node) => {
+          if (!(node instanceof Element)) return;
+
+          if (node.matches(".reveal")) observeRevealElement(node);
+          if (node.matches("[data-target]")) observeCounterElement(node);
+          observeMountedContent(node);
+        });
+      });
+    });
+
+    mutationObserver.observe(document.body, {
+      childList: true,
+      subtree: true,
+    });
 
     const onScroll = () => {
       const nav = document.getElementById("navbar");
@@ -61,13 +101,28 @@ export function ScrollRevealInit() {
       const bt = document.getElementById("back-top");
       bt?.classList.toggle("visible", window.scrollY > 400);
     };
+    const scrollToCurrentHash = () => {
+      const hash = window.location.hash;
+      if (hash !== "#hero") return;
+
+      requestAnimationFrame(() => {
+        document.getElementById("hero")?.scrollIntoView({
+          block: "start",
+        });
+      });
+    };
+
     window.addEventListener("scroll", onScroll);
+    window.addEventListener("hashchange", scrollToCurrentHash);
     onScroll();
+    scrollToCurrentHash();
 
     return () => {
+      mutationObserver.disconnect();
       revealObserver.disconnect();
       counterObserver.disconnect();
       window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("hashchange", scrollToCurrentHash);
     };
   }, []);
 
