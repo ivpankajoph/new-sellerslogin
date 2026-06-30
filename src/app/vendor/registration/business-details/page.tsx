@@ -91,7 +91,7 @@ interface BusinessForm {
   operating_hours: OperatingHourRow[];
 }
 
-const mainSiteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "/";
+const mainSiteUrl =  "/";
 const adminLoginUrl =
   process.env.NEXT_PUBLIC_ADMIN_APP_URL ?? "http://localhost:5173/sign-in?redirect=%2F";
 const supportEmail = "support@sellerslogin.com";
