@@ -122,7 +122,7 @@ export default function PaymentPendingPage() {
     isUpiAutopay?: boolean;
   } | null>(null);
 
-  const [selectedMethod, setSelectedMethod] = useState<"one_time" | "upi_autopay">("one_time");
+  const [selectedMethod] = useState<"one_time" | "upi_autopay">("one_time");
 
   const [addressLine1, setAddressLine1] = useState("");
   const [addressLine2, setAddressLine2] = useState("");
@@ -821,44 +821,6 @@ export default function PaymentPendingPage() {
                 >
                   Remove
                 </button>
-              </div>
-            )}
-
-            <div className="mt-6 flex items-center justify-center gap-1 rounded-xl border border-slate-200 bg-slate-50 p-1 text-sm font-semibold w-full sm:w-auto mx-auto">
-              <button
-                type="button"
-                onClick={() => setSelectedMethod("one_time")}
-                className={`flex items-center gap-1.5 rounded-lg px-4 py-2 transition ${
-                  selectedMethod === "one_time"
-                    ? "bg-white text-violet-700 shadow-sm shadow-slate-200/50"
-                    : "text-slate-500 hover:text-slate-700"
-                }`}
-              >
-                <CreditCard className="h-4 w-4" />
-                Pay Now (One-time)
-              </button>
-              <button
-                type="button"
-                onClick={() => setSelectedMethod("upi_autopay")}
-                className={`flex items-center gap-1.5 rounded-lg px-4 py-2 transition ${
-                  selectedMethod === "upi_autopay"
-                    ? "bg-white text-violet-700 shadow-sm shadow-slate-200/50"
-                    : "text-slate-500 hover:text-slate-700"
-                }`}
-              >
-                <Smartphone className="h-4 w-4" />
-                UPI Autopay (Monthly)
-              </button>
-            </div>
-
-            {selectedMethod === "upi_autopay" && (
-              <div className="mt-4 rounded-xl border border-violet-200 bg-violet-50 p-4 text-sm text-violet-800 w-full sm:max-w-md mx-auto">
-                <p className="flex items-center gap-1.5 font-semibold">
-                  <Smartphone className="h-4 w-4" /> UPI Autopay
-                </p>
-                <p className="mt-1 text-violet-600">
-                  Pay the monthly amount now. Razorpay will auto-deduct the same amount each month for the plan duration.
-                </p>
               </div>
             )}
 
