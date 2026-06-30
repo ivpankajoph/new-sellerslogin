@@ -2,14 +2,15 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { FaFacebook, FaWhatsapp, FaGoogle, FaWallet } from "react-icons/fa";
-import { SiOpenai, SiRazorpay } from "react-icons/si";
+import { SiRazorpay } from "react-icons/si";
 import { MdStorefront } from "react-icons/md";
+import { Bot } from "lucide-react";
 
 export function IntegrationsSection() {
   const orbitingIcons = [
     { Icon: FaFacebook, color: "text-[#1877F2]", top: "10%", left: "50%", delay: "0s" },
     { Icon: FaWhatsapp, color: "text-[#25D366]", top: "70%", left: "80%", delay: "1s" },
-    { Icon: SiOpenai, color: "text-slate-800", top: "30%", left: "10%", delay: "2s" },
+    { Icon: Bot, color: "text-slate-800", top: "30%", left: "10%", delay: "2s" },
     { Icon: FaGoogle, color: "text-[#EA4335]", top: "20%", left: "80%", delay: "3s" },
     { Icon: SiRazorpay, color: "text-[#02042B]", top: "80%", left: "20%", delay: "4s" },
     { Icon: FaWallet, color: "text-orange-500", top: "50%", left: "90%", delay: "5s" },
